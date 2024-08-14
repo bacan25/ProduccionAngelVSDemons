@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class WindowHandler : MonoBehaviour
 {
-  public GameObject[] windows;
-  
-  public void EnabledWindow(int idWindow)
-  {
-    windows[idWindow].SetActive(true);
+    public GameObject[] windows;
 
-    for (int i = 0; i<windows.Length; i++)
+    public void EnabledWindow(int idWindow)
     {
-        if(idWindow !=i)
-          windows[i].SetActive(false);
+        windows[idWindow].SetActive(true);
 
+        for (int i = 0; i < windows.Length; i++)
+        {
+            if (idWindow != i)
+                windows[i].SetActive(false);
+        }
     }
-
-  }
-
 }
