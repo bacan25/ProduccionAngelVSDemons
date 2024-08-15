@@ -2,28 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using TMPro;
 using Photon.Realtime;
+using TMPro;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public TMP_Text textIndicator;
     public GameObject btnConect;
-    public GameObject btnJoinRoom;  // Botón "Unirse a Sala"
-    public GameObject btnCreateRoom;  // Botón "Crear Sala"
+    public GameObject btnJoinRoom;
+    public GameObject btnCreateRoom;
     public GameObject[] windows;
     public int createRoomWindowIndex;
     public int startWindowIndex;
     public GameObject playerNamePrefab;
     public Transform playersContainer;
 
-    private int maxRooms = 10; // Solo pueden existir 10 salas
-    private string baseRoomName = "Sala"; // Nombre base de las salas
+    private int maxRooms = 10;
+    private string baseRoomName = "Sala";
 
-    private void Start() {
+    private void Start()
+    {
         btnConect.SetActive(false);
-        btnJoinRoom.SetActive(false); // Ocultar botón "Unirse a Sala" al inicio
-        btnCreateRoom.SetActive(false); // Ocultar botón "Crear Sala" al inicio
+        btnJoinRoom.SetActive(false);
+        btnCreateRoom.SetActive(false);
     }
 
     public void ConnectPhoton()
@@ -31,29 +32,32 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsConnected)
         {
             PhotonNetwork.ConnectUsingSettings();
+            Debug.Log("Intentando conectar a Photon...");
         }
     }
 
     public void CreatePlayer(string namePlayer)
     {
         PhotonNetwork.NickName = namePlayer;
+        Debug.Log($"Nombre del jugador establecido: {namePlayer}");
     }
 
     public override void OnConnected()
     {
         base.OnConnected();
-        Debug.Log("Conectados a photon");
-        textIndicator.text = "Conectados correctamente";
+        Debug.Log("Conectado a Photon");
+        textIndicator.text = "Conectado correctamente";
     }
 
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
+        Debug.Log($"Conectado al Master Server. Region: {PhotonNetwork.CloudRegion}");
         textIndicator.text = "Bienvenido " + PhotonNetwork.NickName;
 
         btnConect.SetActive(true);
-        btnJoinRoom.SetActive(true); // Mostrar botón "Unirse a Sala"
-        btnCreateRoom.SetActive(true); // Mostrar botón "Crear Sala"
+        btnJoinRoom.SetActive(true);
+        btnCreateRoom.SetActive(true);
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -62,15 +66,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.LogError("Desconectado de Photon: " + cause.ToString());
         textIndicator.text = "Desconectado de Photon: " + cause.ToString();
 
-        btnJoinRoom.SetActive(false); // Ocultar botón "Unirse a Sala" si se desconecta
-        btnCreateRoom.SetActive(false); // Ocultar botón "Crear Sala" si se desconecta
+        btnJoinRoom.SetActive(false);
+        btnCreateRoom.SetActive(false);
     }
 
     public void JoinRoom()
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {
-            StartCoroutine(TryJoinOrCreateRoom());
+            PhotonNetwork.JoinRandomRoom();
         }
         else
         {
@@ -79,44 +83,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    private IEnumerator TryJoinOrCreateRoom()
+    public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        bool roomJoined = false;
-
-        for (int i = 1; i <= maxRooms; i++)
-        {
-            string roomName = baseRoomName + i;
-
-            PhotonNetwork.JoinRoom(roomName);
-            Debug.Log("Intentando unirse a la sala: " + roomName);
-
-            float timeout = 2.0f;
-            float timer = 0;
-
-            while (!roomJoined && timer < timeout)
-            {
-                if (PhotonNetwork.InRoom)
-                {
-                    roomJoined = true;
-                    Debug.Log("Unido a la sala: " + roomName);
-                    break;
-                }
-
-                timer += Time.deltaTime;
-                yield return null;
-            }
-
-            if (roomJoined)
-            {
-                break;
-            }
-        }
-
-        if (!roomJoined)
-        {
-            Debug.Log("Todas las salas están llenas o no existen. Creando una nueva sala...");
-            CreateRoom();
-        }
+        Debug.Log("No se pudo unir a una sala aleatoria. Creando una nueva...");
+        CreateRoom();
     }
 
     public void CreateRoom()
@@ -127,14 +97,16 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 string nameRoom = baseRoomName + i;
 
-                RoomOptions optionRoom = new RoomOptions();
-                optionRoom.IsVisible = true;
-                optionRoom.IsOpen = true;
-                optionRoom.MaxPlayers = 2;
-                optionRoom.PublishUserId = true;
+                RoomOptions optionRoom = new RoomOptions
+                {
+                    IsVisible = true,
+                    IsOpen = true,
+                    MaxPlayers = 2,
+                    PublishUserId = true
+                };
 
                 PhotonNetwork.CreateRoom(nameRoom, optionRoom, TypedLobby.Default);
-                Debug.Log("Creando sala: " + nameRoom);
+                Debug.Log($"Creando sala: {nameRoom}");
 
                 EnabledWindow(createRoomWindowIndex);
                 return;
@@ -150,7 +122,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        Debug.Log("Unido a la sala: " + PhotonNetwork.CurrentRoom.Name);
+        Debug.Log($"Unido a la sala: {PhotonNetwork.CurrentRoom.Name}");
 
         EnabledWindow(createRoomWindowIndex);
 
@@ -160,18 +132,24 @@ public class GameManager : MonoBehaviourPunCallbacks
             TMP_Text playerNameText = playerNameObject.GetComponent<TMP_Text>();
             playerNameText.text = PhotonNetwork.NickName;
         }
+
+        Debug.Log($"Jugadores en la sala: {PhotonNetwork.CurrentRoom.PlayerCount}");
+        foreach (var player in PhotonNetwork.CurrentRoom.Players.Values)
+        {
+            Debug.Log($"Jugador en sala: {player.NickName}");
+        }
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         base.OnJoinRoomFailed(returnCode, message);
-        Debug.LogWarning("No se pudo unir a la sala. Intentando la siguiente sala...");
+        Debug.LogWarning($"No se pudo unir a la sala. Código: {returnCode}, Mensaje: {message}");
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         base.OnCreateRoomFailed(returnCode, message);
-        Debug.LogError("Fallo al crear la sala: " + message);
+        Debug.LogError($"Fallo al crear la sala: {message}");
         textIndicator.text = "Fallo al crear la sala: " + message;
 
         EnabledWindow(startWindowIndex);
@@ -181,17 +159,37 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (idWindow >= 0 && idWindow < windows.Length)
         {
-            windows[idWindow].SetActive(true);
-
             for (int i = 0; i < windows.Length; i++)
             {
-                if (idWindow != i)
-                    windows[i].SetActive(false);
+                windows[i].SetActive(i == idWindow);
             }
         }
         else
         {
             Debug.LogError("ID de ventana inválido.");
+        }
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        Debug.Log($"Nuevo jugador unido a la sala: {newPlayer.NickName}");
+        // Aquí puedes actualizar tu UI o lógica del juego
+    }
+
+    public void ListRooms()
+    {
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            PhotonNetwork.GetCustomRoomList(TypedLobby.Default, "");
+        }
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        Debug.Log("Lista de salas actualizada:");
+        foreach (var room in roomList)
+        {
+            Debug.Log($"Sala: {room.Name}, Jugadores: {room.PlayerCount}/{room.MaxPlayers}");
         }
     }
 }
