@@ -9,14 +9,21 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public TMP_Text textIndicator;
     public GameObject btnConect;
-    public GameObject[] windows; // Array to hold the different UI windows
-    public int createRoomWindowIndex; // Index for CreateRoom Canvas in the windows array
-    public int startWindowIndex; // Index for Start Canvas in the windows array
-    public GameObject playerNamePrefab; // Prefab for displaying player's nickname
-    public Transform playersContainer; // Container where player names will be displayed
+    public GameObject btnJoinRoom;  // Botón "Unirse a Sala"
+    public GameObject btnCreateRoom;  // Botón "Crear Sala"
+    public GameObject[] windows;
+    public int createRoomWindowIndex;
+    public int startWindowIndex;
+    public GameObject playerNamePrefab;
+    public Transform playersContainer;
+
+    private int maxRooms = 10; // Solo pueden existir 10 salas
+    private string baseRoomName = "Sala"; // Nombre base de las salas
 
     private void Start() {
         btnConect.SetActive(false);
+        btnJoinRoom.SetActive(false); // Ocultar botón "Unirse a Sala" al inicio
+        btnCreateRoom.SetActive(false); // Ocultar botón "Crear Sala" al inicio
     }
 
     public void ConnectPhoton()
@@ -43,7 +50,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         base.OnConnectedToMaster();
         textIndicator.text = "Bienvenido " + PhotonNetwork.NickName;
+
         btnConect.SetActive(true);
+        btnJoinRoom.SetActive(true); // Mostrar botón "Unirse a Sala"
+        btnCreateRoom.SetActive(true); // Mostrar botón "Crear Sala"
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -51,25 +61,84 @@ public class GameManager : MonoBehaviourPunCallbacks
         base.OnDisconnected(cause);
         Debug.LogError("Desconectado de Photon: " + cause.ToString());
         textIndicator.text = "Desconectado de Photon: " + cause.ToString();
+
+        btnJoinRoom.SetActive(false); // Ocultar botón "Unirse a Sala" si se desconecta
+        btnCreateRoom.SetActive(false); // Ocultar botón "Crear Sala" si se desconecta
+    }
+
+    public void JoinRoom()
+    {
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            StartCoroutine(TryJoinOrCreateRoom());
+        }
+        else
+        {
+            Debug.LogError("No estás conectado al Master Server. Espera a que la conexión se complete.");
+            textIndicator.text = "Conectando... Por favor espera.";
+        }
+    }
+
+    private IEnumerator TryJoinOrCreateRoom()
+    {
+        bool roomJoined = false;
+
+        for (int i = 1; i <= maxRooms; i++)
+        {
+            string roomName = baseRoomName + i;
+
+            PhotonNetwork.JoinRoom(roomName);
+            Debug.Log("Intentando unirse a la sala: " + roomName);
+
+            float timeout = 2.0f;
+            float timer = 0;
+
+            while (!roomJoined && timer < timeout)
+            {
+                if (PhotonNetwork.InRoom)
+                {
+                    roomJoined = true;
+                    Debug.Log("Unido a la sala: " + roomName);
+                    break;
+                }
+
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            if (roomJoined)
+            {
+                break;
+            }
+        }
+
+        if (!roomJoined)
+        {
+            Debug.Log("Todas las salas están llenas o no existen. Creando una nueva sala...");
+            CreateRoom();
+        }
     }
 
     public void CreateRoom()
     {
-        // Ensure we are connected to the Master Server before creating or joining a room
         if (PhotonNetwork.IsConnectedAndReady)
         {
-            string nameRoom = "Sala1";
-            RoomOptions optionRoom = new RoomOptions();
-            optionRoom.IsVisible = true;
-            optionRoom.IsOpen = true;
-            optionRoom.MaxPlayers = 4; // Maximum 4 players
-            optionRoom.PublishUserId = true;
+            for (int i = 1; i <= maxRooms; i++)
+            {
+                string nameRoom = baseRoomName + i;
 
-            PhotonNetwork.JoinOrCreateRoom(nameRoom, optionRoom, TypedLobby.Default);
+                RoomOptions optionRoom = new RoomOptions();
+                optionRoom.IsVisible = true;
+                optionRoom.IsOpen = true;
+                optionRoom.MaxPlayers = 2;
+                optionRoom.PublishUserId = true;
 
-            // Change the canvas after attempting to create/join the room
-            Debug.Log("Attempting to create/join room: " + nameRoom);
-            EnabledWindow(createRoomWindowIndex); // Switch to the CreateRoom canvas
+                PhotonNetwork.CreateRoom(nameRoom, optionRoom, TypedLobby.Default);
+                Debug.Log("Creando sala: " + nameRoom);
+
+                EnabledWindow(createRoomWindowIndex);
+                return;
+            }
         }
         else
         {
@@ -81,12 +150,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        Debug.Log("Estamos Melos sisas sisas " + PhotonNetwork.CurrentRoom.Name + " Bienvenido " + PhotonNetwork.NickName);
+        Debug.Log("Unido a la sala: " + PhotonNetwork.CurrentRoom.Name);
 
-        // Canvas switch should have already happened, but ensure it here if necessary
-        EnabledWindow(createRoomWindowIndex); // Ensure CreateRoom canvas is active
+        EnabledWindow(createRoomWindowIndex);
 
-        // Instantiate the text prefab with the player's nickname
         if (playerNamePrefab != null && playersContainer != null)
         {
             GameObject playerNameObject = Instantiate(playerNamePrefab, playersContainer);
@@ -98,20 +165,15 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         base.OnJoinRoomFailed(returnCode, message);
-        Debug.LogError("Failed to join the room: " + message);
-        textIndicator.text = "Fallo al unirse a la sala: " + message;
-
-        // Optionally, switch back to the start window if room join fails
-        EnabledWindow(startWindowIndex);
+        Debug.LogWarning("No se pudo unir a la sala. Intentando la siguiente sala...");
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         base.OnCreateRoomFailed(returnCode, message);
-        Debug.LogError("Failed to create the room: " + message);
+        Debug.LogError("Fallo al crear la sala: " + message);
         textIndicator.text = "Fallo al crear la sala: " + message;
 
-        // Optionally, switch back to the start window if room creation fails
         EnabledWindow(startWindowIndex);
     }
 
