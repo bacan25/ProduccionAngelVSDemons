@@ -64,6 +64,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         btnConect.SetActive(true);
         btnJoinRoom.SetActive(true);
         btnCreateRoom.SetActive(true);
+
+        // Entrar al lobby automáticamente para que el usuario pueda ver la lista de salas si es necesario
+        PhotonNetwork.JoinLobby();
+    }
+
+    public override void OnJoinedLobby()
+    {
+        base.OnJoinedLobby();
+        Debug.Log("Unido al Lobby");
+        textIndicator.text = "Unido al Lobby";
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -76,6 +86,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         btnCreateRoom.SetActive(false);
     }
 
+    // Este método solo debe ser llamado cuando se presiona el botón "Unirse a Sala"
     public void JoinRoom()
     {
         if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.InLobby)
@@ -91,10 +102,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("No se pudo unir a una sala aleatoria. Creando una nueva...");
-        CreateRoom();
+        Debug.Log("No se pudo unir a una sala aleatoria. Puedes crear una nueva sala si lo deseas.");
+        // Aquí no creamos la sala automáticamente, dejamos que el usuario decida.
     }
 
+    // Este método solo debe ser llamado cuando se presiona el botón "Crear Sala"
     public void CreateRoom()
     {
         if (PhotonNetwork.IsConnectedAndReady)
