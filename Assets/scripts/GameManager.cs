@@ -1,238 +1,170 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
-[RequireComponent(typeof(PhotonView))]
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public TMP_Text textIndicator;
-    public GameObject btnConect;
-    public GameObject btnJoinRoom;
-    public GameObject btnCreateRoom;
-    public GameObject[] windows;
-    public int createRoomWindowIndex;
-    public int startWindowIndex;
-    public GameObject playerNamePrefab;
-    public Transform playersContainer;
+    public TMP_InputField nicknameInputField;
+    public GameObject startButton;
+    public GameObject readyButton;
+    public GameObject readyIndicator;
+    public TMP_Text player1NameText;
+    public TMP_Text player2NameText;
 
-    private int maxRooms = 10;
-    private string baseRoomName = "Sala";
+    private bool isPlayerReady = false;
 
     private void Start()
     {
-        btnConect.SetActive(false);
-        btnJoinRoom.SetActive(false);
-        btnCreateRoom.SetActive(false);
-
-        if (photonView == null)
-        {
-            Debug.LogError("PhotonView no está asignado.");
-        }
+        startButton.SetActive(true);
+        readyButton.SetActive(false);
     }
 
-    public void ConnectPhoton()
+    public void SetNicknameAndConnect()
     {
-        if (!PhotonNetwork.IsConnected)
+        string nickname = nicknameInputField.text;
+        if (!string.IsNullOrEmpty(nickname))
         {
+            PhotonNetwork.NickName = nickname;
             PhotonNetwork.ConnectUsingSettings();
-            Debug.Log("Intentando conectar a Photon...");
+            Debug.Log($"Nombre del jugador establecido: {nickname}");
+            startButton.SetActive(false);
         }
-    }
-
-    public void CreatePlayer(string namePlayer)
-    {
-        PhotonNetwork.NickName = namePlayer;
-        Debug.Log($"Nombre del jugador establecido: {namePlayer}");
-    }
-
-    public override void OnConnected()
-    {
-        base.OnConnected();
-        Debug.Log("Conectado a Photon");
-        textIndicator.text = "Conectado correctamente";
+        else
+        {
+            Debug.LogWarning("El nickname no puede estar vacío.");
+        }
     }
 
     public override void OnConnectedToMaster()
     {
-        base.OnConnectedToMaster();
-        Debug.Log($"Conectado al Master Server. Region: {PhotonNetwork.CloudRegion}");
-        textIndicator.text = "Bienvenido " + PhotonNetwork.NickName;
-
-        btnConect.SetActive(true);
-        btnJoinRoom.SetActive(true);
-        btnCreateRoom.SetActive(true);
-
-        // Entrar al lobby automáticamente para que el usuario pueda ver la lista de salas si es necesario
-        PhotonNetwork.JoinLobby();
-    }
-
-    public override void OnJoinedLobby()
-    {
-        base.OnJoinedLobby();
-        Debug.Log("Unido al Lobby");
-        textIndicator.text = "Unido al Lobby";
-    }
-
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        base.OnDisconnected(cause);
-        Debug.LogError("Desconectado de Photon: " + cause.ToString());
-        textIndicator.text = "Desconectado de Photon: " + cause.ToString();
-
-        btnJoinRoom.SetActive(false);
-        btnCreateRoom.SetActive(false);
-    }
-
-    // Este método solo debe ser llamado cuando se presiona el botón "Unirse a Sala"
-    public void JoinRoom()
-    {
-        if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.InLobby)
-        {
-            PhotonNetwork.JoinRandomRoom();
-        }
-        else
-        {
-            Debug.LogError("No estás conectado al Master Server o no estás en el lobby. Espera a que la conexión se complete.");
-            textIndicator.text = "Conectando... Por favor espera.";
-        }
+        PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("No se pudo unir a una sala aleatoria. Puedes crear una nueva sala si lo deseas.");
-        // Aquí no creamos la sala automáticamente, dejamos que el usuario decida.
-    }
-
-    // Este método solo debe ser llamado cuando se presiona el botón "Crear Sala"
-    public void CreateRoom()
-    {
-        if (PhotonNetwork.IsConnectedAndReady)
-        {
-            for (int i = 1; i <= maxRooms; i++)
-            {
-                string nameRoom = baseRoomName + i;
-
-                RoomOptions optionRoom = new RoomOptions
-                {
-                    IsVisible = true,
-                    IsOpen = true,
-                    MaxPlayers = 2,
-                    PublishUserId = true
-                };
-
-                PhotonNetwork.CreateRoom(nameRoom, optionRoom, TypedLobby.Default);
-                Debug.Log($"Creando sala: {nameRoom}");
-
-                // No enviar el RPC aquí, esperar hasta estar realmente en la sala
-                return;
-            }
-        }
-        else
-        {
-            Debug.LogError("No estás conectado al Master Server. Espera a que la conexión se complete.");
-            textIndicator.text = "Conectando... Por favor espera.";
-        }
+        CreateRoom();
     }
 
     public override void OnJoinedRoom()
     {
-        base.OnJoinedRoom();
-        Debug.Log($"Unido a la sala: {PhotonNetwork.CurrentRoom.Name}");
-
-        // Ahora que estamos en la sala, podemos enviar el RPC
-        photonView.RPC("RPC_SwitchWindow", RpcTarget.All, createRoomWindowIndex);
+        Debug.Log("Unido a la sala: " + PhotonNetwork.CurrentRoom.Name);
         UpdatePlayerListUI();
+        readyButton.SetActive(true);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        base.OnPlayerEnteredRoom(newPlayer);
-        Debug.Log($"Nuevo jugador unido a la sala: {newPlayer.NickName}");
-
-        photonView.RPC("RPC_SwitchWindow", RpcTarget.All, createRoomWindowIndex);
-        UpdatePlayerListUI();
+        Debug.Log($"Jugador {newPlayer.NickName} ha entrado a la sala.");
+        UpdatePlayerListUI(); // Asegura que la lista de jugadores se actualice cuando un nuevo jugador entra
     }
 
-    public override void OnJoinRoomFailed(short returnCode, string message)
+    public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        base.OnJoinRoomFailed(returnCode, message);
-        Debug.LogWarning($"No se pudo unir a la sala. Código: {returnCode}, Mensaje: {message}");
+        Debug.Log($"Jugador {otherPlayer.NickName} ha dejado la sala.");
+        UpdatePlayerListUI(); // Actualizar la lista de jugadores
+        readyIndicator.GetComponent<TMP_Text>().text = "Waiting for a player to join...";
+        readyButton.SetActive(false); // Desactiva el botón Ready hasta que un nuevo jugador entre
     }
 
-    public override void OnCreateRoomFailed(short returnCode, string message)
+    private void CreateRoom()
     {
-        base.OnCreateRoomFailed(returnCode, message);
-        Debug.LogError($"Fallo al crear la sala: {message}");
-        textIndicator.text = "Fallo al crear la sala: " + message;
-
-        EnabledWindow(startWindowIndex);
+        RoomOptions roomOptions = new RoomOptions() { MaxPlayers = 2 };
+        PhotonNetwork.CreateRoom(null, roomOptions);
     }
 
-    public void EnabledWindow(int idWindow)
+    public void ToggleReady()
     {
-        if (idWindow >= 0 && idWindow < windows.Length)
-        {
-            for (int i = 0; i < windows.Length; i++)
-            {
-                windows[i].SetActive(i == idWindow);
-            }
-        }
-        else
-        {
-            Debug.LogError("ID de ventana inválido.");
-        }
+        isPlayerReady = !isPlayerReady;
+        photonView.RPC("UpdateReadyState", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber, isPlayerReady);
     }
 
     [PunRPC]
-    public void RPC_SwitchWindow(int windowIndex)
+    private void UpdateReadyState(int playerID, bool isReady)
     {
-        EnabledWindow(windowIndex);
+        PhotonNetwork.CurrentRoom.GetPlayer(playerID).SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "IsReady", isReady } });
+        CheckAllPlayersReady();
     }
 
     private void UpdatePlayerListUI()
     {
-        if (playersContainer == null)
+        player1NameText.text = "";
+        player2NameText.text = "";
+
+        var players = PhotonNetwork.CurrentRoom.Players.Values;
+        int index = 0;
+
+        foreach (Player player in players)
         {
-            Debug.LogError("playersContainer no está asignado.");
-            return;
+            if (index == 0)
+            {
+                player1NameText.text = player.NickName;
+            }
+            else if (index == 1)
+            {
+                player2NameText.text = player.NickName;
+            }
+            index++;
         }
 
-        if (playerNamePrefab == null)
+        // Asegura que todos los jugadores reciban la actualización de la UI
+        photonView.RPC("UpdateUIForAllPlayers", RpcTarget.Others);
+    }
+
+    [PunRPC]
+    private void UpdateUIForAllPlayers()
+    {
+        UpdatePlayerListUI();
+    }
+
+    private void CheckAllPlayersReady()
+    {
+        int notReadyCount = 0;
+
+        foreach (Player player in PhotonNetwork.CurrentRoom.Players.Values)
         {
-            Debug.LogError("playerNamePrefab no está asignado.");
-            return;
+            if (!player.CustomProperties.ContainsKey("IsReady") || !(bool)player.CustomProperties["IsReady"])
+            {
+                notReadyCount++;
+            }
         }
 
-        foreach (Transform child in playersContainer)
+        if (notReadyCount == 0 && PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
-            Destroy(child.gameObject); // Limpia la lista actual
+            StartCoroutine(StartGameCountdown());
         }
-
-        foreach (var player in PhotonNetwork.CurrentRoom.Players.Values)
+        else if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
         {
-            GameObject playerNameObject = Instantiate(playerNamePrefab, playersContainer);
-            TMP_Text playerNameText = playerNameObject.GetComponent<TMP_Text>();
-            playerNameText.text = player.NickName;
+            readyIndicator.GetComponent<TMP_Text>().text = "Waiting for a player to join...";
+        }
+        else
+        {
+            readyIndicator.GetComponent<TMP_Text>().text = $"Waiting for {notReadyCount} player(s) to be ready...";
         }
     }
 
-    public void ListRooms()
+    private IEnumerator StartGameCountdown()
     {
-        if (PhotonNetwork.IsConnectedAndReady)
-        {
-            PhotonNetwork.GetCustomRoomList(TypedLobby.Default, "");
-        }
+        readyIndicator.SetActive(false);
+        yield return new WaitForSeconds(5);
+        
+        PhotonNetwork.LoadLevel("JuegoFPSprovicional");
     }
 
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    public void LeaveRoom()
     {
-        Debug.Log("Lista de salas actualizada:");
-        foreach (var room in roomList)
-        {
-            Debug.Log($"Sala: {room.Name}, Jugadores: {room.PlayerCount}/{room.MaxPlayers}");
-        }
+        PhotonNetwork.LeaveRoom();
+        Debug.Log("Saliendo de la sala...");
+    }
+
+    public override void OnLeftRoom()
+    {
+        Debug.Log("Has salido de la sala.");
+        startButton.SetActive(true);
+        readyButton.SetActive(false);
+        readyIndicator.GetComponent<TMP_Text>().text = "";
+        player1NameText.text = "";
+        player2NameText.text = "";
     }
 }

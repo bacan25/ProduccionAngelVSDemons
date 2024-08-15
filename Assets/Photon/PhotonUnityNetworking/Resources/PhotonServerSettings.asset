@@ -40,6 +40,11 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - RPC_SwitchWindow
+  - RPC_UpdateReadyState
+  - UpdateReadyState
+  - TakeDamage
+  - DeclareWinner
+  - UpdateUIForAllPlayers
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
