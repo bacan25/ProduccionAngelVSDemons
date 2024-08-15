@@ -1149,7 +1149,6 @@ GameObject:
   m_Component:
   - component: {fileID: 833104755}
   - component: {fileID: 833104754}
-  - component: {fileID: 833104753}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1157,21 +1156,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &833104753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833104752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9424218a5b23517479b8f2ff20933489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  windows:
-  - {fileID: 1170623463}
-  - {fileID: 1033035835}
 --- !u!114 &833104754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1186,7 +1170,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textIndicator: {fileID: 811687919}
   btnConect: {fileID: 1870317583}
-  windowHandler: {fileID: 833104753}
+  windows:
+  - {fileID: 1170623463}
+  - {fileID: 1033035835}
   createRoomWindowIndex: 1
   startWindowIndex: 0
   playerNamePrefab: {fileID: 4740586671767312150, guid: 81e8ae26c27438444af0384f16be865f,

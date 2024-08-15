@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public TMP_Text textIndicator;
     public GameObject btnConect;
-    public WindowHandler windowHandler; // Añadir una referencia al WindowHandler
-    public int createRoomWindowIndex; // Índice del Canvas CreateRoom en el arreglo windows
-    public int startWindowIndex; // Índice del Canvas Start en el arreglo windows
-    public GameObject playerNamePrefab; // Prefab del texto que mostrará el nickname del jugador
-    public Transform playersContainer; // Contenedor en el que se mostrarán los nombres de los jugadores
+    public GameObject[] windows; // Array to hold the different UI windows
+    public int createRoomWindowIndex; // Index for CreateRoom Canvas in the windows array
+    public int startWindowIndex; // Index for Start Canvas in the windows array
+    public GameObject playerNamePrefab; // Prefab for displaying player's nickname
+    public Transform playersContainer; // Container where player names will be displayed
 
     private void Start() {
         btnConect.SetActive(false);
@@ -55,17 +55,21 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        // Asegúrate de que estamos conectados al Master Server antes de crear o unirse a una sala
+        // Ensure we are connected to the Master Server before creating or joining a room
         if (PhotonNetwork.IsConnectedAndReady)
         {
             string nameRoom = "Sala1";
             RoomOptions optionRoom = new RoomOptions();
             optionRoom.IsVisible = true;
             optionRoom.IsOpen = true;
-            optionRoom.MaxPlayers = 4; // Máximo 4 jugadores
+            optionRoom.MaxPlayers = 4; // Maximum 4 players
             optionRoom.PublishUserId = true;
 
             PhotonNetwork.JoinOrCreateRoom(nameRoom, optionRoom, TypedLobby.Default);
+
+            // Change the canvas after attempting to create/join the room
+            Debug.Log("Attempting to create/join room: " + nameRoom);
+            EnabledWindow(createRoomWindowIndex); // Switch to the CreateRoom canvas
         }
         else
         {
@@ -79,14 +83,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         Debug.Log("Estamos Melos sisas sisas " + PhotonNetwork.CurrentRoom.Name + " Bienvenido " + PhotonNetwork.NickName);
 
-        // Activar el Canvas CreateRoom usando WindowHandler y desactivar el Canvas Start
-        if (windowHandler != null)
-        {
-            windowHandler.EnabledWindow(createRoomWindowIndex); // Activa CreateRoom
-            windowHandler.EnabledWindow(startWindowIndex); // Desactiva Start
-        }
+        // Canvas switch should have already happened, but ensure it here if necessary
+        EnabledWindow(createRoomWindowIndex); // Ensure CreateRoom canvas is active
 
-        // Instanciar el prefab de texto con el nombre del jugador
+        // Instantiate the text prefab with the player's nickname
         if (playerNamePrefab != null && playersContainer != null)
         {
             GameObject playerNameObject = Instantiate(playerNamePrefab, playersContainer);
@@ -100,6 +100,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         base.OnJoinRoomFailed(returnCode, message);
         Debug.LogError("Failed to join the room: " + message);
         textIndicator.text = "Fallo al unirse a la sala: " + message;
+
+        // Optionally, switch back to the start window if room join fails
+        EnabledWindow(startWindowIndex);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -107,5 +110,26 @@ public class GameManager : MonoBehaviourPunCallbacks
         base.OnCreateRoomFailed(returnCode, message);
         Debug.LogError("Failed to create the room: " + message);
         textIndicator.text = "Fallo al crear la sala: " + message;
+
+        // Optionally, switch back to the start window if room creation fails
+        EnabledWindow(startWindowIndex);
+    }
+
+    public void EnabledWindow(int idWindow)
+    {
+        if (idWindow >= 0 && idWindow < windows.Length)
+        {
+            windows[idWindow].SetActive(true);
+
+            for (int i = 0; i < windows.Length; i++)
+            {
+                if (idWindow != i)
+                    windows[i].SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.LogError("ID de ventana inválido.");
+        }
     }
 }
