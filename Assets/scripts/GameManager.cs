@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 PhotonNetwork.CreateRoom(nameRoom, optionRoom, TypedLobby.Default);
                 Debug.Log($"Creando sala: {nameRoom}");
 
-                EnabledWindow(createRoomWindowIndex);
+                photonView.RPC("RPC_SwitchWindow", RpcTarget.All, createRoomWindowIndex);
                 return;
             }
         }
@@ -124,20 +124,17 @@ public class GameManager : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         Debug.Log($"Unido a la sala: {PhotonNetwork.CurrentRoom.Name}");
 
-        EnabledWindow(createRoomWindowIndex);
+        photonView.RPC("RPC_SwitchWindow", RpcTarget.All, createRoomWindowIndex);
+        UpdatePlayerListUI();
+    }
 
-        if (playerNamePrefab != null && playersContainer != null)
-        {
-            GameObject playerNameObject = Instantiate(playerNamePrefab, playersContainer);
-            TMP_Text playerNameText = playerNameObject.GetComponent<TMP_Text>();
-            playerNameText.text = PhotonNetwork.NickName;
-        }
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        Debug.Log($"Nuevo jugador unido a la sala: {newPlayer.NickName}");
 
-        Debug.Log($"Jugadores en la sala: {PhotonNetwork.CurrentRoom.PlayerCount}");
-        foreach (var player in PhotonNetwork.CurrentRoom.Players.Values)
-        {
-            Debug.Log($"Jugador en sala: {player.NickName}");
-        }
+        photonView.RPC("RPC_SwitchWindow", RpcTarget.All, createRoomWindowIndex);
+        UpdatePlayerListUI();
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
@@ -170,10 +167,25 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    [PunRPC]
+    public void RPC_SwitchWindow(int windowIndex)
     {
-        Debug.Log($"Nuevo jugador unido a la sala: {newPlayer.NickName}");
-        // Aquí puedes actualizar tu UI o lógica del juego
+        EnabledWindow(windowIndex);
+    }
+
+    private void UpdatePlayerListUI()
+    {
+        foreach (Transform child in playersContainer)
+        {
+            Destroy(child.gameObject); // Limpia la lista actual
+        }
+
+        foreach (var player in PhotonNetwork.CurrentRoom.Players.Values)
+        {
+            GameObject playerNameObject = Instantiate(playerNamePrefab, playersContainer);
+            TMP_Text playerNameText = playerNameObject.GetComponent<TMP_Text>();
+            playerNameText.text = player.NickName;
+        }
     }
 
     public void ListRooms()
