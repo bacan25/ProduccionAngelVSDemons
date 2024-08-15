@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
+[RequireComponent(typeof(PhotonView))]
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public TMP_Text textIndicator;
@@ -25,6 +26,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         btnConect.SetActive(false);
         btnJoinRoom.SetActive(false);
         btnCreateRoom.SetActive(false);
+
+        if (photonView == null)
+        {
+            Debug.LogError("PhotonView no está asignado.");
+        }
     }
 
     public void ConnectPhoton()
@@ -72,13 +78,13 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        if (PhotonNetwork.IsConnectedAndReady)
+        if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.InLobby)
         {
             PhotonNetwork.JoinRandomRoom();
         }
         else
         {
-            Debug.LogError("No estás conectado al Master Server. Espera a que la conexión se complete.");
+            Debug.LogError("No estás conectado al Master Server o no estás en el lobby. Espera a que la conexión se complete.");
             textIndicator.text = "Conectando... Por favor espera.";
         }
     }
@@ -108,7 +114,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 PhotonNetwork.CreateRoom(nameRoom, optionRoom, TypedLobby.Default);
                 Debug.Log($"Creando sala: {nameRoom}");
 
-                photonView.RPC("RPC_SwitchWindow", RpcTarget.All, createRoomWindowIndex);
+                // No enviar el RPC aquí, esperar hasta estar realmente en la sala
                 return;
             }
         }
@@ -124,6 +130,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         Debug.Log($"Unido a la sala: {PhotonNetwork.CurrentRoom.Name}");
 
+        // Ahora que estamos en la sala, podemos enviar el RPC
         photonView.RPC("RPC_SwitchWindow", RpcTarget.All, createRoomWindowIndex);
         UpdatePlayerListUI();
     }
@@ -175,6 +182,18 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void UpdatePlayerListUI()
     {
+        if (playersContainer == null)
+        {
+            Debug.LogError("playersContainer no está asignado.");
+            return;
+        }
+
+        if (playerNamePrefab == null)
+        {
+            Debug.LogError("playerNamePrefab no está asignado.");
+            return;
+        }
+
         foreach (Transform child in playersContainer)
         {
             Destroy(child.gameObject); // Limpia la lista actual
