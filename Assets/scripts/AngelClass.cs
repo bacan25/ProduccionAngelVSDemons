@@ -1,13 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class AngelClass : MonoBehaviour
 {
     [SerializeField]
     private Transform pivot;
 
-    //Basic attack
     [SerializeField]
     private GameObject bullet;
     [SerializeField]
@@ -16,7 +15,6 @@ public class AngelClass : MonoBehaviour
     private float basicCooldown;
     private float basicTimer;
 
-    //Power attack
     [SerializeField]
     private GameObject power;
     [SerializeField]
@@ -25,40 +23,36 @@ public class AngelClass : MonoBehaviour
     private float powerCooldown;
     private float powerTimer;
 
-    //Have/Don't have powers
     public bool gotBasic;
     public bool gotPower;
 
+    private PhotonView photonView;
 
     void Start()
     {
-        //basicTimer = basicCooldown;
-        //powerTimer = powerCooldown;
+        photonView = GetComponent<PhotonView>();
     }
 
-    
     void Update()
     {
-        if(gotBasic)
+        if (!photonView.IsMine) return;
+
+        if (gotBasic)
             basicTimer += Time.deltaTime;
-        if(gotPower)
+        if (gotPower)
             powerTimer += Time.deltaTime;
 
-        //print("Basic:" + basicTimer);
-        //print("Power:" + powerTimer);
-
-        if(Input.GetMouseButton(0) && gotBasic)
+        if (Input.GetMouseButton(0) && gotBasic)
             BasicAttack();
-        if(Input.GetMouseButton(1) && gotPower)
+        if (Input.GetMouseButton(1) && gotPower)
             PowerAttack();
-        
     }
 
     void BasicAttack()
     {
-        if(basicTimer >= basicCooldown)
+        if (basicTimer >= basicCooldown)
         {
-            GameObject basicAtt = Instantiate(bullet, pivot.position, pivot.rotation);
+            GameObject basicAtt = Instantiate(bullet, pivot.position, pivot.rotation); //cambiar instantiate por photon instantiate
             Rigidbody rb = basicAtt.GetComponent<Rigidbody>();
             if (rb != null)
             {
@@ -68,12 +62,11 @@ public class AngelClass : MonoBehaviour
 
             basicTimer = 0f;
         }
-        
     }
 
     void PowerAttack()
     {
-        if(powerTimer >= powerCooldown)
+        if (powerTimer >= powerCooldown)
         {
             GameObject powerAtt = Instantiate(power, pivot.position, pivot.rotation);
             Rigidbody rb = powerAtt.GetComponent<Rigidbody>();
@@ -85,6 +78,5 @@ public class AngelClass : MonoBehaviour
 
             powerTimer = 0f;
         }
-        
     }
 }

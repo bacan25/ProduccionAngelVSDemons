@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void ToggleReady()
     {
         isPlayerReady = !isPlayerReady;
-        photonView.RPC("UpdateReadyState", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber, isPlayerReady);
+        photonView.RPC("UpdateReadyState", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.ActorNumber, isPlayerReady);
     }
 
     [PunRPC]
@@ -107,19 +107,16 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
             index++;
         }
-
-        // Asegura que todos los jugadores reciban la actualización de la UI
-        photonView.RPC("UpdateUIForAllPlayers", RpcTarget.Others);
-    }
-
-    [PunRPC]
-    private void UpdateUIForAllPlayers()
-    {
-        UpdatePlayerListUI();
     }
 
     private void CheckAllPlayersReady()
     {
+        if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
+        {
+            readyIndicator.GetComponent<TMP_Text>().text = "Waiting for a player to join...";
+            return;
+        }
+
         int notReadyCount = 0;
 
         foreach (Player player in PhotonNetwork.CurrentRoom.Players.Values)
@@ -130,13 +127,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
 
-        if (notReadyCount == 0 && PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        if (notReadyCount == 0)
         {
             StartCoroutine(StartGameCountdown());
-        }
-        else if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
-        {
-            readyIndicator.GetComponent<TMP_Text>().text = "Waiting for a player to join...";
         }
         else
         {
@@ -148,8 +141,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         readyIndicator.SetActive(false);
         yield return new WaitForSeconds(5);
-        
-        PhotonNetwork.LoadLevel("JuegoFPSprovicional");
+
+        PhotonNetwork.LoadLevel("Playground");
     }
 
     public void LeaveRoom()

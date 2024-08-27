@@ -318,10 +318,10 @@ GameObject:
   - component: {fileID: 1529367108390073365}
   - component: {fileID: 7514545277121832856}
   - component: {fileID: 9021439694652896565}
-  - component: {fileID: 7689177883154598690}
   - component: {fileID: 6764288409272786859}
-  - component: {fileID: 8151253734232962639}
   - component: {fileID: 2762129899826143140}
+  - component: {fileID: 3229552647071609691}
+  - component: {fileID: 5639548143263730195}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -447,33 +447,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7689177883154598690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8749192660268499796}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 646757dc1fa56634a86dfdea8b939ac2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movSpeed: 10
-  jumpSpeed: 5
-  turnSpeed: 5
-  isGrounded: 0
-  camPos: {fileID: 3407734573859912888}
-  climbSpeed: 5
-  orientation: {fileID: 3761183441285346924}
-  isClimbing: 0
-  detectionLength: 0.7
-  sphereCastRadius: 0.25
-  maxWallLookAngle: 30
-  wallLookAngle: 0
-  whatIsWall:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &6764288409272786859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,23 +466,8 @@ MonoBehaviour:
   power: {fileID: 5664522316287298105, guid: fb1c781da51f11a41b2ffa7e7a913a6f, type: 3}
   velPower: 10
   powerCooldown: 2
-  gotBasic: 0
-  gotPower: 0
---- !u!114 &8151253734232962639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8749192660268499796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0abdf693afa159b459b378ff9a93be87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
-  slotHolder: {fileID: 0}
-  itemIsUp: {fileID: 0}
+  gotBasic: 1
+  gotPower: 1
 --- !u!114 &2762129899826143140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,12 +485,51 @@ MonoBehaviour:
   turnSpeed: 100
   isGrounded: 0
   cameraVer: {fileID: 3407734573859912888}
-  localRot: 0
   climbSpeed: 5
   isClimbing: 0
   sphereCastRadius: 0.3
   wallFront: 0
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   climbRef: {fileID: 8951316138132500049}
+  playerCamera: {fileID: 1672871414130473507}
+--- !u!114 &3229552647071609691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749192660268499796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5639548143263730195}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &5639548143263730195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749192660268499796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
