@@ -248,7 +248,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 8749192660268499796, guid: 335a5768b3fbd4743bbe3a6417aaf163,
     type: 3}
   disconnectCountdown: 5
-  disconnectMessage: {fileID: 861178264}
+  playerTransforms: []
 --- !u!4 &212823884
 Transform:
   m_ObjectHideFlags: 0

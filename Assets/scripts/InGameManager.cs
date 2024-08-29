@@ -1,16 +1,18 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine.SceneManagement;
-using TMPro;
 
 public class InGameManager : MonoBehaviourPunCallbacks
 {
     public Transform[] spawnPoints;  // Array de puntos de aparición
     public GameObject playerPrefab;  // Prefab del jugador
     public float disconnectCountdown = 5f; // Cuenta regresiva en segundos
-    public TMP_Text disconnectMessage; // Referencia al TMP que mostrará el mensaje
+
+    // Lista pública para almacenar los Transforms de los jugadores
+    public List<Transform> playerTransforms = new List<Transform>();
 
     private void Start()
     {
@@ -19,11 +21,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
             SpawnPlayer();
         }
 
-        // Asegurarse de que el mensaje esté deshabilitado al inicio
-        if (disconnectMessage != null)
-        {
-            disconnectMessage.gameObject.SetActive(false);
-        }
+        // Otras inicializaciones, si es necesario...
     }
 
     void SpawnPlayer()
@@ -31,7 +29,10 @@ public class InGameManager : MonoBehaviourPunCallbacks
         int spawnIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
         if (spawnIndex < spawnPoints.Length)
         {
-            PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
+            GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
+            
+            // Agregar el Transform del jugador a la lista
+            playerTransforms.Add(player.transform);
         }
         else
         {
@@ -47,41 +48,25 @@ public class InGameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         Debug.Log($"Jugador {otherPlayer.NickName} ha dejado la sala.");
-        StartCoroutine(HandlePlayerDisconnect());
+        // Puedes manejar la lógica de quitar al jugador de la lista si es necesario
     }
 
     private IEnumerator HandlePlayerDisconnect()
     {
-        if (disconnectMessage != null)
-        {
-            disconnectMessage.gameObject.SetActive(true);
-            disconnectMessage.text = $"Un jugador se ha desconectado. Terminando la partida en {disconnectCountdown} segundos...";
-        }
-
-        float countdown = disconnectCountdown;
-
-        while (countdown > 0)
-        {
-            if (disconnectMessage != null)
-            {
-                disconnectMessage.text = $"Un jugador se ha desconectado. Terminando la partida en {countdown:F0} segundos...";
-            }
-            yield return new WaitForSeconds(1f);
-            countdown--;
-        }
+        Debug.Log("Un jugador se ha desconectado. Terminando la partida...");
+        yield return new WaitForSeconds(disconnectCountdown);
 
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.LoadLevel("Menu");
+            PhotonNetwork.LoadLevel("LobbyScene");
         }
     }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarning($"Desconectado del servidor por la siguiente razón: {cause}");
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("LobbyScene");
     }
-
 
     public void LeaveGame()
     {
@@ -91,7 +76,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         Debug.Log("Has salido de la sala. Regresando al lobby...");
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("LobbyScene");
     }
 
     public void LoadLevel(string levelName)

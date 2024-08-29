@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class AngelClass : MonoBehaviour
 {
@@ -52,13 +53,18 @@ public class AngelClass : MonoBehaviour
     {
         if (basicTimer >= basicCooldown)
         {
-            GameObject basicAtt = Instantiate(bullet, pivot.position, pivot.rotation); //cambiar instantiate por photon instantiate
+            // Instancia el proyectil con PhotonNetwork.Instantiate
+            GameObject basicAtt = PhotonNetwork.Instantiate(bullet.name, pivot.position, pivot.rotation);
             Rigidbody rb = basicAtt.GetComponent<Rigidbody>();
             if (rb != null)
             {
+                // Asegúrate de que la gravedad esté habilitada o deshabilitada según lo necesites
+                rb.useGravity = true;  // Activa o desactiva según tu necesidad
+
+                // Aplica una fuerza para mover el proyectil
                 rb.velocity = pivot.forward * vel;
             }
-            Destroy(basicAtt, 3f);
+            Destroy(basicAtt, 3f);  // Destruye el proyectil después de 3 segundos
 
             basicTimer = 0f;
         }
@@ -68,13 +74,18 @@ public class AngelClass : MonoBehaviour
     {
         if (powerTimer >= powerCooldown)
         {
-            GameObject powerAtt = Instantiate(power, pivot.position, pivot.rotation);
+            // Instancia el proyectil con PhotonNetwork.Instantiate
+            GameObject powerAtt = PhotonNetwork.Instantiate(power.name, pivot.position, pivot.rotation);
             Rigidbody rb = powerAtt.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.velocity = pivot.forward * vel;
+                // Asegúrate de que la gravedad esté habilitada o deshabilitada según lo necesites
+                rb.useGravity = true;  // Activa o desactiva según tu necesidad
+
+                // Aplica una fuerza para mover el proyectil
+                rb.velocity = pivot.forward * velPower;
             }
-            Destroy(powerAtt, 3f);
+            Destroy(powerAtt, 3f);  // Destruye el proyectil después de 3 segundos
 
             powerTimer = 0f;
         }

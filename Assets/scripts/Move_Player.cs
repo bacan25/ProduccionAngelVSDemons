@@ -1,23 +1,25 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
 public class Move_Player : MonoBehaviour
 {
     [Header("Mov and Jump")]
-    private Rigidbody rb;
-    [SerializeField] private float movSpeed = 5f;
-    [SerializeField] private float jumpSpeed = 5f;
-    [SerializeField] private float turnSpeed = 100f;
+    Rigidbody rb;
+    [SerializeField] float movSpeed = 5f;
+    [SerializeField] float jumpSpeed = 5f;
+    [SerializeField] float turnSpeed = 100f;
 
-    private float horInput, verInput;
+    float horInput, verInput;
     private Vector2 mouseInput;
     public bool isGrounded = false;
+    private int jumpCount = 0;
     public Transform cameraVer;
-    private float localRot;
+    public float localRot;
 
     [Header("Climbing")]
-    [SerializeField] private float climbSpeed = 5f;
+    [SerializeField] float climbSpeed = 5f;  // Ahora se usará en la función Climb
     public bool isClimbing = false;
     public float sphereCastRadius;
     public bool wallFront;
@@ -68,7 +70,7 @@ public class Move_Player : MonoBehaviour
             Walk();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && (jumpCount == 0 || jumpCount == 1))
         {
             Jump();
         }
@@ -83,40 +85,72 @@ public class Move_Player : MonoBehaviour
             wallFront = false;
         }
 
+        if (!wallFront)
+        {
+            isClimbing = false;
+        }
+
         localRot -= mouseInput.y * turnSpeed * Time.deltaTime * 2;
-        localRot = Mathf.Clamp(localRot, -30f, 80f);
+        localRot = Mathf.Clamp(localRot, -50f, 80f);
         cameraVer.localEulerAngles = Vector3.right * localRot;
     }
 
     public void Walk()
     {
-        rb.velocity = transform.rotation * new Vector3
-        (
-            horInput * movSpeed,
-            rb.velocity.y,
-            wallFront ? Mathf.Clamp(verInput * movSpeed, -1000, 0) : verInput * movSpeed
-        );
+        if (jumpCount == 0 || jumpCount == 2)
+        {
+            rb.velocity = transform.rotation * new Vector3
+            (
+                horInput * movSpeed,
+                rb.velocity.y,
+                wallFront ? Mathf.Clamp(verInput * movSpeed, -1000, 0) : verInput * movSpeed
+            );
+        }
+
         transform.Rotate(0, mouseInput.x * turnSpeed * Time.deltaTime, 0);
     }
 
     public void Climb()
     {
-        rb.velocity = transform.rotation * new Vector3(horInput * movSpeed, verInput * movSpeed, 0);
+        // Usar climbSpeed para controlar la velocidad de escalada
+        rb.velocity = transform.rotation * new Vector3(horInput * climbSpeed, verInput * climbSpeed, 0);
         transform.Rotate(0, mouseInput.x * turnSpeed * Time.deltaTime, 0);
+        jumpCount = 0;
     }
 
     public void Jump()
     {
+        rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+        jumpCount++;
+
         if (wallFront)
         {
             isClimbing = !isClimbing;
         }
-        rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+
+        if (jumpCount == 1)
+        {
+            jumpSpeed = 10f;
+        }
+        if (jumpCount == 2)
+        {
+            jumpSpeed = 5f;
+        }
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(climbRef.position, sphereCastRadius);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.transform.tag == "Ground")
+        {
+            isGrounded = true;
+            jumpCount = 0;
+            jumpSpeed = 5f;
+        }
     }
 }
