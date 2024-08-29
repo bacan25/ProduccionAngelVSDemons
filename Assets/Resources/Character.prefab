@@ -485,13 +485,14 @@ MonoBehaviour:
   turnSpeed: 100
   isGrounded: 0
   cameraVer: {fileID: 3407734573859912888}
+  localRot: 0
   climbSpeed: 5
   isClimbing: 0
   sphereCastRadius: 0.3
   wallFront: 0
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   climbRef: {fileID: 8951316138132500049}
   playerCamera: {fileID: 1672871414130473507}
 --- !u!114 &3229552647071609691
