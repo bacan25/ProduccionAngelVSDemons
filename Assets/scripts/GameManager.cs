@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public TMP_Text player2NameText;
 
     private bool isPlayerReady = false;
+
+    // Lista para almacenar los Transforms de los jugadores
+    public List<Transform> playerTransforms = new List<Transform>();
 
     private void Start()
     {
@@ -159,5 +163,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         readyIndicator.GetComponent<TMP_Text>().text = "";
         player1NameText.text = "";
         player2NameText.text = "";
+    }
+
+    // Método para que los jugadores se registren en el GameManager
+    public void RegisterPlayer(Transform playerTransform)
+    {
+        if (!playerTransforms.Contains(playerTransform))
+        {
+            playerTransforms.Add(playerTransform);
+        }
     }
 }

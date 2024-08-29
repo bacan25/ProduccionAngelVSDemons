@@ -29,15 +29,18 @@ public class InGameManager : MonoBehaviourPunCallbacks
         int spawnIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
         if (spawnIndex < spawnPoints.Length)
         {
-            GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
-            
-            // Agregar el Transform del jugador a la lista
-            playerTransforms.Add(player.transform);
+            PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
         }
         else
         {
             Debug.LogError("No hay suficientes puntos de aparición para los jugadores.");
         }
+    }
+
+    public void RegisterPlayerTransform(Transform playerTransform)
+    {
+        playerTransforms.Add(playerTransform);
+        Debug.Log("Player registered. Total players: " + playerTransforms.Count);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
