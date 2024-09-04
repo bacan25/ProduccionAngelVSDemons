@@ -21,7 +21,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
             SpawnPlayer();
         }
 
-        // Otras inicializaciones, si es necesario...
+        // Empezar la búsqueda de jugadores después de unos segundos
+        StartCoroutine(RegisterAllPlayerTransforms());
     }
 
     void SpawnPlayer()
@@ -37,10 +38,20 @@ public class InGameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void RegisterPlayerTransform(Transform playerTransform)
+    IEnumerator RegisterAllPlayerTransforms()
     {
-        playerTransforms.Add(playerTransform);
-        Debug.Log("Player registered. Total players: " + playerTransforms.Count);
+        yield return new WaitForSeconds(2f);  // Espera 2 segundos para asegurar que todos los jugadores estén en la escena
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            if (!playerTransforms.Contains(player.transform))
+            {
+                playerTransforms.Add(player.transform);
+            }
+        }
+
+        Debug.Log("Todos los jugadores han sido registrados. Total players: " + playerTransforms.Count);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)

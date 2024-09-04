@@ -36,6 +36,9 @@ public class Move_Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         photonView = GetComponent<PhotonView>();
 
+        // Asegúrate de que el jugador tenga la etiqueta correcta
+        gameObject.tag = "Player";
+
         // Activar o desactivar la cámara en función de si este jugador es el propietario
         if (!photonView.IsMine)
         {
@@ -49,13 +52,6 @@ public class Move_Player : MonoBehaviour
             if (playerCamera != null)
             {
                 playerCamera.enabled = true;
-            }
-
-            // Registro del Transform en el InGameManager
-            InGameManager gameManager = FindObjectOfType<InGameManager>();
-            if (gameManager != null)
-            {
-                gameManager.RegisterPlayerTransform(this.transform);
             }
         }
     }
