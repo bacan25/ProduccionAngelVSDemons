@@ -25,4 +25,11 @@ public class Health : MonoBehaviour
         currentHealth -= damage;
         //UpdateUI();
     }
+
+    public void Potion()
+    {
+        currentHealth += 10f;
+    }
+
+     
 }

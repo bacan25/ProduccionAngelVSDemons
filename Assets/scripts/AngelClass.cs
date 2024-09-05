@@ -1,13 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
 
 public class AngelClass : MonoBehaviour
 {
     [SerializeField]
     private Transform pivot;
 
+    //Basic attack
     [SerializeField]
     private GameObject bullet;
     [SerializeField]
@@ -16,6 +16,7 @@ public class AngelClass : MonoBehaviour
     private float basicCooldown;
     private float basicTimer;
 
+    //Power attack
     [SerializeField]
     private GameObject power;
     [SerializeField]
@@ -24,70 +25,69 @@ public class AngelClass : MonoBehaviour
     private float powerCooldown;
     private float powerTimer;
 
+    //Have/Don't have powers
     public bool gotBasic;
     public bool gotPower;
 
-    private PhotonView photonView;
+    
+
 
     void Start()
     {
-        photonView = GetComponent<PhotonView>();
+        //basicTimer = basicCooldown;
+        //powerTimer = powerCooldown;
+        
     }
 
+    
     void Update()
     {
-        if (!photonView.IsMine) return;
-
-        if (gotBasic)
+        if(gotBasic)
             basicTimer += Time.deltaTime;
-        if (gotPower)
+        if(gotPower)
             powerTimer += Time.deltaTime;
 
-        if (Input.GetMouseButton(0) && gotBasic)
+        //print("Basic:" + basicTimer);
+        //print("Power:" + powerTimer);
+
+        if(Input.GetMouseButton(0) && gotBasic)
             BasicAttack();
-        if (Input.GetMouseButton(1) && gotPower)
+        if(Input.GetMouseButton(1) && gotPower)
             PowerAttack();
+        
     }
 
     void BasicAttack()
     {
-        if (basicTimer >= basicCooldown)
+        if(basicTimer >= basicCooldown)
         {
-            // Instancia el proyectil con PhotonNetwork.Instantiate
-            GameObject basicAtt = PhotonNetwork.Instantiate(bullet.name, pivot.position, pivot.rotation);
+            GameObject basicAtt = Instantiate(bullet, pivot.position, pivot.rotation);
             Rigidbody rb = basicAtt.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                // Asegúrate de que la gravedad esté habilitada o deshabilitada según lo necesites
-                rb.useGravity = true;  // Activa o desactiva según tu necesidad
-
-                // Aplica una fuerza para mover el proyectil
                 rb.velocity = pivot.forward * vel;
             }
-            Destroy(basicAtt, 3f);  // Destruye el proyectil después de 3 segundos
+            Destroy(basicAtt, 3f);
 
             basicTimer = 0f;
         }
+        
     }
 
     void PowerAttack()
     {
-        if (powerTimer >= powerCooldown)
+        if(powerTimer >= powerCooldown)
         {
-            // Instancia el proyectil con PhotonNetwork.Instantiate
-            GameObject powerAtt = PhotonNetwork.Instantiate(power.name, pivot.position, pivot.rotation);
+            GameObject powerAtt = Instantiate(power, pivot.position, pivot.rotation);
             Rigidbody rb = powerAtt.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                // Asegúrate de que la gravedad esté habilitada o deshabilitada según lo necesites
-                rb.useGravity = true;  // Activa o desactiva según tu necesidad
-
-                // Aplica una fuerza para mover el proyectil
-                rb.velocity = pivot.forward * velPower;
+                rb.velocity = pivot.forward * vel;
             }
-            Destroy(powerAtt, 3f);  // Destruye el proyectil después de 3 segundos
+            Destroy(powerAtt, 3f);
 
             powerTimer = 0f;
         }
+        
     }
 }
