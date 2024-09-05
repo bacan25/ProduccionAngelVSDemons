@@ -19,7 +19,7 @@ public class Move_Player : MonoBehaviour
     public float localRot;
 
     [Header("Climbing")]
-    [SerializeField] float climbSpeed = 5f;  // Ahora se usará en la función Climb
+    [SerializeField] float climbSpeed = 5f;
     public bool isClimbing = false;
     public float sphereCastRadius;
     public bool wallFront;
@@ -35,6 +35,9 @@ public class Move_Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         photonView = GetComponent<PhotonView>();
+
+        // Asegúrate de que el jugador tenga la etiqueta correcta
+        gameObject.tag = "Player";
 
         // Activar o desactivar la cámara en función de si este jugador es el propietario
         if (!photonView.IsMine)

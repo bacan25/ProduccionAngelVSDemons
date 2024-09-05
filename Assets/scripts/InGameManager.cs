@@ -21,7 +21,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
             SpawnPlayer();
         }
 
-        // Otras inicializaciones, si es necesario...
+        // Empezar la búsqueda de jugadores después de unos segundos
+        StartCoroutine(RegisterAllPlayerTransforms());
     }
 
     void SpawnPlayer()
@@ -29,15 +30,28 @@ public class InGameManager : MonoBehaviourPunCallbacks
         int spawnIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
         if (spawnIndex < spawnPoints.Length)
         {
-            GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
-            
-            // Agregar el Transform del jugador a la lista
-            playerTransforms.Add(player.transform);
+            PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
         }
         else
         {
             Debug.LogError("No hay suficientes puntos de aparición para los jugadores.");
         }
+    }
+
+    IEnumerator RegisterAllPlayerTransforms()
+    {
+        yield return new WaitForSeconds(2f);  // Espera 2 segundos para asegurar que todos los jugadores estén en la escena
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            if (!playerTransforms.Contains(player.transform))
+            {
+                playerTransforms.Add(player.transform);
+            }
+        }
+
+        Debug.Log("Todos los jugadores han sido registrados. Total players: " + playerTransforms.Count);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
