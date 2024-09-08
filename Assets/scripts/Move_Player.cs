@@ -44,8 +44,10 @@ public class Move_Player : MonoBehaviour
 
         if (inventory.inventoryOnStage)
         {
-            
-        } else
+            mouseInput = new Vector2(0, 0);
+
+
+        } else 
         {
             mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }

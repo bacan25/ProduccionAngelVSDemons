@@ -15,16 +15,24 @@ public class Inventory : MonoBehaviour
     private int maxSlots;
     private int enabledSlots;
     private GameObject[] slots;
+    public int slotInum;
 
     public GameObject itemIsUp;
 
     public bool inventoryOnStage;
     public int potionNum;
 
+    public ItemManager itemManager;
+
+
+
+
 
 
     void Start()
     {
+        
+
         maxSlots = slotHolder.transform.childCount;
 
         slots = new GameObject[maxSlots];
@@ -34,6 +42,8 @@ public class Inventory : MonoBehaviour
             slots[i] = slotHolder.transform.GetChild(i).gameObject;
 
         }
+
+        SlotInum();
     }
 
     
@@ -41,10 +51,10 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            inventoryEnabled = !inventoryEnabled;
-        } 
+            InventoryEnabled();
+        }
 
-        if(inventoryEnabled)
+        if (inventoryEnabled)
         {
             inventory.SetActive(true);
             inventoryOnStage = true;
@@ -89,6 +99,7 @@ public class Inventory : MonoBehaviour
             {
                 Debug.Log("Item");
                 itemObject.GetComponent<Items>().isUp = true;
+                
 
                 slots[i].GetComponent<Slot>().item = itemObject;
                 slots[i].GetComponent<Slot>().ID = itemID;
@@ -103,6 +114,8 @@ public class Inventory : MonoBehaviour
 
                 slots[i].GetComponent<Slot>().empty = false;
 
+                
+
                 return;
 
             }
@@ -111,12 +124,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void ClearSlot()
+    public void ClearOtherSlot()
     {
         for (int i = 0; i < maxSlots; i++)
         {
             
-            if (slots[i].GetComponent<Slot>().ID == 1)
+            if (slots[i].GetComponent<Slot>().ID == itemManager.itemID && slots[i].GetComponent<Slot>().slotNum == itemManager.slotInum)
             {
 
                 slots[i].GetComponent<Slot>().item = null;
@@ -128,12 +141,59 @@ public class Inventory : MonoBehaviour
                 slots[i].GetComponent<Slot>().UpdateSlot();
 
                 slots[i].GetComponent<Slot>().empty = true;
+
                 return;
 
-            }
+            } 
+
 
 
         }
     }
-     
+
+    public void AutoClearPotionSlot()
+    {
+        for (int i = 0; i < maxSlots; i++)
+        {
+
+            if (slots[i].GetComponent<Slot>().ID == 1)
+            {
+                slots[i].GetComponent<Slot>().item = null;
+                slots[i].GetComponent<Slot>().ID = 0;
+                slots[i].GetComponent<Slot>().type = null;
+                slots[i].GetComponent<Slot>().descript = null;
+                slots[i].GetComponent<Slot>().icon = null;
+
+                slots[i].GetComponent<Slot>().UpdateSlot();
+
+                slots[i].GetComponent<Slot>().empty = true;
+
+                return;
+            }
+
+
+
+        }
+    }
+
+
+    public void SlotInum()
+    {
+        for (int i = 0; i < maxSlots; i++)
+        {
+
+            slots[i].GetComponent<Slot>().slotNum = slotInum;
+            slotInum++;
+        }
+    }
+
+    public void InventoryEnabled()
+    {
+
+        inventoryEnabled = !inventoryEnabled;
+
+    }
+
+    
+
 }

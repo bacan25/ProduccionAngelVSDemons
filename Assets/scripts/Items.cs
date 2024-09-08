@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -28,7 +29,10 @@ public class Items : MonoBehaviour
     public bool accesoryOnStage = false;
     int allAcessories;
     public ItemManager itemManager;
+    public Slot itemSlot;
     private GameObject[] allItems;
+
+    
 
 
 
@@ -84,31 +88,34 @@ public class Items : MonoBehaviour
         //}
 
         if (type == "potion")
-        {
-            if(itemManager.activeItem != null)
-            {
-                itemManager.activeItem.SetActive(false);
-                itemManager.activeItem = null;  
-            }
-
-            accesory.SetActive(true);
-            accesory.GetComponent<Items>().equiped = true;
-            itemManager.activeItem = accesory;
-            itemManager.itemID = itemManager.activeItem.GetComponent<Items>().ID;
-
+        {  
+            ItemManagerUpdate();
 
         }
 
-        //if (type == "accesory")
-        //{
-        //    accesory.SetActive(true);
-        //    accesory.GetComponent<Items>().equiped = true;
-           
+        if (type == "accesory")
+        {
+            ItemManagerUpdate();
 
-           
-           
-        //}
+        }
+
+        
     }
 
-  
+    public void ItemManagerUpdate()
+    {
+        if (itemManager.activeItem != null)
+        {
+            itemManager.activeItem.SetActive(false);
+            itemManager.activeItem = null;
+        }
+
+        accesory.SetActive(true);
+        accesory.GetComponent<Items>().equiped = true;
+        itemManager.activeItem = accesory;
+        itemManager.itemID = itemManager.activeItem.GetComponent<Items>().ID;
+        itemManager.itemType = itemManager.activeItem.GetComponent<Items>().type;
+    }
+
+
 }

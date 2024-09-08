@@ -14,11 +14,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public Sprite icon;
     public bool empty = true;
     public Sprite iconDefault;
+    public int slotNum;
+    public int actualSlotNum;
+    public ItemManager itemManager;
 
     public Transform slotIconPanel;
 
     private void Start() 
     {
+        
+
         slotIconPanel = transform.GetChild(0);
         iconDefault = slotIconPanel.GetComponent<Image>().sprite;
     }
@@ -31,12 +36,22 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public void UseItem()
     {
         item.GetComponent<Items>().ItemUsage();
-       
+        
+
+
+    }
+
+    public void CheckSlotNum()
+    {
+        actualSlotNum = slotNum;
+        itemManager.slotInum = actualSlotNum;
+        Debug.Log(itemManager.slotInum);
     }
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
         UseItem();
+        CheckSlotNum();
         
 
     }
