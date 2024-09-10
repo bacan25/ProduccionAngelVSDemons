@@ -32,12 +32,13 @@ public class Health : MonoBehaviour
             Death();
         }
 
-        //UpdateUI();
+        UpdateUI();
     }
 
     public void Potion()
     {
         currentHealth += 10;
+        UpdateUI();
     }
 
     public void Death()
