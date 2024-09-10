@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class ItemManager : MonoBehaviour
     public int itemID;
     public string itemType;
     public int slotInum;
+    public Text potionTexto;
+    
 
     public Health health;
     public Inventory clearSlot;
@@ -62,9 +66,10 @@ public class ItemManager : MonoBehaviour
 
     private void UsePotion()
     {
-        health.currentHealth += 10;
+        health.Potion();
         clearSlot.potionNum -= 1;
-        
+        potionTexto.text = clearSlot.potionNum.ToString();
+
 
         if (health.currentHealth > health.maxHealth)
         {
