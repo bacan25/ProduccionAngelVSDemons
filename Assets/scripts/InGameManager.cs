@@ -41,12 +41,12 @@ public class InGameManager : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(2f);  // Espera 2 segundos para asegurar que todos los jugadores estén en la escena
 
-        foreach (Player player in PhotonNetwork.PlayerList)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
         {
-            GameObject playerObject = PhotonView.Find(player.ActorNumber).gameObject;
-            if (playerObject != null && !playerTransforms.Contains(playerObject.transform))
+            if (!playerTransforms.Contains(player.transform))
             {
-                playerTransforms.Add(playerObject.transform);
+                playerTransforms.Add(player.transform);
             }
         }
 

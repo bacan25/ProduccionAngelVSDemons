@@ -9,14 +9,30 @@ public class PlayerBulletDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Verifica si el objeto golpeado es un jugador o enemigo
         if (other.CompareTag("Player") || other.CompareTag("Minion"))
         {
-            PhotonView targetPhotonView = other.GetComponent<PhotonView>();
-            if (targetPhotonView != null && targetPhotonView.IsMine)
+            // Si estamos en modo multijugador
+            if (PhotonNetwork.IsConnectedAndReady)
             {
-                // Llama a TakeDamage en la red para que todos vean el daño
-                targetPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
+                PhotonView targetPhotonView = other.GetComponent<PhotonView>();
+                if (targetPhotonView != null && targetPhotonView.IsMine)
+                {
+                    // Aplicar daño a través de Photon (multijugador)
+                    targetPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
+                }
             }
+            else
+            {
+                // Modo local: aplicar daño directamente
+                Health targetHealth = other.GetComponent<Health>();
+                if (targetHealth != null)
+                {
+                    targetHealth.TakeDamage(playerBulletDamage);
+                }
+            }
+
+            // Destruye la bala después de impactar
             Destroy(gameObject);
         }
     }
