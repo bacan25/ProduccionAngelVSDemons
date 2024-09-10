@@ -98,7 +98,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9ab7962d4bcfa8042a4cb70003f2fbb6, type: 2}
+  - {fileID: 2100000, guid: 2c0150f226456eb4796bbac8c3627d8a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -180,14 +180,14 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 0}
   - {fileID: 0}
+  player: {fileID: 0}
   visionRange: 18
   visionAngle: 100
   restPatrol: 2
   shootingRange: 10
   agent: {fileID: 3829448673871569472}
+  playerDetected: 0
   isAgro: 0
-  _inGameManager: {fileID: 0}
-  enemyManager: {fileID: 0}
 --- !u!114 &4589190261931771694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +267,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a167f32c21e164844bc829165ed0a034, type: 2}
+  - {fileID: 2100000, guid: 211297359d3023f43a79fb65792cc18c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -374,7 +374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a167f32c21e164844bc829165ed0a034, type: 2}
+  - {fileID: 2100000, guid: 211297359d3023f43a79fb65792cc18c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -479,7 +479,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cbb6b3afa14a8db44a2ef82ca7289bef, type: 2}
+  - {fileID: 2100000, guid: 821b30369f3b76246ab4d0179c1bc933, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
