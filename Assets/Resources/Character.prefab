@@ -337,7 +337,7 @@ Transform:
   m_GameObject: {fileID: 8749192660268499796}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.83, z: 0}
+  m_LocalPosition: {x: -249.1, y: 5.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -481,8 +481,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
   slotHolder: {fileID: 0}
+  slotInum: 0
   itemIsUp: {fileID: 0}
   inventoryOnStage: 0
+  potionNum: 0
+  itemManager: {fileID: 0}
 --- !u!114 &2762129899826143140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +510,6 @@ MonoBehaviour:
   wallFront: 0
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   climbRef: {fileID: 8951316138132500049}
   inventory: {fileID: 0}
