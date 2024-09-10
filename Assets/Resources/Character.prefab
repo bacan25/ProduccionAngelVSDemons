@@ -481,8 +481,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
   slotHolder: {fileID: 0}
+  slotInum: 0
   itemIsUp: {fileID: 0}
   inventoryOnStage: 0
+  potionNum: 0
+  itemManager: {fileID: 0}
 --- !u!114 &2762129899826143140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +510,6 @@ MonoBehaviour:
   wallFront: 0
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   climbRef: {fileID: 8951316138132500049}
   inventory: {fileID: 0}
