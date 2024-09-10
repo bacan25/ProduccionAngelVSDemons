@@ -29,39 +29,38 @@ public class AngelClass : MonoBehaviour
     public bool gotBasic;
     public bool gotPower;
 
-    
+
 
 
     void Start()
     {
         //basicTimer = basicCooldown;
         //powerTimer = powerCooldown;
-        
+
     }
 
-    
+
     void Update()
     {
-        if(gotBasic)
+        if (gotBasic)
             basicTimer += Time.deltaTime;
-        if(gotPower)
+        if (gotPower)
             powerTimer += Time.deltaTime;
 
         //print("Basic:" + basicTimer);
         //print("Power:" + powerTimer);
 
-        if(Input.GetMouseButton(0) && gotBasic)
+        if (Input.GetMouseButton(0) && gotBasic)
             BasicAttack();
-        if(Input.GetMouseButton(1) && gotPower)
+        if (Input.GetMouseButton(1) && gotPower)
             PowerAttack();
-        
-    }
 
+    }
     void BasicAttack()
     {
-        if(basicTimer >= basicCooldown)
+        if (basicTimer >= basicCooldown)
         {
-            GameObject basicAtt = Instantiate(bullet, pivot.position, pivot.rotation);
+            GameObject basicAtt = PhotonNetwork.Instantiate(bullet.name, pivot.position, pivot.rotation);
             Rigidbody rb = basicAtt.GetComponent<Rigidbody>();
             if (rb != null)
             {
@@ -71,12 +70,12 @@ public class AngelClass : MonoBehaviour
 
             basicTimer = 0f;
         }
-        
     }
+
 
     void PowerAttack()
     {
-        if(powerTimer >= powerCooldown)
+        if (powerTimer >= powerCooldown)
         {
             GameObject powerAtt = Instantiate(power, pivot.position, pivot.rotation);
             Rigidbody rb = powerAtt.GetComponent<Rigidbody>();
@@ -88,6 +87,6 @@ public class AngelClass : MonoBehaviour
 
             powerTimer = 0f;
         }
-        
+
     }
 }

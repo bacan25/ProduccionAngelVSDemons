@@ -1,24 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerBulletDamage : MonoBehaviour
 {
-    //public Health health;
-    
     public int playerBulletDamage;
 
     private void OnTriggerEnter(Collider other)
     {
-        
-
-        if (other.CompareTag("Minion"))
+        if (other.CompareTag("Player") || other.CompareTag("Minion"))
         {
-            other.GetComponent<Health>().TakeDamage(playerBulletDamage);
-            Destroy(this.gameObject);
-
+            PhotonView targetPhotonView = other.GetComponent<PhotonView>();
+            if (targetPhotonView != null && targetPhotonView.IsMine)
+            {
+                // Llama a TakeDamage en la red para que todos vean el daño
+                targetPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
+            }
+            Destroy(gameObject);
         }
-
-        Destroy(this.gameObject, 5f);
     }
 }
