@@ -19,6 +19,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public ItemManager itemManager;
 
     public Transform slotIconPanel;
+    public ItemDescript itemText;
+
 
     private void Start() 
     {
@@ -31,6 +33,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public void UpdateSlot()
     {
         slotIconPanel.GetComponent<Image>().sprite = icon== null? iconDefault: icon;
+        //itemText.slotDescriptText.GetComponent<Text>().text = descript;  
+        
     }
 
     public void UseItem()

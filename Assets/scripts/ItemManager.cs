@@ -62,7 +62,7 @@ public class ItemManager : MonoBehaviour
 
     private void UsePotion()
     {
-        health.currentHealth += 10f;
+        health.currentHealth += 10;
         clearSlot.potionNum -= 1;
         
 

@@ -23,6 +23,7 @@ public class Inventory : MonoBehaviour
     public int potionNum;
 
     public ItemManager itemManager;
+    
 
 
 
@@ -111,6 +112,7 @@ public class Inventory : MonoBehaviour
                 itemObject.SetActive(false);
 
                 slots[i].GetComponent<Slot>().UpdateSlot();
+                
 
                 slots[i].GetComponent<Slot>().empty = false;
 

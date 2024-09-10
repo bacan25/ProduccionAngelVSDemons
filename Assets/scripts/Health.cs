@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public float currentHealth;
-    public float maxHealth;
+    public int currentHealth;
+    public int maxHealth;
+    
 
-    //public Slider healthBar;
+    public Slider healthBar;
 
     void Start()
     {
@@ -15,21 +17,31 @@ public class Health : MonoBehaviour
 
     }
 
-    /* void UpdateUI()
+    void UpdateUI()
     {
-        healthBar.value = currentHealth / maxHealth;
-    } */
+        healthBar.value = currentHealth;
+    } 
 
     public void TakeDamage(int damage)
     {
+        
         currentHealth -= damage;
+        
+        if (currentHealth < 1)
+        {
+            Death();
+        }
+
         //UpdateUI();
     }
 
     public void Potion()
     {
-        currentHealth += 10f;
+        currentHealth += 10;
     }
 
-     
+    public void Death()
+    {
+        Destroy(gameObject);
+    }     
 }
