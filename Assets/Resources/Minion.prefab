@@ -46,9 +46,10 @@ GameObject:
   - component: {fileID: 3829448673871569472}
   - component: {fileID: 4928104656547911685}
   - component: {fileID: 4589190261931771694}
+  - component: {fileID: 3637414319535254695}
   m_Layer: 0
   m_Name: Minion
-  m_TagString: Untagged
+  m_TagString: Minion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +101,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c0150f226456eb4796bbac8c3627d8a, type: 2}
+  - {fileID: 2100000, guid: 9ab7962d4bcfa8042a4cb70003f2fbb6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -182,9 +183,11 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   player: {fileID: 0}
   visionRange: 18
-  visionAngle: 100
+  visionAngle: 312.3
   restPatrol: 2
   shootingRange: 10
   agent: {fileID: 3829448673871569472}
@@ -205,8 +208,23 @@ MonoBehaviour:
   pivot: {fileID: 6119570038260419174}
   bola: {fileID: 8044803207112214825, guid: f9efe6674067186419b379e16dc67ced, type: 3}
   shootCooldown: 5
-  projectileSpeed: 10
+  projectileSpeed: 15
   shootTimer: 0
+--- !u!114 &3637414319535254695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5329651266333619205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd5785a5e1521242bbe11f90cdea9c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 100
+  healthBar: {fileID: 0}
 --- !u!1 &6029391594500328313
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +498,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 821b30369f3b76246ab4d0179c1bc933, type: 2}
+  - {fileID: 2100000, guid: cbb6b3afa14a8db44a2ef82ca7289bef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -534,7 +552,7 @@ PrefabInstance:
     - target: {fileID: 1930713027155105098, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
         type: 3}
       propertyPath: finalScaleReference
-      value: 0.0055476283
+      value: 0.0055476273
       objectReference: {fileID: 0}
     - target: {fileID: 1930713027155105098, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
         type: 3}
@@ -554,7 +572,7 @@ PrefabInstance:
     - target: {fileID: 5317443944276071357, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.07
+      value: -1.23
       objectReference: {fileID: 0}
     - target: {fileID: 5317443944276071357, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
         type: 3}

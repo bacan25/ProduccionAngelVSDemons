@@ -7,8 +7,7 @@ public class Health : MonoBehaviour
 {
     public int currentHealth;
     public int maxHealth;
-    
-
+    [SerializeField] Transform respawn;
     public Slider healthBar;
 
     void Start()
@@ -27,9 +26,12 @@ public class Health : MonoBehaviour
         
         currentHealth -= damage;
         
-        if (currentHealth < 1)
+        if (currentHealth < 1 && this.gameObject.CompareTag("Minion")) //Cambiar tag a Enemy
         {
-            Death();
+            DeathEnemy();
+        }else if (currentHealth < 1 && this.gameObject.CompareTag("Player"))
+        {
+            DeathPlayer();
         }
 
         UpdateUI();
@@ -41,8 +43,15 @@ public class Health : MonoBehaviour
         UpdateUI();
     }
 
-    public void Death()
+    public void DeathEnemy()
     {
         Destroy(gameObject);
-    }     
+    }
+
+    public void DeathPlayer()
+    {
+        this.gameObject.transform.position = respawn.position;
+        currentHealth = maxHealth;
+
+    }
 }

@@ -12,8 +12,9 @@ public class AngelClass : MonoBehaviour
     private GameObject bullet;
     [SerializeField]
     private float vel;
+    public float basicCooldown;
+
     [SerializeField]
-    private float basicCooldown;
     private float basicTimer;
 
     //Power attack
@@ -42,9 +43,9 @@ public class AngelClass : MonoBehaviour
     
     void Update()
     {
-        if(gotBasic)
+        if(gotBasic && basicTimer <= basicCooldown + 0.1f)
             basicTimer += Time.deltaTime;
-        if(gotPower)
+        if(gotPower && powerTimer <= powerCooldown + 0.1f)
             powerTimer += Time.deltaTime;
 
         //print("Basic:" + basicTimer);

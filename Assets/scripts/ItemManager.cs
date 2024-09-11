@@ -15,6 +15,7 @@ public class ItemManager : MonoBehaviour
 
     public Health health;
     public Inventory clearSlot;
+    public AngelClass shootVel; 
 
     private void Start()
     {
@@ -95,6 +96,7 @@ public class ItemManager : MonoBehaviour
         if (itemID == 2)
         {
             Debug.Log("UseAcccesory");
+            shootVel.basicCooldown = 0.3f;
             clearSlot.ClearOtherSlot();
 
 

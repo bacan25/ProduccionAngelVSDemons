@@ -23,9 +23,6 @@ public class Inventory : MonoBehaviour
     public int potionNum;
 
     public ItemManager itemManager;
-    
-
-
 
 
 
