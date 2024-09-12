@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEditor.FilePathAttribute;
 
 public class AngelClass : MonoBehaviour
 {
@@ -28,8 +32,9 @@ public class AngelClass : MonoBehaviour
 
     //Have/Don't have powers
     public bool gotBasic;
-    public bool gotPower;
+    private bool gotPower = false;
 
+    public ChangeAlpha changeAlpha;
     
 
 
@@ -51,10 +56,16 @@ public class AngelClass : MonoBehaviour
         //print("Basic:" + basicTimer);
         //print("Power:" + powerTimer);
 
+        if(basicTimer >= basicCooldown)
+        {
+            changeAlpha.GreenCoolDownIcon();
+        }
+
         if(Input.GetMouseButton(0) && gotBasic)
             BasicAttack();
         if(Input.GetMouseButton(1) && gotPower)
             PowerAttack();
+
         
     }
 
@@ -71,6 +82,7 @@ public class AngelClass : MonoBehaviour
             Destroy(basicAtt, 3f);
 
             basicTimer = 0f;
+            changeAlpha.RedCoolDownIcon();
         }
         
     }
@@ -91,4 +103,25 @@ public class AngelClass : MonoBehaviour
         }
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PowerUp"))
+        {
+            PowerUp();
+            Destroy(other.gameObject);
+        }
+
+       
+    }
+
+    private void PowerUp()
+    {
+        gotPower = true;
+        changeAlpha.SetPowerUpIcon(1f);
+
+
+    }
+
+  
 }

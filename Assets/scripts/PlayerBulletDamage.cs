@@ -19,6 +19,13 @@ public class PlayerBulletDamage : MonoBehaviour
 
         }
 
+        if (other.CompareTag("Ground"))
+        {
+            Destroy(this.gameObject);
+        }
+
         Destroy(this.gameObject, 5f);
     }
+
+  
 }
