@@ -1468,6 +1468,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: IslaColiseo
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bcc62d4d668d85947ae9e68ee6f91772,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5799,7 +5804,7 @@ PrefabInstance:
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
-      value: 0.0055493326
+      value: 0.005547604
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6017,7 +6022,7 @@ GameObject:
   - component: {fileID: 1388240640}
   m_Layer: 0
   m_Name: Terreno
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6056,6 +6061,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2762129899826143140, guid: 335a5768b3fbd4743bbe3a6417aaf163,
+        type: 3}
+      propertyPath: whatIsWall.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6472,8 +6482,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7ad14f793727b4ab6474fb544b7127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints: []
-  playerPrefab: {fileID: 0}
+  spawnPoints:
+  - {fileID: 1636035911}
+  - {fileID: 958211280}
+  playerPrefab: {fileID: 8749192660268499796, guid: 335a5768b3fbd4743bbe3a6417aaf163,
+    type: 3}
   disconnectCountdown: 5
   playerTransforms: []
 --- !u!4 &1490243600
@@ -7328,7 +7341,7 @@ PrefabInstance:
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
-      value: 0.0055482155
+      value: 0.0055479407
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8318,7 +8331,7 @@ PrefabInstance:
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
-      value: 0.00554699
+      value: 0.005548128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8459,7 +8472,7 @@ PrefabInstance:
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
-      value: 0.005547397
+      value: 0.005547504
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

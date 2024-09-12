@@ -76,16 +76,31 @@ public class AngelClass : MonoBehaviour
     {
         if (basicTimer >= basicCooldown)
         {
-            GameObject basicAtt = PhotonNetwork.Instantiate(bullet.name, pivot.position, pivot.rotation);
+            GameObject basicAtt;
+
+            // Si estás en una sala de Photon, instancia a través de Photon
+            if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.InRoom)
+            {
+                basicAtt = PhotonNetwork.Instantiate(bullet.name, pivot.position, pivot.rotation);
+            }
+            else
+            {
+                // Si no estás conectado a Photon, instancia localmente
+                basicAtt = Instantiate(bullet, pivot.position, pivot.rotation);
+            }
+
+            // Añadir la velocidad a la bala
             Rigidbody rb = basicAtt.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.velocity = pivot.forward * vel;
             }
+
+            // Destruir la bala después de 3 segundos
             Destroy(basicAtt, 3f);
 
+            // Reiniciar el temporizador de ataque básico
             basicTimer = 0f;
-            changeAlpha.RedCoolDownIcon();
         }
     }
 
