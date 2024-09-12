@@ -35,5 +35,14 @@ public class PlayerBulletDamage : MonoBehaviour
             // Destruye la bala después de impactar
             Destroy(gameObject);
         }
+
+        if (other.CompareTag("Ground"))
+        {
+            Destroy(this.gameObject);
+        }
+
+        Destroy(this.gameObject, 5f);
     }
+
+  
 }

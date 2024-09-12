@@ -4,12 +4,10 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviourPunCallbacks
 {
-  public int maxHealth = 100;
-    public int currentHealth; 
-
-    public GameObject healthBarObject;  // Asigna la barra de vida como un GameObject en el Inspector
-    private Slider healthBar;  // Referencia al Slider dentro del GameObject
-    public Transform healthBarTransform;
+    public int currentHealth;
+    public int maxHealth;
+    [SerializeField] Transform respawn;
+    public Slider healthBar;
 
     void Start()
     {
@@ -55,10 +53,13 @@ public class Health : MonoBehaviourPunCallbacks
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
-        if (currentHealth < 0)
+        
+        if (currentHealth < 1 && this.gameObject.CompareTag("Minion")) //Cambiar tag a Enemy
         {
-            currentHealth = 0;
+            DeathEnemy();
+        }else if (currentHealth < 1 && this.gameObject.CompareTag("Player"))
+        {
+            DeathPlayer();
         }
 
         // Actualiza la barra de vida después del daño
@@ -89,17 +90,15 @@ public class Health : MonoBehaviourPunCallbacks
         }
     }
 
-    public void Heal(int healAmount)
+    public void DeathEnemy()
     {
-        currentHealth += healAmount;
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
+        Destroy(gameObject);
+    }
 
-        if (healthBar != null)
-        {
-            healthBar.value = currentHealth;
-        }
+    public void DeathPlayer()
+    {
+        this.gameObject.transform.position = respawn.position;
+        currentHealth = maxHealth;
+
     }
 }

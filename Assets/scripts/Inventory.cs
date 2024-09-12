@@ -22,9 +22,6 @@ public class Inventory : MonoBehaviour
     public int potionNum;
 
     public ItemManager itemManager;
-    
-
-
 
 
 
@@ -79,6 +76,7 @@ public class Inventory : MonoBehaviour
             if (item.GetComponent<Items>().ID == 1)
             {
                 potionNum++;
+                itemManager.potionTexto.text = potionNum.ToString();
 
             }
 

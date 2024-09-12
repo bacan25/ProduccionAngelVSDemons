@@ -24,7 +24,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
         // Empezar la búsqueda de jugadores después de unos segundos
         StartCoroutine(RegisterAllPlayerTransforms());
     }
-
+        
     void SpawnPlayer()
     {
         int spawnIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;

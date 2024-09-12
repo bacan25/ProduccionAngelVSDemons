@@ -29,6 +29,12 @@ public class Move_Player : MonoBehaviour
 
     public Inventory inventory;
 
+    private bool dobleSaltoSkill = false;
+    private bool climbSkill = false;
+    
+
+    public ChangeAlpha changeAlpha;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -61,7 +67,7 @@ public class Move_Player : MonoBehaviour
             Walk();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount == 0 || Input.GetKeyDown(KeyCode.Space) && jumpCount == 1)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount == 0 && dobleSaltoSkill || Input.GetKeyDown(KeyCode.Space) && jumpCount == 1 && dobleSaltoSkill)
         {
             Jump();
         }
@@ -70,7 +76,7 @@ public class Move_Player : MonoBehaviour
 
 
         Collider[] colliders = Physics.OverlapSphere(climbRef.position, sphereCastRadius, whatIsWall);
-        if (colliders.Length > 0 && Input.GetKey(KeyCode.Space))
+        if (colliders.Length > 0 && Input.GetKey(KeyCode.Space) && climbSkill)
         {
             wallFront = true;
         } else
@@ -163,5 +169,40 @@ public class Move_Player : MonoBehaviour
 
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("DobleSalto"))
+        {
+            DobleSalto();
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Escalar"))
+        {
+            Escalar();
+            Destroy(other.gameObject);
+        }
+
+      
+    }
+
+    private void DobleSalto()
+    {
+        dobleSaltoSkill = true;
+        changeAlpha.SetDobleSaltoIcon(1f);
+        
+
+    }
+
+    private void Escalar()
+    {
+        climbSkill = true;
+        changeAlpha.SetClimbIcon(1f);
+
+
+    }
+
+   
 
 }
