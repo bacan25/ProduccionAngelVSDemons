@@ -4,32 +4,50 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviourPunCallbacks
 {
-    public int currentHealth;
-    public int maxHealth;
+  public int maxHealth = 100;
+    public int currentHealth; 
 
-    public Slider healthBar;
+    public GameObject healthBarObject;  // Asigna la barra de vida como un GameObject en el Inspector
+    private Slider healthBar;  // Referencia al Slider dentro del GameObject
     public Transform healthBarTransform;
 
     void Start()
     {
         currentHealth = maxHealth;
-        UpdateUI(); // Asegúrate de que la UI de vida esté correcta al inicio
+
+        // Busca el componente Slider dentro del GameObject de la barra de vida
+        if (healthBarObject != null)
+        {
+            healthBar = healthBarObject.GetComponent<Slider>();
+
+            if (healthBar != null)
+            {
+                healthBar.maxValue = maxHealth;
+                healthBar.value = maxHealth;
+            }
+            else
+            {
+                Debug.LogError("No se encontró el componente Slider en el GameObject asignado.");
+            }
+        }
+        else
+        {
+            Debug.LogError("No se ha asignado ningún GameObject para la barra de vida.");
+        }
+
+        // Asigna también el healthBarTransform si no se ha asignado manualmente
+        if (healthBarTransform == null && healthBarObject != null)
+        {
+            healthBarTransform = healthBarObject.transform;
+        }
     }
 
     void Update()
     {
+        // Asegúrate de que la barra de vida siga a la cámara del jugador
         if (healthBarTransform != null && Camera.main != null)
         {
-            // Asegúrate de que la barra de vida siempre esté orientada hacia la cámara
             healthBarTransform.LookAt(Camera.main.transform);
-        }
-    }
-
-    void UpdateUI()
-    {
-        if (healthBar != null)
-        {
-            healthBar.value = (float)currentHealth / maxHealth; // Actualiza la barra de vida proporcionalmente
         }
     }
 
@@ -38,35 +56,50 @@ public class Health : MonoBehaviourPunCallbacks
     {
         currentHealth -= damage;
 
-        if (currentHealth < 1)
+        if (currentHealth < 0)
         {
             currentHealth = 0;
-            Death();
         }
 
-        UpdateUI(); // Asegúrate de que la UI se actualiza cada vez que se recibe daño
-    }
-
-    public void Potion()
-    {
-        currentHealth += 10;
-        if (currentHealth > maxHealth)
+        // Actualiza la barra de vida después del daño
+        if (healthBar != null)
         {
-            currentHealth = maxHealth; // No puede superar la salud máxima
+            healthBar.value = currentHealth;
         }
-        UpdateUI();
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
-    [PunRPC]
-    public void Death()
+    void Die()
     {
-        if (photonView != null && photonView.IsMine)
+        // Destruye el objeto cuando muere
+        if (PhotonNetwork.IsConnectedAndReady)
         {
-            PhotonNetwork.Destroy(gameObject); // Destruir el objeto en la red
+            if (photonView.IsMine)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void Heal(int healAmount)
+    {
+        currentHealth += healAmount;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        if (healthBar != null)
+        {
+            healthBar.value = currentHealth;
         }
     }
 }
