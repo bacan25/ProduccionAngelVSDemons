@@ -63,6 +63,8 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    
+
 
     private void OnCollisionEnter(Collision other)
     {
@@ -194,6 +196,15 @@ public class Inventory : MonoBehaviour
 
     }
 
-    
+    public void ScrollBarEnabled()
+    {
+
+        inventoryOnStage = !inventoryOnStage;
+
+    }
+
+
+
+
 
 }
