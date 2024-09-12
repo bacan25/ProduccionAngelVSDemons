@@ -180,11 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130b087b8b864624ea27b737cbe0d844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  pathPoints: []
   player: {fileID: 0}
   visionRange: 18
   visionAngle: 312.3
@@ -224,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 100
+  respawn: {fileID: 0}
   healthBar: {fileID: 0}
 --- !u!1 &6029391594500328313
 GameObject:
@@ -551,8 +548,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1930713027155105098, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
         type: 3}
+      propertyPath: GroundMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930713027155105098, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
+        type: 3}
       propertyPath: finalScaleReference
-      value: 0.0055476273
+      value: 0.00554768
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930713027155105098, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
+        type: 3}
+      propertyPath: _EditorSetupCategory
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1930713027155105098, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
         type: 3}

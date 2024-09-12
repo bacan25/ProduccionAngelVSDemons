@@ -4,7 +4,10 @@ using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 using static UnityEditor.FilePathAttribute;
+
 
 public class AngelClass : MonoBehaviour
 {
