@@ -37,22 +37,22 @@ public class InGameManager : MonoBehaviourPunCallbacks
             Debug.LogError("No hay suficientes puntos de aparición para los jugadores.");
         }
     }
-
     IEnumerator RegisterAllPlayerTransforms()
     {
         yield return new WaitForSeconds(2f);  // Espera 2 segundos para asegurar que todos los jugadores estén en la escena
 
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
+        foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (!playerTransforms.Contains(player.transform))
+            GameObject playerObject = PhotonView.Find(player.ActorNumber).gameObject;
+            if (playerObject != null && !playerTransforms.Contains(playerObject.transform))
             {
-                playerTransforms.Add(player.transform);
+                playerTransforms.Add(playerObject.transform);
             }
         }
 
         Debug.Log("Todos los jugadores han sido registrados. Total players: " + playerTransforms.Count);
     }
+
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {

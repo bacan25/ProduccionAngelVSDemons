@@ -7,7 +7,7 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField]private Transform pivot;
     [SerializeField]private GameObject bola;
     public float shootCooldown;
-    [SerializeField]private float projectileSpeed = 10f;
+    [SerializeField]private float projectileSpeed = 5f;
 
     public float shootTimer;
 

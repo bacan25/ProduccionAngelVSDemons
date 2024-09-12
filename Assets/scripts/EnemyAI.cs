@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
     // Puntos de ruta (Patrol)
     [SerializeField]private Transform[] pathPoints;
 
-    
+    public Transform player;
     [SerializeField]private float visionRange = 10f;
     [SerializeField]private float visionAngle = 45f;
 
@@ -20,20 +20,17 @@ public class EnemyAI : MonoBehaviour
     private int currentPathIndex;
 
     private bool isWaiting;
+    [SerializeField]private bool playerDetected = false;
     [HideInInspector] public bool isAgro;
-    
+   
+
     // Componente de disparo
     private EnemyShooting enemyShooting;
-
-    //InGameManager reemplazar por el de Miguel
-    public InGameManager _inGameManager;
-    public EnemyManager enemyManager;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         enemyShooting = GetComponent<EnemyShooting>();
-
         currentPathIndex = 0;
         agent.destination = pathPoints[currentPathIndex].position;
         isAgro = false;
@@ -45,7 +42,7 @@ public class EnemyAI : MonoBehaviour
     {
         IsPlayerDetected();
 
-        if(enemyManager.playerDetected != null)
+        if(playerDetected)
         {
             isAgro = true;
         }
@@ -82,8 +79,8 @@ public class EnemyAI : MonoBehaviour
 
     void ChasePlayer()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, enemyManager.playerDetected.position);
-        Vector3 directionToPlayer = (enemyManager.playerDetected.position - transform.position).normalized;
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        Vector3 directionToPlayer = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
 
         // Gira suavementeeee
@@ -92,43 +89,31 @@ public class EnemyAI : MonoBehaviour
         if(distanceToPlayer <= shootingRange)
         {
             agent.isStopped = true;
-            enemyShooting.Shoot(enemyManager.playerDetected.transform);
+            enemyShooting.Shoot(player.transform);
             
         }
         else
         {
             agent.isStopped = false;
-            agent.SetDestination(enemyManager.playerDetected.position);
+            agent.SetDestination(player.position);
         }
         
     }
 
     void IsPlayerDetected()
     {
-        float minDistance = 100000;
-        Transform closestPlayer = null;
-        foreach(Transform player in _inGameManager.playerTransforms)
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if (distanceToPlayer <= visionRange)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-            if (distanceToPlayer <= visionRange)
+            Vector3 directionToPlayer = (player.position - transform.position).normalized;
+            float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+            
+            // Verifica si el player está dentro del angulo de visión
+            if (angleToPlayer <= visionAngle / 2)
             {
-                Vector3 directionToPlayer = (player.position - transform.position).normalized;
-                float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
-                
-                // Verifica si el player está dentro del angulo de visión
-                if (angleToPlayer <= visionAngle / 2)
-                {
-                    minDistance = distanceToPlayer;
-                    closestPlayer = player;
-                }
+                playerDetected = true;
             }
         }
-
-         if (closestPlayer != null)
-        {
-            enemyManager.playerDetected = closestPlayer;
-        }
-        
     }
 
     // Dibuja los círculitos en la escena
@@ -146,10 +131,10 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
         Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
 
-        /* if (enemyManager.playerDetected != null)
+        if (playerDetected)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, enemyManager.playerDetected.position);
-        } */
+            Gizmos.DrawLine(transform.position, player.position);
+        }
     }
 }

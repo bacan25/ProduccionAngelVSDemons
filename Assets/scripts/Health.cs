@@ -1,28 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviourPunCallbacks
 {
-    public float currentHealth;
-    public float maxHealth;
+    public int currentHealth;
+    public int maxHealth;
 
-    //public Slider healthBar;
+    public Slider healthBar;
 
     void Start()
     {
         currentHealth = maxHealth;
-
+        UpdateUI();
     }
 
-    /* void UpdateUI()
+    void UpdateUI()
     {
-        healthBar.value = currentHealth / maxHealth;
-    } */
+        if (healthBar != null)
+        {
+            healthBar.value = currentHealth;
+        }
+    }
 
+    [PunRPC]
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        //UpdateUI();
+
+        if (currentHealth < 1)
+        {
+            Death();
+        }
+
+        UpdateUI();
+    }
+
+    public void Potion()
+    {
+        currentHealth += 10;
+        UpdateUI();
+    }
+
+    [PunRPC]
+    public void Death()
+    {
+        PhotonNetwork.Destroy(gameObject); // Destruir el objeto en la red
     }
 }
