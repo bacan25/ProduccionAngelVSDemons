@@ -35,7 +35,7 @@ public class AngelClass : MonoBehaviour
 
     //Have/Don't have powers
     public bool gotBasic;
-    private bool gotPower = false;
+    public bool gotPower = false;
 
     public ChangeAlpha changeAlpha;
     
@@ -60,10 +60,10 @@ public class AngelClass : MonoBehaviour
         //print("Basic:" + basicTimer);
         //print("Power:" + powerTimer);
 
-        if(basicTimer >= basicCooldown)
+       /*  if(basicTimer >= basicCooldown)
         {
             changeAlpha.GreenCoolDownIcon();
-        }
+        } */
 
         if(Input.GetMouseButton(0) && gotBasic)
             BasicAttack();

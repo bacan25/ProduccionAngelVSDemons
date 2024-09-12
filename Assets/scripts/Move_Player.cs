@@ -29,7 +29,7 @@ public class Move_Player : MonoBehaviour
 
     public Inventory inventory;
 
-    private bool dobleSaltoSkill = false;
+    public bool dobleSaltoSkill = false;
     private bool climbSkill = false;
     
 
