@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
+using UnityEngine.UI;
+using static UnityEditor.FilePathAttribute;
 
 public class AngelClass : MonoBehaviour
 {
@@ -14,8 +16,9 @@ public class AngelClass : MonoBehaviour
     private GameObject bullet;
     [SerializeField]
     private float vel;
+    public float basicCooldown;
+
     [SerializeField]
-    private float basicCooldown;
     private float basicTimer;
 
     //Power attack
@@ -29,8 +32,10 @@ public class AngelClass : MonoBehaviour
 
     //Have/Don't have powers
     public bool gotBasic;
-    public bool gotPower;
+    private bool gotPower = false;
 
+    public ChangeAlpha changeAlpha;
+    
 
 
 
@@ -44,19 +49,25 @@ public class AngelClass : MonoBehaviour
 
     void Update()
     {
-        if (gotBasic)
+        if(gotBasic && basicTimer <= basicCooldown + 0.1f)
             basicTimer += Time.deltaTime;
-        if (gotPower)
+        if(gotPower && powerTimer <= powerCooldown + 0.1f)
             powerTimer += Time.deltaTime;
 
         //print("Basic:" + basicTimer);
         //print("Power:" + powerTimer);
 
-        if (Input.GetMouseButton(0) && gotBasic)
+        if(basicTimer >= basicCooldown)
+        {
+            changeAlpha.GreenCoolDownIcon();
+        }
+
+        if(Input.GetMouseButton(0) && gotBasic)
             BasicAttack();
         if (Input.GetMouseButton(1) && gotPower)
             PowerAttack();
 
+        
     }
     void BasicAttack()
     {
@@ -71,6 +82,7 @@ public class AngelClass : MonoBehaviour
             Destroy(basicAtt, 3f);
 
             basicTimer = 0f;
+            changeAlpha.RedCoolDownIcon();
         }
     }
 
@@ -91,4 +103,25 @@ public class AngelClass : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PowerUp"))
+        {
+            PowerUp();
+            Destroy(other.gameObject);
+        }
+
+       
+    }
+
+    private void PowerUp()
+    {
+        gotPower = true;
+        changeAlpha.SetPowerUpIcon(1f);
+
+
+    }
+
+  
 }

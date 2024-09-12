@@ -6,7 +6,7 @@ public class Health : MonoBehaviourPunCallbacks
 {
     public int currentHealth;
     public int maxHealth;
-
+    [SerializeField] Transform respawn;
     public Slider healthBar;
 
     void Start()
@@ -27,10 +27,13 @@ public class Health : MonoBehaviourPunCallbacks
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
-        if (currentHealth < 1)
+        
+        if (currentHealth < 1 && this.gameObject.CompareTag("Minion")) //Cambiar tag a Enemy
         {
-            Death();
+            DeathEnemy();
+        }else if (currentHealth < 1 && this.gameObject.CompareTag("Player"))
+        {
+            DeathPlayer();
         }
 
         UpdateUI();
@@ -42,9 +45,15 @@ public class Health : MonoBehaviourPunCallbacks
         UpdateUI();
     }
 
-    [PunRPC]
-    public void Death()
+    public void DeathEnemy()
     {
-        PhotonNetwork.Destroy(gameObject); // Destruir el objeto en la red
+        Destroy(gameObject);
+    }
+
+    public void DeathPlayer()
+    {
+        this.gameObject.transform.position = respawn.position;
+        currentHealth = maxHealth;
+
     }
 }
