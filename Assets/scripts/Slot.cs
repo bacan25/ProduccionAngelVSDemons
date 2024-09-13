@@ -55,7 +55,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData pointerEventData)
     {
         UseItem();
-        CheckSlotNum();
+        //CheckSlotNum();
         
 
     }

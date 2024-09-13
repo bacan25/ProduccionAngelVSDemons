@@ -33,7 +33,7 @@ public class Health : MonoBehaviourPunCallbacks
             DeathEnemy();
         }else if (currentHealth < 1 && this.gameObject.CompareTag("Player"))
         {
-            DeathPlayer();
+            //DeathPlayer();
         }
 
         UpdateUI();

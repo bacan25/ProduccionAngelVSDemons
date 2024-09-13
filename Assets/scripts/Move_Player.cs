@@ -48,7 +48,7 @@ public class Move_Player : MonoBehaviour
         horInput = Input.GetAxis("Horizontal");
         verInput = Input.GetAxis("Vertical");
 
-        if (inventory.inventoryOnStage)
+        if (inventory.inventoryOnStage || inventory.instructionsOnStage)
         {
             mouseInput = new Vector2(0, 0);
 

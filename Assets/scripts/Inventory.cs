@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
 {
     private bool inventoryEnabled;
     public GameObject inventory;
+    public GameObject instructions;
     public GameObject slotHolder;
 
     private int maxSlots;
@@ -20,6 +21,8 @@ public class Inventory : MonoBehaviour
     public GameObject itemIsUp;
 
     public bool inventoryOnStage;
+    public bool instructionsOnStage;
+    public bool instructionsEnabled;
     public int potionNum;
 
     public ItemManager itemManager;
@@ -61,6 +64,19 @@ public class Inventory : MonoBehaviour
             inventory.SetActive(false);
             inventoryOnStage = false;
         }
+
+        if (instructionsEnabled)
+        {
+            instructions.SetActive(true);
+            instructionsOnStage = true;
+        }
+        else
+        {
+            instructions.SetActive(false);
+            instructionsOnStage = false;
+        }
+
+
     }
 
     
@@ -199,9 +215,14 @@ public class Inventory : MonoBehaviour
     public void ScrollBarEnabled()
     {
 
-        inventoryOnStage = !inventoryOnStage;
+        instructionsEnabled = !instructionsEnabled;
+
 
     }
+
+    
+
+  
 
 
 
