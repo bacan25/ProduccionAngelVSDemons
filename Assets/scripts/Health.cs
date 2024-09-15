@@ -1,6 +1,8 @@
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
+using static FIMSpace.FProceduralAnimation.LegsAnimator;
 
 public class Health : MonoBehaviourPunCallbacks
 {
@@ -9,10 +11,47 @@ public class Health : MonoBehaviourPunCallbacks
     [SerializeField] Transform respawn;
     public Slider healthBar;
 
+    [SerializeField] int min, seg;
+    [SerializeField] Text tiempo;
+
+    private float restante;
+    public bool isRespawn;
+    public Move_Player player;
+    public Health health;
+    public GameObject respawnPanel;
+
+    private void Awake()
+    {
+        restante = (min * 60 + seg);
+
+    }
+
+
     void Start()
     {
         currentHealth = maxHealth;
         UpdateUI();
+    }
+
+    private void Update()
+    {
+        if (isRespawn)
+        {
+            player.muerto = true;
+            respawnPanel.SetActive(true);
+            restante -= Time.deltaTime;
+            if (restante < 1)
+            {
+                isRespawn = false;
+                respawnPanel.SetActive(false);
+                DeathPlayer();
+                player.muerto = false;
+                restante = (min * 60 + seg);
+            }
+            int tempMin = Mathf.FloorToInt(restante / 60);
+            int tempSeg = Mathf.FloorToInt(restante % 60);
+            tiempo.text = "Respawn en " + string.Format("{00:00}:{01:00}", tempMin, tempSeg);
+        }
     }
 
     void UpdateUI()

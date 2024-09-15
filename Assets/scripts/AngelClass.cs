@@ -34,10 +34,11 @@ public class AngelClass : MonoBehaviour
     private float powerTimer;
 
     //Have/Don't have powers
-    public bool gotBasic;
+    private bool gotBasic = true;
     private bool gotPower = false;
 
     public ChangeAlpha changeAlpha;
+    public Inventory inventory;
     
 
 
@@ -52,6 +53,11 @@ public class AngelClass : MonoBehaviour
 
     void Update()
     {
+        if(inventory.inventoryOnStage || inventory.instructionsOnStage)
+        {
+            return;
+        }
+
         if(gotBasic && basicTimer <= basicCooldown + 0.1f)
             basicTimer += Time.deltaTime;
         if(gotPower && powerTimer <= powerCooldown + 0.1f)
@@ -76,7 +82,8 @@ public class AngelClass : MonoBehaviour
     {
         if (basicTimer >= basicCooldown)
         {
-            GameObject basicAtt = PhotonNetwork.Instantiate(bullet.name, pivot.position, pivot.rotation);
+            //GameObject basicAtt = PhotonNetwork.Instantiate(bullet.name, pivot.position, pivot.rotation);
+            GameObject basicAtt = Instantiate(bullet, pivot.position, pivot.rotation);
             Rigidbody rb = basicAtt.GetComponent<Rigidbody>();
             if (rb != null)
             {
