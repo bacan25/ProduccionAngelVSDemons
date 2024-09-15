@@ -31,7 +31,9 @@ public class Move_Player : MonoBehaviour
 
     private bool dobleSaltoSkill = false;
     private bool climbSkill = false;
-    
+
+    public bool muerto;
+
 
     public ChangeAlpha changeAlpha;
 
@@ -45,6 +47,11 @@ public class Move_Player : MonoBehaviour
     
     void Update()
     {
+        if(muerto)
+        {
+            return;
+        }
+
         horInput = Input.GetAxis("Horizontal");
         verInput = Input.GetAxis("Vertical");
 

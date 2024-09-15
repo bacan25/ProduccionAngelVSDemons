@@ -54,6 +54,7 @@ public class Health : MonoBehaviourPunCallbacks
     {
         this.gameObject.transform.position = respawn.position;
         currentHealth = maxHealth;
+        UpdateUI();
 
     }
 }
