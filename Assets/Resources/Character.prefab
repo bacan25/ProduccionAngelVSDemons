@@ -321,6 +321,8 @@ GameObject:
   - component: {fileID: 6764288409272786859}
   - component: {fileID: 8151253734232962639}
   - component: {fileID: 2762129899826143140}
+  - component: {fileID: 8026816316107826425}
+  - component: {fileID: 2262906203095726232}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -459,14 +461,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 5046357819211447784}
-  bullet: {fileID: 8044803207112214825, guid: f9efe6674067186419b379e16dc67ced, type: 3}
+  bullet: {fileID: 8044803207112214825, guid: b464cf359a427634e93fb41bd822a8d5, type: 3}
   vel: 50
   basicCooldown: 0.4
+  basicTimer: 0
   power: {fileID: 5664522316287298105, guid: fb1c781da51f11a41b2ffa7e7a913a6f, type: 3}
   velPower: 10
   powerCooldown: 2
-  gotBasic: 0
-  gotPower: 0
+  changeAlpha: {fileID: 0}
+  inventory: {fileID: 8151253734232962639}
 --- !u!114 &8151253734232962639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,10 +483,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
+  instructions: {fileID: 0}
   slotHolder: {fileID: 0}
   slotInum: 0
   itemIsUp: {fileID: 0}
   inventoryOnStage: 0
+  instructionsOnStage: 0
+  instructionsEnabled: 0
   potionNum: 0
   itemManager: {fileID: 0}
 --- !u!114 &2762129899826143140
@@ -498,7 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051488903731ff54493d0bcfec4a364e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movSpeed: 5
+  movSpeed: 50
   jumpSpeed: 5
   turnSpeed: 100
   isGrounded: 0
@@ -510,6 +516,45 @@ MonoBehaviour:
   wallFront: 0
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   climbRef: {fileID: 8951316138132500049}
-  inventory: {fileID: 0}
+  inventory: {fileID: 8151253734232962639}
+  muerto: 0
+  changeAlpha: {fileID: 0}
+--- !u!114 &8026816316107826425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749192660268499796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd5785a5e1521242bbe11f90cdea9c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 100
+  respawn: {fileID: 0}
+  healthBar: {fileID: 0}
+  min: 0
+  seg: 10
+  tiempo: {fileID: 0}
+  isRespawn: 0
+  player: {fileID: 2762129899826143140}
+  health: {fileID: 8026816316107826425}
+  respawnPanel: {fileID: 0}
+--- !u!114 &2262906203095726232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749192660268499796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e3d1159136244d943e4c5220142e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winCanvas: {fileID: 0}
+  loseCanvas: {fileID: 0}

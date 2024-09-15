@@ -20,7 +20,7 @@ public class Move_Player : MonoBehaviour
 
 
     [Header("Climbing")]
-    [SerializeField] float climbSpeed = 5f;
+    [SerializeField] private float climbSpeed = 5f;
     public bool isClimbing = false;
     public float sphereCastRadius;
     public bool wallFront;
@@ -29,7 +29,7 @@ public class Move_Player : MonoBehaviour
 
     public Inventory inventory;
 
-    private bool dobleSaltoSkill = false;
+    [SerializeField] private bool dobleSaltoSkill = false;
     private bool climbSkill = false;
 
     public bool muerto;

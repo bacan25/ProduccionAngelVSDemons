@@ -100,4 +100,20 @@ public class InGameManager : MonoBehaviourPunCallbacks
             PhotonNetwork.LoadLevel(levelName);
         }
     }
+
+    //Esta vaina activa los paneles de los ganadores y los perdedores
+    public void HandleWin(PlayerCanvas winner)
+    {
+        foreach (PlayerCanvas player in FindObjectsOfType<PlayerCanvas>())
+        {
+            if (player != winner)
+            {
+                player.LoseCanvas();
+            }
+            else{
+                
+                player.WinCanvas();
+            }
+        }
+    }
 }
