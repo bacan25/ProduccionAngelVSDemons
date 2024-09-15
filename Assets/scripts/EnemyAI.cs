@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
     // Puntos de ruta (Patrol)
     [SerializeField]private Transform[] pathPoints;
 
-    public Transform player;
+    //public Transform player;
     [SerializeField]private float visionRange = 10f;
     [SerializeField]private float visionAngle = 45f;
 
@@ -20,8 +20,11 @@ public class EnemyAI : MonoBehaviour
     private int currentPathIndex;
 
     private bool isWaiting;
-    [SerializeField]private bool playerDetected = false;
+    
     [HideInInspector] public bool isAgro;
+
+    public InGameManager _inGameManager;
+    public EnemyManager enemyManager;
    
 
     // Componente de disparo
@@ -42,7 +45,7 @@ public class EnemyAI : MonoBehaviour
     {
         IsPlayerDetected();
 
-        if(playerDetected)
+        if(enemyManager.playerDetected != null)
         {
             isAgro = true;
         }
@@ -79,8 +82,8 @@ public class EnemyAI : MonoBehaviour
 
     void ChasePlayer()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
+        float distanceToPlayer = Vector3.Distance(transform.position, enemyManager.playerDetected.position);
+        Vector3 directionToPlayer = (enemyManager.playerDetected.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
 
         // Gira suavementeeee
@@ -89,30 +92,41 @@ public class EnemyAI : MonoBehaviour
         if(distanceToPlayer <= shootingRange)
         {
             agent.isStopped = true;
-            enemyShooting.Shoot(player.transform);
+            enemyShooting.Shoot(enemyManager.playerDetected.transform); //Solo parapruebas de la AI
             
         }
         else
         {
             agent.isStopped = false;
-            agent.SetDestination(player.position);
+            agent.SetDestination(enemyManager.playerDetected.position);
         }
         
     }
 
     void IsPlayerDetected()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distanceToPlayer <= visionRange)
+        float minDistance = 100000;
+        Transform closestPlayer = null;
+        foreach(Transform player in _inGameManager.playerTransforms)
         {
-            Vector3 directionToPlayer = (player.position - transform.position).normalized;
-            float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
-            
-            // Verifica si el player está dentro del angulo de visión
-            if (angleToPlayer <= visionAngle / 2)
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            if (distanceToPlayer <= visionRange)
             {
-                playerDetected = true;
+                Vector3 directionToPlayer = (player.position - transform.position).normalized;
+                float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+                
+                // Verifica si el player está dentro del angulo de visión
+                if (angleToPlayer <= visionAngle / 2)
+                {
+                    minDistance = distanceToPlayer;
+                    closestPlayer = player;
+                }
             }
+        }
+
+         if (closestPlayer != null)
+        {
+            enemyManager.playerDetected = closestPlayer;
         }
     }
 
@@ -131,10 +145,10 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
         Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
 
-        if (playerDetected)
+        if (enemyManager.playerDetected)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, player.position);
+            Gizmos.DrawLine(transform.position, enemyManager.playerDetected.position);
         }
     }
 }
