@@ -47,6 +47,13 @@ MonoBehaviour:
   - UpdateUIForAllPlayers
   - RegisterPlayerTransform
   - Death
+  - HandleWinRPC
+  - RespawnPlayer
+  - TakeFallDamage
+  - RegisterPlayerWithMaster
+  - UnregisterPlayerWithMaster
+  - SyncClimbSkill
+  - SyncDobleSaltoSkill
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

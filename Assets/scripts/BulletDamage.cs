@@ -1,30 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class BulletDamage : MonoBehaviour
+public class BulletDamage : MonoBehaviourPun
 {
-    //public Health health;
     public int damage;
-    
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Minion"))
         {
-            other.GetComponent<Health>().TakeDamage(damage);
-            Destroy(this.gameObject);
+            PhotonView targetPhotonView = other.GetComponent<PhotonView>();
+            if (targetPhotonView != null)
+            {
+                targetPhotonView.RPC("TakeDamage", RpcTarget.All, damage);
+            }
+            PhotonNetwork.Destroy(this.gameObject);
         }
-
-        if (other.CompareTag("Ground"))
+        else if (other.CompareTag("Ground"))
         {
-            Destroy(this.gameObject);
+            PhotonNetwork.Destroy(this.gameObject);
         }
-
-        Destroy(this.gameObject, 5f);
-
-
     }
-
-    
 }

@@ -1,18 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class InGameManager : MonoBehaviourPunCallbacks
 {
-    public Transform[] spawnPoints;  // Array de puntos de aparición
-    public GameObject playerPrefab;  // Prefab del jugador
-    public float disconnectCountdown = 5f; // Cuenta regresiva en segundos
+    public static InGameManager Instance; // Singleton para acceso global
 
-    // Lista pública para almacenar los Transforms de los jugadores
+    public Transform[] spawnPoints; // Asegúrate de que estén asignados en el inspector
+    public GameObject playerPrefab; // Asegúrate de que esté asignado en el inspector
+    public float disconnectCountdown = 5f;
+
+    // Lista para almacenar los Transforms de los jugadores
     public List<Transform> playerTransforms = new List<Transform>();
+
+    private void Awake()
+    {
+        // Implementación del singleton
+        if (Instance == null)
+        {
+            Instance = this;
+            // Opcional: DontDestroyOnLoad(gameObject); // Si deseas que el objeto persista entre escenas
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -20,39 +35,60 @@ public class InGameManager : MonoBehaviourPunCallbacks
         {
             SpawnPlayer();
         }
-
-        // Empezar la búsqueda de jugadores después de unos segundos
-        StartCoroutine(RegisterAllPlayerTransforms());
     }
-        
+
     void SpawnPlayer()
     {
+        // Validación adicional de los spawn points
+        if (spawnPoints == null || spawnPoints.Length == 0)
+        {
+            Debug.LogError("Los puntos de spawn no están asignados o la lista está vacía.");
+            return;
+        }
+
         int spawnIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
         if (spawnIndex < spawnPoints.Length)
         {
-            PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
+            Vector3 spawnPosition = spawnPoints[spawnIndex].position;
+            Quaternion spawnRotation = spawnPoints[spawnIndex].rotation;
+
+            // Instanciamos al jugador en red
+            GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, spawnRotation);
+
+            // Asignar la posición de respawn en el script Health del jugador
+            Health healthScript = player.GetComponent<Health>();
+            if (healthScript != null)
+            {
+                healthScript.SetRespawnPosition(spawnPosition); // Asegúrate de que SetRespawnPosition esté definido en Health.cs
+            }
+            else
+            {
+                Debug.LogError("El componente Health no se encontró en el jugador instanciado.");
+            }
         }
         else
         {
             Debug.LogError("No hay suficientes puntos de aparición para los jugadores.");
         }
     }
-    IEnumerator RegisterAllPlayerTransforms()
+
+    // Método para registrar un jugador
+    public void RegisterPlayer(Transform playerTransform)
     {
-        yield return new WaitForSeconds(2f);  // Espera 2 segundos para asegurar que todos los jugadores estén en la escena
-
-        foreach (Player player in PhotonNetwork.PlayerList)
+        if (!playerTransforms.Contains(playerTransform))
         {
-            GameObject playerObject = PhotonView.Find(player.ActorNumber).gameObject;
-            if (playerObject != null && !playerTransforms.Contains(playerObject.transform))
-            {
-                playerTransforms.Add(playerObject.transform);
-            }
+            playerTransforms.Add(playerTransform);
         }
-
-        Debug.Log("Todos los jugadores han sido registrados. Total players: " + playerTransforms.Count);
     }
 
+    // Método para eliminar un jugador de la lista
+    public void UnregisterPlayer(Transform playerTransform)
+    {
+        if (playerTransforms.Contains(playerTransform))
+        {
+            playerTransforms.Remove(playerTransform);
+        }
+    }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
@@ -62,24 +98,6 @@ public class InGameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         Debug.Log($"Jugador {otherPlayer.NickName} ha dejado la sala.");
-        // Puedes manejar la lógica de quitar al jugador de la lista si es necesario
-    }
-
-    private IEnumerator HandlePlayerDisconnect()
-    {
-        Debug.Log("Un jugador se ha desconectado. Terminando la partida...");
-        yield return new WaitForSeconds(disconnectCountdown);
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.LoadLevel("LobbyScene");
-        }
-    }
-
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.LogWarning($"Desconectado del servidor por la siguiente razón: {cause}");
-        SceneManager.LoadScene("LobbyScene");
     }
 
     public void LeaveGame()
@@ -89,8 +107,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        Debug.Log("Has salido de la sala. Regresando al lobby...");
-        SceneManager.LoadScene("LobbyScene");
+        Debug.Log("Has salido de la sala. Regresando al menú...");
+        SceneManager.LoadScene("Menu");
     }
 
     public void LoadLevel(string levelName)
@@ -101,7 +119,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    //Esta vaina activa los paneles de los ganadores y los perdedores
+    // Método para manejar la victoria
     public void HandleWin(PlayerCanvas winner)
     {
         foreach (PlayerCanvas player in FindObjectsOfType<PlayerCanvas>())
@@ -110,8 +128,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
             {
                 player.LoseCanvas();
             }
-            else{
-                
+            else
+            {
                 player.WinCanvas();
             }
         }

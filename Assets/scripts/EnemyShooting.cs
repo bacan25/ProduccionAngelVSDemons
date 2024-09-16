@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class EnemyShooting : MonoBehaviour
+public class EnemyShooting : MonoBehaviourPun
 {
-    [SerializeField]private Transform pivot;
-    [SerializeField]private GameObject bola;
+    [SerializeField] private Transform pivot;
+    [SerializeField] private GameObject bola;
     public float shootCooldown;
-    [SerializeField]private float projectileSpeed;
+    [SerializeField] private float projectileSpeed;
 
-    public float shootTimer;
+    private float shootTimer;
 
     void Start()
     {
@@ -18,6 +17,7 @@ public class EnemyShooting : MonoBehaviour
 
     void Update()
     {
+        if (!photonView.IsMine) return;
         shootTimer += Time.deltaTime;
     }
 
@@ -25,13 +25,12 @@ public class EnemyShooting : MonoBehaviour
     {
         if (shootTimer >= shootCooldown)
         {
-            GameObject projectile = Instantiate(bola, pivot.position, pivot.rotation);
+            GameObject projectile = PhotonNetwork.Instantiate(bola.name, pivot.position, pivot.rotation);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            if(rb != null)
+            if (rb != null)
             {
-                rb.velocity = (target.position - pivot.position).normalized * projectileSpeed; // Velocidad de la bola
+                rb.velocity = (target.position - pivot.position).normalized * projectileSpeed;
             }
-             
             shootTimer = 0f;
         }
     }

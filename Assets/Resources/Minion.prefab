@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 4928104656547911685}
   - component: {fileID: 4589190261931771694}
   - component: {fileID: 3637414319535254695}
+  - component: {fileID: -9158110232238882846}
+  - component: {fileID: -8450819282373572215}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Minion
@@ -181,14 +183,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathPoints: []
-  player: {fileID: 0}
   visionRange: 18
   visionAngle: 312.3
   restPatrol: 2
   shootingRange: 10
-  agent: {fileID: 3829448673871569472}
-  playerDetected: 0
   isAgro: 0
+  _inGameManager: {fileID: 0}
+  enemyManager: {fileID: 0}
 --- !u!114 &4589190261931771694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +206,6 @@ MonoBehaviour:
   bola: {fileID: 8044803207112214825, guid: f9efe6674067186419b379e16dc67ced, type: 3}
   shootCooldown: 5
   projectileSpeed: 15
-  shootTimer: 0
 --- !u!114 &3637414319535254695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +222,52 @@ MonoBehaviour:
   maxHealth: 100
   respawn: {fileID: 0}
   healthBar: {fileID: 0}
+  min: 0
+  seg: 0
+  tiempo: {fileID: 0}
+  isRespawn: 0
+  player: {fileID: 0}
+  respawnPanel: {fileID: 0}
+--- !u!114 &-9158110232238882846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5329651266333619205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: -8450819282373572215}
+  - {fileID: 0}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-8450819282373572215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5329651266333619205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &6029391594500328313
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +592,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3683660395117066124}
     m_Modifications:
+    - target: {fileID: 929832457688175342, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
+        type: 3}
+      propertyPath: m_SynchronizeLayers.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1930713027155105098, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
         type: 3}
       propertyPath: GroundMask.m_Bits
@@ -554,7 +605,7 @@ PrefabInstance:
     - target: {fileID: 1930713027155105098, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
         type: 3}
       propertyPath: finalScaleReference
-      value: 0.00554768
+      value: 0.0055476283
       objectReference: {fileID: 0}
     - target: {fileID: 1930713027155105098, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
         type: 3}
@@ -564,6 +615,11 @@ PrefabInstance:
     - target: {fileID: 1930713027155105098, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
         type: 3}
       propertyPath: _Editor_OnValidateTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692113258425576547, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4791983611837466887, guid: 3bbcc4ea4dbcaaa4581b15848828f488,

@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         readyIndicator.SetActive(false);
         yield return new WaitForSeconds(5);
 
-        PhotonNetwork.LoadLevel("Valentina");
+        PhotonNetwork.LoadLevel("Terreno");
     }
 
     public void LeaveRoom()
