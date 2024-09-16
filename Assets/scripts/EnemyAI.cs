@@ -1,31 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviourPunCallbacks
 {
     // Puntos de ruta (Patrol)
-    [SerializeField]private Transform[] pathPoints;
+    [SerializeField] private Transform[] pathPoints;
+    [SerializeField] private float visionRange = 10f;
+    [SerializeField] private float visionAngle = 45f;
+    [SerializeField] private float restPatrol = 2f;
+    [SerializeField] private float shootingRange = 10f; // Rango de disparo
 
-    //public Transform player;
-    [SerializeField]private float visionRange = 10f;
-    [SerializeField]private float visionAngle = 45f;
-
-    [SerializeField]private float restPatrol = 2f;  
- 
-    [SerializeField]private float shootingRange = 10f; // Rango de disparo
-
-    [SerializeField]private NavMeshAgent agent;
+    private NavMeshAgent agent;
     private int currentPathIndex;
-
     private bool isWaiting;
-    
     [HideInInspector] public bool isAgro;
 
-    public InGameManager _inGameManager;
     public EnemyManager enemyManager;
-   
 
     // Componente de disparo
     private EnemyShooting enemyShooting;
@@ -39,13 +31,25 @@ public class EnemyAI : MonoBehaviour
         isAgro = false;
         isWaiting = false;
 
+        // Asegurarse de que enemyManager está asignado
+        if (enemyManager == null)
+        {
+            enemyManager = GetComponentInParent<EnemyManager>();
+            if (enemyManager == null)
+            {
+                Debug.LogError("EnemyManager no asignado en EnemyAI y no se encontró en los padres.");
+            }
+        }
     }
 
     void Update()
     {
+        if (!PhotonNetwork.IsMasterClient)
+            return;
+
         IsPlayerDetected();
 
-        if(enemyManager.playerDetected != null)
+        if (enemyManager.playerDetected != null)
         {
             isAgro = true;
         }
@@ -58,8 +62,69 @@ public class EnemyAI : MonoBehaviour
             if (!isWaiting)
             {
                 Patrol();
-                //CheckForPlayer();
             }
+        }
+    }
+
+    void IsPlayerDetected()
+    {
+        float minDistance = Mathf.Infinity;
+        Transform closestPlayer = null;
+
+        // Encontrar todos los jugadores en la escena
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject playerObj in players)
+        {
+            Transform playerTransform = playerObj.transform;
+            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+            if (distanceToPlayer <= visionRange)
+            {
+                Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+                float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+
+                // Verifica si el jugador está dentro del ángulo de visión
+                if (angleToPlayer <= visionAngle / 2)
+                {
+                    if (distanceToPlayer < minDistance)
+                    {
+                        minDistance = distanceToPlayer;
+                        closestPlayer = playerTransform;
+                    }
+                }
+            }
+        }
+
+        if (closestPlayer != null)
+        {
+            enemyManager.playerDetected = closestPlayer;
+        }
+        else
+        {
+            enemyManager.playerDetected = null;
+            isAgro = false;
+        }
+    }
+
+    void ChasePlayer()
+    {
+        if (enemyManager.playerDetected == null) return;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, enemyManager.playerDetected.position);
+        Vector3 directionToPlayer = (enemyManager.playerDetected.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+
+        // Gira suavemente
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+
+        if (distanceToPlayer <= shootingRange)
+        {
+            agent.isStopped = true;
+            enemyShooting.Shoot(enemyManager.playerDetected.transform);
+        }
+        else
+        {
+            agent.isStopped = false;
+            agent.SetDestination(enemyManager.playerDetected.position);
         }
     }
 
@@ -78,77 +143,5 @@ public class EnemyAI : MonoBehaviour
         currentPathIndex = (currentPathIndex + 1) % pathPoints.Length;
         agent.destination = pathPoints[currentPathIndex].position;
         isWaiting = false;
-    }
-
-    void ChasePlayer()
-    {
-        float distanceToPlayer = Vector3.Distance(transform.position, enemyManager.playerDetected.position);
-        Vector3 directionToPlayer = (enemyManager.playerDetected.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-
-        // Gira suavementeeee
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-
-        if(distanceToPlayer <= shootingRange)
-        {
-            agent.isStopped = true;
-            enemyShooting.Shoot(enemyManager.playerDetected.transform); //Solo parapruebas de la AI
-            
-        }
-        else
-        {
-            agent.isStopped = false;
-            agent.SetDestination(enemyManager.playerDetected.position);
-        }
-        
-    }
-
-    void IsPlayerDetected()
-    {
-        float minDistance = 100000;
-        Transform closestPlayer = null;
-        foreach(Transform player in _inGameManager.playerTransforms)
-        {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-            if (distanceToPlayer <= visionRange)
-            {
-                Vector3 directionToPlayer = (player.position - transform.position).normalized;
-                float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
-                
-                // Verifica si el player está dentro del angulo de visión
-                if (angleToPlayer <= visionAngle / 2)
-                {
-                    minDistance = distanceToPlayer;
-                    closestPlayer = player;
-                }
-            }
-        }
-
-         if (closestPlayer != null)
-        {
-            enemyManager.playerDetected = closestPlayer;
-        }
-    }
-
-    // Dibuja los círculitos en la escena
-    void OnDrawGizmos()
-    {
-        // Amarillo = Rango de la visión 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, visionRange);
-
-        Vector3 leftBoundary = Quaternion.Euler(0, -visionAngle / 2, 0) * transform.forward * visionRange;
-        Vector3 rightBoundary = Quaternion.Euler(0, visionAngle / 2, 0) * transform.forward * visionRange;
-
-        //Azulito = Angulo de visión 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
-        Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
-
-        if (enemyManager.playerDetected)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, enemyManager.playerDetected.position);
-        }
     }
 }

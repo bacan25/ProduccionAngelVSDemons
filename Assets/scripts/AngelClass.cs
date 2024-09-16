@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using Unity.VisualScripting;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
-using Photon.Realtime;
-using static UnityEditor.FilePathAttribute;
 
-
-public class AngelClass : MonoBehaviour
+public class AngelClass : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private Transform pivot;
@@ -41,20 +34,21 @@ public class AngelClass : MonoBehaviour
     public Inventory inventory;
     public Move_Player player;
 
-
-
-
     void Start()
     {
-        //basicTimer = basicCooldown;
-        //powerTimer = powerCooldown;
-
+        if (!photonView.IsMine)
+        {
+            // Deshabilita componentes que solo deben ser controlados por el propietario
+            GetComponentInChildren<Camera>().enabled = false;
+            GetComponentInChildren<AudioListener>().enabled = false;
+        }
     }
-
 
     void Update()
     {
-        if(inventory.inventoryOnStage || inventory.instructionsOnStage)
+        if (!photonView.IsMine) return;
+
+        if (inventory.inventoryOnStage || inventory.instructionsOnStage)
         {
             return;
         }
@@ -66,78 +60,63 @@ public class AngelClass : MonoBehaviour
 
         if (gotBasic && basicTimer <= basicCooldown + 0.1f)
             basicTimer += Time.deltaTime;
-        if(gotPower && powerTimer <= powerCooldown + 0.1f)
+        if (gotPower && powerTimer <= powerCooldown + 0.1f)
             powerTimer += Time.deltaTime;
 
-        //print("Basic:" + basicTimer);
-        //print("Power:" + powerTimer);
-
-        if(basicTimer >= basicCooldown)
+        if (basicTimer >= basicCooldown)
         {
             changeAlpha.GreenCoolDownIcon();
         }
 
-        if(Input.GetMouseButton(0) && gotBasic)
+        if (Input.GetMouseButton(0) && gotBasic)
             BasicAttack();
         if (Input.GetMouseButton(1) && gotPower)
             PowerAttack();
-
-        
     }
+
     void BasicAttack()
     {
         if (basicTimer >= basicCooldown)
         {
-            //GameObject basicAtt = PhotonNetwork.Instantiate(bullet.name, pivot.position, pivot.rotation);
-            GameObject basicAtt = Instantiate(bullet, pivot.position, pivot.rotation);
+            GameObject basicAtt = PhotonNetwork.Instantiate(bullet.name, pivot.position, pivot.rotation);
             Rigidbody rb = basicAtt.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.velocity = pivot.forward * vel;
             }
-            Destroy(basicAtt, 3f);
-
             basicTimer = 0f;
             changeAlpha.RedCoolDownIcon();
         }
     }
 
-
     void PowerAttack()
     {
         if (powerTimer >= powerCooldown)
         {
-            GameObject powerAtt = Instantiate(power, pivot.position, pivot.rotation);
+            GameObject powerAtt = PhotonNetwork.Instantiate(power.name, pivot.position, pivot.rotation);
             Rigidbody rb = powerAtt.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.velocity = pivot.forward * vel;
+                rb.velocity = pivot.forward * velPower;
             }
-            Destroy(powerAtt, 3f);
-
             powerTimer = 0f;
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!photonView.IsMine) return;
+
         if (other.gameObject.CompareTag("PowerUp"))
         {
             PowerUp();
-            Destroy(other.gameObject);
+            PhotonNetwork.Destroy(other.gameObject);
         }
-
-       
     }
 
     private void PowerUp()
     {
         gotPower = true;
         changeAlpha.SetPowerUpIcon(1f);
-
-
     }
-
-  
 }

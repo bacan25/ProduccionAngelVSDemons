@@ -1,14 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class FallDamage : MonoBehaviour
+public class FallDamage : MonoBehaviourPun
 {
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<Health>().TakeDamage(100);
-        other.GetComponent<Health>().isRespawn = true;
-        
+        PhotonView targetPhotonView = other.GetComponent<PhotonView>();
+        if (targetPhotonView != null && targetPhotonView.IsMine)
+        {
+            Health healthComponent = other.GetComponent<Health>(); // Obtenemos el componente Health
+            if (healthComponent != null) // Verificamos si healthComponent está asignado
+            {
+                healthComponent.TakeFallDamage(); // Llamamos al método para aplicar el daño
+            }
+            else
+            {
+                Debug.LogError("El objeto no tiene el componente Health.");
+            }
+        }
     }
 }

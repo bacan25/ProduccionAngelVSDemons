@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Move_Player : MonoBehaviour
+public class Move_Player : MonoBehaviourPunCallbacks
 {
     [Header("Mov and Jump")]
     Rigidbody rb;
@@ -18,7 +19,6 @@ public class Move_Player : MonoBehaviour
     private int jumpCount = 0;
     public Transform cameraVer;
     public float localRot;
-
 
     [Header("Climbing")]
     [SerializeField] private float climbSpeed;
@@ -35,7 +35,6 @@ public class Move_Player : MonoBehaviour
 
     public bool muerto;
 
-
     public ChangeAlpha changeAlpha;
 
     void Start()
@@ -44,12 +43,78 @@ public class Move_Player : MonoBehaviour
         inventory = GetComponent<Inventory>();
         startJumpSpeed = jumpSpeed;
 
+        if (photonView.IsMine)
+        {
+            // Enviamos un RPC al Master Client para registrar nuestro Transform
+            photonView.RPC("RegisterPlayerWithMaster", RpcTarget.MasterClient, photonView.ViewID);
+        }
+        else
+        {
+            // Desactivar componentes en jugadores remotos
+            DisableRemotePlayerComponents();
+        }
     }
 
-    
+    void DisableRemotePlayerComponents()
+    {
+        // Desactivar cámara
+        Camera playerCamera = GetComponentInChildren<Camera>();
+        if (playerCamera != null)
+        {
+            playerCamera.enabled = false;
+        }
+
+        // Desactivar audio listener
+        AudioListener audioListener = GetComponentInChildren<AudioListener>();
+        if (audioListener != null)
+        {
+            audioListener.enabled = false;
+        }
+
+        // Desactivar scripts específicos
+        Inventory inventoryScript = GetComponent<Inventory>();
+        if (inventoryScript != null)
+        {
+            inventoryScript.enabled = false;
+        }
+
+        // Desactivar otros componentes si es necesario
+    }
+
+    [PunRPC]
+    void RegisterPlayerWithMaster(int viewID)
+    {
+        PhotonView playerView = PhotonView.Find(viewID);
+        if (playerView != null)
+        {
+            Transform playerTransform = playerView.transform;
+            InGameManager.Instance.RegisterPlayer(playerTransform);
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (photonView.IsMine)
+        {
+            // Enviamos un RPC al Master Client para eliminar nuestro Transform
+            photonView.RPC("UnregisterPlayerWithMaster", RpcTarget.MasterClient, photonView.ViewID);
+        }
+    }
+
+    [PunRPC]
+    void UnregisterPlayerWithMaster(int viewID)
+    {
+        PhotonView playerView = PhotonView.Find(viewID);
+        if (playerView != null)
+        {
+            Transform playerTransform = playerView.transform;
+            InGameManager.Instance.UnregisterPlayer(playerTransform);
+        }
+    }
+
     void Update()
     {
-        if(muerto)
+        if (!photonView.IsMine || muerto)
         {
             return;
         }
@@ -57,41 +122,37 @@ public class Move_Player : MonoBehaviour
         horInput = Input.GetAxis("Horizontal");
         verInput = Input.GetAxis("Vertical");
 
-        if (inventory.inventoryOnStage || inventory.instructionsOnStage)
+        if (inventory != null && (inventory.inventoryOnStage || inventory.instructionsOnStage))
         {
-            mouseInput = new Vector2(0, 0);
-
-
-        } else 
+            mouseInput = Vector2.zero;
+        }
+        else
         {
             mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
-        
 
         if (isClimbing)
         {
             Climb();
-        } else
+        }
+        else
         {
             Walk();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount == 0 || Input.GetKeyDown(KeyCode.Space) && jumpCount == 1 && dobleSaltoSkill)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount == 0 || (Input.GetKeyDown(KeyCode.Space) && jumpCount == 1 && dobleSaltoSkill))
         {
             Jump();
         }
-
-        Debug.Log(jumpCount);
-        
-
 
         Collider[] colliders = Physics.OverlapSphere(climbRef.position, sphereCastRadius, whatIsWall);
         if (colliders.Length > 0 && Input.GetKey(KeyCode.Space) && climbSkill)
         {
             wallFront = true;
-        } else
+        }
+        else
         {
-            wallFront= false;
+            wallFront = false;
         }
 
         if (wallFront)
@@ -99,37 +160,32 @@ public class Move_Player : MonoBehaviour
             isClimbing = !isClimbing;
         }
 
-        if (!wallFront) 
+        if (!wallFront)
         {
             isClimbing = false;
-        } 
+        }
 
         localRot -= mouseInput.y * turnSpeed * Time.deltaTime * 2;
         localRot = Mathf.Clamp(localRot, -50f, 80f);
-        cameraVer.localEulerAngles = Vector3.right * localRot;
-
-        
-
+        if (cameraVer != null)
+        {
+            cameraVer.localEulerAngles = Vector3.right * localRot;
+        }
     }
 
     public void Walk()
     {
-        if(jumpCount == 0 && isGrounded || jumpCount == 2)
+        if ((jumpCount == 0 && isGrounded) || jumpCount == 2)
         {
             rb.velocity = transform.rotation * new Vector3
             (
-            horInput * movSpeed,
-            rb.velocity.y,
-            wallFront ? Mathf.Clamp(verInput * movSpeed, -1000, 0) : verInput * movSpeed
+                horInput * movSpeed,
+                rb.velocity.y,
+                verInput * movSpeed
             );
-            
         }
 
         transform.Rotate(0, mouseInput.x * turnSpeed * Time.deltaTime, 0);
-
-
-
-
     }
 
     public void Climb()
@@ -137,29 +193,18 @@ public class Move_Player : MonoBehaviour
         rb.velocity = transform.rotation * new Vector3(horInput * movSpeed, verInput * movSpeed, 0);
         transform.Rotate(0, mouseInput.x * turnSpeed * Time.deltaTime, 0);
         jumpCount = 0;
-
     }
 
     public void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
         jumpCount++;
-       
 
-        if (jumpCount == 1)
+        if (jumpCount == 2)
         {
-            
-            Debug.Log(jumpCount);
-
-        } if (jumpCount == 2)
-        {
-            
-            jumpSpeed = jumpSpeed - ((jumpSpeed/ 2f) / 2f);
-            Debug.Log(jumpCount);
+            jumpSpeed = startJumpSpeed;
         }
     }
-
-
 
     private void OnDrawGizmosSelected()
     {
@@ -169,19 +214,20 @@ public class Move_Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.transform.tag == "Ground")
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
             jumpCount = 0;
             jumpSpeed = startJumpSpeed;
         }
-
-
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        isGrounded = false;
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -189,24 +235,30 @@ public class Move_Player : MonoBehaviour
         if (other.gameObject.CompareTag("DobleSalto"))
         {
             DobleSalto();
-            Destroy(other.gameObject);
+            PhotonNetwork.Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Escalar"))
         {
             Escalar();
-            Destroy(other.gameObject);
+            PhotonNetwork.Destroy(other.gameObject);
         }
-
-      
     }
 
     private void DobleSalto()
     {
         dobleSaltoSkill = true;
         changeAlpha.SetDobleSaltoIcon(1f);
-        
 
+        // Sincronizar con otros jugadores si es necesario
+        photonView.RPC("SyncDobleSaltoSkill", RpcTarget.Others, dobleSaltoSkill);
+    }
+
+    [PunRPC]
+    void SyncDobleSaltoSkill(bool value)
+    {
+        dobleSaltoSkill = value;
+        // Actualizar UI si es necesario
     }
 
     private void Escalar()
@@ -214,11 +266,14 @@ public class Move_Player : MonoBehaviour
         climbSkill = true;
         changeAlpha.SetClimbIcon(1f);
 
-
+        // Sincronizar con otros jugadores si es necesario
+        photonView.RPC("SyncClimbSkill", RpcTarget.Others, climbSkill);
     }
 
-    
-
-
-
+    [PunRPC]
+    void SyncClimbSkill(bool value)
+    {
+        climbSkill = value;
+        // Actualizar UI si es necesario
+    }
 }

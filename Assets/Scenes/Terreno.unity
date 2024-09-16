@@ -295,6 +295,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1150172479}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 117
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -364,7 +374,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -399,6 +409,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -465,18 +480,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 242495}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &48422141 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1931082734993140617, guid: 9a50f19e0dcd62b4d95cce8ab250d5bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 302840016}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &52982219
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,6 +1050,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1903337406}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 109
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1116,7 +1129,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -1152,6 +1165,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Minion2 '
       objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 44
+      objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
@@ -1176,6 +1194,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1600082877}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 107
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1245,7 +1273,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -1280,6 +1308,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -1613,6 +1646,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1435144711}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1682,7 +1725,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -1717,6 +1760,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -2283,6 +2331,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1626810916860839350, guid: be034b3bde9971c47a1387ef1e9c5083,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 68
+      objectReference: {fileID: 0}
     - target: {fileID: 1332524832075410062, guid: be034b3bde9971c47a1387ef1e9c5083,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2337,7 +2390,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemManager
       value: 
-      objectReference: {fileID: 1981293805}
+      objectReference: {fileID: 0}
     - target: {fileID: 2807540358921575946, guid: be034b3bde9971c47a1387ef1e9c5083,
         type: 3}
       propertyPath: m_Name
@@ -2392,6 +2445,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1547274197}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2461,7 +2524,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -2497,6 +2560,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion3
       objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
@@ -2521,6 +2589,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1435144711}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2590,7 +2668,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -2625,6 +2703,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -2986,6 +3069,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 260796572}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3055,7 +3148,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -3090,6 +3183,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -3572,6 +3670,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6286135073839235130, guid: 9a50f19e0dcd62b4d95cce8ab250d5bc,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7613752408741979473, guid: 9a50f19e0dcd62b4d95cce8ab250d5bc,
         type: 3}
       propertyPath: m_Name
@@ -3661,12 +3764,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1660373351}
+      objectReference: {fileID: 0}
     - target: {fileID: 8727990821419991165, guid: 9a50f19e0dcd62b4d95cce8ab250d5bc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1660373351}
+      objectReference: {fileID: 0}
     - target: {fileID: 8727990821419991165, guid: 9a50f19e0dcd62b4d95cce8ab250d5bc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -3733,18 +3836,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 302840016}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &302840018 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7813678784080439138, guid: 9a50f19e0dcd62b4d95cce8ab250d5bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 302840016}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &312350109
 GameObject:
   m_ObjectHideFlags: 0
@@ -3869,6 +3960,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 267888979}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 123
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3938,7 +4039,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -3973,6 +4074,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -4334,6 +4440,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1913478531}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 118
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -4403,7 +4519,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -4438,6 +4554,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -4640,6 +4761,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 267888979}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -4709,7 +4840,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -4744,6 +4875,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -5126,6 +5262,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1435144711}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -5195,7 +5341,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -5230,6 +5376,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -5542,6 +5693,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 931311354}
     m_Modifications:
+    - target: {fileID: -89547995036238996, guid: bf4b752b51b5d434e9728d56eb507efe,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 164990236669391830, guid: bf4b752b51b5d434e9728d56eb507efe,
         type: 3}
       propertyPath: m_Name
@@ -5561,7 +5717,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1660373351}
+      objectReference: {fileID: 0}
     - target: {fileID: 996201180408531695, guid: bf4b752b51b5d434e9728d56eb507efe,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -5790,18 +5946,6 @@ PrefabInstance:
 --- !u!224 &463830924 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7231503097470879054, guid: bf4b752b51b5d434e9728d56eb507efe,
-    type: 3}
-  m_PrefabInstance: {fileID: 463830923}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &463830925 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4336873604936535987, guid: bf4b752b51b5d434e9728d56eb507efe,
-    type: 3}
-  m_PrefabInstance: {fileID: 463830923}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &463830926 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 164990236669391830, guid: bf4b752b51b5d434e9728d56eb507efe,
     type: 3}
   m_PrefabInstance: {fileID: 463830923}
   m_PrefabAsset: {fileID: 0}
@@ -6605,127 +6749,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1902654750}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &524298161
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 524298162}
-  - component: {fileID: 524298165}
-  - component: {fileID: 524298164}
-  - component: {fileID: 524298163}
-  m_Layer: 5
-  m_Name: Button (Legacy)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &524298162
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524298161}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1898802231}
-  m_Father: {fileID: 1574028090}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &524298163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524298161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 524298164}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &524298164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524298161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1995db7ef634038438985882c570477d, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &524298165
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524298161}
-  m_CullTransparentMesh: 1
 --- !u!1 &534320513
 GameObject:
   m_ObjectHideFlags: 0
@@ -6848,6 +6871,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1903337406}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -6917,7 +6950,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -6952,6 +6985,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 61
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -7111,78 +7149,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2107995197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &579541787
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 579541788}
-  - component: {fileID: 579541790}
-  - component: {fileID: 579541789}
-  m_Layer: 5
-  m_Name: RawImage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &579541788
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579541787}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1896926329}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 250}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &579541789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579541787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 2800000, guid: e90eb268464b23840bbbcb0fb4657cff, type: 3}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
---- !u!222 &579541790
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579541787}
-  m_CullTransparentMesh: 1
 --- !u!1 &600370520
 GameObject:
   m_ObjectHideFlags: 0
@@ -7315,6 +7281,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1913478531}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 74
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -7384,7 +7360,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -7419,6 +7395,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -7724,6 +7705,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1600082877}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -7793,7 +7784,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -7828,6 +7819,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -7986,6 +7982,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2076834584}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -8055,7 +8061,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -8090,6 +8096,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -8155,6 +8166,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1913478531}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 73
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -8224,7 +8245,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -8259,6 +8280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -8759,6 +8785,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 486390830}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 91
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -8828,7 +8864,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -8863,6 +8899,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -9091,18 +9132,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 791009780}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &797382759 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3193184806369064391, guid: 9a50f19e0dcd62b4d95cce8ab250d5bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 302840016}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &801301178
 GameObject:
   m_ObjectHideFlags: 0
@@ -9561,6 +9590,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1903337406}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 113
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -9630,7 +9669,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -9665,6 +9704,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -10288,6 +10332,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1150172479}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 105
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -10357,7 +10411,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -10392,6 +10446,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -10433,7 +10492,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958211279}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70710695, y: -0, z: -0, w: 0.70710677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1370.877, y: -2521.1895, z: 1560.4325}
   m_LocalScale: {x: 670.1314, y: 670.13116, z: 670.1312}
   m_ConstrainProportionsScale: 0
@@ -10632,6 +10691,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 250456927}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 83
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -10701,7 +10770,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -10736,6 +10805,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -11733,6 +11807,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 260796572}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 111
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -11802,7 +11886,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -11837,6 +11921,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -11896,6 +11985,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1150172479}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -11965,7 +12064,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -12001,6 +12100,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion
       objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
@@ -12025,6 +12129,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 260796572}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 76
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -12094,7 +12208,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -12130,6 +12244,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Minion2 '
       objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
@@ -12154,6 +12273,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1903337406}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 71
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -12223,7 +12352,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -12258,6 +12387,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -12659,6 +12793,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1150172479}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -12728,7 +12872,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -12763,6 +12907,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -12985,6 +13134,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2136710353}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 132
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -13054,7 +13213,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -13089,6 +13248,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 67
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -13448,6 +13612,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2076834584}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -13517,7 +13691,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -13552,6 +13726,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -13608,6 +13787,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1547274197}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -13677,7 +13866,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -13712,6 +13901,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -13917,6 +14111,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 427306817}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 94
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -13986,7 +14190,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -14021,6 +14225,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -14069,85 +14278,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1902654750}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1191659625
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1191659626}
-  - component: {fileID: 1191659628}
-  - component: {fileID: 1191659627}
-  m_Layer: 5
-  m_Name: Text (Legacy)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1191659626
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191659625}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1508151960}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1191659627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191659625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 408c42eb6a089e643a579cdca7f1c799, type: 3}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Volver a la Sala
---- !u!222 &1191659628
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191659625}
-  m_CullTransparentMesh: 1
 --- !u!1 &1193367034
 GameObject:
   m_ObjectHideFlags: 0
@@ -14277,6 +14407,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 250456927}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 89
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -14346,7 +14486,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -14382,6 +14522,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Minion2 '
       objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
@@ -14406,6 +14551,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 397968837}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -14475,7 +14630,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -14510,6 +14665,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -14589,12 +14749,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1442519303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1243595391 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8749192660268499796, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-    type: 3}
-  m_PrefabInstance: {fileID: 1440758208}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1244912855
 GameObject:
   m_ObjectHideFlags: 0
@@ -14892,6 +15046,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1650723047}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 93
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -14961,7 +15125,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -14996,6 +15160,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -15122,6 +15291,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2076834584}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 103
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -15191,7 +15370,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -15226,6 +15405,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -15742,6 +15926,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 267888979}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -15811,7 +16005,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -15847,6 +16041,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion
       objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 62
+      objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
@@ -15871,6 +16070,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 986910595}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 79
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -15940,7 +16149,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -15975,6 +16184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -16191,78 +16405,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2045302931}
   m_SourcePrefab: {fileID: 100100000, guid: 5991b98caf3d413489b745d3505ac0c7, type: 3}
---- !u!1 &1386559030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1386559031}
-  - component: {fileID: 1386559033}
-  - component: {fileID: 1386559032}
-  m_Layer: 5
-  m_Name: RawImage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1386559031
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386559030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1574028090}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 250}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1386559032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386559030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 2800000, guid: ae99c703f79ebce439c69c0376384b49, type: 3}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
---- !u!222 &1386559033
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386559030}
-  m_CullTransparentMesh: 1
 --- !u!1 &1388240639
 GameObject:
   m_ObjectHideFlags: 0
@@ -16339,6 +16481,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 250456927}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 124
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -16408,7 +16560,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -16443,6 +16595,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -16567,6 +16724,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 267888979}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -16636,7 +16803,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -16671,6 +16838,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -16800,182 +16972,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 535077598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1440758208
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2262906203095726232, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1660373355}
-    - target: {fileID: 2262906203095726232, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: winCanvas
-      value: 
-      objectReference: {fileID: 1896926328}
-    - target: {fileID: 2262906203095726232, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: loseCanvas
-      value: 
-      objectReference: {fileID: 1574028089}
-    - target: {fileID: 2762129899826143140, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: fall
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2762129899826143140, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: movSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2762129899826143140, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: jumpSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2762129899826143140, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: changeAlpha
-      value: 
-      objectReference: {fileID: 1660373354}
-    - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -140.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 241.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 516.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764288409272786859, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: vel
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764288409272786859, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1660373355}
-    - target: {fileID: 6764288409272786859, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: changeAlpha
-      value: 
-      objectReference: {fileID: 1660373354}
-    - target: {fileID: 8026816316107826425, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: tiempo
-      value: 
-      objectReference: {fileID: 817571558}
-    - target: {fileID: 8026816316107826425, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: respawn
-      value: 
-      objectReference: {fileID: 1636035911}
-    - target: {fileID: 8026816316107826425, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 302840018}
-    - target: {fileID: 8026816316107826425, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: respawnPanel
-      value: 
-      objectReference: {fileID: 312350109}
-    - target: {fileID: 8151253734232962639, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: inventory
-      value: 
-      objectReference: {fileID: 463830926}
-    - target: {fileID: 8151253734232962639, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8151253734232962639, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: slotHolder
-      value: 
-      objectReference: {fileID: 463830925}
-    - target: {fileID: 8151253734232962639, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: itemManager
-      value: 
-      objectReference: {fileID: 1981293805}
-    - target: {fileID: 8151253734232962639, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: instructions
-      value: 
-      objectReference: {fileID: 1760406247}
-    - target: {fileID: 8749192660268499796, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_Name
-      value: Character
-      objectReference: {fileID: 0}
-    - target: {fileID: 8749192660268499796, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1981293804}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8749192660268499796, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-        type: 3}
-      insertIndex: 9
-      addedObject: {fileID: 1660373354}
-  m_SourcePrefab: {fileID: 100100000, guid: 335a5768b3fbd4743bbe3a6417aaf163, type: 3}
 --- !u!1 &1441878987
 GameObject:
   m_ObjectHideFlags: 0
@@ -17342,6 +17338,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1435144711}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 122
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -17411,7 +17417,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -17447,6 +17453,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion4
       objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 57
+      objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
@@ -17471,6 +17482,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1024803024840106741, guid: 57d3ba452e6e735419a646699fed6a56,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 844982387579500767, guid: 57d3ba452e6e735419a646699fed6a56,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17535,7 +17551,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemManager
       value: 
-      objectReference: {fileID: 1981293805}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17677,6 +17693,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1913478531}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -17746,7 +17772,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -17782,6 +17808,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion3
       objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
@@ -17806,6 +17837,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 427306817}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -17875,7 +17916,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -17911,6 +17952,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion
       objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
@@ -17935,6 +17981,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 397968837}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -18004,7 +18060,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -18039,6 +18095,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -18184,8 +18245,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7ad14f793727b4ab6474fb544b7127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints: []
-  playerPrefab: {fileID: 0}
+  spawnPoints:
+  - {fileID: 1636035911}
+  - {fileID: 958211280}
+  playerPrefab: {fileID: 8749192660268499796, guid: 335a5768b3fbd4743bbe3a6417aaf163,
+    type: 3}
   disconnectCountdown: 5
   playerTransforms: []
 --- !u!4 &1490243600
@@ -18268,127 +18332,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5120906115499407723, guid: dd770b54a71c24d43b51255fdd93dc25, type: 3}
---- !u!1 &1508151959
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1508151960}
-  - component: {fileID: 1508151963}
-  - component: {fileID: 1508151962}
-  - component: {fileID: 1508151961}
-  m_Layer: 5
-  m_Name: Button (Legacy)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1508151960
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508151959}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1191659626}
-  m_Father: {fileID: 1896926329}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1508151961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508151959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1508151962}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1508151962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508151959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1995db7ef634038438985882c570477d, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1508151963
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508151959}
-  m_CullTransparentMesh: 1
 --- !u!1 &1515706326
 GameObject:
   m_ObjectHideFlags: 0
@@ -18588,6 +18531,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 397968837}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -18657,7 +18610,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -18692,6 +18645,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -18754,6 +18712,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2136710353}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 87
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -18823,7 +18791,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -18858,6 +18826,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -18942,6 +18915,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 397968837}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -19011,7 +18994,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -19046,6 +19029,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -19147,83 +19135,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5120906115499407723, guid: dd770b54a71c24d43b51255fdd93dc25, type: 3}
---- !u!1 &1574028089
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1574028090}
-  - component: {fileID: 1574028092}
-  - component: {fileID: 1574028091}
-  m_Layer: 5
-  m_Name: Perder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1574028090
+--- !u!224 &1574028090 stripped
 RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+    type: 3}
+  m_PrefabInstance: {fileID: 824153453265781992}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574028089}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1386559031}
-  - {fileID: 524298162}
-  m_Father: {fileID: 931311354}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1574028091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574028089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1574028092
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574028089}
-  m_CullTransparentMesh: 1
 --- !u!1 &1576024448
 GameObject:
   m_ObjectHideFlags: 0
@@ -19322,6 +19239,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2076834584}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -19391,7 +19318,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -19426,6 +19353,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -19474,18 +19406,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1521104398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1598845466 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7328558135673930277, guid: 9a50f19e0dcd62b4d95cce8ab250d5bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 302840016}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1600082876
 GameObject:
   m_ObjectHideFlags: 0
@@ -19578,6 +19498,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1547274197}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 121
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -19647,7 +19577,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -19682,6 +19612,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -19738,6 +19673,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1600082877}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -19807,7 +19752,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -19842,6 +19787,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -19951,6 +19901,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 427306817}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -20020,7 +19980,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -20056,6 +20016,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Minion2 '
       objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: finalScaleReference
@@ -20080,6 +20045,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1650723047}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -20149,7 +20124,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -20184,6 +20159,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -20298,18 +20278,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 406286507}
   m_SourcePrefab: {fileID: 100100000, guid: f2276cdc9d1c9374c94b60a2f0041856, type: 3}
---- !u!114 &1658815599 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6878392659368451240, guid: 9a50f19e0dcd62b4d95cce8ab250d5bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 302840016}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1659902749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20407,76 +20375,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1169112563}
   m_SourcePrefab: {fileID: 100100000, guid: dd770b54a71c24d43b51255fdd93dc25, type: 3}
---- !u!4 &1660373349 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3761183441285346924, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-    type: 3}
-  m_PrefabInstance: {fileID: 1440758208}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1660373351 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8151253734232962639, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-    type: 3}
-  m_PrefabInstance: {fileID: 1440758208}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243595391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0abdf693afa159b459b378ff9a93be87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1660373352 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6764288409272786859, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-    type: 3}
-  m_PrefabInstance: {fileID: 1440758208}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243595391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19743baf5555db7428f5be47700aaf3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1660373353 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8026816316107826425, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-    type: 3}
-  m_PrefabInstance: {fileID: 1440758208}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243595391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd5785a5e1521242bbe11f90cdea9c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1660373354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243595391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38dac0175dc4e184ea7cacecfb9682a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doblesaltoIcon: {fileID: 1852466814}
-  climbIcon: {fileID: 1598845466}
-  powerUpIcon: {fileID: 48422141}
-  coolDownIcon: {fileID: 797382759}
---- !u!114 &1660373355 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2762129899826143140, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-    type: 3}
-  m_PrefabInstance: {fileID: 1440758208}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243595391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 051488903731ff54493d0bcfec4a364e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1663008663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20941,6 +20839,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1600082877}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -21010,7 +20918,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -21045,6 +20953,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -21101,6 +21014,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 986910595}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 104
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -21170,7 +21093,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -21205,6 +21128,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -21317,6 +21245,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 486390830}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 86
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -21386,7 +21324,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -21421,6 +21359,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -21703,12 +21646,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6654528835635110089, guid: f2276cdc9d1c9374c94b60a2f0041856, type: 3}
---- !u!1 &1760406247 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3517618631748286057, guid: 4961e3ca6cdb459419f54b74b5128a01,
-    type: 3}
-  m_PrefabInstance: {fileID: 1852862321}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1760406248 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1203859361537961395, guid: 4961e3ca6cdb459419f54b74b5128a01,
@@ -21872,6 +21809,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 260796572}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 114
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -21941,7 +21888,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -21976,6 +21923,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 49
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -22422,136 +22374,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1812053890
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1812053891}
-  - component: {fileID: 1812053895}
-  - component: {fileID: 1812053894}
-  - component: {fileID: 1812053893}
-  - component: {fileID: 1812053892}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1812053891
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812053890}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.22089645, z: -0, w: 0.97529733}
-  m_LocalPosition: {x: -0.42001343, y: 0, z: 1.3699951}
-  m_LocalScale: {x: 0.51916, y: 0.51916, z: 0.51916}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1981293804}
-  m_LocalEulerAnglesHint: {x: 0, y: -25.523, z: 0}
---- !u!114 &1812053892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812053890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99445b668040f574c8a7fab0bc9578c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 1
-  type: potion
-  descript: Cubo de la Muerte
-  icon: {fileID: 21300000, guid: e7d29a79bc7fae248887c8a08a160303, type: 3}
-  isUp: 0
-  equiped: 0
-  accesoryManager: {fileID: 0}
-  accesory: {fileID: 0}
-  playerAccesory: 0
-  accesoryOnStage: 0
-  itemManager: {fileID: 0}
-  itemSlot: {fileID: 0}
---- !u!65 &1812053893
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812053890}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1812053894
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812053890}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1812053895
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812053890}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1816352516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22841,6 +22663,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2136710353}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -22910,7 +22742,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -22945,6 +22777,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 63
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -23024,18 +22861,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1521104398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1852466814 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8085058588283912672, guid: 9a50f19e0dcd62b4d95cce8ab250d5bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 302840016}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1852862321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23208,12 +23033,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1660373351}
+      objectReference: {fileID: 0}
     - target: {fileID: 3929285093245701099, guid: 4961e3ca6cdb459419f54b74b5128a01,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1660373351}
+      objectReference: {fileID: 0}
     - target: {fileID: 3929285093245701099, guid: 4961e3ca6cdb459419f54b74b5128a01,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -23463,6 +23288,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 986910595}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 98
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -23532,7 +23367,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -23567,6 +23402,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -23617,6 +23457,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1650723047}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 77
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -23686,7 +23536,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -23721,6 +23571,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Minion2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -23774,6 +23629,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 986910595}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 119
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -23843,7 +23708,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -23878,6 +23743,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -23928,6 +23798,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 427306817}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 106
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -23997,7 +23877,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -24032,6 +23912,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -24136,162 +24021,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1855687369}
   m_SourcePrefab: {fileID: 100100000, guid: f2276cdc9d1c9374c94b60a2f0041856, type: 3}
---- !u!1 &1896926328
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1896926329}
-  - component: {fileID: 1896926331}
-  - component: {fileID: 1896926330}
-  m_Layer: 5
-  m_Name: Victoria
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1896926329
+--- !u!224 &1896926329 stripped
 RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+    type: 3}
+  m_PrefabInstance: {fileID: 493090451444811870}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896926328}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 579541788}
-  - {fileID: 1508151960}
-  m_Father: {fileID: 931311354}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1896926330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896926328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1896926331
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896926328}
-  m_CullTransparentMesh: 1
---- !u!1 &1898802230
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1898802231}
-  - component: {fileID: 1898802233}
-  - component: {fileID: 1898802232}
-  m_Layer: 5
-  m_Name: Text (Legacy)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1898802231
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898802230}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 524298162}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1898802232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898802230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 408c42eb6a089e643a579cdca7f1c799, type: 3}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Volver a la Sala
---- !u!222 &1898802233
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898802230}
-  m_CullTransparentMesh: 1
 --- !u!1 &1899347857
 GameObject:
   m_ObjectHideFlags: 0
@@ -24483,6 +24218,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 486390830}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 131
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -24552,7 +24297,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -24587,6 +24332,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -25015,6 +24765,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1547274197}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 92
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -25084,7 +24844,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -25119,6 +24879,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -25208,6 +24973,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2136710353}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 108
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -25277,7 +25052,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -25312,6 +25087,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -25391,60 +25171,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1795487254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1981293803
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1981293804}
-  - component: {fileID: 1981293805}
-  m_Layer: 0
-  m_Name: ItemManager
-  m_TagString: AcessoryManager
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1981293804
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981293803}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1812053891}
-  - {fileID: 2127248194}
-  m_Father: {fileID: 1660373349}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1981293805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981293803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e326760b27ee64f83fbc6fcba547da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeItem: {fileID: 0}
-  itemID: 0
-  itemType: 
-  slotInum: 0
-  potionTexto: {fileID: 1658815599}
-  health: {fileID: 1660373353}
-  clearSlot: {fileID: 1660373351}
-  shootVel: {fileID: 1660373352}
 --- !u!1 &1985797096
 GameObject:
   m_ObjectHideFlags: 0
@@ -25515,6 +25241,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1650723047}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 82
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -25584,7 +25320,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -25619,6 +25355,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -25901,6 +25642,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 486390830}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 129
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -25970,7 +25721,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -26005,6 +25756,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -26306,6 +26062,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 250456927}
     m_Modifications:
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: -9158110232238882846, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683660395117066124, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -26375,7 +26141,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1660373349}
+      objectReference: {fileID: 0}
     - target: {fileID: 4928104656547911685, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: enemyManager
@@ -26410,6 +26176,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minion4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8313494123166416730, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
@@ -26540,136 +26311,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 979476553609435638, guid: 86186bcb2e8a4e6409722ed00412d33b, type: 3}
---- !u!1 &2127248193
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2127248194}
-  - component: {fileID: 2127248198}
-  - component: {fileID: 2127248197}
-  - component: {fileID: 2127248196}
-  - component: {fileID: 2127248195}
-  m_Layer: 0
-  m_Name: Cube (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2127248194
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127248193}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.22089645, z: -0, w: 0.97529733}
-  m_LocalPosition: {x: -0.42001343, y: 0, z: 1.3699951}
-  m_LocalScale: {x: 0.51916, y: 0.51916, z: 0.51916}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1981293804}
-  m_LocalEulerAnglesHint: {x: 0, y: -25.523, z: 0}
---- !u!114 &2127248195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127248193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99445b668040f574c8a7fab0bc9578c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 2
-  type: accesory
-  descript: Cubo de la Muerte
-  icon: {fileID: 21300000, guid: e7d29a79bc7fae248887c8a08a160303, type: 3}
-  isUp: 0
-  equiped: 0
-  accesoryManager: {fileID: 0}
-  accesory: {fileID: 0}
-  playerAccesory: 0
-  accesoryOnStage: 0
-  itemManager: {fileID: 0}
-  itemSlot: {fileID: 0}
---- !u!65 &2127248196
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127248193}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &2127248197
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127248193}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &2127248198
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127248193}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &2135494209
 GameObject:
   m_ObjectHideFlags: 0
@@ -26876,11 +26517,246 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5120906115499407723, guid: dd770b54a71c24d43b51255fdd93dc25, type: 3}
+--- !u!1001 &493090451444811870
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 931311354}
+    m_Modifications:
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952194613042417859, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152252384509965799, guid: 4c81a06ba1b9b3c439c1938a6525baa1,
+        type: 3}
+      propertyPath: m_Name
+      value: Victoria
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c81a06ba1b9b3c439c1938a6525baa1, type: 3}
+--- !u!1001 &824153453265781992
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 931311354}
+    m_Modifications:
+    - target: {fileID: 3422739593649632478, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_Name
+      value: Perder
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973036735215490355, guid: 16c4e68d6678aa540b6db95d49a0f986,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 16c4e68d6678aa540b6db95d49a0f986, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1440758208}
   - {fileID: 1490243600}
   - {fileID: 1808822857}
   - {fileID: 1388240640}
