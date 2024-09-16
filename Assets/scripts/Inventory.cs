@@ -207,15 +207,22 @@ public class Inventory : MonoBehaviour
 
     public void InventoryEnabled()
     {
+        if (!instructionsEnabled)
+        {
+            inventoryEnabled = !inventoryEnabled;
+        }
 
-        inventoryEnabled = !inventoryEnabled;
+        
 
     }
 
     public void ScrollBarEnabled()
     {
-
-        instructionsEnabled = !instructionsEnabled;
+        if(!inventoryEnabled)
+        {
+            instructionsEnabled = !instructionsEnabled;
+        }
+        
 
 
     }

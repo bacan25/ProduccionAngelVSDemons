@@ -7,9 +7,10 @@ public class Move_Player : MonoBehaviour
 {
     [Header("Mov and Jump")]
     Rigidbody rb;
-    [SerializeField] float movSpeed = 5f;
-    [SerializeField] float jumpSpeed = 5f;
-    [SerializeField] float turnSpeed = 100f;
+    [SerializeField] float movSpeed;
+    [SerializeField] float jumpSpeed;
+    [SerializeField] float turnSpeed;
+    private float startJumpSpeed;
 
     float horInput, verInput;
     private Vector2 mouseInput;
@@ -20,7 +21,7 @@ public class Move_Player : MonoBehaviour
 
 
     [Header("Climbing")]
-    [SerializeField] private float climbSpeed = 5f;
+    [SerializeField] private float climbSpeed;
     public bool isClimbing = false;
     public float sphereCastRadius;
     public bool wallFront;
@@ -41,6 +42,7 @@ public class Move_Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         inventory = GetComponent<Inventory>();
+        startJumpSpeed = jumpSpeed;
 
     }
 
@@ -74,11 +76,12 @@ public class Move_Player : MonoBehaviour
             Walk();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount == 0 && dobleSaltoSkill || Input.GetKeyDown(KeyCode.Space) && jumpCount == 1 && dobleSaltoSkill)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount == 0 || Input.GetKeyDown(KeyCode.Space) && jumpCount == 1 && dobleSaltoSkill)
         {
             Jump();
         }
 
+        Debug.Log(jumpCount);
         
 
 
@@ -111,7 +114,7 @@ public class Move_Player : MonoBehaviour
 
     public void Walk()
     {
-        if(jumpCount == 0 || jumpCount == 2)
+        if(jumpCount == 0 && isGrounded || jumpCount == 2)
         {
             rb.velocity = transform.rotation * new Vector3
             (
@@ -146,13 +149,12 @@ public class Move_Player : MonoBehaviour
         if (jumpCount == 1)
         {
             
-            jumpSpeed = 10f;
             Debug.Log(jumpCount);
 
         } if (jumpCount == 2)
         {
             
-            jumpSpeed = 5f;
+            jumpSpeed = jumpSpeed - ((jumpSpeed/ 2f) / 2f);
             Debug.Log(jumpCount);
         }
     }
@@ -171,10 +173,15 @@ public class Move_Player : MonoBehaviour
         {
             isGrounded = true;
             jumpCount = 0;
-            jumpSpeed = 5f;
+            jumpSpeed = startJumpSpeed;
         }
 
 
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        isGrounded = false;
     }
 
     private void OnTriggerEnter(Collider other)

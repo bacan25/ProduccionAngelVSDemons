@@ -39,7 +39,8 @@ public class AngelClass : MonoBehaviour
 
     public ChangeAlpha changeAlpha;
     public Inventory inventory;
-    
+    public Move_Player player;
+
 
 
 
@@ -58,7 +59,12 @@ public class AngelClass : MonoBehaviour
             return;
         }
 
-        if(gotBasic && basicTimer <= basicCooldown + 0.1f)
+        if (player.muerto)
+        {
+            return;
+        }
+
+        if (gotBasic && basicTimer <= basicCooldown + 0.1f)
             basicTimer += Time.deltaTime;
         if(gotPower && powerTimer <= powerCooldown + 0.1f)
             powerTimer += Time.deltaTime;
