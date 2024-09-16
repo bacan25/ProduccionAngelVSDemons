@@ -646,7 +646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3761183441285346924
 Transform:
   m_ObjectHideFlags: 0
@@ -823,7 +823,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051488903731ff54493d0bcfec4a364e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameManager: {fileID: 0}
   movSpeed: 20
   jumpSpeed: 15
   turnSpeed: 100
@@ -856,14 +855,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 100
-  respawn: {fileID: 0}
-  healthBar: {fileID: 0}
-  min: 0
-  seg: 10
-  tiempo: {fileID: 0}
-  isRespawn: 0
   player: {fileID: 2762129899826143140}
-  respawnPanel: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!114 &9138407040869165617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,6 +907,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 8026816316107826425}
   - {fileID: -5578421568006729679}
   sceneViewId: 0
   InstantiationId: 0
