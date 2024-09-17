@@ -38,7 +38,7 @@ public class Items : MonoBehaviour
 
     private void Start()
     {
-        itemManager = GetComponent<ItemManager>();
+        
         accesoryManager = GameObject.FindWithTag("AcessoryManager");
         allAcessories = accesoryManager.transform.childCount;
         allItems = new GameObject[allAcessories];

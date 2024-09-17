@@ -130,7 +130,8 @@ MonoBehaviour:
   accesory: {fileID: 0}
   playerAccesory: 0
   accesoryOnStage: 0
-  itemManager: {fileID: 0}
+  itemManager: {fileID: 2695080374269499775, guid: f8159e10416984d4fa650ecc14fab5e4,
+    type: 3}
   itemSlot: {fileID: 0}
 --- !u!54 &1236351013870828562
 Rigidbody:
