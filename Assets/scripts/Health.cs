@@ -1,6 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UI; // Si tienes una barra de vida o elementos UI
+using UnityEngine.UI;
 
 public class Health : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -23,6 +23,17 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
             if (player == null)
             {
                 Debug.LogError("El componente Move_Player no se encontró en el jugador.");
+            }
+        }
+
+        // Buscar el Slider en el Canvas del jugador si no ha sido asignado manualmente
+        if (healthBar == null)
+        {
+            healthBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Slider>();
+
+            if (healthBar == null)
+            {
+                Debug.LogError("No se encontró una barra de vida (Slider) en el Canvas del jugador.");
             }
         }
 
@@ -84,7 +95,7 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
         // Incrementar la salud
         currentHealth += 10; // Cambia este valor según lo que quieras que recupere la poción
 
-        // Asegurarte de que la salud no exceda el máximo
+        // Asegúrate de que la salud no exceda el máximo
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
@@ -134,7 +145,7 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
         // Si tienes una barra de vida (Slider) asignada, actualízala
         if (healthBar != null)
         {
-            healthBar.value = (float)currentHealth / maxHealth;
+            healthBar.value = currentHealth;
         }
     }
 

@@ -1068,6 +1068,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8099454713544569414, guid: 4def912df1ffe2241b564ae14271b5d7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8151253734232962639}
+    - target: {fileID: 8099454713544569414, guid: 4def912df1ffe2241b564ae14271b5d7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ScrollBarEnabled
+      objectReference: {fileID: 0}
     - target: {fileID: 8706090272975004018, guid: 4def912df1ffe2241b564ae14271b5d7,
         type: 3}
       propertyPath: m_Pivot.x
