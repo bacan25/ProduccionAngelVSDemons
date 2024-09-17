@@ -1181,7 +1181,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7025782172418442386, guid: 4def912df1ffe2241b564ae14271b5d7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6533775895909540035}
+    - targetCorrespondingSourceObject: {fileID: 7025782172418442386, guid: 4def912df1ffe2241b564ae14271b5d7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2318800026601037347}
   m_SourcePrefab: {fileID: 100100000, guid: 4def912df1ffe2241b564ae14271b5d7, type: 3}
 --- !u!114 &72219854798221934 stripped
 MonoBehaviour:
@@ -1237,6 +1245,46 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2600808394206164370}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5014611800004833536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7025782172418442386, guid: 4def912df1ffe2241b564ae14271b5d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2600808394206164370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6533775895909540035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5014611800004833536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e688b17dcabc61418439a52b5fe6a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2318800026601037347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5014611800004833536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!114 &5252516516310795660 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7850691715409178654, guid: 4def912df1ffe2241b564ae14271b5d7,

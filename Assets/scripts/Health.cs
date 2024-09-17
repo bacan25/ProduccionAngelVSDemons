@@ -16,20 +16,30 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
     {
         currentHealth = maxHealth;
 
-        // Asignar el componente Move_Player si no está asignado
+        // Intentar asignar el componente Move_Player
         if (player == null)
         {
-            player = GetComponent<Move_Player>();
+            player = GetComponent<Move_Player>(); // Buscar en el mismo GameObject
             if (player == null)
             {
-                Debug.LogError("El componente Move_Player no se encontró en el jugador.");
+                // Si no se encuentra en el mismo GameObject, buscar en los hijos
+                player = GetComponentInChildren<Move_Player>();
+
+                if (player == null)
+                {
+                    Debug.LogError("El componente Move_Player no se encontró en el jugador ni en sus hijos.");
+                }
             }
         }
 
         // Buscar el Slider en el Canvas del jugador si no ha sido asignado manualmente
         if (healthBar == null)
         {
-            healthBar = GetComponentInChildren<Canvas>().GetComponentInChildren<Slider>();
+            Canvas playerCanvas = GetComponentInChildren<Canvas>(); // Buscar el Canvas dentro del prefab del jugador
+            if (playerCanvas != null)
+            {
+                healthBar = playerCanvas.GetComponentInChildren<Slider>(); // Buscar el Slider dentro del Canvas
+            }
 
             if (healthBar == null)
             {
@@ -145,7 +155,7 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
         // Si tienes una barra de vida (Slider) asignada, actualízala
         if (healthBar != null)
         {
-            healthBar.value = currentHealth;
+            healthBar.value = (float)currentHealth / maxHealth; // Actualiza el valor de la barra
         }
     }
 

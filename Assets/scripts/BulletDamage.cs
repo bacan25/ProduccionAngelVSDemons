@@ -7,7 +7,7 @@ public class BulletDamage : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Minion"))
+        if (other.CompareTag("Minion"))
         {
             PhotonView targetPhotonView = other.GetComponent<PhotonView>();
             if (targetPhotonView != null)

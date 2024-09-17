@@ -65,6 +65,9 @@ public class InGameManager : MonoBehaviourPunCallbacks
             {
                 Debug.LogError("El componente Health no se encontró en el jugador instanciado.");
             }
+
+            // Registrar el jugador en la lista de jugadores para otros componentes (como IA enemiga)
+            RegisterPlayer(player.transform);
         }
         else
         {
