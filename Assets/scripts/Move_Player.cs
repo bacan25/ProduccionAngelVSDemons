@@ -235,13 +235,25 @@ public class Move_Player : MonoBehaviourPunCallbacks
         if (other.gameObject.CompareTag("DobleSalto"))
         {
             DobleSalto();
-            PhotonNetwork.Destroy(other.gameObject);
+
+            // Comprobar si el objeto tiene PhotonView antes de destruirlo
+            PhotonView photonViewObj = other.gameObject.GetComponent<PhotonView>();
+            if (photonViewObj != null && photonViewObj.IsMine)
+            {
+                PhotonNetwork.Destroy(other.gameObject);
+            }
         }
 
         if (other.gameObject.CompareTag("Escalar"))
         {
             Escalar();
-            PhotonNetwork.Destroy(other.gameObject);
+
+            // Comprobar si el objeto tiene PhotonView antes de destruirlo
+            PhotonView photonViewObj = other.gameObject.GetComponent<PhotonView>();
+            if (photonViewObj != null && photonViewObj.IsMine)
+            {
+                PhotonNetwork.Destroy(other.gameObject);
+            }
         }
     }
 
