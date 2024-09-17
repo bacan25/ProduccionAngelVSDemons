@@ -9,8 +9,13 @@ public class PlayerCanvasManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        // Obtener la referencia del Canvas
-        playerCanvas = GetComponent<Canvas>();
+        // Verificar si la cámara del jugador está correctamente asignada
+        Camera playerCamera = GetComponentInChildren<Camera>();
+        if (playerCamera == null)
+        {
+            Debug.LogError("No se encontró la cámara del jugador.");
+        }
+
 
         // Solo el jugador local debe tener su canvas habilitado
         if (photonView.IsMine)

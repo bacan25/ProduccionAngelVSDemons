@@ -31,13 +31,14 @@ public class Items : MonoBehaviour
     public Slot itemSlot;
     private GameObject[] allItems;
 
-    
+
 
 
 
 
     private void Start()
     {
+        itemManager = GetComponent<ItemManager>();
         accesoryManager = GameObject.FindWithTag("AcessoryManager");
         allAcessories = accesoryManager.transform.childCount;
         allItems = new GameObject[allAcessories];
@@ -73,10 +74,10 @@ public class Items : MonoBehaviour
             {
                 gameObject.SetActive(false);
             }
-         
+
         }
 
-        
+
     }
 
     public void ItemUsage()
@@ -87,7 +88,7 @@ public class Items : MonoBehaviour
         //}
 
         if (type == "potion")
-        {  
+        {
             ItemManagerUpdate();
 
         }
@@ -98,7 +99,7 @@ public class Items : MonoBehaviour
 
         }
 
-        
+
     }
 
     public void ItemManagerUpdate()
