@@ -812,6 +812,7 @@ MonoBehaviour:
   instructionsEnabled: 0
   potionNum: 0
   itemManager: {fileID: 8667666699246938278}
+  inventoryCanvas: {fileID: 0}
 --- !u!114 &2762129899826143140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,10 +1008,30 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1595372270840670583, guid: 4def912df1ffe2241b564ae14271b5d7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8151253734232962639}
+    - target: {fileID: 1595372270840670583, guid: 4def912df1ffe2241b564ae14271b5d7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ScrollBarEnabled
+      objectReference: {fileID: 0}
     - target: {fileID: 4881420912780790683, guid: 4def912df1ffe2241b564ae14271b5d7,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5487447545790804642, guid: 4def912df1ffe2241b564ae14271b5d7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8151253734232962639}
+    - target: {fileID: 5487447545790804642, guid: 4def912df1ffe2241b564ae14271b5d7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InventoryEnabled
       objectReference: {fileID: 0}
     - target: {fileID: 7025782172418442386, guid: 4def912df1ffe2241b564ae14271b5d7,
         type: 3}
