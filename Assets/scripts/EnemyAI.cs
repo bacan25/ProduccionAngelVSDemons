@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviourPunCallbacks
     private NavMeshAgent agent;
     private int currentPathIndex;
     private bool isWaiting;
-    [HideInInspector] public bool isAgro;
+ 
 
     public EnemyManager enemyManager;
 
@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviourPunCallbacks
         enemyShooting = GetComponent<EnemyShooting>();
         currentPathIndex = 0;
         agent.destination = pathPoints[currentPathIndex].position;
-        isAgro = false;
+       
         isWaiting = false;
 
         // Asegurarse de que enemyManager está asignado
@@ -45,15 +45,11 @@ public class EnemyAI : MonoBehaviourPunCallbacks
     void Update()
     {
         if (!PhotonNetwork.IsMasterClient)
-            return;
+            return; 
 
         IsPlayerDetected();
 
         if (enemyManager.playerDetected != null)
-        {
-            isAgro = true;
-        }
-        if (isAgro)
         {
             ChasePlayer();
         }
@@ -101,7 +97,7 @@ public class EnemyAI : MonoBehaviourPunCallbacks
         else
         {
             enemyManager.playerDetected = null;
-            isAgro = false;
+            
         }
     }
 
@@ -120,6 +116,10 @@ public class EnemyAI : MonoBehaviourPunCallbacks
         {
             agent.isStopped = true;
             enemyShooting.Shoot(enemyManager.playerDetected.transform);
+            Vector3 randomNumber = new Vector3(Random.Range(-3,3), enemyManager.playerDetected.position.y, Random.Range(-3,3));
+            Vector3 newObjective = enemyManager.playerDetected.position + randomNumber.normalized * (shootingRange - 0.5f);
+            agent.isStopped = false;
+            agent.SetDestination(newObjective); //Tiene muchos nuevos objetivos a la vez
         }
         else
         {
