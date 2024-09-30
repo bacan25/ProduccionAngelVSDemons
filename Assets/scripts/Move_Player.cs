@@ -45,40 +45,33 @@ public class Move_Player : MonoBehaviourPunCallbacks
 
         if (photonView.IsMine)
         {
-            // Enviamos un RPC al Master Client para registrar nuestro Transform
             photonView.RPC("RegisterPlayerWithMaster", RpcTarget.MasterClient, photonView.ViewID);
         }
         else
         {
-            // Desactivar componentes en jugadores remotos
             DisableRemotePlayerComponents();
         }
     }
 
     void DisableRemotePlayerComponents()
     {
-        // Desactivar cámara
         Camera playerCamera = GetComponentInChildren<Camera>();
         if (playerCamera != null)
         {
             playerCamera.enabled = false;
         }
 
-        // Desactivar audio listener
         AudioListener audioListener = GetComponentInChildren<AudioListener>();
         if (audioListener != null)
         {
             audioListener.enabled = false;
         }
 
-        // Desactivar scripts específicos
         Inventory inventoryScript = GetComponent<Inventory>();
         if (inventoryScript != null)
         {
             inventoryScript.enabled = false;
         }
-
-        // Desactivar otros componentes si es necesario
     }
 
     [PunRPC]
@@ -96,7 +89,6 @@ public class Move_Player : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            // Enviamos un RPC al Master Client para eliminar nuestro Transform
             photonView.RPC("UnregisterPlayerWithMaster", RpcTarget.MasterClient, photonView.ViewID);
         }
     }
@@ -140,7 +132,7 @@ public class Move_Player : MonoBehaviourPunCallbacks
             Walk();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount == 0 || (Input.GetKeyDown(KeyCode.Space) && jumpCount == 1 && dobleSaltoSkill))
+        if (Input.GetKeyDown(KeyCode.Space) && (jumpCount == 0 || (jumpCount == 1 && dobleSaltoSkill)))
         {
             Jump();
         }
@@ -236,7 +228,6 @@ public class Move_Player : MonoBehaviourPunCallbacks
         {
             DobleSalto();
 
-            // Comprobar si el objeto tiene PhotonView antes de destruirlo
             PhotonView photonViewObj = other.gameObject.GetComponent<PhotonView>();
             if (photonViewObj != null && photonViewObj.IsMine)
             {
@@ -248,7 +239,6 @@ public class Move_Player : MonoBehaviourPunCallbacks
         {
             Escalar();
 
-            // Comprobar si el objeto tiene PhotonView antes de destruirlo
             PhotonView photonViewObj = other.gameObject.GetComponent<PhotonView>();
             if (photonViewObj != null && photonViewObj.IsMine)
             {
@@ -262,7 +252,6 @@ public class Move_Player : MonoBehaviourPunCallbacks
         dobleSaltoSkill = true;
         changeAlpha.SetDobleSaltoIcon(1f);
 
-        // Sincronizar con otros jugadores si es necesario
         photonView.RPC("SyncDobleSaltoSkill", RpcTarget.Others, dobleSaltoSkill);
     }
 
@@ -270,7 +259,6 @@ public class Move_Player : MonoBehaviourPunCallbacks
     void SyncDobleSaltoSkill(bool value)
     {
         dobleSaltoSkill = value;
-        // Actualizar UI si es necesario
     }
 
     private void Escalar()
@@ -278,7 +266,6 @@ public class Move_Player : MonoBehaviourPunCallbacks
         climbSkill = true;
         changeAlpha.SetClimbIcon(1f);
 
-        // Sincronizar con otros jugadores si es necesario
         photonView.RPC("SyncClimbSkill", RpcTarget.Others, climbSkill);
     }
 
@@ -286,6 +273,5 @@ public class Move_Player : MonoBehaviourPunCallbacks
     void SyncClimbSkill(bool value)
     {
         climbSkill = value;
-        // Actualizar UI si es necesario
     }
 }

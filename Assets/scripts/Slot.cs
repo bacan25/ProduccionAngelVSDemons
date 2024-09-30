@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,30 +16,29 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public ItemManager itemManager;
 
     public Transform slotIconPanel;
-    public ItemDescript itemText;
 
-
-    private void Start() 
+    private void Start()
     {
-        
-
         slotIconPanel = transform.GetChild(0);
         iconDefault = slotIconPanel.GetComponent<Image>().sprite;
+
+        if (itemManager == null)
+        {
+            itemManager = FindObjectOfType<ItemManager>();
+        }
     }
 
     public void UpdateSlot()
     {
-        slotIconPanel.GetComponent<Image>().sprite = icon== null? iconDefault: icon;
-        //itemText.slotDescriptText.GetComponent<Text>().text = descript;  
-        
+        slotIconPanel.GetComponent<Image>().sprite = icon == null ? iconDefault : icon;
     }
 
     public void UseItem()
     {
-        item.GetComponent<Items>().ItemUsage();
-        
-
-
+        if (item != null)
+        {
+            item.GetComponent<Items>().ItemUsage();
+        }
     }
 
     public void CheckSlotNum()
@@ -55,9 +51,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData pointerEventData)
     {
         UseItem();
-        //CheckSlotNum();
-        
-
+        CheckSlotNum();
     }
-    
 }

@@ -1,185 +1,117 @@
 using Photon.Pun;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Inventory : MonoBehaviourPun
 {
-    private bool inventoryEnabled;
-    public GameObject inventory;
-    public GameObject instructions;
+    private int maxSlots = 20;
+    private List<Item> items = new List<Item>();
+
+    public GameObject inventoryUI; // Referencia al UI del inventario
+    public bool inventoryOnStage; // Indica si el inventario está abierto
+    public bool instructionsOnStage; // Indica si las instrucciones están abiertas
+
     public GameObject slotHolder;
-
-    private int maxSlots;
-    private int enabledSlots;
     private GameObject[] slots;
-    public int slotInum;
-
-    public GameObject itemIsUp;
-
-    public bool inventoryOnStage;
-    public bool instructionsOnStage;
-    public bool instructionsEnabled;
-    public int potionNum;
-
-    public ItemManager itemManager;
-
-    // Añadir referencia a la cámara del jugador
-    public Canvas inventoryCanvas;
 
     void Start()
     {
-        maxSlots = slotHolder.transform.childCount;
-        slots = new GameObject[maxSlots];
+        if (!photonView.IsMine)
+        {
+            enabled = false;
+            return;
+        }
 
+        // Inicializar slots
+        slots = new GameObject[maxSlots];
         for (int i = 0; i < maxSlots; i++)
         {
             slots[i] = slotHolder.transform.GetChild(i).gameObject;
-        }
-
-        SlotInum();
-
-        // Si este jugador no es el propietario, desactiva su Canvas
-        if (!photonView.IsMine)
-        {
-            inventoryCanvas.enabled = false;
+            slots[i].GetComponent<Slot>().slotNum = i; // Asignar número de slot
         }
     }
 
     void Update()
     {
-        if (!photonView.IsMine) return; // Solo el jugador local puede interactuar con su inventario
+        if (!photonView.IsMine) return;
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            InventoryEnabled();
-        }
-
-        if (inventoryEnabled)
-        {
-            inventory.SetActive(true);
-            inventoryOnStage = true;
-        }
-        else
-        {
-            inventory.SetActive(false);
-            inventoryOnStage = false;
-        }
-
-        if (instructionsEnabled)
-        {
-            instructions.SetActive(true);
-            instructionsOnStage = true;
-        }
-        else
-        {
-            instructions.SetActive(false);
-            instructionsOnStage = false;
+            // Mostrar/ocultar inventario
+            bool isActive = !inventoryUI.activeSelf;
+            inventoryUI.SetActive(isActive);
+            inventoryOnStage = isActive;
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Item")
+        if (!photonView.IsMine) return;
+
+        if (other.gameObject.CompareTag("Item"))
         {
-            itemIsUp = other.gameObject;
-
-            Items item = itemIsUp.GetComponent<Items>();
-            AddItem(itemIsUp, item.ID, item.type, item.descript, item.icon);
-
-            if (item.GetComponent<Items>().ID == 1)
+            Items itemComponent = other.gameObject.GetComponent<Items>();
+            if (itemComponent != null)
             {
-                potionNum++;
-                itemManager.potionTexto.text = potionNum.ToString();
+                Item item = new Item(itemComponent.ID, itemComponent.type, itemComponent.descript, itemComponent.icon);
+                AddItem(item);
+                PhotonNetwork.Destroy(other.gameObject); // Destruir el objeto recogido
             }
         }
     }
 
-    public void AddItem(GameObject itemObject, int itemID, string itemType, string itemDescript, Sprite itemIcon)
+    public void AddItem(Item item)
     {
-        for (int i = 0; i < maxSlots; i++)
+        if (items.Count < maxSlots)
         {
-            if (slots[i].GetComponent<Slot>().empty)
+            items.Add(item);
+            HUDManager.Instance.inventoryUI.GetComponent<InventoryUI>().AddItem(item);
+        }
+        else
+        {
+            Debug.Log("Inventario lleno");
+        }
+    }
+
+    public void RemoveItemByID(int id)
+    {
+        Item itemToRemove = items.Find(item => item.ID == id);
+        if (itemToRemove != null)
+        {
+            items.Remove(itemToRemove);
+        }
+        else
+        {
+            Debug.Log("Ítem no encontrado en el inventario.");
+        }
+    }
+
+    public void ClearSlotByNumber(int slotNumber)
+    {
+        if (slotNumber >= 0 && slotNumber < slots.Length)
+        {
+            Slot slot = slots[slotNumber].GetComponent<Slot>();
+            slot.item = null;
+            slot.ID = 0;
+            slot.type = null;
+            slot.descript = null;
+            slot.icon = null;
+
+            slot.UpdateSlot();
+            slot.empty = true;
+        }
+    }
+
+    public int GetItemCount(int id)
+    {
+        int count = 0;
+        foreach (Item item in items)
+        {
+            if (item.ID == id)
             {
-                itemObject.GetComponent<Items>().isUp = true;
-
-                slots[i].GetComponent<Slot>().item = itemObject;
-                slots[i].GetComponent<Slot>().ID = itemID;
-                slots[i].GetComponent<Slot>().type = itemType;
-                slots[i].GetComponent<Slot>().descript = itemDescript;
-                slots[i].GetComponent<Slot>().icon = itemIcon;
-
-                itemObject.transform.parent = slots[i].transform;
-                itemObject.SetActive(false);
-
-                slots[i].GetComponent<Slot>().UpdateSlot();
-                slots[i].GetComponent<Slot>().empty = false;
-
-                return;
+                count++;
             }
         }
-    }
-
-    public void ClearOtherSlot()
-    {
-        for (int i = 0; i < maxSlots; i++)
-        {
-            if (slots[i].GetComponent<Slot>().ID == itemManager.itemID && slots[i].GetComponent<Slot>().slotNum == itemManager.slotInum)
-            {
-                slots[i].GetComponent<Slot>().item = null;
-                slots[i].GetComponent<Slot>().ID = 0;
-                slots[i].GetComponent<Slot>().type = null;
-                slots[i].GetComponent<Slot>().descript = null;
-                slots[i].GetComponent<Slot>().icon = null;
-
-                slots[i].GetComponent<Slot>().UpdateSlot();
-                slots[i].GetComponent<Slot>().empty = true;
-
-                return;
-            }
-        }
-    }
-
-    public void AutoClearPotionSlot()
-    {
-        for (int i = 0; i < maxSlots; i++)
-        {
-            if (slots[i].GetComponent<Slot>().ID == 1)
-            {
-                slots[i].GetComponent<Slot>().item = null;
-                slots[i].GetComponent<Slot>().ID = 0;
-                slots[i].GetComponent<Slot>().type = null;
-                slots[i].GetComponent<Slot>().descript = null;
-                slots[i].GetComponent<Slot>().icon = null;
-
-                slots[i].GetComponent<Slot>().UpdateSlot();
-                slots[i].GetComponent<Slot>().empty = true;
-
-                return;
-            }
-        }
-    }
-
-    public void SlotInum()
-    {
-        for (int i = 0; i < maxSlots; i++)
-        {
-            slots[i].GetComponent<Slot>().slotNum = slotInum;
-            slotInum++;
-        }
-    }
-
-    public void InventoryEnabled()
-    {
-        if (!instructionsEnabled)
-        {
-            inventoryEnabled = !inventoryEnabled;
-        }
-    }
-
-    public void ScrollBarEnabled()
-    {
-        if (!inventoryEnabled)
-        {
-            instructionsEnabled = !instructionsEnabled;
-        }
+        return count;
     }
 }

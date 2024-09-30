@@ -1,11 +1,7 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using Photon.Pun;
 using UnityEngine;
 
-public class Items : MonoBehaviour
+public class Items : MonoBehaviourPun
 {
     public int ID;
     public string type;
@@ -16,106 +12,70 @@ public class Items : MonoBehaviour
     public bool isUp;
 
     [HideInInspector]
-    public bool equiped;
+    public bool equipped;
 
-    [HideInInspector]
-    public GameObject accesoryManager;
-
-    [HideInInspector]
-    public GameObject accesory;
-
-    public bool playerAccesory;
-    public bool accesoryOnStage = false;
-    int allAcessories;
     public ItemManager itemManager;
-    public Slot itemSlot;
-    private GameObject[] allItems;
-
-
-
-
-
 
     private void Start()
     {
-        
-        accesoryManager = GameObject.FindWithTag("AcessoryManager");
-        allAcessories = accesoryManager.transform.childCount;
-        allItems = new GameObject[allAcessories];
-
-
-        if (!playerAccesory)
+        if (!photonView.IsMine)
         {
-
-            for (int i = 0; i < allAcessories; i++)
-            {
-                if (accesoryManager.transform.GetChild(i).gameObject.GetComponent<Items>().ID == ID)
-                {
-                    accesory = accesoryManager.transform.GetChild(i).gameObject;
-                    //allItems[i] = accesory.transform.GetChild(i).gameObject;
-
-                }
-            }
-
+            enabled = false;
+            return;
         }
 
-
+        if (itemManager == null)
+        {
+            itemManager = GetComponentInParent<ItemManager>();
+            if (itemManager == null)
+            {
+                Debug.LogError("ItemManager no encontrado en el padre.");
+            }
+        }
     }
 
     private void Update()
     {
-        if (equiped)
+        if (!photonView.IsMine) return;
+
+        if (equipped && Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                equiped = false;
-            }
-            if (equiped == false)
-            {
-                gameObject.SetActive(false);
-            }
-
+            UnequipItem();
         }
-
-
     }
 
     public void ItemUsage()
     {
-        //foreach (GameObject item in allItems)
-        //{
-        //    item.SetActive(false);
-        //}
-
-        if (type == "potion")
+        switch (type)
         {
-            ItemManagerUpdate();
-
+            case "potion":
+                itemManager.UsePotion();
+                break;
+            case "accesory":
+                itemManager.UseAccessory();
+                break;
+            default:
+                Debug.Log("Tipo de ítem no reconocido.");
+                break;
         }
 
-        if (type == "accesory")
-        {
-            ItemManagerUpdate();
-
-        }
-
-
+        itemManager.inventory.RemoveItemByID(ID);
+        HUDManager.Instance.inventoryUI.GetComponent<InventoryUI>().RemoveItemByID(ID);
     }
 
-    public void ItemManagerUpdate()
+    public void EquipItem()
     {
-        if (itemManager.activeItem != null)
-        {
-            itemManager.activeItem.SetActive(false);
-            itemManager.activeItem = null;
-        }
+        if (!photonView.IsMine) return;
 
-        accesory.SetActive(true);
-        accesory.GetComponent<Items>().equiped = true;
-        itemManager.activeItem = accesory;
-        itemManager.itemID = itemManager.activeItem.GetComponent<Items>().ID;
-        itemManager.itemType = itemManager.activeItem.GetComponent<Items>().type;
+        equipped = true;
+        gameObject.SetActive(true);
     }
 
+    public void UnequipItem()
+    {
+        if (!photonView.IsMine) return;
 
+        equipped = false;
+        gameObject.SetActive(false);
+    }
 }

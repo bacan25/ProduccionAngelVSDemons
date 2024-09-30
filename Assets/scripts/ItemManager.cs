@@ -1,21 +1,26 @@
+using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : MonoBehaviourPun
 {
     public GameObject activeItem = null;
     public int itemID;
     public string itemType;
+    public int potionNum;
     public int slotInum;
-    public Text potionTexto;
 
-    public Health health; // Asegúrate de que está asignado o lo buscaremos en Start()
-    public Inventory clearSlot; // Asegúrate de que esté asignado en el inspector
-    public AngelClass shootVel; // Asegúrate de que esté asignado
+    public Health health;
+    public Inventory inventory;
+    public AngelClass angelClass;
 
     private void Start()
     {
-        // Verifica que el componente Health esté asignado, si no, lo buscamos en el mismo GameObject
+        if (!photonView.IsMine)
+        {
+            enabled = false;
+            return;
+        }
+
         if (health == null)
         {
             health = GetComponent<Health>();
@@ -24,86 +29,60 @@ public class ItemManager : MonoBehaviour
                 Debug.LogError("El componente Health no está asignado y no se encontró en el GameObject.");
             }
         }
+
+        if (inventory == null)
+        {
+            inventory = GetComponent<Inventory>();
+        }
+
+        if (angelClass == null)
+        {
+            angelClass = GetComponent<AngelClass>();
+        }
     }
 
     private void Update()
     {
+        if (!photonView.IsMine) return;
+
         if (Input.GetKeyDown(KeyCode.U) && itemType == "accesory")
         {
-            Accesory();
+            UseAccessory();
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (itemID == 1)
-            {
-                Potion();
-            }
-            else
-            {
-                AutoPotion();
-            }
+            UsePotion();
         }
     }
 
-    private void Potion()
+    public void UsePotion()
     {
-        if (health != null)
+        if (health != null && potionNum > 0)
         {
-            UsePotion();
-            clearSlot.ClearOtherSlot(); // Asegúrate de que clearSlot esté asignado correctamente
+            health.Potion();
+            potionNum--;
+            HUDManager.Instance.UpdatePotionCount(potionNum);
+
+            inventory.ClearSlotByNumber(slotInum);
+
             itemID = 0;
         }
         else
         {
-            Debug.LogError("El componente Health no está asignado.");
+            Debug.Log("No tienes pociones.");
         }
     }
 
-    public void AutoPotion()
+    public void UseAccessory()
     {
-        if (clearSlot != null && clearSlot.potionNum > 0)
+        if (itemID == 2 && angelClass != null)
         {
-            UsePotion();
-            clearSlot.AutoClearPotionSlot();
+            angelClass.basicCooldown = 0.3f;
+
+            inventory.ClearSlotByNumber(slotInum);
+
+            itemID = 0;
         }
-    }
-
-    private void UsePotion()
-    {
-        if (health != null)
-        {
-            health.Potion(); // Llamar al método Potion del script Health
-            clearSlot.potionNum -= 1;
-            potionTexto.text = clearSlot.potionNum.ToString();
-
-            if (health.currentHealth > health.maxHealth)
-            {
-                health.currentHealth = health.maxHealth;
-            }
-
-            if (activeItem != null && itemID == 1)
-            {
-                activeItem.SetActive(false);
-                activeItem = null;
-            }
-        }
-    }
-
-    private void Accesory()
-    {
-        if (itemID == 2 && shootVel != null)
-        {
-            Debug.Log("UseAcccesory");
-            shootVel.basicCooldown = 0.3f;
-            clearSlot.ClearOtherSlot();
-
-            if (activeItem != null)
-            {
-                activeItem.SetActive(false);
-                activeItem = null;
-            }
-        }
-        itemID = 0;
     }
 }
