@@ -20,12 +20,13 @@ public class EnemyAI : MonoBehaviourPunCallbacks
     public EnemyManager enemyManager;
 
     // Componente de disparo
-    private EnemyShooting enemyShooting;
+    [SerializeField] private EnemyShooting enemyShooting;
+    [SerializeField] private Animator anim;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        enemyShooting = GetComponent<EnemyShooting>();
+        
         currentPathIndex = 0;
         agent.destination = pathPoints[currentPathIndex].position;
        
@@ -115,7 +116,8 @@ public class EnemyAI : MonoBehaviourPunCallbacks
         if (distanceToPlayer <= shootingRange)
         {
             agent.isStopped = true;
-            enemyShooting.Shoot(enemyManager.playerDetected.transform);
+            anim.SetTrigger("Attack");
+            //enemyShooting.Shoot(enemyManager.playerDetected.transform);
             Vector3 randomNumber = new Vector3(Random.Range(-3,3), enemyManager.playerDetected.position.y, Random.Range(-3,3));
             Vector3 newObjective = enemyManager.playerDetected.position + randomNumber.normalized * (shootingRange - 0.5f);
             agent.isStopped = false;

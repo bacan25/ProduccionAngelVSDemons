@@ -7,11 +7,13 @@ public class EnemyShooting : MonoBehaviourPun
     [SerializeField] private GameObject bola;
     public float shootCooldown;
     [SerializeField] private float projectileSpeed;
+    [SerializeField] private EnemyManager enemyManager;
 
     private float shootTimer;
 
     void Start()
     {
+        enemyManager = gameObject.GetComponentInParent<EnemyManager>();
         shootTimer = shootCooldown;
     }
 
@@ -21,7 +23,7 @@ public class EnemyShooting : MonoBehaviourPun
         shootTimer += Time.deltaTime;
     }
 
-    public void Shoot(Transform target)
+    public void Shoot()
     {
         if (shootTimer >= shootCooldown)
         {
@@ -29,9 +31,11 @@ public class EnemyShooting : MonoBehaviourPun
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.velocity = (target.position - pivot.position).normalized * projectileSpeed;
+                rb.velocity = (enemyManager.playerDetected.position - pivot.position).normalized * projectileSpeed;
             }
             shootTimer = 0f;
         }
     }
+
+    
 }
