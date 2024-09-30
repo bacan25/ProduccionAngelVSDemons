@@ -1,23 +1,18 @@
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AngelClass : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private Transform pivot;
 
-    //Basic attack
     [SerializeField]
     private GameObject bullet;
     [SerializeField]
     private float vel;
     public float basicCooldown;
-
-    [SerializeField]
     private float basicTimer;
 
-    //Power attack
     [SerializeField]
     private GameObject power;
     [SerializeField]
@@ -26,11 +21,9 @@ public class AngelClass : MonoBehaviourPunCallbacks
     private float powerCooldown;
     private float powerTimer;
 
-    //Have/Don't have powers
     private bool gotBasic = true;
     private bool gotPower = false;
 
-    public ChangeAlpha changeAlpha;
     public Inventory inventory;
     public Move_Player player;
 
@@ -38,9 +31,20 @@ public class AngelClass : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine)
         {
-            // Deshabilita componentes que solo deben ser controlados por el propietario
             GetComponentInChildren<Camera>().enabled = false;
             GetComponentInChildren<AudioListener>().enabled = false;
+            enabled = false;
+            return;
+        }
+
+        if (inventory == null)
+        {
+            inventory = GetComponent<Inventory>();
+        }
+
+        if (player == null)
+        {
+            player = GetComponent<Move_Player>();
         }
     }
 
@@ -48,28 +52,33 @@ public class AngelClass : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine) return;
 
-        if (inventory.inventoryOnStage || inventory.instructionsOnStage)
+        if (inventory != null && inventory.inventoryUI != null && inventory.inventoryUI.activeSelf)
         {
             return;
         }
 
-        if (player.muerto)
+        if (player != null && player.muerto)
         {
             return;
         }
 
-        if (gotBasic && basicTimer <= basicCooldown + 0.1f)
+        if (gotBasic)
+        {
             basicTimer += Time.deltaTime;
-        if (gotPower && powerTimer <= powerCooldown + 0.1f)
-            powerTimer += Time.deltaTime;
+            float cooldownPercent = Mathf.Clamp01(basicTimer / basicCooldown);
+            HUDManager.Instance.UpdateBasicAttackCooldown(1 - cooldownPercent);
+        }
 
-        if (basicTimer >= basicCooldown)
+        if (gotPower)
         {
-            changeAlpha.GreenCoolDownIcon();
+            powerTimer += Time.deltaTime;
+            float cooldownPercent = Mathf.Clamp01(powerTimer / powerCooldown);
+            HUDManager.Instance.UpdatePowerAttackCooldown(1 - cooldownPercent);
         }
 
         if (Input.GetMouseButton(0) && gotBasic)
             BasicAttack();
+
         if (Input.GetMouseButton(1) && gotPower)
             PowerAttack();
     }
@@ -85,7 +94,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
                 rb.velocity = pivot.forward * vel;
             }
             basicTimer = 0f;
-            changeAlpha.RedCoolDownIcon();
+            HUDManager.Instance.UpdateBasicAttackCooldown(1f);
         }
     }
 
@@ -100,6 +109,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
                 rb.velocity = pivot.forward * velPower;
             }
             powerTimer = 0f;
+            HUDManager.Instance.UpdatePowerAttackCooldown(1f);
         }
     }
 
@@ -117,6 +127,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
     private void PowerUp()
     {
         gotPower = true;
-        changeAlpha.SetPowerUpIcon(1f);
+        powerTimer = powerCooldown;
+        HUDManager.Instance.UpdatePowerAttackCooldown(1f);
     }
 }

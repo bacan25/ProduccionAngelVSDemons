@@ -1,64 +1,39 @@
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Health : MonoBehaviourPunCallbacks, IPunObservable
 {
     public int currentHealth;
     public int maxHealth;
-    private Vector3 respawnPosition; // Posición de respawn del jugador
-    public Move_Player player; // Referencia al script de movimiento
-    private bool isRespawning = false; // Bandera para evitar múltiples respawns simultáneos
-
-    public Slider healthBar; // Si tienes una barra de vida en la UI (opcional)
+    private Vector3 respawnPosition;
+    public Move_Player player;
+    private bool isRespawning = false;
 
     private void Start()
     {
         currentHealth = maxHealth;
 
-        // Intentar asignar el componente Move_Player
         if (player == null)
         {
-            player = GetComponent<Move_Player>(); // Buscar en el mismo GameObject
+            player = GetComponent<Move_Player>() ?? GetComponentInChildren<Move_Player>();
             if (player == null)
             {
-                // Si no se encuentra en el mismo GameObject, buscar en los hijos
-                player = GetComponentInChildren<Move_Player>();
-
-                if (player == null)
-                {
-                    Debug.LogError("El componente Move_Player no se encontró en el jugador ni en sus hijos.");
-                }
+                Debug.LogError("El componente Move_Player no se encontró en el jugador ni en sus hijos.");
             }
         }
 
-        // Buscar el Slider en el Canvas del jugador si no ha sido asignado manualmente
-        if (healthBar == null)
-        {
-            Canvas playerCanvas = GetComponentInChildren<Canvas>(); // Buscar el Canvas dentro del prefab del jugador
-            if (playerCanvas != null)
-            {
-                healthBar = playerCanvas.GetComponentInChildren<Slider>(); // Buscar el Slider dentro del Canvas
-            }
-
-            if (healthBar == null)
-            {
-                Debug.LogError("No se encontró una barra de vida (Slider) en el Canvas del jugador.");
-            }
-        }
-
-        // Guardar la posición inicial como posición de respawn
         respawnPosition = transform.position;
 
-        // Inicializamos la barra de vida (si existe)
-        UpdateUI();
+        if (photonView.IsMine)
+        {
+            UpdateUI();
+        }
     }
 
     private void Update()
     {
-        if (!photonView.IsMine) return; // Solo el jugador local ejecuta este código
+        if (!photonView.IsMine) return;
 
-        // Si el jugador está muerto y no está ya respawneando
         if (currentHealth <= 0 && !isRespawning)
         {
             isRespawning = true;
@@ -71,19 +46,16 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        // Asegurarnos de que la salud no sea negativa
-        if (currentHealth < 0)
+        if (photonView.IsMine)
         {
-            currentHealth = 0;
+            UpdateUI();
         }
-
-        // Actualizar la barra de vida o cualquier otra UI
-        UpdateUI();
 
         if (currentHealth <= 0)
         {
-            if (CompareTag("Minion")) // O "Enemy" según tu configuración
+            if (CompareTag("Minion"))
             {
                 DeathEnemy();
             }
@@ -96,28 +68,22 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
 
     public void TakeFallDamage()
     {
-        // Aplicar suficiente daño para "matar" al jugador por caída
-        TakeDamage(currentHealth); // Esto provocará que la salud del jugador llegue a cero
+        TakeDamage(currentHealth);
     }
 
     public void Potion()
     {
-        // Incrementar la salud
-        currentHealth += 10; // Cambia este valor según lo que quieras que recupere la poción
+        currentHealth += 10;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        // Asegúrate de que la salud no exceda el máximo
-        if (currentHealth > maxHealth)
+        if (photonView.IsMine)
         {
-            currentHealth = maxHealth;
+            UpdateUI();
         }
-
-        // Actualizar la barra de vida o cualquier otra UI
-        UpdateUI();
     }
 
     void RespawnPlayer()
     {
-        // Desactivar temporalmente el movimiento y colisiones del jugador
         player.muerto = true;
         Collider playerCollider = GetComponent<Collider>();
         if (playerCollider != null)
@@ -125,16 +91,15 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
             playerCollider.enabled = false;
         }
 
-        // Mover al jugador a la posición de respawn
         transform.position = respawnPosition;
 
-        // Restablecer la salud
         currentHealth = maxHealth;
 
-        // Actualizar la barra de vida
-        UpdateUI();
+        if (photonView.IsMine)
+        {
+            UpdateUI();
+        }
 
-        // Reactivar el movimiento y colisiones del jugador
         if (playerCollider != null)
         {
             playerCollider.enabled = true;
@@ -152,10 +117,10 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
 
     public void UpdateUI()
     {
-        // Si tienes una barra de vida (Slider) asignada, actualízala
-        if (healthBar != null)
+        if (photonView.IsMine)
         {
-            healthBar.value = (float)currentHealth / maxHealth; // Actualiza el valor de la barra
+            float healthPercent = (float)currentHealth / maxHealth;
+            HUDManager.Instance.UpdateHealth(healthPercent);
         }
     }
 
@@ -163,17 +128,14 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            // Enviamos el valor de currentHealth a los demás
             stream.SendNext(currentHealth);
         }
         else
         {
-            // Recibimos el valor de currentHealth de otro jugador
             currentHealth = (int)stream.ReceiveNext();
         }
     }
 
-    // Método para establecer la posición de respawn desde el InGameManager o cualquier otro sistema
     public void SetRespawnPosition(Vector3 position)
     {
         respawnPosition = position;
