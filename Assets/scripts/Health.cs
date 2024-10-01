@@ -30,6 +30,7 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+
     private void Update()
     {
         if (!photonView.IsMine) return;

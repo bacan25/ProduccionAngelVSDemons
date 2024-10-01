@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 2262906203095726232}
   - component: {fileID: 2210382511146475217}
   - component: {fileID: -5578421568006729679}
+  - component: {fileID: 7849588627409033480}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -605,6 +606,26 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &7849588627409033480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749192660268499796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e326760b27ee64f83fbc6fcba547da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeItem: {fileID: 0}
+  itemID: 0
+  itemType: 
+  potionNum: 0
+  slotInum: 0
+  health: {fileID: 0}
+  inventory: {fileID: 0}
+  angelClass: {fileID: 0}
 --- !u!1001 &6714697318801437145
 PrefabInstance:
   m_ObjectHideFlags: 0

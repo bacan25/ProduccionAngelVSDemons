@@ -6,6 +6,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
     [SerializeField]
     private Transform pivot;
 
+    [Header("Habilidades")]
     [SerializeField]
     private GameObject bullet;
     [SerializeField]
@@ -21,8 +22,8 @@ public class AngelClass : MonoBehaviourPunCallbacks
     private float powerCooldown;
     private float powerTimer;
 
-    private bool gotBasic = true;
-    private bool gotPower = false;
+    private bool basicUnlocked = true;
+    private bool powerUnlocked = false;
 
     public Inventory inventory;
     public Move_Player player;
@@ -46,6 +47,10 @@ public class AngelClass : MonoBehaviourPunCallbacks
         {
             player = GetComponent<Move_Player>();
         }
+
+        // Inicializar habilidades en el HUD
+        HUDManager.Instance.UnlockAbility("BasicAttack");
+        HUDManager.Instance.LockAbility("PowerAttack");
     }
 
     void Update()
@@ -62,24 +67,24 @@ public class AngelClass : MonoBehaviourPunCallbacks
             return;
         }
 
-        if (gotBasic)
+        if (basicUnlocked)
         {
             basicTimer += Time.deltaTime;
             float cooldownPercent = Mathf.Clamp01(basicTimer / basicCooldown);
-            HUDManager.Instance.UpdateBasicAttackCooldown(1 - cooldownPercent);
+            HUDManager.Instance.UpdateAbilityCooldown("BasicAttack", 1 - cooldownPercent);
         }
 
-        if (gotPower)
+        if (powerUnlocked)
         {
             powerTimer += Time.deltaTime;
             float cooldownPercent = Mathf.Clamp01(powerTimer / powerCooldown);
-            HUDManager.Instance.UpdatePowerAttackCooldown(1 - cooldownPercent);
+            HUDManager.Instance.UpdateAbilityCooldown("PowerAttack", 1 - cooldownPercent);
         }
 
-        if (Input.GetMouseButton(0) && gotBasic)
+        if (Input.GetMouseButton(0) && basicUnlocked)
             BasicAttack();
 
-        if (Input.GetMouseButton(1) && gotPower)
+        if (Input.GetMouseButton(1) && powerUnlocked)
             PowerAttack();
     }
 
@@ -94,7 +99,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
                 rb.velocity = pivot.forward * vel;
             }
             basicTimer = 0f;
-            HUDManager.Instance.UpdateBasicAttackCooldown(1f);
+            HUDManager.Instance.UpdateAbilityCooldown("BasicAttack", 1f);
         }
     }
 
@@ -109,7 +114,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
                 rb.velocity = pivot.forward * velPower;
             }
             powerTimer = 0f;
-            HUDManager.Instance.UpdatePowerAttackCooldown(1f);
+            HUDManager.Instance.UpdateAbilityCooldown("PowerAttack", 1f);
         }
     }
 
@@ -126,8 +131,9 @@ public class AngelClass : MonoBehaviourPunCallbacks
 
     private void PowerUp()
     {
-        gotPower = true;
+        powerUnlocked = true;
         powerTimer = powerCooldown;
-        HUDManager.Instance.UpdatePowerAttackCooldown(1f);
+        HUDManager.Instance.UnlockAbility("PowerAttack");
+        HUDManager.Instance.UpdateAbilityCooldown("PowerAttack", 1f);
     }
 }
