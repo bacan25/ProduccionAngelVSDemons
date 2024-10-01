@@ -23,6 +23,8 @@ public class EnemyAI : MonoBehaviourPunCallbacks
     [SerializeField] private EnemyShooting enemyShooting;
     [SerializeField] private Animator anim;
 
+    bool isShooting;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -52,7 +54,7 @@ public class EnemyAI : MonoBehaviourPunCallbacks
 
         if (enemyManager.playerDetected != null)
         {
-            ChasePlayer();
+            if (!isShooting) StartCoroutine(ChasePlayer());
         }
         else
         {
@@ -102,33 +104,40 @@ public class EnemyAI : MonoBehaviourPunCallbacks
         }
     }
 
-    void ChasePlayer()
-    {
-        if (enemyManager.playerDetected == null) return;
-
-        float distanceToPlayer = Vector3.Distance(transform.position, enemyManager.playerDetected.position);
-        Vector3 directionToPlayer = (enemyManager.playerDetected.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-
-        // Gira suavemente
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-
-        if (distanceToPlayer <= shootingRange)
+     IEnumerator ChasePlayer()
+     {
+        isShooting = true;
+        if (enemyManager.playerDetected != null) 
         {
-            agent.isStopped = true;
-            anim.SetTrigger("Attack");
-            //enemyShooting.Shoot(enemyManager.playerDetected.transform);
-            Vector3 randomNumber = new Vector3(Random.Range(-3,3), enemyManager.playerDetected.position.y, Random.Range(-3,3));
-            Vector3 newObjective = enemyManager.playerDetected.position + randomNumber.normalized * (shootingRange - 0.5f);
-            agent.isStopped = false;
-            agent.SetDestination(newObjective); //Tiene muchos nuevos objetivos a la vez
-        }
-        else
-        {
-            agent.isStopped = false;
-            agent.SetDestination(enemyManager.playerDetected.position);
-        }
-    }
+            float distanceToPlayer = Vector3.Distance(transform.position, enemyManager.playerDetected.position);
+            Vector3 directionToPlayer = (enemyManager.playerDetected.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+
+            // Gira suavemente
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+
+            if (distanceToPlayer <= shootingRange)
+            {
+                agent.isStopped = true;
+                anim.SetTrigger("Attack");
+                yield return new WaitForSeconds(1);
+                //enemyShooting.Shoot(enemyManager.playerDetected.transform);
+                Vector3 randomNumber = new Vector3(Random.Range(-3, 3), enemyManager.playerDetected.position.y, Random.Range(-3, 3));
+                Vector3 newObjective = enemyManager.playerDetected.position + randomNumber.normalized * (shootingRange - 0.5f);
+                agent.isStopped = false;
+                agent.SetDestination(newObjective); //Tiene muchos nuevos objetivos a la vez
+
+                yield return new WaitForSeconds(3);
+            }
+            else
+            {
+                agent.isStopped = false;
+                agent.SetDestination(enemyManager.playerDetected.position);
+            }
+        } 
+        isShooting = false;
+        
+     }
 
     void Patrol()
     {
