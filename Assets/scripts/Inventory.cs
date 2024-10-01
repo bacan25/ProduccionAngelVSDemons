@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviourPun
 
     void Start()
     {
-        if (!photonView.IsMine)
+        if (!PhotonNetwork.OfflineMode && !photonView.IsMine)
         {
             enabled = false;
             return;
@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviourPun
 
     void Update()
     {
-        if (!photonView.IsMine) return;
+        if (!PhotonNetwork.OfflineMode && !photonView.IsMine) return;
 
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviourPun
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!photonView.IsMine) return;
+        if (!PhotonNetwork.OfflineMode && !photonView.IsMine) return;
 
         if (other.gameObject.CompareTag("Item"))
         {
@@ -55,7 +55,16 @@ public class Inventory : MonoBehaviourPun
             {
                 Item item = new Item(itemComponent.ID, itemComponent.type, itemComponent.descript, itemComponent.icon);
                 AddItem(item);
-                PhotonNetwork.Destroy(other.gameObject); // Destruir el objeto recogido
+                
+                // Arreglo de la línea de destrucción del objeto
+                if (PhotonNetwork.OfflineMode)
+                {
+                    Destroy(other.gameObject); // Destruir el objeto localmente en modo offline
+                }
+                else
+                {
+                    PhotonNetwork.Destroy(other.gameObject); // Destruir el objeto en red
+                }
             }
         }
     }

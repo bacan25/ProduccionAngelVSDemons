@@ -879,6 +879,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4636144420756500978, guid: db2db50f4952eeb4da156848ef5b2c65,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5060234500625658969, guid: db2db50f4952eeb4da156848ef5b2c65,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -959,7 +964,8 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6241808806836220922, guid: db2db50f4952eeb4da156848ef5b2c65, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
