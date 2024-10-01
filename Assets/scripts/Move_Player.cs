@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
@@ -43,7 +41,7 @@ public class Move_Player : MonoBehaviourPunCallbacks
         inventory = GetComponent<Inventory>();
         startJumpSpeed = jumpSpeed;
 
-        if (photonView.IsMine)
+        if (PhotonNetwork.OfflineMode || photonView.IsMine)
         {
             photonView.RPC("RegisterPlayerWithMaster", RpcTarget.MasterClient, photonView.ViewID);
         }
@@ -87,7 +85,7 @@ public class Move_Player : MonoBehaviourPunCallbacks
 
     void OnDestroy()
     {
-        if (photonView.IsMine)
+        if (PhotonNetwork.OfflineMode || photonView.IsMine)
         {
             photonView.RPC("UnregisterPlayerWithMaster", RpcTarget.MasterClient, photonView.ViewID);
         }
@@ -106,7 +104,7 @@ public class Move_Player : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (!photonView.IsMine || muerto)
+        if (!PhotonNetwork.OfflineMode && (!photonView.IsMine || muerto))
         {
             return;
         }

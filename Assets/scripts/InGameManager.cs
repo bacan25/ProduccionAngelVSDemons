@@ -31,7 +31,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if (PhotonNetwork.IsConnectedAndReady)
+        if (PhotonNetwork.OfflineMode || PhotonNetwork.IsConnectedAndReady)
         {
             SpawnPlayer();
         }
@@ -52,8 +52,10 @@ public class InGameManager : MonoBehaviourPunCallbacks
             Vector3 spawnPosition = spawnPoints[spawnIndex].position;
             Quaternion spawnRotation = spawnPoints[spawnIndex].rotation;
 
-            // Instanciamos al jugador en red
-            GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, spawnRotation);
+            // Instanciamos al jugador en red o localmente en modo offline
+            GameObject player = PhotonNetwork.OfflineMode ? 
+                Instantiate(playerPrefab, spawnPosition, spawnRotation) : 
+                PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, spawnRotation);
 
             // Asignar la posición de respawn en el script Health del jugador
             Health healthScript = player.GetComponent<Health>();

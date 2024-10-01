@@ -14,11 +14,25 @@ public class PlayerBulletDamage : MonoBehaviourPun
             {
                 targetPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
             }
-            PhotonNetwork.Destroy(gameObject);
+            if (PhotonNetwork.OfflineMode)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
         else if (other.CompareTag("Ground"))
         {
-            PhotonNetwork.Destroy(gameObject);
+            if (PhotonNetwork.OfflineMode)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
     }
 }

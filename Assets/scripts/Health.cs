@@ -24,16 +24,15 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
 
         respawnPosition = transform.position;
 
-        if (photonView.IsMine)
+        if (PhotonNetwork.OfflineMode || photonView.IsMine)
         {
             UpdateUI();
         }
     }
 
-
     private void Update()
     {
-        if (!photonView.IsMine) return;
+        if (!PhotonNetwork.OfflineMode && !photonView.IsMine) return;
 
         if (currentHealth <= 0 && !isRespawning)
         {
@@ -49,7 +48,7 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        if (photonView.IsMine)
+        if (PhotonNetwork.OfflineMode || photonView.IsMine)
         {
             UpdateUI();
         }
@@ -77,7 +76,7 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
         currentHealth += 10;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        if (photonView.IsMine)
+        if (PhotonNetwork.OfflineMode || photonView.IsMine)
         {
             UpdateUI();
         }
@@ -96,7 +95,7 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
 
         currentHealth = maxHealth;
 
-        if (photonView.IsMine)
+        if (PhotonNetwork.OfflineMode || photonView.IsMine)
         {
             UpdateUI();
         }
@@ -110,7 +109,7 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
 
     public void DeathEnemy()
     {
-        if (photonView.IsMine)
+        if (PhotonNetwork.OfflineMode || photonView.IsMine)
         {
             PhotonNetwork.Destroy(gameObject);
         }
@@ -118,7 +117,7 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
 
     public void UpdateUI()
     {
-        if (photonView.IsMine)
+        if (PhotonNetwork.OfflineMode || photonView.IsMine)
         {
             float healthPercent = (float)currentHealth / maxHealth;
             HUDManager.Instance.UpdateHealth(healthPercent);

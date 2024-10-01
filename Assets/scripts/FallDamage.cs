@@ -6,7 +6,7 @@ public class FallDamage : MonoBehaviourPun
     private void OnTriggerEnter(Collider other)
     {
         PhotonView targetPhotonView = other.GetComponent<PhotonView>();
-        if (targetPhotonView != null && targetPhotonView.IsMine)
+        if ((PhotonNetwork.OfflineMode || (targetPhotonView != null && targetPhotonView.IsMine)))
         {
             Health healthComponent = other.GetComponent<Health>(); // Obtenemos el componente Health
             if (healthComponent != null) // Verificamos si healthComponent está asignado

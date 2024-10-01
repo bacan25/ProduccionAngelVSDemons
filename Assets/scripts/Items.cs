@@ -18,7 +18,7 @@ public class Items : MonoBehaviourPun
 
     private void Start()
     {
-        if (!photonView.IsMine)
+        if (!PhotonNetwork.OfflineMode && !photonView.IsMine)
         {
             enabled = false;
             return;
@@ -36,7 +36,7 @@ public class Items : MonoBehaviourPun
 
     private void Update()
     {
-        if (!photonView.IsMine) return;
+        if (!PhotonNetwork.OfflineMode && !photonView.IsMine) return;
 
         if (equipped && Input.GetKeyDown(KeyCode.E))
         {
@@ -65,7 +65,7 @@ public class Items : MonoBehaviourPun
 
     public void EquipItem()
     {
-        if (!photonView.IsMine) return;
+        if (!PhotonNetwork.OfflineMode && !photonView.IsMine) return;
 
         equipped = true;
         gameObject.SetActive(true);
@@ -73,7 +73,7 @@ public class Items : MonoBehaviourPun
 
     public void UnequipItem()
     {
-        if (!photonView.IsMine) return;
+        if (!PhotonNetwork.OfflineMode && !photonView.IsMine) return;
 
         equipped = false;
         gameObject.SetActive(false);
