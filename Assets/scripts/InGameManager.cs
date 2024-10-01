@@ -1,27 +1,23 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class InGameManager : MonoBehaviourPunCallbacks
 {
-    public static InGameManager Instance; // Singleton para acceso global
+    public static InGameManager Instance;
 
-    public Transform[] spawnPoints; // Asegúrate de que estén asignados en el inspector
-    public GameObject playerPrefab; // Asegúrate de que esté asignado en el inspector
-    public float disconnectCountdown = 5f;
-
-    // Lista para almacenar los Transforms de los jugadores
+    public Transform[] spawnPoints; 
+    public GameObject playerPrefab;
     public List<Transform> playerTransforms = new List<Transform>();
+
+    private PlayerCanvas playerCanvas; // Referencia al canvas local
 
     private void Awake()
     {
-        // Implementación del singleton
         if (Instance == null)
         {
             Instance = this;
-            // Opcional: DontDestroyOnLoad(gameObject); // Si deseas que el objeto persista entre escenas
         }
         else
         {
@@ -33,13 +29,16 @@ public class InGameManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.OfflineMode || PhotonNetwork.IsConnectedAndReady)
         {
+            // Obtener la referencia al PlayerCanvas local
+            playerCanvas = PlayerCanvas.Instance;
+
+            // Spawnear al jugador
             SpawnPlayer();
         }
     }
 
     void SpawnPlayer()
     {
-        // Validación adicional de los spawn points
         if (spawnPoints == null || spawnPoints.Length == 0)
         {
             Debug.LogError("Los puntos de spawn no están asignados o la lista está vacía.");
@@ -52,23 +51,20 @@ public class InGameManager : MonoBehaviourPunCallbacks
             Vector3 spawnPosition = spawnPoints[spawnIndex].position;
             Quaternion spawnRotation = spawnPoints[spawnIndex].rotation;
 
-            // Instanciamos al jugador en red o localmente en modo offline
             GameObject player = PhotonNetwork.OfflineMode ? 
                 Instantiate(playerPrefab, spawnPosition, spawnRotation) : 
                 PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, spawnRotation);
 
-            // Asignar la posición de respawn en el script Health del jugador
-            Health healthScript = player.GetComponent<Health>();
+            HealthSystem healthScript = player.GetComponent<HealthSystem>();
             if (healthScript != null)
             {
-                healthScript.SetRespawnPosition(spawnPosition); // Asegúrate de que SetRespawnPosition esté definido en Health.cs
+                healthScript.SetRespawnPosition(spawnPosition);
             }
             else
             {
-                Debug.LogError("El componente Health no se encontró en el jugador instanciado.");
+                Debug.LogError("El componente HealthSystem no se encontró en el jugador instanciado.");
             }
 
-            // Registrar el jugador en la lista de jugadores para otros componentes (como IA enemiga)
             RegisterPlayer(player.transform);
         }
         else
@@ -77,7 +73,6 @@ public class InGameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    // Método para registrar un jugador
     public void RegisterPlayer(Transform playerTransform)
     {
         if (!playerTransforms.Contains(playerTransform))
@@ -86,7 +81,6 @@ public class InGameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    // Método para eliminar un jugador de la lista
     public void UnregisterPlayer(Transform playerTransform)
     {
         if (playerTransforms.Contains(playerTransform))
@@ -113,30 +107,24 @@ public class InGameManager : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         Debug.Log("Has salido de la sala. Regresando al menú...");
-        SceneManager.LoadScene("Menu");
+        PhotonNetwork.LoadLevel("Menu");
     }
 
-    public void LoadLevel(string levelName)
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.LoadLevel(levelName);
-        }
-    }
-
-    // Método para manejar la victoria
+    // Manejo de la victoria del jugador
     public void HandleWin(PlayerCanvas winner)
     {
-        foreach (PlayerCanvas player in FindObjectsOfType<PlayerCanvas>())
+        if (playerCanvas != null && winner == playerCanvas)
         {
-            if (player != winner)
-            {
-                player.LoseCanvas();
-            }
-            else
-            {
-                player.WinCanvas();
-            }
+            // Mostrar el canvas de victoria del jugador local
+            playerCanvas.WinCanvas();
         }
+        else if (playerCanvas != null)
+        {
+            // Mostrar el canvas de derrota en el jugador local
+            playerCanvas.LoseCanvas();
+        }
+
+        // Notificar en el log
+        Debug.Log("El juego ha terminado. ¡Tenemos un ganador!");
     }
 }

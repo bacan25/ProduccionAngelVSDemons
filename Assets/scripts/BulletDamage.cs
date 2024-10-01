@@ -7,18 +7,19 @@ public class BulletDamage : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Minion"))
+        if (other.CompareTag("Player"))
         {
             PhotonView targetPhotonView = other.GetComponent<PhotonView>();
             if (targetPhotonView != null)
             {
+                // Aplicar daño al jugador a través del HealthSystem
                 targetPhotonView.RPC("TakeDamage", RpcTarget.All, damage);
             }
-            PhotonNetwork.Destroy(this.gameObject);
+            PhotonNetwork.Destroy(gameObject); // Destruir la bala tras impactar
         }
         else if (other.CompareTag("Ground"))
         {
-            PhotonNetwork.Destroy(this.gameObject);
+            PhotonNetwork.Destroy(gameObject); // Destruir la bala si impacta el suelo
         }
     }
 }

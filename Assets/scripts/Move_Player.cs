@@ -1,214 +1,83 @@
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 
-public class Move_Player : MonoBehaviourPunCallbacks
+public class Move_Player : MonoBehaviourPun
 {
-    [Header("Mov and Jump")]
+    [Header("Movement and Jump")]
     Rigidbody rb;
-    [SerializeField] float movSpeed;
-    [SerializeField] float jumpSpeed;
-    [SerializeField] float turnSpeed;
-    private float startJumpSpeed;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float rotationSpeed;
 
-    float horInput, verInput;
+    private float horizontalInput, verticalInput;
     private Vector2 mouseInput;
     public bool isGrounded = false;
     private int jumpCount = 0;
-    public Transform cameraVer;
-    public float localRot;
+    public Transform cameraTransform;
+    public float verticalRotation;
 
-    [Header("Climbing")]
-    [SerializeField] private float climbSpeed;
-    public bool isClimbing = false;
-    public float sphereCastRadius;
-    public bool wallFront;
-    public LayerMask whatIsWall;
-    public Transform climbRef;
+    [Header("Abilities")]
+    [SerializeField] private bool doubleJumpAbility = false;
+    private bool climbAbility = false;
 
-    public Inventory inventory;
-
-    [SerializeField] private bool dobleSaltoSkill = false;
-    private bool climbSkill = false;
-
-    public bool muerto;
-
-    public ChangeAlpha changeAlpha;
+    public bool isDead;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        inventory = GetComponent<Inventory>();
-        startJumpSpeed = jumpSpeed;
-
-        if (PhotonNetwork.OfflineMode || photonView.IsMine)
-        {
-            photonView.RPC("RegisterPlayerWithMaster", RpcTarget.MasterClient, photonView.ViewID);
-        }
-        else
-        {
-            DisableRemotePlayerComponents();
-        }
-    }
-
-    void DisableRemotePlayerComponents()
-    {
-        Camera playerCamera = GetComponentInChildren<Camera>();
-        if (playerCamera != null)
-        {
-            playerCamera.enabled = false;
-        }
-
-        AudioListener audioListener = GetComponentInChildren<AudioListener>();
-        if (audioListener != null)
-        {
-            audioListener.enabled = false;
-        }
-
-        Inventory inventoryScript = GetComponent<Inventory>();
-        if (inventoryScript != null)
-        {
-            inventoryScript.enabled = false;
-        }
-    }
-
-    [PunRPC]
-    void RegisterPlayerWithMaster(int viewID)
-    {
-        PhotonView playerView = PhotonView.Find(viewID);
-        if (playerView != null)
-        {
-            Transform playerTransform = playerView.transform;
-            InGameManager.Instance.RegisterPlayer(playerTransform);
-        }
-    }
-
-    void OnDestroy()
-    {
-        if (PhotonNetwork.OfflineMode || photonView.IsMine)
-        {
-            photonView.RPC("UnregisterPlayerWithMaster", RpcTarget.MasterClient, photonView.ViewID);
-        }
-    }
-
-    [PunRPC]
-    void UnregisterPlayerWithMaster(int viewID)
-    {
-        PhotonView playerView = PhotonView.Find(viewID);
-        if (playerView != null)
-        {
-            Transform playerTransform = playerView.transform;
-            InGameManager.Instance.UnregisterPlayer(playerTransform);
-        }
+        jumpForce = 10f; // Set default jump force, adjust in Unity Inspector
     }
 
     void Update()
     {
-        if (!PhotonNetwork.OfflineMode && (!photonView.IsMine || muerto))
-        {
-            return;
-        }
+        if (!photonView.IsMine || isDead) return;
 
-        horInput = Input.GetAxis("Horizontal");
-        verInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
-        if (inventory != null && (inventory.inventoryOnStage || inventory.instructionsOnStage))
-        {
-            mouseInput = Vector2.zero;
-        }
-        else
-        {
-            mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        }
+        MovePlayer();
+        RotatePlayer();
 
-        if (isClimbing)
-        {
-            Climb();
-        }
-        else
-        {
-            Walk();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && (jumpCount == 0 || (jumpCount == 1 && dobleSaltoSkill)))
+        if (Input.GetKeyDown(KeyCode.Space) && (jumpCount == 0 || (jumpCount == 1 && doubleJumpAbility)))
         {
             Jump();
         }
+    }
 
-        Collider[] colliders = Physics.OverlapSphere(climbRef.position, sphereCastRadius, whatIsWall);
-        if (colliders.Length > 0 && Input.GetKey(KeyCode.Space) && climbSkill)
+    private void MovePlayer()
+    {
+        if (isGrounded || jumpCount < 2)
         {
-            wallFront = true;
-        }
-        else
-        {
-            wallFront = false;
-        }
-
-        if (wallFront)
-        {
-            isClimbing = !isClimbing;
-        }
-
-        if (!wallFront)
-        {
-            isClimbing = false;
-        }
-
-        localRot -= mouseInput.y * turnSpeed * Time.deltaTime * 2;
-        localRot = Mathf.Clamp(localRot, -50f, 80f);
-        if (cameraVer != null)
-        {
-            cameraVer.localEulerAngles = Vector3.right * localRot;
+            Vector3 movement = new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime;
+            rb.MovePosition(transform.position + transform.TransformDirection(movement));
         }
     }
 
-    public void Walk()
+    private void RotatePlayer()
     {
-        if ((jumpCount == 0 && isGrounded) || jumpCount == 2)
+        transform.Rotate(0, mouseInput.x * rotationSpeed * Time.deltaTime, 0);
+        verticalRotation -= mouseInput.y * rotationSpeed * Time.deltaTime;
+        verticalRotation = Mathf.Clamp(verticalRotation, -45f, 45f);
+
+        if (cameraTransform != null)
         {
-            rb.velocity = transform.rotation * new Vector3
-            (
-                horInput * movSpeed,
-                rb.velocity.y,
-                verInput * movSpeed
-            );
+            cameraTransform.localEulerAngles = Vector3.right * verticalRotation;
         }
-
-        transform.Rotate(0, mouseInput.x * turnSpeed * Time.deltaTime, 0);
     }
 
-    public void Climb()
+    private void Jump()
     {
-        rb.velocity = transform.rotation * new Vector3(horInput * movSpeed, verInput * movSpeed, 0);
-        transform.Rotate(0, mouseInput.x * turnSpeed * Time.deltaTime, 0);
-        jumpCount = 0;
-    }
-
-    public void Jump()
-    {
-        rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
         jumpCount++;
-
-        if (jumpCount == 2)
-        {
-            jumpSpeed = startJumpSpeed;
-        }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(climbRef.position, sphereCastRadius);
-    }
-
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
             jumpCount = 0;
-            jumpSpeed = startJumpSpeed;
         }
     }
 
@@ -222,22 +91,20 @@ public class Move_Player : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("DobleSalto"))
+        if (other.CompareTag("DoubleJump"))
         {
-            DobleSalto();
-
-            PhotonView photonViewObj = other.gameObject.GetComponent<PhotonView>();
+            ActivateDoubleJump();
+            PhotonView photonViewObj = other.GetComponent<PhotonView>();
             if (photonViewObj != null && photonViewObj.IsMine)
             {
                 PhotonNetwork.Destroy(other.gameObject);
             }
         }
 
-        if (other.gameObject.CompareTag("Escalar"))
+        if (other.CompareTag("Climb"))
         {
-            Escalar();
-
-            PhotonView photonViewObj = other.gameObject.GetComponent<PhotonView>();
+            ActivateClimb();
+            PhotonView photonViewObj = other.GetComponent<PhotonView>();
             if (photonViewObj != null && photonViewObj.IsMine)
             {
                 PhotonNetwork.Destroy(other.gameObject);
@@ -245,31 +112,15 @@ public class Move_Player : MonoBehaviourPunCallbacks
         }
     }
 
-    private void DobleSalto()
+    private void ActivateDoubleJump()
     {
-        dobleSaltoSkill = true;
-        changeAlpha.SetDobleSaltoIcon(1f);
-
-        photonView.RPC("SyncDobleSaltoSkill", RpcTarget.Others, dobleSaltoSkill);
+        doubleJumpAbility = true;
+        Debug.Log("Habilidad de doble salto activada");
     }
 
-    [PunRPC]
-    void SyncDobleSaltoSkill(bool value)
+    private void ActivateClimb()
     {
-        dobleSaltoSkill = value;
-    }
-
-    private void Escalar()
-    {
-        climbSkill = true;
-        changeAlpha.SetClimbIcon(1f);
-
-        photonView.RPC("SyncClimbSkill", RpcTarget.Others, climbSkill);
-    }
-
-    [PunRPC]
-    void SyncClimbSkill(bool value)
-    {
-        climbSkill = value;
+        climbAbility = true;
+        Debug.Log("Habilidad de escalar activada");
     }
 }

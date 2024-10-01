@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -61,15 +61,15 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log($"Jugador {newPlayer.NickName} ha entrado a la sala.");
-        UpdatePlayerListUI(); // Asegura que la lista de jugadores se actualice cuando un nuevo jugador entra
+        UpdatePlayerListUI();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         Debug.Log($"Jugador {otherPlayer.NickName} ha dejado la sala.");
-        UpdatePlayerListUI(); // Actualizar la lista de jugadores
+        UpdatePlayerListUI();
         readyIndicator.GetComponent<TMP_Text>().text = "Waiting for a player to join...";
-        readyButton.SetActive(false); // Desactiva el botón Ready hasta que un nuevo jugador entre
+        readyButton.SetActive(false);
     }
 
     private void CreateRoom()
@@ -140,14 +140,18 @@ public class GameManager : MonoBehaviourPunCallbacks
             readyIndicator.GetComponent<TMP_Text>().text = $"Waiting for {notReadyCount} player(s) to be ready...";
         }
     }
-
     private IEnumerator StartGameCountdown()
     {
         readyIndicator.SetActive(false);
         yield return new WaitForSeconds(5);
 
-        PhotonNetwork.LoadLevel("Terreno");
+        // Verifica si eres el MasterClient antes de cargar la escena
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("Terreno");
+        }
     }
+
 
     public void LeaveRoom()
     {
@@ -165,7 +169,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         player2NameText.text = "";
     }
 
-    // Método para que los jugadores se registren en el GameManager
+    // Método para registrar jugadores en el GameManager
     public void RegisterPlayer(Transform playerTransform)
     {
         if (!playerTransforms.Contains(playerTransform))

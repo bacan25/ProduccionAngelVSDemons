@@ -7,32 +7,18 @@ public class PlayerBulletDamage : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Minion"))
+        if (other.CompareTag("Player"))
         {
             PhotonView targetPhotonView = other.GetComponent<PhotonView>();
             if (targetPhotonView != null)
             {
                 targetPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
             }
-            if (PhotonNetwork.OfflineMode)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                PhotonNetwork.Destroy(gameObject);
-            }
+            PhotonNetwork.Destroy(gameObject);
         }
         else if (other.CompareTag("Ground"))
         {
-            if (PhotonNetwork.OfflineMode)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                PhotonNetwork.Destroy(gameObject);
-            }
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
