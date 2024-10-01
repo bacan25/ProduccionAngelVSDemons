@@ -468,11 +468,9 @@ MonoBehaviour:
   bullet: {fileID: 8044803207112214825, guid: b464cf359a427634e93fb41bd822a8d5, type: 3}
   vel: 50
   basicCooldown: 0.4
-  basicTimer: 0
   power: {fileID: 5664522316287298105, guid: fb1c781da51f11a41b2ffa7e7a913a6f, type: 3}
   velPower: 10
   powerCooldown: 2
-  changeAlpha: {fileID: 9138407040869165617}
   inventory: {fileID: 8151253734232962639}
   player: {fileID: 2762129899826143140}
 --- !u!114 &8151253734232962639
@@ -487,17 +485,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abdf693afa159b459b378ff9a93be87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
-  instructions: {fileID: 0}
-  slotHolder: {fileID: 0}
-  slotInum: 0
-  itemIsUp: {fileID: 0}
+  inventoryUI: {fileID: 0}
   inventoryOnStage: 0
   instructionsOnStage: 0
-  instructionsEnabled: 0
-  potionNum: 0
-  itemManager: {fileID: 8667666699246938278}
-  inventoryCanvas: {fileID: 0}
+  slotHolder: {fileID: 0}
 --- !u!114 &2762129899826143140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,7 +534,6 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   player: {fileID: 2762129899826143140}
-  healthBar: {fileID: 0}
 --- !u!114 &9138407040869165617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,15 +694,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6714697318801437145}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8667666699246938278 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2695080374269499775, guid: f8159e10416984d4fa650ecc14fab5e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 6714697318801437145}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e326760b27ee64f83fbc6fcba547da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
