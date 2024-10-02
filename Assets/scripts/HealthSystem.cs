@@ -7,18 +7,23 @@ public class HealthSystem : MonoBehaviourPun
     private int currentHealth;
     private Vector3 respawnPosition;
 
-    public PlayerCanvas playerCanvas; // Referencia al canvas del jugador
+    private PlayerCanvas playerCanvas; // Referencia al PlayerCanvas singleton
 
     private void Start()
     {
+        // Inicializar la salud al máximo
         currentHealth = maxHealth;
         respawnPosition = transform.position;
 
+        // Obtener el PlayerCanvas como singleton
+        playerCanvas = PlayerCanvas.Instance;
+
         if (playerCanvas == null)
         {
-            playerCanvas = GetComponent<PlayerCanvas>();
+            Debug.LogError("PlayerCanvas no encontrado. Asegúrate de que el PlayerCanvas esté en la escena.");
         }
 
+        // Forzar la inicialización correcta de la barra de salud
         UpdateHealthUI();
     }
 
@@ -49,7 +54,6 @@ public class HealthSystem : MonoBehaviourPun
         UpdateHealthUI();
     }
 
-    // Función para establecer la posición de respawn
     public void SetRespawnPosition(Vector3 position)
     {
         respawnPosition = position;
@@ -57,9 +61,15 @@ public class HealthSystem : MonoBehaviourPun
 
     private void UpdateHealthUI()
     {
-        if (playerCanvas != null)
+        // Actualizar la barra de salud solo si este es el jugador local
+        if (playerCanvas != null && (photonView.IsMine || PhotonNetwork.OfflineMode))
         {
+            Debug.Log($"Actualizando barra de salud: {currentHealth} / {maxHealth}");
             playerCanvas.UpdateHealthBar((float)currentHealth / maxHealth);
+        }
+        else
+        {
+            Debug.LogError("No se pudo actualizar la barra de vida porque PlayerCanvas es nulo o no es el jugador local.");
         }
     }
 }

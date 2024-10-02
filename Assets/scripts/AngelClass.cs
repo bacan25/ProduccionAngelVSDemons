@@ -17,7 +17,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
     private bool basicUnlocked = true;
     private bool powerUnlocked = false;
 
-    public PlayerCanvas playerCanvas;
+    private PlayerCanvas playerCanvas;
 
     void Start()
     {
@@ -29,13 +29,18 @@ public class AngelClass : MonoBehaviourPunCallbacks
             return;
         }
 
-        if (playerCanvas == null)
-        {
-            playerCanvas = GetComponent<PlayerCanvas>();
-        }
+        // Obtener el PlayerCanvas como singleton
+        playerCanvas = PlayerCanvas.Instance;
 
-        playerCanvas.UnlockAbility("BasicAttack");
-        playerCanvas.LockAbility("PowerAttack");
+        if (playerCanvas != null)
+        {
+            playerCanvas.UnlockAbility("BasicAttack");
+            playerCanvas.LockAbility("PowerAttack");
+        }
+        else
+        {
+            Debug.LogError("PlayerCanvas no encontrado. Asegúrate de que esté en la escena.");
+        }
     }
 
     void Update()
@@ -43,12 +48,11 @@ public class AngelClass : MonoBehaviourPunCallbacks
         if (!photonView.IsMine) return;
 
         HandleCooldowns();
-
-        if (Input.GetMouseButton(0) && basicUnlocked && basicTimer >= basicCooldown)
+        basicTimer += Time.deltaTime;
+        if (Input.GetMouseButtonDown(0) && basicTimer >= basicCooldown)
         {
             BasicAttack();
         }
-
         if (Input.GetMouseButton(1) && powerUnlocked && powerTimer >= powerCooldown)
         {
             PowerAttack();
@@ -73,21 +77,26 @@ public class AngelClass : MonoBehaviourPunCallbacks
 
     private void BasicAttack()
     {
+        // Verificar si el cliente está dentro de una sala antes de instanciar
+        if (!PhotonNetwork.InRoom)
+        {
+            Debug.LogError("No puedes instanciar el proyectil, el cliente no está en una sala.");
+            return;
+        }
+
         basicTimer = 0f;
-        GameObject basicAttack = PhotonNetwork.Instantiate(bulletPrefab.name, pivot.position, pivot.rotation);
-        Rigidbody rb = basicAttack.GetComponent<Rigidbody>();
+        GameObject bullet = PhotonNetwork.Instantiate(bulletPrefab.name, pivot.position, pivot.rotation);
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.velocity = pivot.forward * bulletSpeed;
         }
-
-        playerCanvas.UpdateAbilityCooldown("BasicAttack", 0f);
     }
 
     private void PowerAttack()
     {
         powerTimer = 0f;
-        GameObject powerAttack = PhotonNetwork.Instantiate(powerPrefab.name, pivot.position, pivot.rotation);
+        GameObject powerAttack = PhotonNetwork.IsConnected ? PhotonNetwork.Instantiate(powerPrefab.name, pivot.position, pivot.rotation) : Instantiate(powerPrefab, pivot.position, pivot.rotation);
         Rigidbody rb = powerAttack.GetComponent<Rigidbody>();
         if (rb != null)
         {

@@ -3,23 +3,25 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviourPun
 {
-    public int damage;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            PhotonView targetPhotonView = other.GetComponent<PhotonView>();
-            if (targetPhotonView != null)
+            PhotonView targetView = other.GetComponent<PhotonView>();
+
+            if (targetView != null && targetView.IsMine)
             {
-                // Aplicar daño al jugador a través del HealthSystem
-                targetPhotonView.RPC("TakeDamage", RpcTarget.All, damage);
+                // Asegurarse de que el juego esté conectado a Photon o esté en modo offline
+                if (PhotonNetwork.IsConnected || PhotonNetwork.OfflineMode)
+                {
+                    // Enviar el RPC solo si está conectado a Photon o en modo offline
+                    targetView.RPC("TakeDamage", RpcTarget.All, 10);  // Ejemplo: 10 de daño
+                }
+                else
+                {
+                    Debug.LogError("No estás conectado a Photon ni en modo offline.");
+                }
             }
-            PhotonNetwork.Destroy(gameObject); // Destruir la bala tras impactar
-        }
-        else if (other.CompareTag("Ground"))
-        {
-            PhotonNetwork.Destroy(gameObject); // Destruir la bala si impacta el suelo
         }
     }
 }

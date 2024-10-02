@@ -4,13 +4,18 @@ using UnityEngine.UI;
 public class PlayerCanvas : MonoBehaviour
 {
     public static PlayerCanvas Instance; // Singleton
-    [SerializeField] private Slider healthBar; 
+    [SerializeField] private Slider healthBar;
     [SerializeField] private GameObject winCanvas;
     [SerializeField] private GameObject loseCanvas;
 
+    // UI para habilidades (esto podría ser una lista de imágenes o barras)
+    // Aquí supongo que tienes imágenes para representar habilidades y su enfriamiento.
+    [SerializeField] private Image basicAbilityCooldownImage;
+    [SerializeField] private Image powerAbilityCooldownImage;
+
     private void Awake()
     {
-        // Implementación del Singleton
+        // Configuración del singleton
         if (Instance == null)
         {
             Instance = this;
@@ -23,25 +28,45 @@ public class PlayerCanvas : MonoBehaviour
 
     public void UpdateHealthBar(float healthPercent)
     {
-        healthBar.value = healthPercent;
+        if (healthBar != null)
+        {
+            healthBar.value = healthPercent * 100;  // Multiplica por 100 para ajustarlo al slider
+        }
+        else
+        {
+            Debug.LogError("Barra de vida no asignada en el PlayerCanvas.");
+        }
+    }
+
+
+    // Método para actualizar la visualización del enfriamiento de una habilidad
+    public void UpdateAbilityCooldown(string abilityName, float cooldownPercent)
+    {
+        // Asegúrate de actualizar la habilidad correcta en función del nombre de la habilidad
+        if (abilityName == "BasicAttack" && basicAbilityCooldownImage != null)
+        {
+            basicAbilityCooldownImage.fillAmount = 1 - cooldownPercent; // Inverso para llenar la imagen correctamente
+        }
+        else if (abilityName == "PowerAttack" && powerAbilityCooldownImage != null)
+        {
+            powerAbilityCooldownImage.fillAmount = 1 - cooldownPercent;
+        }
+        else
+        {
+            Debug.LogError($"La habilidad {abilityName} no tiene una imagen de enfriamiento asignada o no existe.");
+        }
     }
 
     public void UnlockAbility(string abilityName)
     {
         Debug.Log($"Habilidad desbloqueada: {abilityName}");
-        // Actualiza la UI para mostrar la habilidad desbloqueada
+        // Aquí puedes agregar la lógica para actualizar la UI con la habilidad desbloqueada.
     }
 
     public void LockAbility(string abilityName)
     {
         Debug.Log($"Habilidad bloqueada: {abilityName}");
-        // Actualiza la UI para bloquear la habilidad
-    }
-
-    public void UpdateAbilityCooldown(string abilityName, float cooldownPercent)
-    {
-        Debug.Log($"Cooldown de {abilityName}: {cooldownPercent * 100}%");
-        // Actualiza visualmente el cooldown de la habilidad en la UI
+        // Aquí puedes agregar la lógica para bloquear la habilidad en la UI.
     }
 
     public void WinCanvas()

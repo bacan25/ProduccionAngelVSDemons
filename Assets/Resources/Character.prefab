@@ -463,13 +463,12 @@ MonoBehaviour:
   pivot: {fileID: 5046357819211447784}
   bulletPrefab: {fileID: 8044803207112214825, guid: f9efe6674067186419b379e16dc67ced,
     type: 3}
-  bulletSpeed: 3
+  bulletSpeed: 50
   basicCooldown: 0.4
   powerPrefab: {fileID: 5664522316287298105, guid: fb1c781da51f11a41b2ffa7e7a913a6f,
     type: 3}
-  powerSpeed: 0
+  powerSpeed: 3
   powerCooldown: 2
-  playerCanvas: {fileID: 0}
 --- !u!114 &2762129899826143140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,12 +481,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051488903731ff54493d0bcfec4a364e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 20
   jumpForce: 5
-  rotationSpeed: 8
+  rotationSpeed: 15
   isGrounded: 0
   cameraTransform: {fileID: 3407734573859912888}
-  verticalRotation: 8
+  verticalRotation: 15
   doubleJumpAbility: 0
   isDead: 0
 --- !u!114 &662854631840426943
@@ -503,7 +502,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  playerCanvas: {fileID: 0}
 --- !u!114 &2210382511146475217
 MonoBehaviour:
   m_ObjectHideFlags: 0

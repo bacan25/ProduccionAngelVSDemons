@@ -7,7 +7,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
 {
     public static InGameManager Instance;
 
-    public Transform[] spawnPoints; 
+    public Transform[] spawnPoints;
     public GameObject playerPrefab;
     public List<Transform> playerTransforms = new List<Transform>();
 
@@ -24,18 +24,27 @@ public class InGameManager : MonoBehaviourPunCallbacks
             Destroy(gameObject);
         }
     }
-
     private void Start()
     {
-        if (PhotonNetwork.OfflineMode || PhotonNetwork.IsConnectedAndReady)
+        // Si no está conectado a Photon, activar el modo offline
+        if (!PhotonNetwork.IsConnected)
         {
-            // Obtener la referencia al PlayerCanvas local
-            playerCanvas = PlayerCanvas.Instance;
-
-            // Spawnear al jugador
-            SpawnPlayer();
+            PhotonNetwork.OfflineMode = true;
         }
+
+        // Obtener la referencia al PlayerCanvas
+        playerCanvas = PlayerCanvas.Instance;
+
+        // Verificar si el PlayerCanvas está correctamente asignado
+        if (playerCanvas == null)
+        {
+            Debug.LogError("PlayerCanvas no encontrado. Asegúrate de que el PlayerCanvas esté en la escena.");
+        }
+
+        // Spawnear al jugador
+        SpawnPlayer();
     }
+
 
     void SpawnPlayer()
     {
@@ -45,14 +54,17 @@ public class InGameManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        int spawnIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+        // Obtener el índice de spawn para el jugador
+        int spawnIndex = PhotonNetwork.OfflineMode ? 0 : PhotonNetwork.LocalPlayer.ActorNumber - 1;
+
         if (spawnIndex < spawnPoints.Length)
         {
             Vector3 spawnPosition = spawnPoints[spawnIndex].position;
             Quaternion spawnRotation = spawnPoints[spawnIndex].rotation;
 
-            GameObject player = PhotonNetwork.OfflineMode ? 
-                Instantiate(playerPrefab, spawnPosition, spawnRotation) : 
+            // Instanciar al jugador, ya sea en modo offline o en red
+            GameObject player = PhotonNetwork.OfflineMode ?
+                Instantiate(playerPrefab, spawnPosition, spawnRotation) :
                 PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, spawnRotation);
 
             HealthSystem healthScript = player.GetComponent<HealthSystem>();
@@ -113,18 +125,27 @@ public class InGameManager : MonoBehaviourPunCallbacks
     // Manejo de la victoria del jugador
     public void HandleWin(PlayerCanvas winner)
     {
-        if (playerCanvas != null && winner == playerCanvas)
+        if (playerCanvas == null)
+        {
+            Debug.LogError("PlayerCanvas no asignado en el jugador local.");
+            return;
+        }
+
+        if (winner == playerCanvas)
         {
             // Mostrar el canvas de victoria del jugador local
             playerCanvas.WinCanvas();
+            Debug.Log("El jugador local ha ganado.");
         }
-        else if (playerCanvas != null)
+        else
         {
-            // Mostrar el canvas de derrota en el jugador local
+            // Mostrar el canvas de derrota del jugador local
             playerCanvas.LoseCanvas();
+            Debug.Log("El jugador local ha perdido.");
         }
 
         // Notificar en el log
         Debug.Log("El juego ha terminado. ¡Tenemos un ganador!");
     }
+
 }
