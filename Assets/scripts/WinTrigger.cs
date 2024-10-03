@@ -22,10 +22,11 @@ public class WinTrigger : MonoBehaviourPun
     {
         if (!gameEnded && col.CompareTag("Player"))
         {
-            gameEnded = true;
+            gameEnded = true;  // Evitar que se active varias veces
             PhotonView winnerView = col.GetComponent<PhotonView>();
             if (winnerView != null)
             {
+                // Llamar RPC para manejar la victoria
                 photonView.RPC("HandleWinRPC", RpcTarget.All, winnerView.ViewID);
             }
         }
@@ -39,6 +40,7 @@ public class WinTrigger : MonoBehaviourPun
         {
             PlayerCanvas winner = winnerView.GetComponent<PlayerCanvas>();
 
+            // Verificar que inGameManager esté presente
             if (inGameManager == null)
             {
                 inGameManager = FindObjectOfType<InGameManager>();
@@ -49,6 +51,7 @@ public class WinTrigger : MonoBehaviourPun
                 }
             }
 
+            // Si se obtiene correctamente el PlayerCanvas del ganador, se maneja la victoria
             if (winner != null)
             {
                 inGameManager.HandleWin(winner);

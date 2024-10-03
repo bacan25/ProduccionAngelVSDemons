@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 5067159500252984414}
   - component: {fileID: 3829448673871569472}
   - component: {fileID: 4928104656547911685}
-  - component: {fileID: 3637414319535254695}
   - component: {fileID: -9158110232238882846}
   - component: {fileID: -8450819282373572215}
   m_Layer: 0
@@ -189,21 +188,6 @@ MonoBehaviour:
   enemyManager: {fileID: 0}
   enemyShooting: {fileID: 3176432088292337043}
   anim: {fileID: 6992123165297655491}
---- !u!114 &3637414319535254695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5329651266333619205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd5785a5e1521242bbe11f90cdea9c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 100
-  player: {fileID: 0}
 --- !u!114 &-9158110232238882846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +207,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 3637414319535254695}
   - {fileID: -8450819282373572215}
   sceneViewId: 0
   InstantiationId: 0
@@ -942,8 +925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 6119570038260419174}
-  bola: {fileID: 8044803207112214825, guid: f9efe6674067186419b379e16dc67ced, type: 3}
-  shootCooldown: 5
+  projectilePrefab: {fileID: 0}
   projectileSpeed: 15
   enemyManager: {fileID: 0}
 --- !u!95 &6992123165297655491 stripped
