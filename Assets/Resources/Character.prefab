@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 5046357819211447784}
-  bulletPrefab: {fileID: 8044803207112214825, guid: f9efe6674067186419b379e16dc67ced,
+  bulletPrefab: {fileID: 8044803207112214825, guid: b464cf359a427634e93fb41bd822a8d5,
     type: 3}
   bulletSpeed: 50
   basicCooldown: 0.4

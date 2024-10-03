@@ -20989,7 +20989,7 @@ GameObject:
   - component: {fileID: 1770992071}
   m_Layer: 0
   m_Name: FallDamage
-  m_TagString: Untagged
+  m_TagString: FallDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
