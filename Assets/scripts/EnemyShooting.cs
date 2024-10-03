@@ -6,26 +6,38 @@ public class EnemyShooting : MonoBehaviourPun
     [SerializeField] private Transform pivot;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileSpeed;
-    [SerializeField] private EnemyManager enemyManager;
+    [SerializeField] private EnemyAI minion;
 
     void Start()
     {
-        enemyManager = GetComponentInParent<EnemyManager>();
-        if (enemyManager == null)
+        minion = GetComponentInParent<EnemyAI>();
+        if (minion == null)
         {
-            Debug.LogError("EnemyManager no encontrado.");
+            Debug.LogError("minion no encontrado.");
         }
     }
 
     public void Shoot()
     {
-        if (enemyManager.playerDetected != null)
+        if (minion.enemyManager.playerDetected != null)
         {
-            GameObject projectile = PhotonNetwork.Instantiate(projectilePrefab.name, pivot.position, pivot.rotation);
+            GameObject projectile;
+
+            // Usa Instantiate normal en modo offline
+            if (PhotonNetwork.OfflineMode)
+            {
+                projectile = Instantiate(projectilePrefab, pivot.position, pivot.rotation);
+            }
+            else
+            {
+                // Usar PhotonNetwork.Instantiate en modo online
+                projectile = PhotonNetwork.Instantiate(projectilePrefab.name, pivot.position, pivot.rotation);
+            }
+
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.velocity = (enemyManager.playerDetected.position - pivot.position).normalized * projectileSpeed;
+                rb.velocity = (minion.enemyManager.playerDetected.position - pivot.position).normalized * projectileSpeed;
             }
         }
     }

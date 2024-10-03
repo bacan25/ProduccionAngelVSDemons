@@ -33,12 +33,14 @@ public class HealthSystem : MonoBehaviourPun
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        UpdateHealthUI();
-
+        // Aquí puedes agregar lógica para manejar la muerte del jugador
         if (currentHealth <= 0)
         {
-            Respawn();
+            Debug.Log("El jugador ha muerto.");
+            // Implementar respawn o lógica de muerte
         }
+
+        UpdateHealthUI();
     }
 
     public void TakeFallDamage(int damage)

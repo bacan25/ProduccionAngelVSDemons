@@ -9,17 +9,26 @@ public class BulletDamage : MonoBehaviourPun
         {
             PhotonView targetView = other.GetComponent<PhotonView>();
 
-            if (targetView != null && targetView.IsMine)
+            if (targetView != null)
             {
-                // Asegurarse de que el juego esté conectado a Photon o esté en modo offline
-                if (PhotonNetwork.IsConnected || PhotonNetwork.OfflineMode)
+                // Si estás en una sala, envía el RPC; de lo contrario, ejecuta el daño localmente.
+                if (PhotonNetwork.InRoom)
                 {
-                    // Enviar el RPC solo si está conectado a Photon o en modo offline
+                    // Enviar el RPC para que todos los jugadores lo reciban
                     targetView.RPC("TakeDamage", RpcTarget.All, 10);  // Ejemplo: 10 de daño
+                }
+                else if (PhotonNetwork.OfflineMode)
+                {
+                    // Ejecutar localmente si estamos en modo offline
+                    var healthSystem = other.GetComponent<HealthSystem>();
+                    if (healthSystem != null)
+                    {
+                        healthSystem.TakeDamage(10);  // Ejemplo: 10 de daño
+                    }
                 }
                 else
                 {
-                    Debug.LogError("No estás conectado a Photon ni en modo offline.");
+                    Debug.LogWarning("No puedes enviar RPCs fuera de una sala o en modo offline.");
                 }
             }
         }

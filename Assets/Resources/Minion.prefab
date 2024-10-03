@@ -925,9 +925,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 6119570038260419174}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 8044803207112214825, guid: f9efe6674067186419b379e16dc67ced,
+    type: 3}
   projectileSpeed: 15
-  enemyManager: {fileID: 0}
+  minion: {fileID: 4928104656547911685}
 --- !u!95 &6992123165297655491 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 620706639719535827, guid: 3bbcc4ea4dbcaaa4581b15848828f488,

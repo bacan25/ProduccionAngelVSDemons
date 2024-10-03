@@ -40,7 +40,9 @@ public class EnemyAI : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        DetectPlayer();
+        
+        if (enemyManager.playerDetected == null)
+            DetectPlayer();
 
         if (enemyManager.playerDetected != null)
         {
@@ -79,7 +81,14 @@ public class EnemyAI : MonoBehaviourPunCallbacks
         }
 
         enemyManager.playerDetected = closestPlayer;
+
+        // Agrega este debug para confirmar que el jugador es detectado
+        if (closestPlayer != null)
+        {
+            Debug.Log("Jugador detectado por el enemigo: " + closestPlayer.name);
+        }
     }
+
 
     IEnumerator ChasePlayer()
     {
@@ -98,7 +107,11 @@ public class EnemyAI : MonoBehaviourPunCallbacks
                 anim.SetTrigger("Attack");
                 yield return new WaitForSeconds(1);
                 agent.isStopped = false;
+
+                // Verificar si se está llamando a Shoot
+                Debug.Log("Enemigo disparando.");
                 enemyShooting.Shoot();
+
                 yield return new WaitForSeconds(3);
             }
             else
