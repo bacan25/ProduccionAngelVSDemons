@@ -3,22 +3,34 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviourPun
 {
-    public int damage;
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Minion"))
+        if (other.CompareTag("Player"))
         {
-            PhotonView targetPhotonView = other.GetComponent<PhotonView>();
-            if (targetPhotonView != null)
+            PhotonView targetView = other.GetComponent<PhotonView>();
+
+            if (targetView != null)
             {
-                targetPhotonView.RPC("TakeDamage", RpcTarget.All, damage);
+                // Si estás en una sala, envía el RPC; de lo contrario, ejecuta el daño localmente.
+                if (PhotonNetwork.InRoom)
+                {
+                    // Enviar el RPC para que todos los jugadores lo reciban
+                    targetView.RPC("TakeDamage", RpcTarget.All, 10);  // Ejemplo: 10 de daño
+                }
+                else if (PhotonNetwork.OfflineMode)
+                {
+                    // Ejecutar localmente si estamos en modo offline
+                    var healthSystem = other.GetComponent<HealthSystem>();
+                    if (healthSystem != null)
+                    {
+                        healthSystem.TakeDamage(10);  // Ejemplo: 10 de daño
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("No puedes enviar RPCs fuera de una sala o en modo offline.");
+                }
             }
-            PhotonNetwork.Destroy(this.gameObject);
-        }
-        else if (other.CompareTag("Ground"))
-        {
-            PhotonNetwork.Destroy(this.gameObject);
         }
     }
 }

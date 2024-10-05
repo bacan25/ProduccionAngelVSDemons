@@ -3,30 +3,21 @@ using UnityEngine;
 
 public class AngelClass : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    private Transform pivot;
-
-    [Header("Habilidades")]
-    [SerializeField]
-    private GameObject bullet;
-    [SerializeField]
-    private float vel;
-    public float basicCooldown;
+    [SerializeField] private Transform pivot;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float bulletSpeed;
+    public float basicCooldown = 2f;
     private float basicTimer;
 
-    [SerializeField]
-    private GameObject power;
-    [SerializeField]
-    private float velPower;
-    [SerializeField]
-    private float powerCooldown;
+    [SerializeField] private GameObject powerPrefab;
+    [SerializeField] private float powerSpeed;
+    public float powerCooldown = 5f;
     private float powerTimer;
 
     private bool basicUnlocked = true;
     private bool powerUnlocked = false;
 
-    public Inventory inventory;
-    public Move_Player player;
+    private PlayerCanvas playerCanvas;
 
     void Start()
     {
@@ -38,102 +29,107 @@ public class AngelClass : MonoBehaviourPunCallbacks
             return;
         }
 
-        if (inventory == null)
-        {
-            inventory = GetComponent<Inventory>();
-        }
+        // Obtener el PlayerCanvas como singleton
+        playerCanvas = PlayerCanvas.Instance;
 
-        if (player == null)
+        if (playerCanvas != null)
         {
-            player = GetComponent<Move_Player>();
+            playerCanvas.UnlockAbility("BasicAttack");
+            playerCanvas.LockAbility("PowerAttack");
         }
-
-        // Inicializar habilidades en el HUD
-        HUDManager.Instance.UnlockAbility("BasicAttack");
-        HUDManager.Instance.LockAbility("PowerAttack");
+        else
+        {
+            Debug.LogError("PlayerCanvas no encontrado. Asegúrate de que esté en la escena.");
+        }
     }
 
     void Update()
     {
         if (!photonView.IsMine) return;
 
-        if (inventory != null && inventory.inventoryUI != null && inventory.inventoryUI.activeSelf)
+        HandleCooldowns();
+        basicTimer += Time.deltaTime;
+        if (Input.GetMouseButtonDown(0) && basicTimer >= basicCooldown)
         {
-            return;
+            BasicAttack();
         }
-
-        if (player != null && player.muerto)
+        if (Input.GetMouseButton(1) && powerUnlocked && powerTimer >= powerCooldown)
         {
-            return;
+            PowerAttack();
         }
+    }
 
+    private void HandleCooldowns()
+    {
+        // Control de cooldown de habilidades en la UI
         if (basicUnlocked)
         {
             basicTimer += Time.deltaTime;
-            float cooldownPercent = Mathf.Clamp01(basicTimer / basicCooldown);
-            HUDManager.Instance.UpdateAbilityCooldown("BasicAttack", 1 - cooldownPercent);
+            playerCanvas.UpdateAbilityCooldown("BasicAttack", Mathf.Clamp01(basicTimer / basicCooldown));
         }
 
         if (powerUnlocked)
         {
             powerTimer += Time.deltaTime;
-            float cooldownPercent = Mathf.Clamp01(powerTimer / powerCooldown);
-            HUDManager.Instance.UpdateAbilityCooldown("PowerAttack", 1 - cooldownPercent);
+            playerCanvas.UpdateAbilityCooldown("PowerAttack", Mathf.Clamp01(powerTimer / powerCooldown));
         }
-
-        if (Input.GetMouseButton(0) && basicUnlocked)
-            BasicAttack();
-
-        if (Input.GetMouseButton(1) && powerUnlocked)
-            PowerAttack();
     }
 
-    void BasicAttack()
+
+    private void BasicAttack()
     {
-        if (basicTimer >= basicCooldown)
+        basicTimer = 0f;
+
+        if (bulletPrefab != null && pivot != null)
         {
-            GameObject basicAtt = PhotonNetwork.Instantiate(bullet.name, pivot.position, pivot.rotation);
-            Rigidbody rb = basicAtt.GetComponent<Rigidbody>();
+            GameObject bullet;
+
+            // Verificar si estamos en modo offline o conectados a una sala
+            if (PhotonNetwork.OfflineMode)
+            {
+                // Instanciar usando el método normal de Unity en modo offline
+                bullet = Instantiate(bulletPrefab, pivot.position, pivot.rotation);
+            }
+            else if (PhotonNetwork.InRoom)
+            {
+                // Instanciar usando Photon si estamos conectados a una sala
+                bullet = PhotonNetwork.Instantiate(bulletPrefab.name, pivot.position, pivot.rotation);
+            }
+            else
+            {
+                Debug.LogError("No puedes instanciar el proyectil, el cliente no está en una sala.");
+                return;
+            }
+
+            // Aplicar la velocidad al proyectil
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.velocity = pivot.forward * vel;
+                rb.velocity = pivot.forward * bulletSpeed;
             }
-            basicTimer = 0f;
-            HUDManager.Instance.UpdateAbilityCooldown("BasicAttack", 1f);
         }
-    }
-
-    void PowerAttack()
-    {
-        if (powerTimer >= powerCooldown)
+        else
         {
-            GameObject powerAtt = PhotonNetwork.Instantiate(power.name, pivot.position, pivot.rotation);
-            Rigidbody rb = powerAtt.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.velocity = pivot.forward * velPower;
-            }
-            powerTimer = 0f;
-            HUDManager.Instance.UpdateAbilityCooldown("PowerAttack", 1f);
+            Debug.LogError("El prefab del proyectil o el pivot no están asignados correctamente.");
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void PowerAttack()
     {
-        if (!photonView.IsMine) return;
-
-        if (other.gameObject.CompareTag("PowerUp"))
+        powerTimer = 0f;
+        GameObject powerAttack = PhotonNetwork.IsConnected ? PhotonNetwork.Instantiate(powerPrefab.name, pivot.position, pivot.rotation) : Instantiate(powerPrefab, pivot.position, pivot.rotation);
+        Rigidbody rb = powerAttack.GetComponent<Rigidbody>();
+        if (rb != null)
         {
-            PowerUp();
-            PhotonNetwork.Destroy(other.gameObject);
+            rb.velocity = pivot.forward * powerSpeed;
         }
+
+        playerCanvas.UpdateAbilityCooldown("PowerAttack", 0f);
     }
 
-    private void PowerUp()
+    public void UnlockPower()
     {
         powerUnlocked = true;
-        powerTimer = powerCooldown;
-        HUDManager.Instance.UnlockAbility("PowerAttack");
-        HUDManager.Instance.UpdateAbilityCooldown("PowerAttack", 1f);
+        playerCanvas.UnlockAbility("PowerAttack");
     }
 }

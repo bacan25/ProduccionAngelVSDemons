@@ -5,72 +5,60 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviourPunCallbacks
 {
-    // Puntos de ruta (Patrol)
     [SerializeField] private Transform[] pathPoints;
     [SerializeField] private float visionRange = 10f;
     [SerializeField] private float visionAngle = 45f;
     [SerializeField] private float restPatrol = 2f;
-    [SerializeField] private float shootingRange = 10f; // Rango de disparo
+    [SerializeField] private float shootingRange = 10f;
 
     private NavMeshAgent agent;
     private int currentPathIndex;
     private bool isWaiting;
- 
-
     public EnemyManager enemyManager;
-
-    // Componente de disparo
     [SerializeField] private EnemyShooting enemyShooting;
     [SerializeField] private Animator anim;
-
-    bool isShooting;
+    private bool isShooting;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        
         currentPathIndex = 0;
         agent.destination = pathPoints[currentPathIndex].position;
-       
         isWaiting = false;
 
-        // Asegurarse de que enemyManager está asignado
         if (enemyManager == null)
         {
             enemyManager = GetComponentInParent<EnemyManager>();
             if (enemyManager == null)
             {
-                Debug.LogError("EnemyManager no asignado en EnemyAI y no se encontró en los padres.");
+                Debug.LogError("EnemyManager no asignado en EnemyAI.");
             }
         }
     }
 
     void Update()
     {
-        if (!PhotonNetwork.IsMasterClient)
-            return; 
+        if (!PhotonNetwork.IsMasterClient) return;
 
-        IsPlayerDetected();
+        
+        if (enemyManager.playerDetected == null)
+            DetectPlayer();
 
         if (enemyManager.playerDetected != null)
         {
             if (!isShooting) StartCoroutine(ChasePlayer());
         }
-        else
+        else if (!isWaiting)
         {
-            if (!isWaiting)
-            {
-                Patrol();
-            }
+            Patrol();
         }
     }
 
-    void IsPlayerDetected()
+    void DetectPlayer()
     {
         float minDistance = Mathf.Infinity;
         Transform closestPlayer = null;
 
-        // Encontrar todos los jugadores en la escena
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject playerObj in players)
         {
@@ -81,7 +69,6 @@ public class EnemyAI : MonoBehaviourPunCallbacks
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
                 float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
 
-                // Verifica si el jugador está dentro del ángulo de visión
                 if (angleToPlayer <= visionAngle / 2)
                 {
                     if (distanceToPlayer < minDistance)
@@ -93,27 +80,25 @@ public class EnemyAI : MonoBehaviourPunCallbacks
             }
         }
 
+        enemyManager.playerDetected = closestPlayer;
+
+        // Agrega este debug para confirmar que el jugador es detectado
         if (closestPlayer != null)
         {
-            enemyManager.playerDetected = closestPlayer;
-        }
-        else
-        {
-            enemyManager.playerDetected = null;
-            
+            Debug.Log("Jugador detectado por el enemigo: " + closestPlayer.name);
         }
     }
 
-     IEnumerator ChasePlayer()
-     {
+
+    IEnumerator ChasePlayer()
+    {
         isShooting = true;
-        if (enemyManager.playerDetected != null) 
+        if (enemyManager.playerDetected != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, enemyManager.playerDetected.position);
             Vector3 directionToPlayer = (enemyManager.playerDetected.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
 
-            // Gira suavemente
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
 
             if (distanceToPlayer <= shootingRange)
@@ -121,11 +106,11 @@ public class EnemyAI : MonoBehaviourPunCallbacks
                 agent.isStopped = true;
                 anim.SetTrigger("Attack");
                 yield return new WaitForSeconds(1);
-                //enemyShooting.Shoot(enemyManager.playerDetected.transform);
-                Vector3 randomNumber = new Vector3(Random.Range(-3, 3), enemyManager.playerDetected.position.y, Random.Range(-3, 3));
-                Vector3 newObjective = enemyManager.playerDetected.position + randomNumber.normalized * (shootingRange - 0.5f);
                 agent.isStopped = false;
-                agent.SetDestination(newObjective); //Tiene muchos nuevos objetivos a la vez
+
+                // Verificar si se está llamando a Shoot
+                Debug.Log("Enemigo disparando.");
+                enemyShooting.Shoot();
 
                 yield return new WaitForSeconds(3);
             }
@@ -134,10 +119,10 @@ public class EnemyAI : MonoBehaviourPunCallbacks
                 agent.isStopped = false;
                 agent.SetDestination(enemyManager.playerDetected.position);
             }
-        } 
+        }
+
         isShooting = false;
-        
-     }
+    }
 
     void Patrol()
     {
