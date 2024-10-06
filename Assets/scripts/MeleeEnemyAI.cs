@@ -3,21 +3,26 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class EnemyAI : MonoBehaviourPunCallbacks
+public class MeleeEnemyAI : MonoBehaviourPunCallbacks
 {
+    // Puntos de ruta (Patrol)
     [SerializeField] private Transform[] pathPoints;
     [SerializeField] private float visionRange = 10f;
     [SerializeField] private float visionAngle = 45f;
     [SerializeField] private float restPatrol = 2f;
-    [SerializeField] private float shootingRange = 10f;
+    [SerializeField] private float shootingRange;
 
     private NavMeshAgent agent;
     private int currentPathIndex;
     private bool isWaiting;
-    public EnemyManager enemyManager;
-    [SerializeField] private EnemyShooting enemyShooting;
+
     [SerializeField] private Animator anim;
-    private bool isShooting;
+    [SerializeField] private BoxCollider arm;
+ 
+
+    public EnemyManager enemyManager;
+
+    private bool isAttacking;
 
     void Start()
     {
@@ -26,39 +31,40 @@ public class EnemyAI : MonoBehaviourPunCallbacks
         agent.destination = pathPoints[currentPathIndex].position;
         isWaiting = false;
 
-        if (enemyManager == null)
+        // Asegurarse de que enemyManager está asignado
+        /* if (enemyManager == null)
         {
             enemyManager = GetComponentInParent<EnemyManager>();
-            if (enemyManager == null)
-            {
-                Debug.LogError("EnemyManager no asignado en EnemyAI.");
-            }
-        }
+            
+        } else{
+            Debug.LogError("EnemyManager no asignado en EnemyAI y no se encontró en los padres.");
+        } */
     }
 
     void Update()
     {
-        if (!PhotonNetwork.IsMasterClient) return;
+        //if (!PhotonNetwork.IsMasterClient) return;
 
         
         if (enemyManager.playerDetected == null)
-            DetectPlayer();
+            IsPlayerDetected();
 
         if (enemyManager.playerDetected != null)
-        {
-            if (!isShooting) StartCoroutine(ChasePlayer());
-        }
-        else if (!isWaiting)
+            if(!isAttacking) ChasePlayer();
+
+        if (!isWaiting)
         {
             Patrol();
         }
+        
     }
 
-    void DetectPlayer()
+    void IsPlayerDetected()
     {
         float minDistance = Mathf.Infinity;
         Transform closestPlayer = null;
 
+        // Encontrar todos los jugadores en la escena
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject playerObj in players)
         {
@@ -69,6 +75,7 @@ public class EnemyAI : MonoBehaviourPunCallbacks
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
                 float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
 
+                // Verifica si el jugador está dentro del ángulo de visión
                 if (angleToPlayer <= visionAngle / 2)
                 {
                     if (distanceToPlayer < minDistance)
@@ -79,50 +86,38 @@ public class EnemyAI : MonoBehaviourPunCallbacks
                 }
             }
         }
-
         enemyManager.playerDetected = closestPlayer;
-
-        // Agrega este debug para confirmar que el jugador es detectado
+        
         if (closestPlayer != null)
         {
             Debug.Log("Jugador detectado por el enemigo: " + closestPlayer.name);
         }
     }
 
-
-    IEnumerator ChasePlayer()
+    void ChasePlayer()
     {
-        isShooting = true;
+        isAttacking = true;
         if (enemyManager.playerDetected != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, enemyManager.playerDetected.position);
             Vector3 directionToPlayer = (enemyManager.playerDetected.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
 
+            // Gira suavemente
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
 
             if (distanceToPlayer <= shootingRange)
             {
-                agent.isStopped = true;
                 anim.SetTrigger("Attack");
-                yield return new WaitForSeconds(1);
-                agent.isStopped = false;
-                
-
-                // Verificar si se está llamando a Shoot
-                Debug.Log("Enemigo disparando.");
-                enemyShooting.Shoot();
-
-                yield return new WaitForSeconds(3);
             }
             else
             {
                 agent.isStopped = false;
                 agent.SetDestination(enemyManager.playerDetected.position);
             }
+            
         }
-
-        isShooting = false;
+        isAttacking = false;
     }
 
     void Patrol()
@@ -140,5 +135,14 @@ public class EnemyAI : MonoBehaviourPunCallbacks
         currentPathIndex = (currentPathIndex + 1) % pathPoints.Length;
         agent.destination = pathPoints[currentPathIndex].position;
         isWaiting = false;
+    }
+
+    void MeeleAttackTrue()
+    {
+        arm.enabled = true;
+    }
+    void MeeleAttackFalse()
+    {
+        arm.enabled = false;
     }
 }
