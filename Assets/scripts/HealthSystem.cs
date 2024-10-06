@@ -13,7 +13,7 @@ public class HealthSystem : MonoBehaviourPun
     {
         // Inicializar la salud al máximo
         currentHealth = maxHealth;
-        respawnPosition = transform.position;
+        respawnPosition = transform.position; // Establece el punto de respawn inicial
 
         // Obtener el PlayerCanvas como singleton
         playerCanvas = PlayerCanvas.Instance;
@@ -23,7 +23,7 @@ public class HealthSystem : MonoBehaviourPun
             Debug.LogError("PlayerCanvas no encontrado. Asegúrate de que el PlayerCanvas esté en la escena.");
         }
 
-        // Forzar la inicialización correcta de la barra de salud
+        // Inicializar la barra de salud
         UpdateHealthUI();
     }
 
@@ -37,20 +37,24 @@ public class HealthSystem : MonoBehaviourPun
 
         if (currentHealth <= 0)
         {
+            Debug.Log("El jugador ha muerto.");
             Respawn();
         }
     }
 
-    public void TakeFallDamage(int damage)
+    public void TakeFallDamage()
     {
-        TakeDamage(damage);
+        // Aplica todo el daño (quita toda la vida)
+        TakeDamage(currentHealth);
     }
 
     private void Respawn()
     {
-        transform.position = respawnPosition;
+        // Resetear la salud y mover al jugador a la posición de respawn
         currentHealth = maxHealth;
+        transform.position = respawnPosition;
 
+        Debug.Log("Respawn del jugador en: " + respawnPosition);
         UpdateHealthUI();
     }
 

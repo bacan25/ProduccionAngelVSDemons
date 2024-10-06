@@ -75,21 +75,42 @@ public class AngelClass : MonoBehaviourPunCallbacks
         }
     }
 
+
     private void BasicAttack()
     {
-        // Verificar si el cliente está dentro de una sala antes de instanciar
-        if (!PhotonNetwork.InRoom)
-        {
-            Debug.LogError("No puedes instanciar el proyectil, el cliente no está en una sala.");
-            return;
-        }
-
         basicTimer = 0f;
-        GameObject bullet = PhotonNetwork.Instantiate(bulletPrefab.name, pivot.position, pivot.rotation);
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        if (rb != null)
+
+        if (bulletPrefab != null && pivot != null)
         {
-            rb.velocity = pivot.forward * bulletSpeed;
+            GameObject bullet;
+
+            // Verificar si estamos en modo offline o conectados a una sala
+            if (PhotonNetwork.OfflineMode)
+            {
+                // Instanciar usando el método normal de Unity en modo offline
+                bullet = Instantiate(bulletPrefab, pivot.position, pivot.rotation);
+            }
+            else if (PhotonNetwork.InRoom)
+            {
+                // Instanciar usando Photon si estamos conectados a una sala
+                bullet = PhotonNetwork.Instantiate(bulletPrefab.name, pivot.position, pivot.rotation);
+            }
+            else
+            {
+                Debug.LogError("No puedes instanciar el proyectil, el cliente no está en una sala.");
+                return;
+            }
+
+            // Aplicar la velocidad al proyectil
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.velocity = pivot.forward * bulletSpeed;
+            }
+        }
+        else
+        {
+            Debug.LogError("El prefab del proyectil o el pivot no están asignados correctamente.");
         }
     }
 

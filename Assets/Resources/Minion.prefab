@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 4928104656547911685}
   - component: {fileID: -9158110232238882846}
   - component: {fileID: -8450819282373572215}
+  - component: {fileID: -5633485187905477115}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Minion
@@ -227,6 +228,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-5633485187905477115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5329651266333619205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab802c71ff79f74d90f30c8c3760058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &6029391594500328313
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,9 +939,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 6119570038260419174}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 8044803207112214825, guid: f9efe6674067186419b379e16dc67ced,
+    type: 3}
   projectileSpeed: 15
-  enemyManager: {fileID: 0}
+  minion: {fileID: 4928104656547911685}
 --- !u!95 &6992123165297655491 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 620706639719535827, guid: 3bbcc4ea4dbcaaa4581b15848828f488,
