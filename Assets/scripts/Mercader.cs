@@ -9,7 +9,8 @@ public class Mercader : MonoBehaviour
     public Color gizmoColor = Color.green;  // Color del rango
     public GameObject mercaderText;
     public GameObject comprarPanel;
-    private bool enablePanel;
+    public bool enablePanel;
+    public bool insideRange;
 
     private void Start()
     {
@@ -17,6 +18,7 @@ public class Mercader : MonoBehaviour
         SphereCollider sphereCollider = gameObject.AddComponent<SphereCollider>();
         sphereCollider.isTrigger = true; // Lo hacemos un trigger
         sphereCollider.radius = range;   // Definimos el radio del rango
+        enablePanel = false;
     }
 
     void OnDrawGizmos()
@@ -28,22 +30,38 @@ public class Mercader : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            EnablePanel();
+
+        }
+
+    }
+
     // Este método se llama cuando otro Collider entra en el rango (trigger)
     void OnTriggerStay(Collider other)
     {
+
         if (other.CompareTag("Player"))
         {
             mercaderText.gameObject.SetActive(true);
+            insideRange = true;
 
-            if (Input.GetKeyDown(KeyCode.C)) 
-            { 
-                enablePanel = !enablePanel;
-                EnablePanel();
-            }
-
-            
         }
             
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            enablePanel = true;
+
+        }
+
     }
 
     // Este método se llama cuando otro Collider sale del rango (trigger)
@@ -53,19 +71,25 @@ public class Mercader : MonoBehaviour
         {
             mercaderText.gameObject.SetActive(false);
             enablePanel = false;
-            EnablePanel();
+            comprarPanel.gameObject.SetActive(false);
+            insideRange = false;
         }
     }
 
     public void EnablePanel()
     {
-        if (enablePanel)
+        if (enablePanel && insideRange)
         {
             comprarPanel.gameObject.SetActive(true);
-        }
-        else if (!enablePanel)
+            enablePanel = false;
+
+        } else if (!enablePanel)
         {
             comprarPanel.gameObject.SetActive(false);
+            enablePanel = true;
+
         }
+        
+
     }
 }
