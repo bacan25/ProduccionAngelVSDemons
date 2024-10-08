@@ -3,7 +3,12 @@ guid: d71b44a108067c349b90ade7baf7a6ec
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ArenaMedia
+    second: {fileID: 2100000, guid: fb5e2017a0dd9cc41aee9b2e8ffa3e4d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

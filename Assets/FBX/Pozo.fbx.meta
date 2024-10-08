@@ -3,7 +3,12 @@ guid: 122f987ad6e267e4dbf987763a32d136
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Conreto
+    second: {fileID: 2100000, guid: ee143b45dfaf9034496f5af786bb9667, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
