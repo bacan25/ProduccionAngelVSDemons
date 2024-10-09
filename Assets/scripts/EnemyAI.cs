@@ -107,6 +107,7 @@ public class EnemyAI : MonoBehaviourPunCallbacks
                 anim.SetTrigger("Attack");
                 yield return new WaitForSeconds(1);
                 agent.isStopped = false;
+                
 
                 // Verificar si se está llamando a Shoot
                 Debug.Log("Enemigo disparando.");
