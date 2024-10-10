@@ -14,8 +14,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
     private PlayerCanvas playerCanvas; // Referencia al canvas local
 
     // Listas de campamentos de enemigos de cada ruta
-    [SerializeField] private List<GameObject> ruta1Enemies = new List<GameObject>();
-    [SerializeField] private List<GameObject> ruta2Enemies = new List<GameObject>();
+    [SerializeField] private GameObject ruta1Enemies;
+    [SerializeField] private GameObject ruta2Enemies;
 
     private void Awake()
     {
@@ -104,24 +104,13 @@ public class InGameManager : MonoBehaviourPunCallbacks
     }
 
     // Método para activar enemigos de una ruta y desactivar los de la otra
-    private void ActivateRouteEnemies(List<GameObject> enemiesToActivate)
+    private void ActivateRouteEnemies(GameObject enemiesToActivate)
     {
-        // Desactivar todos los enemigos de ambas rutas primero
-        foreach (GameObject enemy in ruta1Enemies)
-        {
-            enemy.SetActive(false);
-        }
-
-        foreach (GameObject enemy in ruta2Enemies)
-        {
-            enemy.SetActive(false);
-        }
+        ruta1Enemies.SetActive(false);
+        ruta2Enemies.SetActive(false);
 
         // Activar solo los enemigos de la ruta correspondiente
-        foreach (GameObject enemy in enemiesToActivate)
-        {
-            enemy.SetActive(true);
-        }
+        enemiesToActivate.SetActive(true);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)

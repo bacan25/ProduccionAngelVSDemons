@@ -1,14 +1,25 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealthSystem : MonoBehaviourPun
 {
     [SerializeField] private int maxHealth = 100;
     private int currentHealth;
+    [SerializeField] private Slider healthSlider; // Slider de la UI que representa la barra de salud del enemigo
 
     void Start()
     {
         currentHealth = maxHealth;
+
+        // Inicializar el valor del slider de salud
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = maxHealth; // Establecer el valor máximo del slider
+            healthSlider.value = currentHealth; // Establecer el valor inicial del slider
+        }
+
+        UpdateHealthUI(); // Inicializar la barra de salud con el valor actual
     }
 
     [PunRPC]
@@ -16,6 +27,8 @@ public class EnemyHealthSystem : MonoBehaviourPun
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        UpdateHealthUI(); // Actualizar la barra de salud en la interfaz de usuario
 
         if (currentHealth <= 0)
         {
@@ -56,6 +69,19 @@ public class EnemyHealthSystem : MonoBehaviourPun
         {
             // En modo online, enviar un RPC a todos los clientes
             photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
+        }
+    }
+
+    private void UpdateHealthUI()
+    {
+        // Actualizar la barra de salud si existe un slider asignado
+        if (healthSlider != null)
+        {
+            healthSlider.value = currentHealth; // Asignar la salud actual al slider
+        }
+        else
+        {
+            Debug.LogError("Barra de vida no asignada en EnemyHealthSystem.");
         }
     }
 }
