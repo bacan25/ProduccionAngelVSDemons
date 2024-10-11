@@ -7,11 +7,17 @@ public class PlayerCanvas : MonoBehaviour
     [SerializeField] private Slider healthBar;
     [SerializeField] private GameObject winCanvas;
     [SerializeField] private GameObject loseCanvas;
+    
 
     // UI para habilidades (esto podría ser una lista de imágenes o barras)
     // Aquí supongo que tienes imágenes para representar habilidades y su enfriamiento.
     [SerializeField] private Image basicAbilityCooldownImage;
     [SerializeField] private Image powerAbilityCooldownImage;
+
+    [SerializeField] private Text monedasText;
+    public int monedas;
+    [SerializeField] private Text pocionesText;
+    public int pociones;
 
     private void Awake()
     {
@@ -77,5 +83,29 @@ public class PlayerCanvas : MonoBehaviour
     public void LoseCanvas()
     {
         loseCanvas.SetActive(true);
+    }
+
+    public void SumarMonedas()
+    {
+        monedas += 10;
+        monedasText.text = monedas.ToString();
+    }
+
+    public void RestarMonedas()
+    {
+        monedas -= 15;
+        monedasText.text = monedas.ToString();
+    }
+
+    public void SumarPociones()
+    {
+        pociones += 1;
+        pocionesText.text = pociones.ToString();
+    }
+
+    public void RestarPociones()
+    {
+        pociones -= 1;
+        pocionesText.text = pociones.ToString();
     }
 }

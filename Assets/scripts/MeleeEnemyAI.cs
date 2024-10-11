@@ -108,11 +108,12 @@ public class MeleeEnemyAI : MonoBehaviourPunCallbacks
 
             if (distanceToPlayer <= shootingRange)
             {
+                agent.isStopped = false;
                 anim.SetTrigger("Attack");
             }
             else
             {
-                agent.isStopped = false;
+                
                 agent.SetDestination(enemyManager.playerDetected.position);
             }
             
