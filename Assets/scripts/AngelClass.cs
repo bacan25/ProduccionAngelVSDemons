@@ -17,11 +17,12 @@ public class AngelClass : MonoBehaviourPunCallbacks
     private bool basicUnlocked = true;
     private bool powerUnlocked = false;
 
-    private PlayerCanvas playerCanvas;
+    public PlayerCanvas playerCanvas;
 
     void Start()
     {
-        if (!photonView.IsMine)
+        // Si el objeto no pertenece a este jugador y no está en modo offline, desactivar el control y componentes no necesarios
+        if (!photonView.IsMine && !PhotonNetwork.OfflineMode)
         {
             GetComponentInChildren<Camera>().enabled = false;
             GetComponentInChildren<AudioListener>().enabled = false;
@@ -29,30 +30,31 @@ public class AngelClass : MonoBehaviourPunCallbacks
             return;
         }
 
-        // Obtener el PlayerCanvas como singleton
-        playerCanvas = PlayerCanvas.Instance;
+        // Asignar referencia al PlayerCanvas
+        if (playerCanvas == null)
+        {
+            playerCanvas = PlayerCanvas.Instance;
+        }
 
-        if (playerCanvas != null)
-        {
-            playerCanvas.UnlockAbility("BasicAttack");
-            playerCanvas.LockAbility("PowerAttack");
-        }
-        else
-        {
-            Debug.LogError("PlayerCanvas no encontrado. Asegúrate de que esté en la escena.");
-        }
+        // Desbloquear habilidad de ataque básico e inicializar la interfaz
+        playerCanvas.UnlockAbility("BasicAttack");
+        playerCanvas.LockAbility("PowerAttack");
     }
 
     void Update()
     {
-        if (!photonView.IsMine) return;
+        // Si no es el jugador local ni estamos en offline mode, salir de la actualización
+        if (!photonView.IsMine && !PhotonNetwork.OfflineMode) return;
 
         HandleCooldowns();
-        basicTimer += Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && basicTimer >= basicCooldown)
+
+        // Comprobar si se puede realizar el ataque básico
+        if (Input.GetMouseButton(0) && basicUnlocked && basicTimer >= basicCooldown)
         {
             BasicAttack();
         }
+
+        // Comprobar si se puede realizar el ataque de poder
         if (Input.GetMouseButton(1) && powerUnlocked && powerTimer >= powerCooldown)
         {
             PowerAttack();
@@ -61,7 +63,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
 
     private void HandleCooldowns()
     {
-        // Control de cooldown de habilidades en la UI
+        // Actualizar el cooldown de las habilidades
         if (basicUnlocked)
         {
             basicTimer += Time.deltaTime;
@@ -75,53 +77,75 @@ public class AngelClass : MonoBehaviourPunCallbacks
         }
     }
 
-
     private void BasicAttack()
     {
         basicTimer = 0f;
 
-        if (bulletPrefab != null && pivot != null)
+        GameObject basicAttack = null;
+        // Si está en modo offline, instanciar el proyectil localmente
+        if (PhotonNetwork.OfflineMode || !PhotonNetwork.InRoom)
         {
-            GameObject bullet;
+            basicAttack = Instantiate(bulletPrefab, pivot.position, pivot.rotation);
+        }
+        else
+        {
+            // En modo online, usar Photon para instanciar el proyectil
+            basicAttack = PhotonNetwork.Instantiate(bulletPrefab.name, pivot.position, pivot.rotation);
+        }
 
-            // Verificar si estamos en modo offline o conectados a una sala
-            if (PhotonNetwork.OfflineMode)
-            {
-                // Instanciar usando el método normal de Unity en modo offline
-                bullet = Instantiate(bulletPrefab, pivot.position, pivot.rotation);
-            }
-            else if (PhotonNetwork.InRoom)
-            {
-                // Instanciar usando Photon si estamos conectados a una sala
-                bullet = PhotonNetwork.Instantiate(bulletPrefab.name, pivot.position, pivot.rotation);
-            }
-            else
-            {
-                Debug.LogError("No puedes instanciar el proyectil, el cliente no está en una sala.");
-                return;
-            }
-
-            // Aplicar la velocidad al proyectil
-            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        // Verificar que el proyectil se ha instanciado correctamente
+        if (basicAttack != null)
+        {
+            Rigidbody rb = basicAttack.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.velocity = pivot.forward * bulletSpeed;
             }
+            else
+            {
+                Debug.LogError("El proyectil no tiene un componente Rigidbody.");
+            }
         }
         else
         {
-            Debug.LogError("El prefab del proyectil o el pivot no están asignados correctamente.");
+            Debug.LogError("No se pudo instanciar el proyectil. Asegúrate de estar en una sala o en offline mode.");
         }
+
+        playerCanvas.UpdateAbilityCooldown("BasicAttack", 0f);
     }
 
     private void PowerAttack()
     {
         powerTimer = 0f;
-        GameObject powerAttack = PhotonNetwork.IsConnected ? PhotonNetwork.Instantiate(powerPrefab.name, pivot.position, pivot.rotation) : Instantiate(powerPrefab, pivot.position, pivot.rotation);
-        Rigidbody rb = powerAttack.GetComponent<Rigidbody>();
-        if (rb != null)
+
+        GameObject powerAttack = null;
+        // Si está en modo offline, instanciar el proyectil localmente
+        if (PhotonNetwork.OfflineMode || !PhotonNetwork.InRoom)
         {
-            rb.velocity = pivot.forward * powerSpeed;
+            powerAttack = Instantiate(powerPrefab, pivot.position, pivot.rotation);
+        }
+        else
+        {
+            // En modo online, usar Photon para instanciar el proyectil
+            powerAttack = PhotonNetwork.Instantiate(powerPrefab.name, pivot.position, pivot.rotation);
+        }
+
+        // Verificar que el proyectil se ha instanciado correctamente
+        if (powerAttack != null)
+        {
+            Rigidbody rb = powerAttack.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.velocity = pivot.forward * powerSpeed;
+            }
+            else
+            {
+                Debug.LogError("El proyectil no tiene un componente Rigidbody.");
+            }
+        }
+        else
+        {
+            Debug.LogError("No se pudo instanciar el proyectil de poder. Asegúrate de estar en una sala o en offline mode.");
         }
 
         playerCanvas.UpdateAbilityCooldown("PowerAttack", 0f);

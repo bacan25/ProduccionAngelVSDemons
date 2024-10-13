@@ -51,15 +51,15 @@ public class PlayerCanvas : MonoBehaviour
         // Asegúrate de actualizar la habilidad correcta en función del nombre de la habilidad
         if (abilityName == "BasicAttack" && basicAbilityCooldownImage != null)
         {
-            basicAbilityCooldownImage.fillAmount = 1 - cooldownPercent; // Inverso para llenar la imagen correctamente
+            //basicAbilityCooldownImage.fillAmount = 1 - cooldownPercent; // Inverso para llenar la imagen correctamente
         }
         else if (abilityName == "PowerAttack" && powerAbilityCooldownImage != null)
         {
-            powerAbilityCooldownImage.fillAmount = 1 - cooldownPercent;
+            //powerAbilityCooldownImage.fillAmount = 1 - cooldownPercent;
         }
         else
         {
-            Debug.LogError($"La habilidad {abilityName} no tiene una imagen de enfriamiento asignada o no existe.");
+            //Debug.LogError($"La habilidad {abilityName} no tiene una imagen de enfriamiento asignada o no existe.");
         }
     }
 

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5365649586524644809}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.426, y: -0.19, z: 1.01}
+  m_LocalPosition: {x: 0.05, y: -0.054, z: 1.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -164,7 +164,7 @@ Transform:
   m_GameObject: {fileID: 7429083240442732346}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.42000008, z: -0.13}
+  m_LocalPosition: {x: 0, y: 0.42000008, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -323,6 +323,8 @@ GameObject:
   - component: {fileID: 662854631840426943}
   - component: {fileID: 2210382511146475217}
   - component: {fileID: -5578421568006729679}
+  - component: {fileID: 1467441294807321248}
+  - component: {fileID: 4902424924477760412}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -346,6 +348,7 @@ Transform:
   - {fileID: 3407734573859912888}
   - {fileID: 2897321028374401356}
   - {fileID: 8951316138132500049}
+  - {fileID: 8054129438633477854}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3075710872764493916
@@ -464,7 +467,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8044803207112214825, guid: b464cf359a427634e93fb41bd822a8d5,
     type: 3}
   bulletSpeed: 50
-  basicCooldown: 0.4
+  basicCooldown: 0.5
   powerPrefab: {fileID: 5664522316287298105, guid: fb1c781da51f11a41b2ffa7e7a913a6f,
     type: 3}
   powerSpeed: 3
@@ -481,7 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051488903731ff54493d0bcfec4a364e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 5
   jumpForce: 5
   rotationSpeed: 15
   isGrounded: 0
@@ -502,6 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  healthSlider: {fileID: 2004775233643680093}
 --- !u!114 &2210382511146475217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,3 +545,44 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &1467441294807321248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749192660268499796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eecf82b311cec14b91ca8d8d5e229a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+  nombre: 
+  inventory: {fileID: 0}
+  skills: {fileID: 0}
+  move_Player: {fileID: 2762129899826143140}
+  wings:
+  - {fileID: 0}
+  - {fileID: 0}
+  gloves: []
+  hats: []
+  uiPanel: {fileID: 0}
+  uiText: {fileID: 0}
+--- !u!114 &4902424924477760412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749192660268499796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee5438c29baf5b48aa70903a2bc0027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  descriptPanel: {fileID: 0}
+  panelRect: {fileID: 0}
+  middlePosY: 180
+  topPosY: -187
+  tweenDur: 0.5
