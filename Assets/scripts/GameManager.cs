@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         // Verifica si eres el MasterClient antes de cargar la escena
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.LoadLevel("Terreno");
+            PhotonNetwork.LoadLevel("MapaEdel");
         }
     }
 
