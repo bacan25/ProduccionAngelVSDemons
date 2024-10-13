@@ -1,12 +1,16 @@
 using Photon.Pun;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class EnemyHealthSystem : MonoBehaviourPun
 {
+    
     [SerializeField] private int maxHealth = 100;
     private int currentHealth;
     [SerializeField] private Slider healthSlider; // Slider de la UI que representa la barra de salud del enemigo
+
 
     void Start()
     {
@@ -32,7 +36,9 @@ public class EnemyHealthSystem : MonoBehaviourPun
 
         if (currentHealth <= 0)
         {
+            PlayerCanvas.Instance.SumarMonedas();
             Die();
+           
         }
 
         Debug.Log($"Enemigo: {gameObject.name} ha recibido {damage} de daño. Salud restante: {currentHealth}/{maxHealth}");

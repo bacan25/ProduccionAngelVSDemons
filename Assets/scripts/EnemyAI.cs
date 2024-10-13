@@ -38,7 +38,7 @@ public class EnemyAI : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (!PhotonNetwork.IsMasterClient) return;
+        //if (!PhotonNetwork.IsMasterClient) return; 
 
         
         if (enemyManager.playerDetected == null)
@@ -51,6 +51,7 @@ public class EnemyAI : MonoBehaviourPunCallbacks
         else if (!isWaiting)
         {
             Patrol();
+            
         }
     }
 
@@ -127,9 +128,10 @@ public class EnemyAI : MonoBehaviourPunCallbacks
 
     void Patrol()
     {
-        if (agent.remainingDistance < 0.5f && !isWaiting)
+        if (agent.remainingDistance < 0.3f && !isWaiting)
         {
             StartCoroutine(WaitAtPatrolPoint());
+            
         }
     }
 

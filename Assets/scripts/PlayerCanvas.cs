@@ -7,11 +7,17 @@ public class PlayerCanvas : MonoBehaviour
     [SerializeField] private Slider healthBar;
     [SerializeField] private GameObject winCanvas;
     [SerializeField] private GameObject loseCanvas;
+    
 
     // UI para habilidades (esto podría ser una lista de imágenes o barras)
     // Aquí supongo que tienes imágenes para representar habilidades y su enfriamiento.
     [SerializeField] private Image basicAbilityCooldownImage;
     [SerializeField] private Image powerAbilityCooldownImage;
+
+    [SerializeField] private Text monedasText;
+    public int monedas;
+    [SerializeField] private Text pocionesText;
+    public int pociones;
 
     private void Awake()
     {
@@ -45,15 +51,15 @@ public class PlayerCanvas : MonoBehaviour
         // Asegúrate de actualizar la habilidad correcta en función del nombre de la habilidad
         if (abilityName == "BasicAttack" && basicAbilityCooldownImage != null)
         {
-            basicAbilityCooldownImage.fillAmount = 1 - cooldownPercent; // Inverso para llenar la imagen correctamente
+            //basicAbilityCooldownImage.fillAmount = 1 - cooldownPercent; // Inverso para llenar la imagen correctamente
         }
         else if (abilityName == "PowerAttack" && powerAbilityCooldownImage != null)
         {
-            powerAbilityCooldownImage.fillAmount = 1 - cooldownPercent;
+            //powerAbilityCooldownImage.fillAmount = 1 - cooldownPercent;
         }
         else
         {
-            Debug.LogError($"La habilidad {abilityName} no tiene una imagen de enfriamiento asignada o no existe.");
+            //Debug.LogError($"La habilidad {abilityName} no tiene una imagen de enfriamiento asignada o no existe.");
         }
     }
 
@@ -77,5 +83,29 @@ public class PlayerCanvas : MonoBehaviour
     public void LoseCanvas()
     {
         loseCanvas.SetActive(true);
+    }
+
+    public void SumarMonedas()
+    {
+        monedas += 10;
+        monedasText.text = monedas.ToString();
+    }
+
+    public void RestarMonedas()
+    {
+        monedas -= 15;
+        monedasText.text = monedas.ToString();
+    }
+
+    public void SumarPociones()
+    {
+        pociones += 1;
+        pocionesText.text = pociones.ToString();
+    }
+
+    public void RestarPociones()
+    {
+        pociones -= 1;
+        pocionesText.text = pociones.ToString();
     }
 }

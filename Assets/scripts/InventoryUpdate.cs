@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,16 +10,17 @@ public class InventoryUpdate : MonoBehaviour
 
     public ItemManager itemManager;
     public int allSlots;
-    public GameObject[] slots;
+    public Slot[] slots;
+    
 
     void Start()
     {
         allSlots = this.transform.childCount;
-        slots = new GameObject[allSlots];
+        slots = new Slot[allSlots];
 
         for (int i = 0; i < allSlots; i++) 
         {
-            slots[i] = this.transform.GetChild(i).gameObject;
+            slots[i] = this.transform.GetChild(i).gameObject.GetComponent<Slot>();
         }
 
 
@@ -29,13 +31,15 @@ public class InventoryUpdate : MonoBehaviour
     {
         for (int i = 0; i < allSlots; i++) 
         {
-            if (slots[i].GetComponent<Slot>().slotID == itemManager.ID)
+            if (slots[i].slotID == itemManager.ID)
             {
                 
-                slots[i].GetComponent<Slot>().SetNewImage();
+                slots[i].SetNewImage();
                 return;
             }
+
             
+
         }
     }
 }
