@@ -13,6 +13,7 @@ public class ItemManager : MonoBehaviour
     public int ID;
     public string nombre;
     public InventoryUpdate inventory;
+    public InventoryUpdate skills;
     public Move_Player move_Player;
 
     public GameObject[] wings;
@@ -39,6 +40,7 @@ public class ItemManager : MonoBehaviour
             ID = other.GetComponent<Item>().itemID;
             nombre = other.GetComponent<Item>().itemName;
             inventory.UpdateSlot();
+            skills.UpdateSlot();
             //Destroy(other.gameObject);
 
             if (ID == 1)
