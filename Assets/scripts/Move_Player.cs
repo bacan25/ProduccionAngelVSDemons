@@ -26,6 +26,11 @@ public class Move_Player : MonoBehaviourPun
     // Referencia al PlayerCanvas singleton
     private PlayerCanvas playerCanvas;
 
+    [Header("Ground Check")]
+    [SerializeField] private Transform[] groundCheckPoints; // Puntos para verificar si el jugador está en el suelo
+    [SerializeField] private float groundCheckRadius = 0.3f; // Radio de verificación para el suelo
+    [SerializeField] private float rayLength = 1.2f; // Longitud del raycast para detectar el suelo
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -47,6 +52,9 @@ public class Move_Player : MonoBehaviourPun
     void Update()
     {
         if (!photonView.IsMine || isDead) return;
+
+        // Actualizar el estado de isGrounded con un Raycast o verificación de puntos
+        CheckGroundStatus();
 
         // Obtener inputs de rotación de cámara
         mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
@@ -109,20 +117,31 @@ public class Move_Player : MonoBehaviourPun
         jumpCount++;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void CheckGroundStatus()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            jumpCount = 0;  // Reiniciar el contador de saltos
-        }
-    }
+        isGrounded = false;
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
+        // Utilizar Raycast para verificar si está tocando el suelo
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, rayLength))
         {
-            isGrounded = false;
+            if (hit.collider.CompareTag("Ground"))
+            {
+                isGrounded = true;
+                jumpCount = 0; // Reiniciar el contador de saltos
+                return;
+            }
+        }
+
+        // Verificar cada punto en el suelo para asegurarse de que el jugador está grounded
+        foreach (Transform checkPoint in groundCheckPoints)
+        {
+            if (Physics.CheckSphere(checkPoint.position, groundCheckRadius, LayerMask.GetMask("Ground")))
+            {
+                isGrounded = true;
+                jumpCount = 0;
+                return;
+            }
         }
     }
 
