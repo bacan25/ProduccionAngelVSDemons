@@ -7,8 +7,6 @@ public class Mercader : MonoBehaviour
 {
     public float range = 5f;  // Define el rango que quieres mostrar alrededor del objeto
     public Color gizmoColor = Color.green;  // Color del rango
-    public GameObject mercaderText;
-    public GameObject comprarPanel;
     public bool enablePanel;
     public bool insideRange;
 
@@ -35,35 +33,5 @@ public class Mercader : MonoBehaviour
         
 
     }
-
-    // Este método se llama cuando otro Collider entra en el rango (trigger)
-    void OnTriggerStay(Collider other)
-    {
-
-        if (other.CompareTag("Player"))
-        {
-            mercaderText.gameObject.SetActive(true);
-            comprarPanel.gameObject.SetActive(true);
-
-            if (Input.GetKey(KeyCode.Alpha1))
-            {
-                
-            }
-
-        }
-            
-    }
-
-    // Este método se llama cuando otro Collider sale del rango (trigger)
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            mercaderText.gameObject.SetActive(false);
-            comprarPanel.gameObject.SetActive(false);
-            
-        }
-    }
-
     
 }
