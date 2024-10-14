@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: -5578421568006729679}
   - component: {fileID: 1467441294807321248}
   - component: {fileID: 4902424924477760412}
+  - component: {fileID: 3265947185081411934}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -668,3 +669,17 @@ MonoBehaviour:
   middlePosY: 180
   topPosY: -187
   tweenDur: 0.5
+--- !u!114 &3265947185081411934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749192660268499796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef8c92d512417545808bc4d3b49908b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mercaderText: {fileID: 0}
+  comprarPanel: {fileID: 0}
