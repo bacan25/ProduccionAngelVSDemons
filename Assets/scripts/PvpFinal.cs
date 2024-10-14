@@ -18,40 +18,62 @@ public class PvpFinal : MonoBehaviourPunCallbacks
             // Verificar si ya comenzó el combate
             if (isFighting) return;
 
+            // Asegurarse de que InGameManager está inicializado
             InGameManager gameManager = InGameManager.Instance;
+            if (gameManager == null)
+            {
+                Debug.LogError("InGameManager no está inicializado. Asegúrate de que está en la escena y correctamente configurado.");
+                return;
+            }
 
             player1 = col.gameObject;
 
             // Busca al otro jugador
-            foreach (Transform playerTransform in gameManager.playerTransforms)
+            player2 = FindOtherPlayer(gameManager);
+            if (player2 == null)
             {
-                GameObject p = playerTransform.gameObject;
-                if (p != player1)
-                {
-                    player2 = p;
-                    break;
-                }
+                Debug.LogWarning("No se encontró al otro jugador. Esperando a que ambos jugadores estén presentes.");
+                return;
             }
 
-            if (player2 != null)
+            // Enviar una llamada RPC a todos los jugadores para iniciar el combate
+            photonView.RPC("StartFight", RpcTarget.AllBuffered, player1.GetComponent<PhotonView>().ViewID, player2.GetComponent<PhotonView>().ViewID);
+        }
+    }
+
+    private GameObject FindOtherPlayer(InGameManager gameManager)
+    {
+        // Busca al otro jugador en la lista del InGameManager
+        foreach (Transform playerTransform in gameManager.playerTransforms)
+        {
+            GameObject p = playerTransform.gameObject;
+            if (p != player1)
             {
-                // Enviar una llamada RPC a todos los jugadores para iniciar el combate
-                photonView.RPC("StartFight", RpcTarget.AllBuffered, player1.GetComponent<PhotonView>().ViewID, player2.GetComponent<PhotonView>().ViewID);
+                return p;
             }
         }
+        return null; // Si no encuentra otro jugador, devuelve null
     }
 
     [PunRPC]
     public void StartFight(int player1ID, int player2ID)
     {
-        player1 = PhotonView.Find(player1ID).gameObject;
-        player2 = PhotonView.Find(player2ID).gameObject;
+        // Encontrar a los jugadores por su ViewID
+        player1 = PhotonView.Find(player1ID)?.gameObject;
+        player2 = PhotonView.Find(player2ID)?.gameObject;
+
+        // Asegurarse de que ambos jugadores fueron encontrados antes de proceder
+        if (player1 == null || player2 == null)
+        {
+            Debug.LogError("Uno o ambos jugadores no fueron encontrados para el combate.");
+            return;
+        }
 
         // Posicionar a ambos jugadores en las posiciones establecidas
         player1.transform.position = pos1.position;
         player2.transform.position = pos2.position;
 
-        // Activa el pvp
+        // Activa el PvP
         isFighting = true;
 
         StartCoroutine(VerificarVidaJugadores());
@@ -59,8 +81,21 @@ public class PvpFinal : MonoBehaviourPunCallbacks
 
     public IEnumerator VerificarVidaJugadores()
     {
+        // Asegurarse de que ambos jugadores y sus sistemas de vida existen
+        if (player1 == null || player2 == null)
+        {
+            Debug.LogError("Uno o ambos jugadores no están presentes al iniciar la verificación de vida.");
+            yield break;
+        }
+
         HealthSystem health1 = player1.GetComponent<HealthSystem>();
         HealthSystem health2 = player2.GetComponent<HealthSystem>();
+
+        if (health1 == null || health2 == null)
+        {
+            Debug.LogError("No se pudo encontrar el HealthSystem en uno o ambos jugadores.");
+            yield break;
+        }
 
         while (isFighting)
         {
@@ -83,9 +118,17 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     {
         isFighting = false;
 
-        GameObject ganador = PhotonView.Find(winnerID).gameObject;
-        Debug.Log(ganador.name + " humilló a su oponente. Mejoren bots.");
+        GameObject ganador = PhotonView.Find(winnerID)?.gameObject;
 
-        // Aquí podrías agregar lógica para manejar lo que sucede después del combate (reaparecer, recompensas, etc.)
+        // Asegurarse de que el ganador existe antes de proceder
+        if (ganador != null)
+        {
+            Debug.Log(ganador.name + " humilló a su oponente. Mejoren bots.");
+            // Aquí podrías agregar lógica para manejar lo que sucede después del combate (reaparecer, recompensas, etc.)
+        }
+        else
+        {
+            Debug.LogError("El jugador ganador no fue encontrado.");
+        }
     }
 }
