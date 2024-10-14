@@ -9,18 +9,26 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        // Desactivar el script si no pertenece al jugador local
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
         {
-            // Si este no es el inventario del jugador local, desactivar el script
             enabled = false;
             return;
         }
 
-        // Obtener referencia del ItemManager en el mismo jugador
-        itemManager = GetComponentInParent<ItemManager>();
-        if (itemManager == null)
+        // Intentar obtener la referencia del ItemManager del jugador local
+        GameObject localPlayer = GameObject.FindWithTag("Player"); // Asumiendo que el jugador tiene la etiqueta "Player"
+        if (localPlayer != null)
         {
-            Debug.LogError("ItemManager no encontrado. Asegúrate de que el InventoryUpdate está en el mismo jugador.");
+            itemManager = localPlayer.GetComponent<ItemManager>();
+            if (itemManager == null)
+            {
+                Debug.LogError("ItemManager no encontrado en el jugador local. Asegúrate de que el script esté asignado correctamente.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Jugador local no encontrado en la escena. Asegúrate de que el objeto jugador esté presente.");
         }
     }
 

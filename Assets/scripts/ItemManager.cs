@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using Photon.Pun;
 using System.Collections;
 using UnityEngine;
@@ -25,11 +24,11 @@ public class ItemManager : MonoBehaviour
 
     private void Awake()
     {
-        // Buscar y asignar referencias usando GameObject.Find()
-        inventory = GameObject.Find("PanelInventario");
-        if (inventory != null)
+        // Buscar el PanelInventario específicamente dentro del Canvas
+        GameObject panelInventario = GameObject.Find("Canvas/HUB/PanelInventario");
+        if (panelInventario != null)
         {
-            inventoryUpdate = inventory.GetComponent<InventoryUpdate>();
+            inventoryUpdate = panelInventario.GetComponent<InventoryUpdate>();
             if (inventoryUpdate == null)
             {
                 Debug.LogError("InventoryUpdate no encontrado en el objeto PanelInventario.");
@@ -37,35 +36,37 @@ public class ItemManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("PanelInventario no encontrado en la escena.");
+            Debug.LogError("PanelInventario no encontrado en la jerarquía Canvas/HUB.");
         }
 
-        skills = GameObject.Find("Skills");
-        if (skills != null)
+        // Buscar el PanelSkills específicamente dentro del Canvas si es necesario
+        GameObject panelSkills = GameObject.Find("Canvas/HUB/PanelSkills");
+        if (panelSkills != null)
         {
-            skillsUpdate = skills.GetComponent<InventoryUpdate>();
+            skillsUpdate = panelSkills.GetComponent<InventoryUpdate>();
             if (skillsUpdate == null)
             {
-                Debug.LogError("InventoryUpdate no encontrado en el objeto Skills.");
+                Debug.LogError("InventoryUpdate no encontrado en el objeto PanelSkills.");
             }
         }
         else
         {
-            Debug.LogError("Skills no encontrado en la escena.");
+            Debug.LogError("PanelSkills no encontrado en la jerarquía Canvas/HUB.");
         }
 
-        uiPanel = GameObject.Find("PanelInventario");
+        // Buscar el PanelInventario para el panel de UI y el texto
+        uiPanel = GameObject.Find("Canvas/HUB/PanelInventario");
         if (uiPanel != null)
         {
-            uiText = uiPanel.GetComponent<Text>();
+            uiText = uiPanel.GetComponentInChildren<Text>();
             if (uiText == null)
             {
-                Debug.LogError("Text no encontrado en el objeto PanelInventario.");
+                Debug.LogError("Text no encontrado en los hijos de PanelInventario.");
             }
         }
         else
         {
-            Debug.LogError("PanelInventario no encontrado en la escena para uiPanel.");
+            Debug.LogError("PanelInventario no encontrado para uiPanel.");
         }
     }
 
