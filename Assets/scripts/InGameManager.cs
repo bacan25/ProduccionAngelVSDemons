@@ -1,6 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class InGameManager : MonoBehaviourPunCallbacks
@@ -41,7 +42,6 @@ public class InGameManager : MonoBehaviourPunCallbacks
         }
     }
 
-
     void SpawnPlayer()
     {
         if (spawnPoints == null || spawnPoints.Length == 0)
@@ -70,8 +70,6 @@ public class InGameManager : MonoBehaviourPunCallbacks
                 Debug.LogError("El componente HealthSystem no se encontró en el jugador instanciado.");
             }
 
-            RegisterPlayer(player.transform);
-
             // Asignar la ruta de enemigos basada en el jugador que ha entrado
             if (spawnIndex == 0) // Primer jugador (Ruta 1)
             {
@@ -93,6 +91,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
         if (!playerTransforms.Contains(playerTransform))
         {
             playerTransforms.Add(playerTransform);
+            Debug.Log($"Jugador registrado: {playerTransform.name}");
         }
     }
 
@@ -101,6 +100,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
         if (playerTransforms.Contains(playerTransform))
         {
             playerTransforms.Remove(playerTransform);
+            Debug.Log($"Jugador eliminado: {playerTransform.name}");
         }
     }
 
@@ -122,6 +122,12 @@ public class InGameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         Debug.Log($"Jugador {otherPlayer.NickName} ha dejado la sala.");
+        // Eliminar el transform del jugador que se fue
+        GameObject player = GameObject.Find(otherPlayer.NickName);
+        if (player != null)
+        {
+            UnregisterPlayer(player.transform);
+        }
     }
 
     public void LeaveGame()

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class HealthSystem : MonoBehaviourPun
 {
     public int maxHealth = 100;
-    [HideInInspector]public int currentHealth;
+    [HideInInspector] public int currentHealth;
     private Vector3 respawnPosition;
 
     private PlayerCanvas playerCanvas; // Referencia al PlayerCanvas singleton
@@ -31,6 +31,9 @@ public class HealthSystem : MonoBehaviourPun
             healthSlider.maxValue = maxHealth; // Establecer el valor máximo del slider
             healthSlider.value = currentHealth; // Establecer el valor inicial del slider
         }
+
+        // Registrar al jugador en el InGameManager
+        InGameManager.Instance?.RegisterPlayer(transform);
 
         // Inicializar la barra de salud
         UpdateHealthUI();

@@ -54,6 +54,8 @@ MonoBehaviour:
   - UnregisterPlayerWithMaster
   - SyncClimbSkill
   - SyncDobleSaltoSkill
+  - FightEnded
+  - StartFight
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
