@@ -3,6 +3,19 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviourPun
 {
+    [SerializeField] private float bulletSpeed = 20f; // Velocidad de la bala
+    private Rigidbody rb;
+
+    private void Start()
+    {
+        // Obtener el componente Rigidbody y aplicar velocidad inicial
+        rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = transform.forward * bulletSpeed;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -31,6 +44,29 @@ public class BulletDamage : MonoBehaviourPun
                     Debug.LogWarning("No puedes enviar RPCs fuera de una sala o en modo offline.");
                 }
             }
+
+            DestroyBullet();
+        }
+        else if (other.CompareTag("Ground"))
+        {
+            DestroyBullet();
+        }
+    }
+
+    private void DestroyBullet()
+    {
+        if (PhotonNetwork.OfflineMode)
+        {
+            Destroy(gameObject); // Destruir el objeto localmente
+        }
+        else
+        {
+            // Transferir la propiedad antes de destruir si no somos los dueños
+            if (!photonView.IsMine)
+            {
+                photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+            }
+            PhotonNetwork.Destroy(gameObject); // Destruir el objeto en red
         }
     }
 }
