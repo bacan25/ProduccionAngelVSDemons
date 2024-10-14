@@ -12,9 +12,9 @@ public class PlayerBulletDamage : MonoBehaviourPun
             PhotonView targetPhotonView = other.GetComponent<PhotonView>();
             if (targetPhotonView != null)
             {
-                if (PhotonNetwork.OfflineMode || targetPhotonView.IsMine)
+                if (PhotonNetwork.OfflineMode)
                 {
-                    // Modo offline o el jugador es controlado localmente: infligir daño localmente
+                    // Modo offline: infligir daño localmente
                     HealthSystem playerHealth = other.GetComponent<HealthSystem>();
                     if (playerHealth != null)
                     {
@@ -23,21 +23,22 @@ public class PlayerBulletDamage : MonoBehaviourPun
                 }
                 else
                 {
-                    // Modo online: enviar RPC para infligir daño al jugador
+                    // Modo online: enviar RPC para infligir daño
                     targetPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
                 }
             }
+
             DestroyBullet();
         }
-        else if (other.CompareTag("Minion"))
+        else if (other.CompareTag("Enemy"))
         {
             // Manejar el daño a los enemigos
             PhotonView enemyPhotonView = other.GetComponent<PhotonView>();
             if (enemyPhotonView != null)
             {
-                if (PhotonNetwork.OfflineMode || enemyPhotonView.IsMine)
+                if (PhotonNetwork.OfflineMode)
                 {
-                    // Modo offline o el enemigo es controlado localmente: infligir daño localmente
+                    // Modo offline: infligir daño localmente
                     EnemyHealthSystem enemyHealth = other.GetComponent<EnemyHealthSystem>();
                     if (enemyHealth != null)
                     {
@@ -50,6 +51,7 @@ public class PlayerBulletDamage : MonoBehaviourPun
                     enemyPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
                 }
             }
+
             DestroyBullet();
         }
         else if (other.CompareTag("Ground"))
@@ -62,17 +64,16 @@ public class PlayerBulletDamage : MonoBehaviourPun
     {
         if (PhotonNetwork.OfflineMode)
         {
-            // Modo offline: destruir el objeto localmente
-            Destroy(gameObject);
-        }
-        else if (PhotonNetwork.InRoom)
-        {
-            // Modo online y conectado a una sala: destruir el objeto a través de Photon
-            PhotonNetwork.Destroy(gameObject);
+            Destroy(gameObject); // Destruir el objeto localmente
         }
         else
         {
-            Debug.LogWarning("No se puede destruir el proyectil porque no está conectado a Photon o en una sala.");
+            // Transferir la propiedad al cliente actual antes de destruir
+            if (!photonView.IsMine)
+            {
+                photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+            }
+            PhotonNetwork.Destroy(gameObject); // Destruir el objeto en red
         }
     }
 }

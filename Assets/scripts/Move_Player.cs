@@ -31,6 +31,13 @@ public class Move_Player : MonoBehaviourPun
     [SerializeField] private float groundCheckRadius = 0.3f; // Radio de verificación para el suelo
     [SerializeField] private float rayLength = 1.2f; // Longitud del raycast para detectar el suelo
 
+    [Header("Climbing")]
+    [SerializeField] private float climbSpeed = 5f;
+    public bool isClimbing = false;
+    [SerializeField] private float sphereCastRadius = 0.5f; // Radio para detectar paredes escalables
+    [SerializeField] private LayerMask whatIsWall;
+    public Transform climbRef; // Referencia para verificar si hay una pared en frente
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -82,6 +89,14 @@ public class Move_Player : MonoBehaviourPun
             // Actualizar la velocidad actual en función de los inputs
             Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
             currentVelocity = moveDirection * moveSpeed;
+        }
+
+        // Lógica de escalada
+        CheckClimbStatus();
+
+        if (isClimbing)
+        {
+            Climb();
         }
     }
 
@@ -143,6 +158,26 @@ public class Move_Player : MonoBehaviourPun
                 return;
             }
         }
+    }
+
+    private void CheckClimbStatus()
+    {
+        // Verificar si hay una pared en frente para escalar
+        Collider[] colliders = Physics.OverlapSphere(climbRef.position, sphereCastRadius, whatIsWall);
+        if (colliders.Length > 0 && Input.GetKey(KeyCode.Space) && climbAbility)
+        {
+            isClimbing = true;
+        }
+        else
+        {
+            isClimbing = false;
+        }
+    }
+
+    private void Climb()
+    {
+        // Aplicar movimiento de escalada
+        rb.velocity = new Vector3(horizontalInput * climbSpeed, verticalInput * climbSpeed, 0);
     }
 
     private void OnTriggerEnter(Collider other)
