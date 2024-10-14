@@ -550,23 +550,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 5
-  rotationSpeed: 15
+  rotationSpeed: 50
   isGrounded: 0
   cameraTransform: {fileID: 3407734573859912888}
-  verticalRotation: 15
+  verticalRotation: 25
   doubleJumpAbility: 0
+  climbAbility: 0
   isDead: 0
   groundCheckPoints:
   - {fileID: 6839638209472711612}
   - {fileID: 1214186464785753506}
   groundCheckRadius: 0.3
   rayLength: 1.2
-  climbSpeed: 5
+  climbSpeed: 15
   isClimbing: 0
   sphereCastRadius: 0.5
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   climbRef: {fileID: 8951316138132500049}
 --- !u!114 &662854631840426943
 MonoBehaviour:
