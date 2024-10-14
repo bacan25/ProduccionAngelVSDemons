@@ -1,19 +1,16 @@
-using JetBrains.Annotations;
 using Photon.Pun;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class ItemManager : MonoBehaviour
 {
     public int ID;
     public string nombre;
-    public InventoryUpdate inventory;
-    public InventoryUpdate skills;
+    public InventoryUpdate inventoryUpdate;
+    public InventoryUpdate skillsUpdate;
+    public GameObject inventory;
+    public GameObject skills;
     public Move_Player move_Player;
 
     public GameObject[] wings;
@@ -24,7 +21,54 @@ public class ItemManager : MonoBehaviour
     public Text uiText;
 
     public int pociones;
-    public int monedas;
+
+    private void Awake()
+    {
+        // Buscar el PanelInventario específicamente dentro del Canvas
+        GameObject panelInventario = GameObject.Find("Canvas/HUB/PanelInventario");
+        if (panelInventario != null)
+        {
+            inventoryUpdate = panelInventario.GetComponent<InventoryUpdate>();
+            if (inventoryUpdate == null)
+            {
+                Debug.LogError("InventoryUpdate no encontrado en el objeto PanelInventario.");
+            }
+        }
+        else
+        {
+            Debug.LogError("PanelInventario no encontrado en la jerarquía Canvas/HUB.");
+        }
+
+        // Buscar el PanelSkills específicamente dentro del Canvas si es necesario
+        GameObject panelSkills = GameObject.Find("Canvas/HUB/PanelSkills");
+        if (panelSkills != null)
+        {
+            skillsUpdate = panelSkills.GetComponent<InventoryUpdate>();
+            if (skillsUpdate == null)
+            {
+                Debug.LogError("InventoryUpdate no encontrado en el objeto PanelSkills.");
+            }
+        }
+        else
+        {
+            Debug.LogError("PanelSkills no encontrado en la jerarquía Canvas/HUB.");
+        }
+
+        // Buscar el PanelInventario para el panel de UI y el texto
+        uiPanel = GameObject.Find("Canvas/HUB/PanelInventario");
+        if (uiPanel != null)
+        {
+            uiText = uiPanel.GetComponentInChildren<Text>();
+            if (uiText == null)
+            {
+                Debug.LogError("Text no encontrado en los hijos de PanelInventario.");
+            }
+        }
+        else
+        {
+            Debug.LogError("PanelInventario no encontrado para uiPanel.");
+        }
+    }
 
     private void Update()
     {
@@ -32,24 +76,39 @@ public class ItemManager : MonoBehaviour
         {
             pociones -= 1;
             PlayerCanvas.Instance.RestarPociones();
-            //Sumar vida
-
+            // Aquí puedes añadir lógica para incrementar la vida del jugador
         }
-        
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Item"))
         {
             ID = other.GetComponent<Item>().itemID;
             nombre = other.GetComponent<Item>().itemName;
-            inventory.UpdateSlot();
-            skills.UpdateSlot();
-            //Destroy(other.gameObject);
 
-            if (ID == 1)
+            // Actualizar los slots de inventario y habilidades
+            if (inventoryUpdate != null)
             {
-                //move_Player.ActivateDoubleJump();
+                inventoryUpdate.UpdateSlot();
+            }
+            else
+            {
+                Debug.LogWarning("InventoryUpdate no está asignado. No se puede actualizar el inventario.");
+            }
+
+            if (skillsUpdate != null)
+            {
+                skillsUpdate.UpdateSlot();
+            }
+            else
+            {
+                Debug.LogWarning("SkillsUpdate no está asignado. No se pueden actualizar las habilidades.");
+            }
+
+            // Destruir el objeto de la escena si tiene un PhotonView y es propietario
+            if (ID == 1 || ID == 2)
+            {
                 PhotonView photonViewObj = other.GetComponent<PhotonView>();
                 if (photonViewObj != null && photonViewObj.IsMine)
                 {
@@ -57,53 +116,46 @@ public class ItemManager : MonoBehaviour
                 }
             }
 
-            if (ID == 2)
-            {
-                //move_Player.ActivateClimb();
-                PhotonView photonViewObj = other.GetComponent<PhotonView>();
-                if (photonViewObj != null && photonViewObj.IsMine)
-                {
-                    PhotonNetwork.Destroy(other.gameObject);
-                }
-            }
-
-            if (ID == 4)
+            if (ID == 8)
             {
                 StartCoroutine(ActivarYDesactivarPanel(3f));
 
                 foreach (GameObject obj in wings)
                 {
-                    if (obj != null)  
+                    if (obj != null)
                     {
                         Destroy(obj);
                     }
                 }
-
-                
             }
         }
-        
     }
 
     IEnumerator ActivarYDesactivarPanel(float segundos)
     {
-        uiText.text = "La reliquia " + nombre + " tiene un nuevo due�o.";
-        
-        uiPanel.SetActive(true);
+        if (uiText != null)
+        {
+            uiText.text = "La reliquia " + nombre + " tiene un nuevo dueño.";
+        }
+        else
+        {
+            Debug.LogError("uiText no está asignado. No se puede mostrar el mensaje.");
+        }
 
-        yield return new WaitForSeconds(segundos);
-
-        uiPanel.SetActive(false);
+        if (uiPanel != null)
+        {
+            uiPanel.SetActive(true);
+            yield return new WaitForSeconds(segundos);
+            uiPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("uiPanel no está asignado. No se puede activar el panel.");
+        }
     }
 
     public void Comprar()
     {
-        if(monedas >= 15)
-        {
-            PlayerCanvas.Instance.RestarMonedas();
-            pociones += 1;
-            PlayerCanvas.Instance.SumarPociones();
-        }
+        // Implementa lógica de compra aquí
     }
-
 }

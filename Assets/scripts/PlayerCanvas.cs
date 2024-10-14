@@ -85,16 +85,14 @@ public class PlayerCanvas : MonoBehaviour
         loseCanvas.SetActive(true);
     }
 
-    public void SumarMonedas()
+    public void SumarMonedas(int counter)
     {
-        counter.monedas += 10;
-        monedasText.text = counter.monedas.ToString();
+        monedasText.text = counter.ToString();
     }
 
     public void RestarMonedas()
     {
-        counter.monedas -= 15;
-        monedasText.text = counter.monedas.ToString();
+        
     }
 
     public void SumarPociones()

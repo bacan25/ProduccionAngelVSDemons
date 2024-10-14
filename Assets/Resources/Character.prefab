@@ -638,17 +638,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   nombre: 
-  inventory: {fileID: 4230272551145532786, guid: b94495bbef8a8b7418e44600bbdb77e4,
-    type: 3}
-  skills: {fileID: 6004870281606574384, guid: 1b4c4703105436f4eae5acc11eff943c, type: 3}
+  inventoryUpdate: {fileID: 0}
+  skillsUpdate: {fileID: 0}
+  inventory: {fileID: 0}
+  skills: {fileID: 0}
   move_Player: {fileID: 2762129899826143140}
   wings:
   - {fileID: 0}
   - {fileID: 0}
   gloves: []
   hats: []
-  uiPanel: {fileID: 2901981554167789346, guid: 0d4d7ee179f96c04382df9e984c45b6a, type: 3}
-  uiText: {fileID: 1780056984762936490, guid: 0d4d7ee179f96c04382df9e984c45b6a, type: 3}
+  uiPanel: {fileID: 0}
+  uiText: {fileID: 0}
+  pociones: 0
 --- !u!114 &4902424924477760412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,10 +663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee5438c29baf5b48aa70903a2bc0027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptPanel: {fileID: 3552808865893733806, guid: 8795ac2b33b6a204e8769a06298be192,
-    type: 3}
-  panelRect: {fileID: 6240962347461980880, guid: 8795ac2b33b6a204e8769a06298be192,
-    type: 3}
+  descriptPanel: {fileID: 0}
+  panelRect: {fileID: 0}
   middlePosY: 180
   topPosY: -187
   tweenDur: 0.5

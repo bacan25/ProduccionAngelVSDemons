@@ -32,11 +32,7 @@ public class Mercader : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            EnablePanel();
-
-        }
+        
 
     }
 
@@ -47,21 +43,15 @@ public class Mercader : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             mercaderText.gameObject.SetActive(true);
-            insideRange = true;
+            comprarPanel.gameObject.SetActive(true);
+
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                
+            }
 
         }
             
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-
-        if (other.CompareTag("Player"))
-        {
-            enablePanel = true;
-
-        }
-
     }
 
     // Este método se llama cuando otro Collider sale del rango (trigger)
@@ -70,26 +60,10 @@ public class Mercader : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             mercaderText.gameObject.SetActive(false);
-            enablePanel = false;
             comprarPanel.gameObject.SetActive(false);
-            insideRange = false;
+            
         }
     }
 
-    public void EnablePanel()
-    {
-        if (enablePanel && insideRange)
-        {
-            comprarPanel.gameObject.SetActive(true);
-            enablePanel = false;
-
-        } else if (!enablePanel)
-        {
-            comprarPanel.gameObject.SetActive(false);
-            enablePanel = true;
-
-        }
-        
-
-    }
+    
 }
