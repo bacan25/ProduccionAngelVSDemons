@@ -471,7 +471,8 @@ MonoBehaviour:
     type: 3}
   powerSpeed: 3
   powerCooldown: 2
-  playerCanvas: {fileID: 0}
+  playerCanvas: {fileID: 3866275237853664941, guid: d2dca7151d4ac464ab600fbb56761bdb,
+    type: 3}
 --- !u!114 &2762129899826143140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +507,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  healthSlider: {fileID: 0}
+  healthSlider: {fileID: 712042352676300400, guid: ef68778b449033942893763d45af2134,
+    type: 3}
 --- !u!114 &2210382511146475217
 MonoBehaviour:
   m_ObjectHideFlags: 0
