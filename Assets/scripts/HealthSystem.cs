@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class HealthSystem : MonoBehaviourPun
 {
     public int maxHealth = 100;
-    private int currentHealth;
+    [HideInInspector]public int currentHealth;
     private Vector3 respawnPosition;
 
     private PlayerCanvas playerCanvas; // Referencia al PlayerCanvas singleton
