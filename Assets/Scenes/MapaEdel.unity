@@ -9058,6 +9058,11 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 1560568309227131753, guid: d2dca7151d4ac464ab600fbb56761bdb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1754672261158881384, guid: d2dca7151d4ac464ab600fbb56761bdb,
         type: 3}
       propertyPath: newSprite
@@ -9070,6 +9075,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: e89af7526b4f5f041898beeb809de7ec,
         type: 3}
+    - target: {fileID: 1839689477571595588, guid: d2dca7151d4ac464ab600fbb56761bdb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 2283906230020739329, guid: d2dca7151d4ac464ab600fbb56761bdb,
         type: 3}
       propertyPath: m_Pivot.x
@@ -9197,6 +9207,11 @@ PrefabInstance:
       value: 71
       objectReference: {fileID: 0}
     - target: {fileID: 4178405866458080368, guid: d2dca7151d4ac464ab600fbb56761bdb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4478277673808986034, guid: d2dca7151d4ac464ab600fbb56761bdb,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -13946,6 +13961,11 @@ PrefabInstance:
     - target: {fileID: 7176656000235330314, guid: 03dd9a70ad577784dafef72b057ad5bd,
         type: 3}
       propertyPath: m_Name
+      value: Mercader
+      objectReference: {fileID: 0}
+    - target: {fileID: 7176656000235330314, guid: 03dd9a70ad577784dafef72b057ad5bd,
+        type: 3}
+      propertyPath: m_TagString
       value: Mercader
       objectReference: {fileID: 0}
     m_RemovedComponents: []
