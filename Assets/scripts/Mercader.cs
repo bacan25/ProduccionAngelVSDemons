@@ -45,6 +45,11 @@ public class Mercader : MonoBehaviour
             mercaderText.gameObject.SetActive(true);
             comprarPanel.gameObject.SetActive(true);
 
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                
+            }
+
         }
             
     }
