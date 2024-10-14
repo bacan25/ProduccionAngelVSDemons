@@ -11,6 +11,11 @@ public class MercaderDetect : MonoBehaviour
     {
         mercaderText = GameObject.Find("MercaderText");
         comprarPanel = GameObject.Find("ComprarPanel");
+       
+    }
+
+    private void Start()
+    {
         mercaderText.gameObject.SetActive(false);
         comprarPanel.gameObject.SetActive(false);
     }
