@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 4df5dab918479a04e875df963ae56b78
   - enabled: 1
-    path: Assets/Scenes/Terreno.unity
-    guid: da2efd3b5902f254fa25920412323330
+    path: Assets/Scenes/MapaEdel.unity
+    guid: 0b2c184469ce8a648a1ac379ec1ae7f2
   m_configObjects: {}

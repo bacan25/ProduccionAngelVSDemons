@@ -348,6 +348,7 @@ Transform:
   - {fileID: 3407734573859912888}
   - {fileID: 2897321028374401356}
   - {fileID: 8951316138132500049}
+  - {fileID: 8054129438633477854}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3075710872764493916
@@ -504,6 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  healthSlider: {fileID: 2004775233643680093}
 --- !u!114 &2210382511146475217
 MonoBehaviour:
   m_ObjectHideFlags: 0

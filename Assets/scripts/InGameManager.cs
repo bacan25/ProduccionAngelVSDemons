@@ -7,11 +7,15 @@ public class InGameManager : MonoBehaviourPunCallbacks
 {
     public static InGameManager Instance;
 
-    public Transform[] spawnPoints;
+    public Transform[] spawnPoints; 
     public GameObject playerPrefab;
     public List<Transform> playerTransforms = new List<Transform>();
 
     private PlayerCanvas playerCanvas; // Referencia al canvas local
+
+    // Listas de campamentos de enemigos de cada ruta
+    [SerializeField] private GameObject ruta1Enemies;
+    [SerializeField] private GameObject ruta2Enemies;
 
     private void Awake()
     {
@@ -24,27 +28,18 @@ public class InGameManager : MonoBehaviourPunCallbacks
             Destroy(gameObject);
         }
     }
+
     private void Start()
     {
-        // Si no está conectado a Photon, activar el modo offline
-        if (!PhotonNetwork.IsConnected)
+        if (PhotonNetwork.OfflineMode || PhotonNetwork.IsConnectedAndReady)
         {
-            PhotonNetwork.OfflineMode = true;
+            // Obtener la referencia al PlayerCanvas local
+            playerCanvas = PlayerCanvas.Instance;
+
+            // Spawnear al jugador y asignar ruta
+            SpawnPlayer();
         }
-
-        // Obtener la referencia al PlayerCanvas
-        playerCanvas = PlayerCanvas.Instance;
-
-        // Verificar si el PlayerCanvas está correctamente asignado
-        if (playerCanvas == null)
-        {
-            Debug.LogError("PlayerCanvas no encontrado. Asegúrate de que el PlayerCanvas esté en la escena.");
-        }
-
-        // Spawnear al jugador
-        SpawnPlayer();
     }
-
 
     void SpawnPlayer()
     {
@@ -54,17 +49,14 @@ public class InGameManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        // Obtener el índice de spawn para el jugador
-        int spawnIndex = PhotonNetwork.OfflineMode ? 0 : PhotonNetwork.LocalPlayer.ActorNumber - 1;
-
+        int spawnIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
         if (spawnIndex < spawnPoints.Length)
         {
             Vector3 spawnPosition = spawnPoints[spawnIndex].position;
             Quaternion spawnRotation = spawnPoints[spawnIndex].rotation;
 
-            // Instanciar al jugador, ya sea en modo offline o en red
-            GameObject player = PhotonNetwork.OfflineMode ?
-                Instantiate(playerPrefab, spawnPosition, spawnRotation) :
+            GameObject player = PhotonNetwork.OfflineMode ? 
+                Instantiate(playerPrefab, spawnPosition, spawnRotation) : 
                 PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, spawnRotation);
 
             HealthSystem healthScript = player.GetComponent<HealthSystem>();
@@ -78,6 +70,16 @@ public class InGameManager : MonoBehaviourPunCallbacks
             }
 
             RegisterPlayer(player.transform);
+
+            // Asignar la ruta de enemigos basada en el jugador que ha entrado
+            if (spawnIndex == 0) // Primer jugador (Ruta 1)
+            {
+                ActivateRouteEnemies(ruta1Enemies);
+            }
+            else if (spawnIndex == 1) // Segundo jugador (Ruta 2)
+            {
+                ActivateRouteEnemies(ruta2Enemies);
+            }
         }
         else
         {
@@ -99,6 +101,16 @@ public class InGameManager : MonoBehaviourPunCallbacks
         {
             playerTransforms.Remove(playerTransform);
         }
+    }
+
+    // Método para activar enemigos de una ruta y desactivar los de la otra
+    private void ActivateRouteEnemies(GameObject enemiesToActivate)
+    {
+        ruta1Enemies.SetActive(false);
+        ruta2Enemies.SetActive(false);
+
+        // Activar solo los enemigos de la ruta correspondiente
+        enemiesToActivate.SetActive(true);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -125,27 +137,18 @@ public class InGameManager : MonoBehaviourPunCallbacks
     // Manejo de la victoria del jugador
     public void HandleWin(PlayerCanvas winner)
     {
-        if (playerCanvas == null)
-        {
-            Debug.LogError("PlayerCanvas no asignado en el jugador local.");
-            return;
-        }
-
-        if (winner == playerCanvas)
+        if (playerCanvas != null && winner == playerCanvas)
         {
             // Mostrar el canvas de victoria del jugador local
             playerCanvas.WinCanvas();
-            Debug.Log("El jugador local ha ganado.");
         }
-        else
+        else if (playerCanvas != null)
         {
-            // Mostrar el canvas de derrota del jugador local
+            // Mostrar el canvas de derrota en el jugador local
             playerCanvas.LoseCanvas();
-            Debug.Log("El jugador local ha perdido.");
         }
 
         // Notificar en el log
         Debug.Log("El juego ha terminado. ¡Tenemos un ganador!");
     }
-
 }

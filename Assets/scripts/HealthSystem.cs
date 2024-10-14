@@ -1,13 +1,15 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviourPun
 {
     public int maxHealth = 100;
-    private int currentHealth;
+    [HideInInspector]public int currentHealth;
     private Vector3 respawnPosition;
 
     private PlayerCanvas playerCanvas; // Referencia al PlayerCanvas singleton
+    [SerializeField] private Slider healthSlider;
 
     private void Start()
     {
@@ -21,6 +23,13 @@ public class HealthSystem : MonoBehaviourPun
         if (playerCanvas == null)
         {
             Debug.LogError("PlayerCanvas no encontrado. Asegúrate de que el PlayerCanvas esté en la escena.");
+        }
+
+        // Inicializar el valor del slider de salud
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = maxHealth; // Establecer el valor máximo del slider
+            healthSlider.value = currentHealth; // Establecer el valor inicial del slider
         }
 
         // Inicializar la barra de salud
@@ -71,9 +80,15 @@ public class HealthSystem : MonoBehaviourPun
             Debug.Log($"Actualizando barra de salud: {currentHealth} / {maxHealth}");
             playerCanvas.UpdateHealthBar((float)currentHealth / maxHealth);
         }
+
+        // Actualizar la barra de salud sobre el personaje
+        if (healthSlider != null)
+        {
+            healthSlider.value = currentHealth; // Asignar la salud actual al slider
+        }
         else
         {
-            Debug.LogError("No se pudo actualizar la barra de vida porque PlayerCanvas es nulo o no es el jugador local.");
+            Debug.LogError("No se pudo actualizar la barra de vida porque el slider no está asignado.");
         }
     }
 }
