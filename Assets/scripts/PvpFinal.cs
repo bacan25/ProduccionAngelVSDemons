@@ -15,6 +15,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            this.transform.position += new Vector3(0,100,0);
             // Verificar si ya comenzó el combate
             if (isFighting) return;
 
@@ -38,6 +39,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
 
             // Enviar una llamada RPC a todos los jugadores para iniciar el combate
             photonView.RPC("StartFight", RpcTarget.AllBuffered, player1.GetComponent<PhotonView>().ViewID, player2.GetComponent<PhotonView>().ViewID);
+            
         }
     }
 
@@ -109,7 +111,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
                 photonView.RPC("FightEnded", RpcTarget.AllBuffered, player1.GetComponent<PhotonView>().ViewID);
                 yield break;
             }
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(3f);
         }
     }
 
