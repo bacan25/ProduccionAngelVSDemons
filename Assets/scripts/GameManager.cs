@@ -145,12 +145,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         readyIndicator.SetActive(false);
         yield return new WaitForSeconds(5);
 
-        // Verifica si eres el MasterClient antes de cargar la escena
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.LoadLevel("MapaEdel");
-        }
+        PhotonNetwork.LoadLevel("MapaEdel");
+       
     }
+
 
 
     public void LeaveRoom()
