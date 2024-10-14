@@ -30,7 +30,7 @@ public class PlayerBulletDamage : MonoBehaviourPun
 
             DestroyBullet();
         }
-        else if (other.CompareTag("Enemy"))
+        else if (other.CompareTag("Minion"))
         {
             // Manejar el daño a los enemigos
             PhotonView enemyPhotonView = other.GetComponent<PhotonView>();
