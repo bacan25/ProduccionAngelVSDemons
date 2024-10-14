@@ -5064,6 +5064,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 8749192660268499796, guid: 335a5768b3fbd4743bbe3a6417aaf163,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8561,7 +8566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &963194226
 AudioListener:
   m_ObjectHideFlags: 0
@@ -14301,7 +14306,7 @@ Transform:
   m_GameObject: {fileID: 1531654421}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 139.77, y: 351.04, z: 881.5}
+  m_LocalPosition: {x: -1.78, y: 17.08, z: -54.32}
   m_LocalScale: {x: 7.0721, y: 7.0721, z: 7.0721}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16619,13 +16624,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  playerPrefab: {fileID: 8749192660268499796, guid: 335a5768b3fbd4743bbe3a6417aaf163,
-    type: 3}
-  playerTransforms:
   - {fileID: 1370593475}
   - {fileID: 616097621}
+  playerPrefab: {fileID: 8749192660268499796, guid: 335a5768b3fbd4743bbe3a6417aaf163,
+    type: 3}
+  playerTransforms: []
   ruta1Enemies: {fileID: 1346676502}
   ruta2Enemies: {fileID: 773455835}
 --- !u!4 &1826423063
