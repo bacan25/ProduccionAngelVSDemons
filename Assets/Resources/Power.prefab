@@ -107,8 +107,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0.48}
 --- !u!54 &5329516929950123892
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -187,4 +187,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8203c025475228344ab6d2af6df66d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  bulletSpeed: 20
