@@ -11,7 +11,7 @@ public class Move_Player : MonoBehaviourPun
 
     private float horizontalInput, verticalInput;
     private Vector2 mouseInput;
-    public bool isGrounded = false;
+    public bool isGrounded = true;
     private int jumpCount = 0;
     public Transform cameraTransform;
     public float verticalRotation;
