@@ -11,7 +11,7 @@ public class Move_Player : MonoBehaviourPun
 
     private float horizontalInput, verticalInput;
     private Vector2 mouseInput;
-    public bool isGrounded = false;
+    public bool isGrounded = true;
     private int jumpCount = 0;
     public Transform cameraTransform;
     public float verticalRotation;
@@ -25,6 +25,18 @@ public class Move_Player : MonoBehaviourPun
 
     // Referencia al PlayerCanvas singleton
     private PlayerCanvas playerCanvas;
+
+    [Header("Ground Check")]
+    [SerializeField] private Transform[] groundCheckPoints; // Puntos para verificar si el jugador está en el suelo
+    [SerializeField] private float groundCheckRadius = 0.3f; // Radio de verificación para el suelo
+    [SerializeField] private float rayLength = 1.2f; // Longitud del raycast para detectar el suelo
+
+    [Header("Climbing")]
+    [SerializeField] private float climbSpeed = 5f;
+    public bool isClimbing = false;
+    [SerializeField] private float sphereCastRadius = 0.5f; // Radio para detectar paredes escalables
+    [SerializeField] private LayerMask whatIsWall;
+    public Transform climbRef; // Referencia para verificar si hay una pared en frente
 
     void Start()
     {
@@ -47,6 +59,9 @@ public class Move_Player : MonoBehaviourPun
     void Update()
     {
         if (!photonView.IsMine || isDead) return;
+
+        // Actualizar el estado de isGrounded con un Raycast o verificación de puntos
+        CheckGroundStatus();
 
         // Obtener inputs de rotación de cámara
         mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
@@ -74,6 +89,14 @@ public class Move_Player : MonoBehaviourPun
             // Actualizar la velocidad actual en función de los inputs
             Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
             currentVelocity = moveDirection * moveSpeed;
+        }
+
+        // Lógica de escalada
+        CheckClimbStatus();
+
+        if (isClimbing)
+        {
+            Climb();
         }
     }
 
@@ -109,21 +132,52 @@ public class Move_Player : MonoBehaviourPun
         jumpCount++;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void CheckGroundStatus()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        isGrounded = false;
+
+        // Utilizar Raycast para verificar si está tocando el suelo
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, rayLength))
         {
-            isGrounded = true;
-            jumpCount = 0;  // Reiniciar el contador de saltos
+            if (hit.collider.CompareTag("Ground"))
+            {
+                isGrounded = true;
+                jumpCount = 0; // Reiniciar el contador de saltos
+                return;
+            }
+        }
+
+        // Verificar cada punto en el suelo para asegurarse de que el jugador está grounded
+        foreach (Transform checkPoint in groundCheckPoints)
+        {
+            if (Physics.CheckSphere(checkPoint.position, groundCheckRadius, LayerMask.GetMask("Ground")))
+            {
+                isGrounded = true;
+                jumpCount = 0;
+                return;
+            }
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void CheckClimbStatus()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        // Verificar si hay una pared en frente para escalar
+        Collider[] colliders = Physics.OverlapSphere(climbRef.position, sphereCastRadius, whatIsWall);
+        if (colliders.Length > 0 && Input.GetKey(KeyCode.Space) && climbAbility)
         {
-            isGrounded = false;
+            isClimbing = true;
         }
+        else
+        {
+            isClimbing = false;
+        }
+    }
+
+    private void Climb()
+    {
+        // Aplicar movimiento de escalada
+        rb.velocity = new Vector3(horizontalInput * climbSpeed, verticalInput * climbSpeed, 0);
     }
 
     private void OnTriggerEnter(Collider other)
