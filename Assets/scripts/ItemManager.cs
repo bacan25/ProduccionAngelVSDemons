@@ -23,10 +23,14 @@ public class ItemManager : MonoBehaviour
     public GameObject uiPanel;
     public Text uiText;
 
+    public int pociones;
+    public int monedas;
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && PlayerCanvas.Instance.pociones >= 1)
+        if (Input.GetKeyDown(KeyCode.Q) && pociones >= 1)
         {
+            pociones -= 1;
             PlayerCanvas.Instance.RestarPociones();
             //Sumar vida
 
@@ -94,9 +98,10 @@ public class ItemManager : MonoBehaviour
 
     public void Comprar()
     {
-        if(PlayerCanvas.Instance.monedas >= 15)
+        if(monedas >= 15)
         {
             PlayerCanvas.Instance.RestarMonedas();
+            pociones += 1;
             PlayerCanvas.Instance.SumarPociones();
         }
     }
