@@ -19,6 +19,56 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Gorro
     second: {fileID: 2100000, guid: 21362619526f2374aaa04913c60953da, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fabric029_2K-JPG_Color
+    second: {fileID: 2800000, guid: 5b969b0ec494e93488cd0caa81480ada, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fabric029_2K-JPG_NormalGL
+    second: {fileID: 2800000, guid: 70f0b1fd5d3cc53488c9f41830e9396c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fabric029_2K-JPG_Roughness
+    second: {fileID: 2800000, guid: dd746916d99198649a77ed5cb9901e4e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leather022_2K-JPG_Color
+    second: {fileID: 2800000, guid: e7af34f738a40cf45b5ea7d258db0b93, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leather022_2K-JPG_NormalGL
+    second: {fileID: 2800000, guid: c580b59b791832c43b012c183c00053f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leather022_2K-JPG_Roughness
+    second: {fileID: 2800000, guid: 0b0fc3d554062844f94f9e78153c2424, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal059C_2K-JPG_Color
+    second: {fileID: 2800000, guid: 2cddc1b5e40c3814c8273d9c7abc905e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal059C_2K-JPG_Metalness
+    second: {fileID: 2800000, guid: 5601d7c313797c5429bf843aab7f075f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal059C_2K-JPG_NormalGL
+    second: {fileID: 2800000, guid: 60ce3812d42b83e439b4e6783bc500fc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal059C_2K-JPG_Roughness
+    second: {fileID: 2800000, guid: bb5afdbf046e8944185c6cc6b55c7de8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
