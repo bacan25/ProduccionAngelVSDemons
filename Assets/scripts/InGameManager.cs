@@ -1,6 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class InGameManager : MonoBehaviourPunCallbacks
@@ -40,7 +41,6 @@ public class InGameManager : MonoBehaviourPunCallbacks
             SpawnPlayer();
         }
     }
-
 
     void SpawnPlayer()
     {
@@ -117,11 +117,31 @@ public class InGameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log($"Jugador {newPlayer.NickName} ha entrado a la sala.");
+        // Registrar todos los jugadores nuevamente para asegurarnos de que estén sincronizados
+        StartCoroutine(RegisterAllPlayers());
+    }
+
+    private IEnumerator RegisterAllPlayers()
+    {
+        // Esperar un momento para asegurarse de que todos los jugadores estén correctamente instanciados
+        yield return new WaitForSeconds(1.0f);
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            RegisterPlayer(player.transform);
+        }
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         Debug.Log($"Jugador {otherPlayer.NickName} ha dejado la sala.");
+        // Eliminar el transform del jugador que se fue
+        GameObject player = GameObject.Find(otherPlayer.NickName);
+        if (player != null)
+        {
+            UnregisterPlayer(player.transform);
+        }
     }
 
     public void LeaveGame()

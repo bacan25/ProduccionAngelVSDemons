@@ -62,20 +62,17 @@ public class PlayerBulletDamage : MonoBehaviourPun
     {
         if (PhotonNetwork.OfflineMode)
         {
-            // En modo offline, destruir el proyectil localmente
+            // Modo offline: destruir el objeto localmente
             Destroy(gameObject);
+        }
+        else if (PhotonNetwork.InRoom)
+        {
+            // Modo online y conectado a una sala: destruir el objeto a través de Photon
+            PhotonNetwork.Destroy(gameObject);
         }
         else
         {
-            if (photonView.IsMine)
-            {
-                // En modo online, solo el propietario del proyectil debe destruirlo
-                PhotonNetwork.Destroy(gameObject);
-            }
-            else
-            {
-                Debug.LogWarning("No se puede destruir el proyectil porque no está conectado a Photon o en una sala.");
-            }
+            Debug.LogWarning("No se puede destruir el proyectil porque no está conectado a Photon o en una sala.");
         }
     }
 }
