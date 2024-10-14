@@ -99,9 +99,9 @@ public class EnemyHealthSystem : MonoBehaviourPun
     private void UpdateMonedasUI()
     {
         // Actualizar la barra de salud solo si este es el jugador local
-        if (playerCanvas != null && (photonView.IsMine || PhotonNetwork.OfflineMode))
+        if (playerCanvas != null && photonView.IsMine)
         {
-            monedas += 10;
+            playerCanvas.monedasPlayer += monedas;
             playerCanvas.SumarMonedas(monedas);
         }
         else

@@ -18,6 +18,8 @@ public class PlayerCanvas : MonoBehaviour
     [SerializeField] private Text pocionesText;
     public ItemManager counter;
 
+    public int monedasPlayer;
+
 
     private void Awake()
     {
@@ -87,7 +89,8 @@ public class PlayerCanvas : MonoBehaviour
 
     public void SumarMonedas(int counter)
     {
-        monedasText.text = counter.ToString();
+      
+        monedasText.text = monedasPlayer.ToString();
     }
 
     public void RestarMonedas()
@@ -97,6 +100,7 @@ public class PlayerCanvas : MonoBehaviour
 
     public void SumarPociones()
     {
+        
         pocionesText.text = counter.pociones.ToString();
     }
 
