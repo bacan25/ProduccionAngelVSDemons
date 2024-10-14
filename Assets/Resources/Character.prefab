@@ -651,7 +651,6 @@ MonoBehaviour:
   uiPanel: {fileID: 0}
   uiText: {fileID: 0}
   pociones: 0
-  monedas: 0
 --- !u!114 &4902424924477760412
 MonoBehaviour:
   m_ObjectHideFlags: 0

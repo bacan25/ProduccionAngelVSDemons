@@ -37,6 +37,12 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
 
     public void UpdateSlot()
     {
+        if (itemManager == null)
+        {
+            Debug.LogError("ItemManager no asignado en InventoryUpdate. No se puede actualizar el inventario.");
+            return;
+        }
+
         for (int i = 0; i < allSlots; i++)
         {
             if (slots[i].slotID == itemManager.ID)
