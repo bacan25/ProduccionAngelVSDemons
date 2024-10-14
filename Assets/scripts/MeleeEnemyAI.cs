@@ -125,7 +125,7 @@ public class MeleeEnemyAI : MonoBehaviourPunCallbacks
     {
         if (agent.remainingDistance < 0.5f && !isWaiting)
         {
-            print("Espera atrullaje");
+            
             StartCoroutine(WaitAtPatrolPoint());
         }
     }
@@ -137,7 +137,7 @@ public class MeleeEnemyAI : MonoBehaviourPunCallbacks
         currentPathIndex = (currentPathIndex + 1) % pathPoints.Length;
         agent.destination = pathPoints[currentPathIndex].position;
         isWaiting = false;
-        print("Sale de espera");
+        
     }
 
     void MeeleAttackTrue()

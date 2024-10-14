@@ -12,8 +12,10 @@ public class ItemManager : MonoBehaviour
 {
     public int ID;
     public string nombre;
-    public InventoryUpdate inventory;
-    public InventoryUpdate skills;
+    public InventoryUpdate inventoryUpdate;
+    public InventoryUpdate skillsUpdate;
+    public GameObject inventory;
+    public GameObject skills;
     public Move_Player move_Player;
 
     public GameObject[] wings;
@@ -24,8 +26,20 @@ public class ItemManager : MonoBehaviour
     public Text uiText;
 
     public int pociones;
-    public int monedas;
+    
 
+    private void Awake()
+    {
+        inventory = GameObject.Find("PanelInventario");
+        inventoryUpdate = inventory.GetComponent<InventoryUpdate>();
+
+        skills = GameObject.Find("Skills");
+        skillsUpdate = inventory.GetComponent<InventoryUpdate>();
+
+        uiPanel = GameObject.Find("PanelInventario");
+        uiText = uiPanel.GetComponent<Text>();
+
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q) && pociones >= 1)
@@ -43,8 +57,8 @@ public class ItemManager : MonoBehaviour
         {
             ID = other.GetComponent<Item>().itemID;
             nombre = other.GetComponent<Item>().itemName;
-            inventory.UpdateSlot();
-            skills.UpdateSlot();
+            inventoryUpdate.UpdateSlot();
+            skillsUpdate.UpdateSlot();
             //Destroy(other.gameObject);
 
             if (ID == 1)
@@ -67,7 +81,7 @@ public class ItemManager : MonoBehaviour
                 }
             }
 
-            if (ID == 4)
+            if (ID == 8)
             {
                 StartCoroutine(ActivarYDesactivarPanel(3f));
 
@@ -98,12 +112,7 @@ public class ItemManager : MonoBehaviour
 
     public void Comprar()
     {
-        if(monedas >= 15)
-        {
-            PlayerCanvas.Instance.RestarMonedas();
-            pociones += 1;
-            PlayerCanvas.Instance.SumarPociones();
-        }
+        
     }
 
 }

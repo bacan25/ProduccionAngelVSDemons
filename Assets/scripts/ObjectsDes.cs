@@ -9,7 +9,12 @@ public class ObjectsDes : MonoBehaviour
     [SerializeField] RectTransform panelRect;
     [SerializeField] float middlePosY, topPosY;
     [SerializeField] float tweenDur;
-    
+
+    private void Awake()
+    {
+        descriptPanel = GameObject.Find("HUBDescript");
+        panelRect = descriptPanel.GetComponent<RectTransform>();
+    }
     void Update()
     {
         if (Input.GetKey(KeyCode.F1))
