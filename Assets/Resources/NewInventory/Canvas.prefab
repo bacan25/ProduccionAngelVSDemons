@@ -1654,9 +1654,8 @@ MonoBehaviour:
   basicAbilityCooldownImage: {fileID: 0}
   powerAbilityCooldownImage: {fileID: 0}
   monedasText: {fileID: 4569857105427396201}
-  monedas: 0
   pocionesText: {fileID: 3533055530769178250}
-  pociones: 0
+  counter: {fileID: 1467441294807321248, guid: 335a5768b3fbd4743bbe3a6417aaf163, type: 3}
 --- !u!1 &6805362785882248221
 GameObject:
   m_ObjectHideFlags: 0

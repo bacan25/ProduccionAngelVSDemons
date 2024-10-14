@@ -1970,6 +1970,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5997193619239316957, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6532813126039651955, guid: 8b0ae159f4dadd44eb35ae56e9a10637,
         type: 3}
       propertyPath: sceneViewId
@@ -2522,6 +2527,16 @@ PrefabInstance:
         type: 3}
       propertyPath: moveSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2762129899826143140, guid: 335a5768b3fbd4743bbe3a6417aaf163,
+        type: 3}
+      propertyPath: climbAbility
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2762129899826143140, guid: 335a5768b3fbd4743bbe3a6417aaf163,
+        type: 3}
+      propertyPath: whatIsWall.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3407734573859912888, guid: 335a5768b3fbd4743bbe3a6417aaf163,
         type: 3}

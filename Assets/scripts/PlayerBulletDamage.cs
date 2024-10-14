@@ -5,6 +5,12 @@ public class PlayerBulletDamage : MonoBehaviourPun
 {
     public int playerBulletDamage;
 
+    private void Start()
+    {
+        // Destruir la bala después de 4 segundos de ser instanciada
+        Invoke(nameof(DestroyBullet), 4f);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

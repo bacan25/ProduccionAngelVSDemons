@@ -18,7 +18,7 @@ public class Move_Player : MonoBehaviourPun
 
     [Header("Abilities")]
     [SerializeField] private bool doubleJumpAbility = false;  // Control de la habilidad de doble salto
-    private bool climbAbility = false;
+    [SerializeField] private bool climbAbility = false;
     public bool isDead;
 
     private Vector3 currentVelocity; // Almacena la velocidad actual del jugador
