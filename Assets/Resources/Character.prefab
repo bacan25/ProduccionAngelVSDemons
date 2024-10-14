@@ -549,9 +549,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051488903731ff54493d0bcfec4a364e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
   jumpForce: 5
-  rotationSpeed: 50
+  rotationSpeed: 100
   isGrounded: 0
   cameraTransform: {fileID: 3407734573859912888}
   verticalRotation: 25
