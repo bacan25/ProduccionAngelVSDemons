@@ -11,9 +11,14 @@ public class EnemyHealthSystem : MonoBehaviourPun
     private int currentHealth;
     [SerializeField] private Slider healthSlider; // Slider de la UI que representa la barra de salud del enemigo
 
+    private PlayerCanvas playerCanvas;
+
+    public int monedas;
 
     void Start()
     {
+        playerCanvas = PlayerCanvas.Instance;
+
         currentHealth = maxHealth;
 
         // Inicializar el valor del slider de salud
@@ -36,7 +41,7 @@ public class EnemyHealthSystem : MonoBehaviourPun
 
         if (currentHealth <= 0)
         {
-            PlayerCanvas.Instance.SumarMonedas();
+            UpdateMonedasUI();
             Die();
            
         }
@@ -89,5 +94,20 @@ public class EnemyHealthSystem : MonoBehaviourPun
         {
             Debug.LogError("Barra de vida no asignada en EnemyHealthSystem.");
         }
+    }
+
+    private void UpdateMonedasUI()
+    {
+        // Actualizar la barra de salud solo si este es el jugador local
+        if (playerCanvas != null && (photonView.IsMine || PhotonNetwork.OfflineMode))
+        {
+            monedas += 10;
+            playerCanvas.SumarMonedas(monedas);
+        }
+        else
+        {
+            Debug.LogError("No se pudo actualizar las monedas porque el slider no está asignado.");
+        }
+
     }
 }

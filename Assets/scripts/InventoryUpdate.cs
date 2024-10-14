@@ -11,7 +11,11 @@ public class InventoryUpdate : MonoBehaviour
     public ItemManager itemManager;
     public int allSlots;
     public Slot[] slots;
-    
+
+    private void Awake()
+    {
+        itemManager = FindObjectOfType<ItemManager>();
+    }
 
     void Start()
     {
@@ -31,6 +35,7 @@ public class InventoryUpdate : MonoBehaviour
     {
         for (int i = 0; i < allSlots; i++) 
         {
+            Debug.Log("Found");
             if (slots[i].slotID == itemManager.ID)
             {
                 
