@@ -89,7 +89,7 @@ public class PlayerCanvas : MonoBehaviour
 
     public void SumarMonedas(int counter)
     {
-        monedasPlayer += counter;
+      
         monedasText.text = monedasPlayer.ToString();
     }
 
