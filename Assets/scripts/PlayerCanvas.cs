@@ -15,9 +15,9 @@ public class PlayerCanvas : MonoBehaviour
     [SerializeField] private Image powerAbilityCooldownImage;
 
     [SerializeField] private Text monedasText;
-    public int monedas;
     [SerializeField] private Text pocionesText;
-    public int pociones;
+    public ItemManager counter;
+
 
     private void Awake()
     {
@@ -87,25 +87,23 @@ public class PlayerCanvas : MonoBehaviour
 
     public void SumarMonedas()
     {
-        monedas += 10;
-        monedasText.text = monedas.ToString();
+        counter.monedas += 10;
+        monedasText.text = counter.monedas.ToString();
     }
 
     public void RestarMonedas()
     {
-        monedas -= 15;
-        monedasText.text = monedas.ToString();
+        counter.monedas -= 15;
+        monedasText.text = counter.monedas.ToString();
     }
 
     public void SumarPociones()
     {
-        pociones += 1;
-        pocionesText.text = pociones.ToString();
+        pocionesText.text = counter.pociones.ToString();
     }
 
     public void RestarPociones()
     {
-        pociones -= 1;
-        pocionesText.text = pociones.ToString();
+        pocionesText.text = counter.pociones.ToString();
     }
 }
