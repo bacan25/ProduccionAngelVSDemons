@@ -7,7 +7,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
 {
     public static InGameManager Instance;
 
-    public Transform[] spawnPoints; 
+    public Transform[] spawnPoints;
     public GameObject playerPrefab;
     public List<Transform> playerTransforms = new List<Transform>();
 
@@ -31,7 +31,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if (PhotonNetwork.OfflineMode || PhotonNetwork.IsConnectedAndReady)
+        if (PhotonNetwork.OfflineMode || (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.InRoom))
         {
             // Obtener la referencia al PlayerCanvas local
             playerCanvas = PlayerCanvas.Instance;
@@ -40,6 +40,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
             SpawnPlayer();
         }
     }
+
 
     void SpawnPlayer()
     {
@@ -55,8 +56,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
             Vector3 spawnPosition = spawnPoints[spawnIndex].position;
             Quaternion spawnRotation = spawnPoints[spawnIndex].rotation;
 
-            GameObject player = PhotonNetwork.OfflineMode ? 
-                Instantiate(playerPrefab, spawnPosition, spawnRotation) : 
+            GameObject player = PhotonNetwork.OfflineMode ?
+                Instantiate(playerPrefab, spawnPosition, spawnRotation) :
                 PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, spawnRotation);
 
             HealthSystem healthScript = player.GetComponent<HealthSystem>();
