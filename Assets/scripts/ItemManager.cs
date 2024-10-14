@@ -101,7 +101,7 @@ public class ItemManager : MonoBehaviour
 
     IEnumerator ActivarYDesactivarPanel(float segundos)
     {
-        uiText.text = "La reliquia " + nombre + " tiene un nuevo dueño.";
+        uiText.text = "La reliquia " + nombre + " tiene un nuevo dueï¿½o.";
         
         uiPanel.SetActive(true);
 
