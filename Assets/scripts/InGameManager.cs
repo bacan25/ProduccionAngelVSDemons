@@ -70,8 +70,6 @@ public class InGameManager : MonoBehaviourPunCallbacks
                 Debug.LogError("El componente HealthSystem no se encontró en el jugador instanciado.");
             }
 
-            RegisterPlayer(player.transform);
-
             // Asignar la ruta de enemigos basada en el jugador que ha entrado
             if (spawnIndex == 0) // Primer jugador (Ruta 1)
             {
@@ -93,6 +91,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
         if (!playerTransforms.Contains(playerTransform))
         {
             playerTransforms.Add(playerTransform);
+            Debug.Log($"Jugador registrado: {playerTransform.name}");
         }
     }
 
@@ -101,6 +100,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
         if (playerTransforms.Contains(playerTransform))
         {
             playerTransforms.Remove(playerTransform);
+            Debug.Log($"Jugador eliminado: {playerTransform.name}");
         }
     }
 
@@ -117,20 +117,6 @@ public class InGameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log($"Jugador {newPlayer.NickName} ha entrado a la sala.");
-        // Registrar todos los jugadores nuevamente para asegurarnos de que estén sincronizados
-        StartCoroutine(RegisterAllPlayers());
-    }
-
-    private IEnumerator RegisterAllPlayers()
-    {
-        // Esperar un momento para asegurarse de que todos los jugadores estén correctamente instanciados
-        yield return new WaitForSeconds(1.0f);
-
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
-        {
-            RegisterPlayer(player.transform);
-        }
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
