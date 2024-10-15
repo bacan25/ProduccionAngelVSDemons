@@ -693,7 +693,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef8c92d512417545808bc4d3b49908b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mercaderText: {fileID: 8673287123477834740, guid: eaf5e42f5c467824490aec78b51eb1c3,
-    type: 3}
-  comprarPanel: {fileID: 7048573967888323190, guid: 50b4a2a79ed54d945bdf4269ca79b24e,
-    type: 3}

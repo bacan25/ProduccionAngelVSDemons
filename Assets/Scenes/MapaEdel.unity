@@ -2355,6 +2355,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mercader (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7176656000235330314, guid: 03dd9a70ad577784dafef72b057ad5bd,
+        type: 3}
+      propertyPath: m_TagString
+      value: Mercader
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
