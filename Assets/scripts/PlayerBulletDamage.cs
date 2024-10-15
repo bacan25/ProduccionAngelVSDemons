@@ -48,13 +48,13 @@ public class PlayerBulletDamage : MonoBehaviourPun
                     EnemyHealthSystem enemyHealth = other.GetComponent<EnemyHealthSystem>();
                     if (enemyHealth != null)
                     {
-                        enemyHealth.ApplyDamage(playerBulletDamage);
+                        enemyHealth.ApplyDamage(playerBulletDamage, photonView.ViewID);
                     }
                 }
                 else
                 {
                     // Modo online: enviar RPC para infligir daño al enemigo
-                    enemyPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
+                    enemyPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage, photonView.ViewID);
                 }
             }
 

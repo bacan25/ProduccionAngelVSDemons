@@ -2674,6 +2674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthSlider: {fileID: 1461606802678424478}
+  monedas: 20
 --- !u!114 &2071707046638499722
 MonoBehaviour:
   m_ObjectHideFlags: 0

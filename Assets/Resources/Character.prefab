@@ -387,6 +387,8 @@ GameObject:
   - component: {fileID: -5578421568006729679}
   - component: {fileID: 1467441294807321248}
   - component: {fileID: 4902424924477760412}
+  - component: {fileID: 5247812672268875184}
+  - component: {fileID: 3265947185081411934}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -529,11 +531,11 @@ MonoBehaviour:
   pivot: {fileID: 5046357819211447784}
   bulletPrefab: {fileID: 8044803207112214825, guid: b464cf359a427634e93fb41bd822a8d5,
     type: 3}
-  bulletSpeed: 200
+  bulletSpeed: 100
   basicCooldown: 0.5
   powerPrefab: {fileID: 5664522316287298105, guid: fb1c781da51f11a41b2ffa7e7a913a6f,
     type: 3}
-  powerSpeed: 200
+  powerSpeed: 50
   powerCooldown: 2
   playerCanvas: {fileID: 0}
 --- !u!114 &2762129899826143140
@@ -548,9 +550,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051488903731ff54493d0bcfec4a364e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
   jumpForce: 5
-  rotationSpeed: 50
+  rotationSpeed: 100
   isGrounded: 0
   cameraTransform: {fileID: 3407734573859912888}
   verticalRotation: 25
@@ -668,3 +670,30 @@ MonoBehaviour:
   middlePosY: 180
   topPosY: -187
   tweenDur: 0.5
+--- !u!114 &5247812672268875184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749192660268499796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f7ffbc7242c5245bdef45784571165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentGold: 0
+--- !u!114 &3265947185081411934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749192660268499796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef8c92d512417545808bc4d3b49908b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mercaderText: {fileID: 0}
+  comprarPanel: {fileID: 0}

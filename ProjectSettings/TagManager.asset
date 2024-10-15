@@ -14,6 +14,7 @@ TagManager:
   - Escalar
   - PowerUp
   - FallDamage
+  - Mercader
   layers:
   - Default
   - TransparentFX
