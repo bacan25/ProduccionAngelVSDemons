@@ -20,7 +20,7 @@ public class PlayerCanvas : MonoBehaviourPun
     [SerializeField] private GameObject comprarPanel;
 
     public int monedasPlayer;
-    private int cantidadPociones;
+    public int cantidadPociones;
 
     private PhotonView photonView;
 
