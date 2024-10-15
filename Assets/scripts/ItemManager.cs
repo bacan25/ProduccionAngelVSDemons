@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,59 +25,48 @@ public class ItemManager : MonoBehaviourPun
     {
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
         {
+            // Asegurarse de que solo el jugador local maneje el inventario
             enabled = false;
             return;
         }
 
-        // Iniciar la búsqueda de los componentes
+        // Solo el jugador local debe buscar estos componentes
         if (photonView.IsMine)
         {
-            StartCoroutine(InitializeComponents());
-        }
-    }
-
-    private IEnumerator InitializeComponents()
-    {
-        // Buscar el PanelInventario dentro de la jerarquía correcta
-        Transform hubTransform = GameObject.Find("HUB")?.transform;
-        if (hubTransform != null)
-        {
-            inventory = hubTransform.Find("PanelInventario")?.gameObject;
-        }
-
-        if (inventory != null)
-        {
-            inventoryUpdate = inventory.GetComponent<InventoryUpdate>();
-            if (inventoryUpdate != null)
+            // Obtener el PanelInventario
+            inventory = GameObject.Find("PanelInventario");
+            if (inventory != null)
             {
-                inventoryUpdate.SetItemManager(this);  // Asignar este ItemManager al InventoryUpdate
+                inventoryUpdate = inventory.GetComponent<InventoryUpdate>();
+                if (inventoryUpdate == null)
+                {
+                    Debug.LogError("InventoryUpdate no encontrado en el objeto PanelInventario. Asegúrate de que PanelInventario tenga el componente InventoryUpdate.");
+                }
+                else
+                {
+                    inventoryUpdate.SetItemManager(this); // Aquí se asigna el ItemManager al InventoryUpdate
+                }
             }
             else
             {
-                Debug.LogError("InventoryUpdate no encontrado en el objeto PanelInventario. Asegúrate de que PanelInventario tenga el componente InventoryUpdate.");
+                Debug.LogError("PanelInventario no encontrado. Asegúrate de que el objeto PanelInventario existe en la escena.");
             }
-        }
-        else
-        {
-            Debug.LogError("PanelInventario no encontrado en el HUB. Asegúrate de que el objeto PanelInventario exista en la jerarquía del HUB.");
-        }
 
-        // Buscar el componente Text en los hijos de PanelInventario
-        uiPanel = GameObject.Find("PanelInventario");
-        if (uiPanel != null)
-        {
-            uiText = uiPanel.GetComponentInChildren<Text>();
-            if (uiText == null)
+            // Buscar el componente Text en los hijos de PanelInventario
+            uiPanel = GameObject.Find("PanelInventario");
+            if (uiPanel != null)
             {
-                Debug.LogError("Text no encontrado en los hijos de PanelInventario.");
+                uiText = uiPanel.GetComponentInChildren<Text>();
+                if (uiText == null)
+                {
+                    Debug.LogError("Text no encontrado en los hijos de PanelInventario. Asegúrate de que haya un componente Text en uno de los hijos.");
+                }
+            }
+            else
+            {
+                Debug.LogError("PanelInventario no encontrado para buscar el Text.");
             }
         }
-        else
-        {
-            Debug.LogError("PanelInventario no encontrado para buscar el Text.");
-        }
-
-        yield return null;
     }
 
     private void Update()

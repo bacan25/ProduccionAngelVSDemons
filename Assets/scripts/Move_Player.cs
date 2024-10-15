@@ -1,10 +1,11 @@
-using UnityEngine;
 using Photon.Pun;
+using UnityEngine;
 
 public class Move_Player : MonoBehaviourPun
 {
     [Header("Movement and Jump")]
     Rigidbody rb;
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float rotationSpeed;
@@ -18,7 +19,7 @@ public class Move_Player : MonoBehaviourPun
 
     [Header("Abilities")]
     [SerializeField] private bool doubleJumpAbility = false;  // Control de la habilidad de doble salto
-    [SerializeField] private bool climbAbility = false;
+    [SerializeField] private bool climbAbility = false;       // Control de la habilidad de escalar
     public bool isDead;
 
     private Vector3 currentVelocity; // Almacena la velocidad actual del jugador
@@ -58,7 +59,8 @@ public class Move_Player : MonoBehaviourPun
 
     void Update()
     {
-        if (!photonView.IsMine || isDead) return;
+        if (!photonView.IsMine || isDead)
+            return;
 
         // Actualizar el estado de isGrounded con un Raycast o verificación de puntos
         CheckGroundStatus();
@@ -223,5 +225,16 @@ public class Move_Player : MonoBehaviourPun
         {
             playerCanvas.UnlockAbility("Climb");
         }
+    }
+
+    // Métodos para consultar si las habilidades están activadas
+    public bool HasDoubleJump()
+    {
+        return doubleJumpAbility;
+    }
+
+    public bool HasClimb()
+    {
+        return climbAbility;
     }
 }

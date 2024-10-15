@@ -15,7 +15,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
     private float powerTimer;
 
     private bool basicUnlocked = true;
-    private bool powerUnlocked = false;
+    private bool powerUnlocked = false;  // Eliminada la definición duplicada
 
     public PlayerCanvas playerCanvas;
 
@@ -77,7 +77,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
         }
     }
 
-   private void BasicAttack()
+    private void BasicAttack()
     {
         basicTimer = 0f;
 
@@ -167,5 +167,10 @@ public class AngelClass : MonoBehaviourPunCallbacks
     {
         powerUnlocked = true;
         playerCanvas.UnlockAbility("PowerAttack");
+    }
+
+    public bool HasPowerUp()
+    {
+        return powerUnlocked;
     }
 }

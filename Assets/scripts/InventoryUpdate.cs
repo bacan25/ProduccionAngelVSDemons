@@ -7,8 +7,15 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
     public int allSlots;
     public Slot[] slots;
 
-    private void Start()
+    private void Awake()
     {
+        // Desactivar el script si no pertenece al jugador local
+        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+        {
+            enabled = false;
+            return;
+        }
+
         allSlots = this.transform.childCount;
         slots = new Slot[allSlots];
 
@@ -16,12 +23,11 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
         {
             slots[i] = this.transform.GetChild(i).gameObject.GetComponent<Slot>();
         }
+    }
 
-        // Este script no se debe desactivar en el Awake, ya que no depende del jugador directamente.
-        if (itemManager == null)
-        {
-            Debug.LogWarning("ItemManager aún no asignado al InventoryUpdate. Esto debe ser asignado por el ItemManager del jugador.");
-        }
+    public void SetItemManager(ItemManager manager)
+    {
+        itemManager = manager;
     }
 
     public void UpdateSlot()
@@ -36,15 +42,46 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
         {
             if (slots[i].slotID == itemManager.ID)
             {
-                slots[i].SetNewImage();
+                slots[i].SetNewImage(true); // Activar la imagen para indicar que el objeto está adquirido
                 return;
             }
         }
     }
 
-    // Método para asignar el ItemManager desde el jugador
-    public void SetItemManager(ItemManager manager)
+    public void UpdateSkills(Move_Player movePlayer, AngelClass angelClass)
     {
-        itemManager = manager;
+        if (movePlayer == null || angelClass == null)
+        {
+            Debug.LogError("Referencia de habilidades no encontrada en InventoryUpdate.");
+            return;
+        }
+
+        // Actualizar las habilidades del jugador en los slots
+        if (movePlayer.HasDoubleJump())
+        {
+            slots[0].SetNewImage(true); // Activar la imagen del doble salto
+        }
+        else
+        {
+            slots[0].SetNewImage(false); // Desactivar si la habilidad no está desbloqueada
+        }
+
+        if (movePlayer.HasClimb())
+        {
+            slots[1].SetNewImage(true); // Activar la imagen de escalar
+        }
+        else
+        {
+            slots[1].SetNewImage(false); // Desactivar si la habilidad no está desbloqueada
+        }
+
+        if (angelClass.HasPowerUp())
+        {
+            slots[2].SetNewImage(true); // Activar la imagen del power-up
+        }
+        else
+        {
+            slots[2].SetNewImage(false); // Desactivar si la habilidad no está desbloqueada
+        }
     }
 }

@@ -14,11 +14,12 @@ public class Slot : MonoBehaviour
         imageComponent = GetComponent<Image>();
     }
 
-    public void SetNewImage()
+    public void SetNewImage(bool isActive)
     {
         if (newSprite != null)
         {
             imageComponent.sprite = newSprite;
+            imageComponent.enabled = isActive; // Activar o desactivar la imagen según el parámetro
         }
     }
 }
