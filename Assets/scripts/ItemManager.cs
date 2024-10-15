@@ -28,7 +28,7 @@ public class ItemManager : MonoBehaviourPun
             return;
         }
 
-        // Solo el jugador local debe buscar estos componentes
+        // Iniciar la búsqueda de los componentes
         if (photonView.IsMine)
         {
             StartCoroutine(InitializeComponents());
@@ -37,22 +37,28 @@ public class ItemManager : MonoBehaviourPun
 
     private IEnumerator InitializeComponents()
     {
-        // Esperar a que los objetos necesarios estén en la escena
-        yield return new WaitForSeconds(1f);
-
-        // Obtener el PanelInventario
-        var inventoryCanvas = GameObject.Find("InventoryCanvas");
-        if (inventoryCanvas != null)
+        // Buscar el PanelInventario dentro de la jerarquía correcta
+        Transform hubTransform = GameObject.Find("HUB")?.transform;
+        if (hubTransform != null)
         {
-            inventoryUpdate = inventoryCanvas.GetComponentInChildren<InventoryUpdate>();
-            if (inventoryUpdate == null)
+            inventory = hubTransform.Find("PanelInventario")?.gameObject;
+        }
+
+        if (inventory != null)
+        {
+            inventoryUpdate = inventory.GetComponent<InventoryUpdate>();
+            if (inventoryUpdate != null)
             {
-                Debug.LogError("InventoryUpdate no encontrado en el InventoryCanvas.");
+                inventoryUpdate.SetItemManager(this);  // Asignar este ItemManager al InventoryUpdate
+            }
+            else
+            {
+                Debug.LogError("InventoryUpdate no encontrado en el objeto PanelInventario. Asegúrate de que PanelInventario tenga el componente InventoryUpdate.");
             }
         }
         else
         {
-            Debug.LogError("InventoryCanvas no encontrado. Asegúrate de que el objeto InventoryCanvas existe en la escena.");
+            Debug.LogError("PanelInventario no encontrado en el HUB. Asegúrate de que el objeto PanelInventario exista en la jerarquía del HUB.");
         }
 
         // Buscar el componente Text en los hijos de PanelInventario
@@ -69,6 +75,8 @@ public class ItemManager : MonoBehaviourPun
         {
             Debug.LogError("PanelInventario no encontrado para buscar el Text.");
         }
+
+        yield return null;
     }
 
     private void Update()
