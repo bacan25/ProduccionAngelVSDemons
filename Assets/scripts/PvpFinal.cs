@@ -11,11 +11,13 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     private GameObject player1;
     private GameObject player2;
     [SerializeField]private GameObject paredesFinal;
+    PlayerCanvas playerCanvas = PlayerCanvas.Instance;
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            paredesFinal.SetActive(true);
             this.transform.position += new Vector3(0,100,0);
             // Verificar si ya comenzó el combate
             if (isFighting) return;
@@ -61,6 +63,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     [PunRPC]
     public void StartFight(int player1ID, int player2ID)
     {
+        
         // Encontrar a los jugadores por su ViewID
         player1 = PhotonView.Find(player1ID)?.gameObject;
         player2 = PhotonView.Find(player2ID)?.gameObject;
@@ -78,7 +81,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
 
         // Activa el PvP
         isFighting = true;
-        paredesFinal.SetActive(true); //Ponerlo en modo pun
+        
         StartCoroutine(VerificarVidaJugadores());
     }
 
@@ -104,12 +107,12 @@ public class PvpFinal : MonoBehaviourPunCallbacks
         {
             if (health1.currentHealth <= 0)
             {
-                photonView.RPC("FightEnded", RpcTarget.AllBuffered, player2.GetComponent<PhotonView>().ViewID);
+                photonView.RPC("FightEnded", RpcTarget.AllBuffered, player2.GetComponent<PhotonView>().ViewID, player1.GetComponent<PhotonView>().ViewID);
                 yield break;
             }
             else if (health2.currentHealth <= 0)
             {
-                photonView.RPC("FightEnded", RpcTarget.AllBuffered, player1.GetComponent<PhotonView>().ViewID);
+                photonView.RPC("FightEnded", RpcTarget.AllBuffered, player1.GetComponent<PhotonView>().ViewID, player2.GetComponent<PhotonView>().ViewID);
                 yield break;
             }
             yield return new WaitForSeconds(3f);
@@ -118,17 +121,24 @@ public class PvpFinal : MonoBehaviourPunCallbacks
 
     //Hacer que le salga a cada uno un canvas diferente
     [PunRPC]
-    private void FightEnded(int winnerID)
+    private void FightEnded(int winnerID, int loserID)
     {
         isFighting = false;
 
         GameObject ganador = PhotonView.Find(winnerID)?.gameObject;
+        GameObject perdedor = PhotonView.Find(loserID)?.gameObject;
 
         // Asegurarse de que el ganador existe antes de proceder
         if (ganador != null)
         {
-            Debug.Log(ganador.name + " humilló a su oponente. Mejoren bots.");
-            // Aquí podrías agregar lógica para manejar lo que sucede después del combate (reaparecer, recompensas, etc.)
+            if(ganador.GetComponent<PhotonView>().IsMine)
+            {
+                playerCanvas.WinCanvas();
+            }
+            else if(perdedor.GetComponent<PhotonView>().IsMine)
+            {
+                playerCanvas.LoseCanvas();
+            }
         }
         else
         {
