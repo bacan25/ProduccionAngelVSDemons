@@ -27,12 +27,12 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
 
         if (other.CompareTag("Mercader"))
         {
-            playerCanvas?.ShowMercaderPanel();
+            playerCanvas.ShowMercaderPanel();
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 int pocionPrecio = 10; // Precio de una poción
-                playerCanvas?.ComprarPocion(pocionPrecio);
+                playerCanvas.ComprarPocion(pocionPrecio);
             }
         }
     }
@@ -43,7 +43,7 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
 
         if (other.CompareTag("Mercader"))
         {
-            playerCanvas?.HideMercaderPanel();
+            playerCanvas.HideMercaderPanel();
         }
     }
 }
