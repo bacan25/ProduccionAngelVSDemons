@@ -43,7 +43,31 @@ public class PlayerBulletDamage : MonoBehaviourPun
 
             DestroyBullet();
         }
-        else if (other.CompareTag("Ground"))
+        if (other.CompareTag("Player"))
+        {
+            // Manejar el daño a los enemigos
+            PhotonView playerPhotonView = other.GetComponent<PhotonView>();
+            if (playerPhotonView != null)
+            {
+                if (PhotonNetwork.OfflineMode)
+                {
+                    // Modo offline: infligir daño localmente
+                    HealthSystem playerHealth = other.GetComponent<HealthSystem>();
+                    if (playerHealth != null)
+                    {
+                        playerHealth.TakeDamage(playerBulletDamage);
+                    }
+                }
+                else
+                {
+                    // Modo online: enviar RPC para infligir daño al enemigo
+                    playerPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage, shooterView != null ? shooterView.ViewID : -1);
+                }
+            }
+
+            DestroyBullet();
+        }
+        else
         {
             DestroyBullet();
         }
