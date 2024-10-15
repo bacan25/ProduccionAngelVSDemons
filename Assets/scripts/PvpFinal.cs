@@ -11,7 +11,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     private GameObject player1;
     private GameObject player2;
     [SerializeField]private GameObject paredesFinal;
-    PlayerCanvas playerCanvas = PlayerCanvas.Instance;
+    PlayerCanvas playerCanvas;
 
     private void OnTriggerEnter(Collider col)
     {
@@ -124,7 +124,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     private void FightEnded(int winnerID, int loserID)
     {
         isFighting = false;
-        Debug.Log(isFighting);
+        PlayerCanvas playerCanvas = PlayerCanvas.Instance;
         GameObject ganador = PhotonView.Find(winnerID)?.gameObject;
         GameObject perdedor = PhotonView.Find(loserID)?.gameObject;
 
