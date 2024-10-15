@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Slot : MonoBehaviour
 {
     public Image imageComponent;
-    public Sprite newSprite;
+    public Sprite baseSprite;     // Imagen base cuando el objeto no está adquirido
+    public Sprite acquiredSprite; // Imagen cuando el objeto ha sido adquirido
     public int slotID;
 
     private void Start()
@@ -16,10 +17,13 @@ public class Slot : MonoBehaviour
 
     public void SetNewImage(bool isActive)
     {
-        if (newSprite != null)
+        if (isActive && acquiredSprite != null)
         {
-            imageComponent.sprite = newSprite;
-            imageComponent.enabled = isActive; // Activar o desactivar la imagen según el parámetro
+            imageComponent.sprite = acquiredSprite; // Imagen cuando el objeto está adquirido
+        }
+        else if (!isActive && baseSprite != null)
+        {
+            imageComponent.sprite = baseSprite; // Imagen base cuando el objeto no está adquirido
         }
     }
 }

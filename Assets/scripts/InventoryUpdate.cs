@@ -16,14 +16,6 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
             return;
         }
 
-        // Obtener referencia al ItemManager del jugador local
-        itemManager = GetComponentInParent<ItemManager>();
-
-        if (itemManager == null)
-        {
-            Debug.LogError("ItemManager no encontrado en el jugador local. Asegúrate de que el jugador tenga el componente ItemManager.");
-        }
-
         // Inicializar los slots del inventario
         allSlots = this.transform.childCount;
         slots = new Slot[allSlots];
@@ -32,6 +24,18 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
         {
             slots[i] = this.transform.GetChild(i).gameObject.GetComponent<Slot>();
         }
+
+        // Verificar si se asignó el ItemManager
+        if (itemManager == null)
+        {
+            Debug.LogError("ItemManager no asignado en InventoryUpdate. No se puede actualizar el inventario.");
+        }
+    }
+
+    // Método para asignar el ItemManager desde el script ItemManager
+    public void SetItemManager(ItemManager manager)
+    {
+        itemManager = manager;
     }
 
     public void UpdateSlot()
