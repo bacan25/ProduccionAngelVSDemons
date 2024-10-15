@@ -39,6 +39,11 @@ public class HealthSystem : MonoBehaviourPun
         UpdateHealthUI();
     }
 
+    private void Update()
+    {
+        RecoverLife();
+    }
+
     [PunRPC]
     public void TakeDamage(int damage)
     {
@@ -92,6 +97,18 @@ public class HealthSystem : MonoBehaviourPun
         else
         {
             Debug.LogError("No se pudo actualizar la barra de vida porque el slider no está asignado.");
+        }
+    }
+
+    public void RecoverLife()
+    {
+        if(playerCanvas.cantidadPociones > 0 && Input.GetKeyUp(KeyCode.Q))
+        {
+            playerCanvas.RestarPociones();
+            currentHealth += 10;
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+            UpdateHealthUI();
+
         }
     }
 }
