@@ -10,6 +10,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     private bool isFighting = false;
     private GameObject player1;
     private GameObject player2;
+    [SerializeField]private GameObject paredesFinal;
 
     private void OnTriggerEnter(Collider col)
     {
@@ -77,7 +78,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
 
         // Activa el PvP
         isFighting = true;
-
+        paredesFinal.SetActive(true); //Ponerlo en modo pun
         StartCoroutine(VerificarVidaJugadores());
     }
 
@@ -115,6 +116,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
         }
     }
 
+    //Hacer que le salga a cada uno un canvas diferente
     [PunRPC]
     private void FightEnded(int winnerID)
     {
