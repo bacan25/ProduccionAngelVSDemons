@@ -55,14 +55,14 @@ public class HealthSystem : MonoBehaviourPun
         if (currentHealth <= 0)
         {
             Debug.Log("El jugador ha muerto.");
-            Invoke("Respawn", 2f);
+            Invoke("Respawn", 0.5f);
         }
     }
 
     public void TakeFallDamage()
     {
         // Aplica todo el daño (quita toda la vida)
-        TakeDamage(currentHealth);
+        Respawn();
     }
 
     private void Respawn()

@@ -120,7 +120,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
                 photonView.RPC("FightEnded", RpcTarget.AllBuffered, player1.GetComponent<PhotonView>().ViewID, player2.GetComponent<PhotonView>().ViewID);
                 yield break;
             }
-            //yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
