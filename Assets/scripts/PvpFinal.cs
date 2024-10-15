@@ -124,7 +124,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     private void FightEnded(int winnerID, int loserID)
     {
         isFighting = false;
-
+        Debug.Log(isFighting);
         GameObject ganador = PhotonView.Find(winnerID)?.gameObject;
         GameObject perdedor = PhotonView.Find(loserID)?.gameObject;
 
@@ -133,10 +133,12 @@ public class PvpFinal : MonoBehaviourPunCallbacks
         {
             if(ganador.GetComponent<PhotonView>().IsMine)
             {
+                Debug.Log("Gané");
                 playerCanvas.WinCanvas();
             }
             else if(perdedor.GetComponent<PhotonView>().IsMine)
             {
+                Debug.Log("Perdí");
                 playerCanvas.LoseCanvas();
             }
         }
