@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class PlayerCanvas : MonoBehaviour
+public class PlayerCanvas : MonoBehaviourPun
 {
     public static PlayerCanvas Instance; // Singleton
 
@@ -22,6 +22,8 @@ public class PlayerCanvas : MonoBehaviour
     public int monedasPlayer;
     private int cantidadPociones;
 
+    private PhotonView photonView;
+
     private void Awake()
     {
         // Configuración del singleton
@@ -33,10 +35,9 @@ public class PlayerCanvas : MonoBehaviour
         {
             Destroy(gameObject); // Evitar duplicados
         }
-    }
 
-    private void Start()
-    {
+        photonView = GetComponent<PhotonView>();
+
         if (mercaderText != null)
             mercaderText.SetActive(false);
 
@@ -137,9 +138,9 @@ public class PlayerCanvas : MonoBehaviour
     }
 
     // Métodos para gestionar el panel del mercader solo para el jugador correspondiente
-    public void ShowMercaderPanel(PhotonView playerView)
+    public void ShowMercaderPanel()
     {
-        if (playerView.IsMine)
+        if (photonView.IsMine)
         {
             if (mercaderText != null)
                 mercaderText.SetActive(true);
@@ -149,9 +150,9 @@ public class PlayerCanvas : MonoBehaviour
         }
     }
 
-    public void HideMercaderPanel(PhotonView playerView)
+    public void HideMercaderPanel()
     {
-        if (playerView.IsMine)
+        if (photonView.IsMine)
         {
             if (mercaderText != null)
                 mercaderText.SetActive(false);
@@ -163,7 +164,7 @@ public class PlayerCanvas : MonoBehaviour
 
     public bool ComprarPocion(int precio)
     {
-        if (monedasPlayer >= precio)
+        if (photonView.IsMine && monedasPlayer >= precio)
         {
             monedasPlayer -= precio;
             UpdateGoldDisplay(monedasPlayer);
