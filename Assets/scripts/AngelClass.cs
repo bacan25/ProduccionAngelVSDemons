@@ -77,11 +77,12 @@ public class AngelClass : MonoBehaviourPunCallbacks
         }
     }
 
-    private void BasicAttack()
+   private void BasicAttack()
     {
         basicTimer = 0f;
 
         GameObject basicAttack = null;
+
         // Si está en modo offline, instanciar el proyectil localmente
         if (PhotonNetwork.OfflineMode || !PhotonNetwork.InRoom)
         {
@@ -100,6 +101,17 @@ public class AngelClass : MonoBehaviourPunCallbacks
             if (rb != null)
             {
                 rb.velocity = pivot.forward * bulletSpeed;
+
+                // Asignar el PhotonView del jugador que disparó la bala
+                PlayerBulletDamage bulletDamage = basicAttack.GetComponent<PlayerBulletDamage>();
+                if (bulletDamage != null)
+                {
+                    bulletDamage.SetShooter(photonView);
+                }
+                else
+                {
+                    Debug.LogError("El componente PlayerBulletDamage no se encontró en el proyectil.");
+                }
             }
             else
             {
@@ -113,7 +125,6 @@ public class AngelClass : MonoBehaviourPunCallbacks
 
         playerCanvas.UpdateAbilityCooldown("BasicAttack", 0f);
     }
-
     private void PowerAttack()
     {
         powerTimer = 0f;

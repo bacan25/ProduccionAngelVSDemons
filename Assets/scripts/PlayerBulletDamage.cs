@@ -36,7 +36,7 @@ public class PlayerBulletDamage : MonoBehaviourPun
 
             DestroyBullet();
         }
-        else if (other.CompareTag("Minion"))
+      else if (other.CompareTag("Minion"))
         {
             // Manejar el daño a los enemigos
             PhotonView enemyPhotonView = other.GetComponent<PhotonView>();
@@ -48,23 +48,23 @@ public class PlayerBulletDamage : MonoBehaviourPun
                     EnemyHealthSystem enemyHealth = other.GetComponent<EnemyHealthSystem>();
                     if (enemyHealth != null)
                     {
-                        enemyHealth.ApplyDamage(playerBulletDamage, photonView.ViewID);
-                    }
+                        enemyHealth.ApplyDamage(playerBulletDamage, shooterView.ViewID);
+                    }   
                 }
                 else
                 {
                     // Modo online: enviar RPC para infligir daño al enemigo
-                    enemyPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage, photonView.ViewID);
+                    enemyPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage, shooterView.ViewID);
                 }
             }
 
             DestroyBullet();
-        }
         else if (other.CompareTag("Ground"))
         {
             DestroyBullet();
         }
     }
+     }
 
     private void DestroyBullet()
     {
