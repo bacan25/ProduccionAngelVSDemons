@@ -46,11 +46,14 @@ public class EnemyHealthSystem : MonoBehaviourPun
         PhotonView shooterView = PhotonView.Find(shooterViewID);
         if (shooterView != null && shooterView.IsMine)
         {
-            PlayerCanvas playerCanvas = shooterView.GetComponent<PlayerCanvas>();
-            if (playerCanvas != null)
+            PlayerGoldManager playerGoldManager = shooterView.GetComponent<PlayerGoldManager>();
+            if (playerGoldManager != null)
             {
-                playerCanvas.monedasPlayer += monedas;
-                playerCanvas.SumarMonedas(monedas);
+                playerGoldManager.AddGold(monedas);
+            }
+            else
+            {
+                Debug.LogError("PlayerGoldManager no encontrado en el jugador que mató al enemigo.");
             }
         }
 
