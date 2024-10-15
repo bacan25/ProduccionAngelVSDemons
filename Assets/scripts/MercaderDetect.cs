@@ -29,9 +29,9 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
         {
             playerCanvas?.ShowMercaderPanel();
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyUp(KeyCode.Alpha1))
             {
-                int pocionPrecio = 10; // Precio de una poción
+                int pocionPrecio = 25; // Precio de una poción
                 playerCanvas?.ComprarPocion(pocionPrecio);
             }
         }
