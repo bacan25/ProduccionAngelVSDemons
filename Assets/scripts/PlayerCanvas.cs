@@ -18,7 +18,7 @@ public class PlayerCanvas : MonoBehaviour
     [SerializeField] private GameObject comprarPanel;
 
     public int monedasPlayer;
-    private int cantidadPociones;
+    public int cantidadPociones;
 
     private void Awake()
     {
