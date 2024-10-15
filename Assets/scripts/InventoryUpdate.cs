@@ -7,15 +7,24 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
     public int allSlots;
     public Slot[] slots;
 
-    private void Awake()
+    private void Start()
     {
-        // Desactivar el script si no pertenece al jugador local
+        // Solo el jugador local debe tener acceso a su propio inventario
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
         {
             enabled = false;
             return;
         }
 
+        // Obtener referencia al ItemManager del jugador local
+        itemManager = GetComponentInParent<ItemManager>();
+
+        if (itemManager == null)
+        {
+            Debug.LogError("ItemManager no encontrado en el jugador local. Asegúrate de que el jugador tenga el componente ItemManager.");
+        }
+
+        // Inicializar los slots del inventario
         allSlots = this.transform.childCount;
         slots = new Slot[allSlots];
 
@@ -23,11 +32,6 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
         {
             slots[i] = this.transform.GetChild(i).gameObject.GetComponent<Slot>();
         }
-    }
-
-    public void SetItemManager(ItemManager manager)
-    {
-        itemManager = manager;
     }
 
     public void UpdateSlot()

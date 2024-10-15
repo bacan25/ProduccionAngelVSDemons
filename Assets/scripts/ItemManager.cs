@@ -1,6 +1,5 @@
 using Photon.Pun;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,26 +32,19 @@ public class ItemManager : MonoBehaviourPun
         // Solo el jugador local debe buscar estos componentes
         if (photonView.IsMine)
         {
-            // Obtener el PanelInventario
-            inventory = GameObject.Find("PanelInventario");
-            if (inventory != null)
+            // Obtener el InventoryUpdate del jugador local
+            inventoryUpdate = GetComponentInChildren<InventoryUpdate>();
+
+            if (inventoryUpdate != null)
             {
-                inventoryUpdate = inventory.GetComponent<InventoryUpdate>();
-                if (inventoryUpdate == null)
-                {
-                    Debug.LogError("InventoryUpdate no encontrado en el objeto PanelInventario. Asegúrate de que PanelInventario tenga el componente InventoryUpdate.");
-                }
-                else
-                {
-                    inventoryUpdate.SetItemManager(this); // Aquí se asigna el ItemManager al InventoryUpdate
-                }
+                inventoryUpdate.SetItemManager(this); // Asignar este ItemManager al InventoryUpdate
             }
             else
             {
-                Debug.LogError("PanelInventario no encontrado. Asegúrate de que el objeto PanelInventario existe en la escena.");
+                Debug.LogError("InventoryUpdate no encontrado en el jugador local. Asegúrate de que el PanelInventario está en la jerarquía del jugador.");
             }
 
-            // Buscar el componente Text en los hijos de PanelInventario
+            // Buscar el componente Text en el inventario del jugador local
             uiPanel = GameObject.Find("PanelInventario");
             if (uiPanel != null)
             {
