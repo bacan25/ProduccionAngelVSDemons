@@ -8,7 +8,9 @@ public class ItemManager : MonoBehaviourPun
     public int ID;
     public string nombre;
     public InventoryUpdate inventoryUpdate;
+    public InventoryUpdate skillsUpdate;
     public GameObject inventory;
+    public GameObject skills;
     public Move_Player move_Player;
 
     public GameObject[] wings;
@@ -42,6 +44,7 @@ public class ItemManager : MonoBehaviourPun
         if (hubTransform != null)
         {
             inventory = hubTransform.Find("PanelInventario")?.gameObject;
+            skills = hubTransform.Find("PanelSkills")?.gameObject;
         }
 
         if (inventory != null)
@@ -49,7 +52,7 @@ public class ItemManager : MonoBehaviourPun
             inventoryUpdate = inventory.GetComponent<InventoryUpdate>();
             if (inventoryUpdate != null)
             {
-                inventoryUpdate.SetItemManager(this);  // Asignar este ItemManager al InventoryUpdate
+                inventoryUpdate.SetItemManager(this);  // Asignar este ItemManager al InventoryUpdate de PanelInventario
             }
             else
             {
@@ -59,6 +62,23 @@ public class ItemManager : MonoBehaviourPun
         else
         {
             Debug.LogError("PanelInventario no encontrado en el HUB. Asegúrate de que el objeto PanelInventario exista en la jerarquía del HUB.");
+        }
+
+        if (skills != null)
+        {
+            skillsUpdate = skills.GetComponent<InventoryUpdate>();
+            if (skillsUpdate != null)
+            {
+                skillsUpdate.SetItemManager(this);  // Asignar este ItemManager al InventoryUpdate de PanelSkills
+            }
+            else
+            {
+                Debug.LogError("InventoryUpdate no encontrado en el objeto PanelSkills. Asegúrate de que PanelSkills tenga el componente InventoryUpdate.");
+            }
+        }
+        else
+        {
+            Debug.LogError("PanelSkills no encontrado en el HUB. Asegúrate de que el objeto PanelSkills exista en la jerarquía del HUB.");
         }
 
         // Buscar el componente Text en los hijos de PanelInventario
@@ -109,11 +129,30 @@ public class ItemManager : MonoBehaviourPun
                 Debug.LogError("InventoryUpdate no asignado en ItemManager. No se puede actualizar el inventario.");
             }
 
+            if (skillsUpdate != null)
+            {
+                skillsUpdate.UpdateSlot();
+            }
+            else
+            {
+                Debug.LogError("SkillsUpdate no asignado en ItemManager. No se puede actualizar las habilidades.");
+            }
+
             // Destruir el item si tiene un PhotonView y el jugador es el propietario
             PhotonView photonViewObj = other.GetComponent<PhotonView>();
             if (photonViewObj != null && photonViewObj.IsMine)
             {
                 PhotonNetwork.Destroy(other.gameObject);
+            }
+            if (ID== 1)
+            {
+                move_Player.doubleJumpAbility = true;
+
+            }
+            if (ID== 2)
+            {
+                move_Player.climbAbility = true;
+
             }
 
             // Realizar acciones según el ID del objeto
