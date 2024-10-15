@@ -11,11 +11,11 @@ public class PlayerCanvas : MonoBehaviour
     [SerializeField] private Image basicAbilityCooldownImage;
     [SerializeField] private Image powerAbilityCooldownImage;
 
-    [SerializeField] private Text monedasText; // Texto que muestra la cantidad de monedas
-    [SerializeField] private Text pocionesText; // Texto que muestra la cantidad de pociones
-    public ItemManager counter;
+    [SerializeField] private Text monedasText;
+    [SerializeField] private Text pocionesText;
 
     public int monedasPlayer;
+    private int cantidadPociones;
 
     private void Awake()
     {
@@ -78,50 +78,6 @@ public class PlayerCanvas : MonoBehaviour
         loseCanvas.SetActive(true);
     }
 
-    public void SumarMonedas(int cantidad)
-    {
-        monedasPlayer += cantidad;
-        UpdateGoldDisplay(monedasPlayer); // Llama a la actualización del texto de las monedas
-    }
-
-    public void RestarMonedas(int cantidad)
-    {
-        if (monedasPlayer >= cantidad)
-        {
-            monedasPlayer -= cantidad;
-            UpdateGoldDisplay(monedasPlayer);
-        }
-        else
-        {
-            Debug.LogWarning("No hay suficientes monedas para restar.");
-        }
-    }
-
-    public void SumarPociones()
-    {
-        if (pocionesText != null && counter != null)
-        {
-            pocionesText.text = counter.pociones.ToString();
-        }
-        else
-        {
-            Debug.LogError("Texto de pociones o ItemManager no asignado en el PlayerCanvas.");
-        }
-    }
-
-    public void RestarPociones()
-    {
-        if (pocionesText != null && counter != null)
-        {
-            pocionesText.text = counter.pociones.ToString();
-        }
-        else
-        {
-            Debug.LogError("Texto de pociones o ItemManager no asignado en el PlayerCanvas.");
-        }
-    }
-
-    // Cambiado a public para que pueda ser llamado desde otros scripts
     public void UpdateGoldDisplay(int newGoldAmount)
     {
         if (monedasText != null)
@@ -131,6 +87,24 @@ public class PlayerCanvas : MonoBehaviour
         else
         {
             Debug.LogError("Texto de monedas no asignado en el PlayerCanvas.");
+        }
+    }
+
+    public void SumarPociones()
+    {
+        cantidadPociones++;
+        UpdatePocionesDisplay();
+    }
+
+    private void UpdatePocionesDisplay()
+    {
+        if (pocionesText != null)
+        {
+            pocionesText.text = cantidadPociones.ToString();
+        }
+        else
+        {
+            Debug.LogError("Texto de pociones no asignado en el PlayerCanvas.");
         }
     }
 }

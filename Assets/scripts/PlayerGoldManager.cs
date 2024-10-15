@@ -29,13 +29,11 @@ public class PlayerGoldManager : MonoBehaviourPun
     {
         if (PhotonNetwork.OfflineMode)
         {
-            // En modo offline, simplemente sumar el oro localmente
             currentGold += amount;
             UpdateGoldUI();
         }
         else if (photonView.IsMine)
         {
-            // Enviar un RPC para sumar el oro solo al jugador propietario
             photonView.RPC("RPC_AddGold", RpcTarget.AllBuffered, amount);
         }
     }
@@ -45,6 +43,22 @@ public class PlayerGoldManager : MonoBehaviourPun
     {
         currentGold += amount;
         UpdateGoldUI();
+    }
+
+    // Método para restar oro cuando se compra una poción
+    public bool SpendGold(int amount)
+    {
+        if (currentGold >= amount)
+        {
+            currentGold -= amount;
+            UpdateGoldUI();
+            return true; // Compra exitosa
+        }
+        else
+        {
+            Debug.LogWarning("No hay suficiente oro para realizar la compra.");
+            return false; // No hay suficiente oro
+        }
     }
 
     // Método para actualizar la interfaz gráfica del oro
