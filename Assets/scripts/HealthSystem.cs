@@ -55,7 +55,7 @@ public class HealthSystem : MonoBehaviourPun
         if (currentHealth <= 0)
         {
             Debug.Log("El jugador ha muerto.");
-            //Respawn();
+            Invoke("Respawn", 2f);
         }
     }
 
