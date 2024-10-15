@@ -16,19 +16,11 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
             return;
         }
 
-        // Intentar obtener la referencia del ItemManager del jugador local
-        GameObject localPlayer = GameObject.FindWithTag("Player"); // Asumiendo que el jugador tiene la etiqueta "Player"
-        if (localPlayer != null)
+        // Intentar obtener la referencia del ItemManager del jugador local usando una mejor manera de acceder al componente correcto
+        itemManager = FindObjectOfType<ItemManager>(); // Busca el ItemManager en la escena (mejor en el contexto multijugador)
+        if (itemManager == null)
         {
-            itemManager = localPlayer.GetComponent<ItemManager>();
-            if (itemManager == null)
-            {
-                Debug.LogError("ItemManager no encontrado en el jugador local. Asegúrate de que el script esté asignado correctamente.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Jugador local no encontrado en la escena. Asegúrate de que el objeto jugador esté presente.");
+            Debug.LogError("ItemManager no encontrado. Asegúrate de que el script esté asignado correctamente al jugador local.");
         }
     }
 
