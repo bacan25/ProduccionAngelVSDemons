@@ -4,6 +4,7 @@ using UnityEngine;
 public class MercaderDetect : MonoBehaviourPunCallbacks
 {
     private PlayerCanvas playerCanvas;
+    private bool isBuying = false;
 
     private void Awake()
     {
@@ -21,26 +22,30 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
         }
     }
 
-    void OnTriggerStay(Collider other)
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Alpha1) && isBuying==true)
+        {
+            int pocionPrecio = 25; // Precio de una poción
+            playerCanvas?.ComprarPocion(pocionPrecio);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (!photonView.IsMine) return; // Solo el jugador local debe mostrar el panel de la tienda
-
+        isBuying = true;
         if (other.CompareTag("Mercader"))
         {
             playerCanvas.ShowMercaderPanel();
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                int pocionPrecio = 10; // Precio de una poción
-                playerCanvas.ComprarPocion(pocionPrecio);
-            }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
         if (!photonView.IsMine) return; // Solo el jugador local debe ocultar el panel de la tienda
-
+        isBuying=false;
         if (other.CompareTag("Mercader"))
         {
             playerCanvas.HideMercaderPanel();
