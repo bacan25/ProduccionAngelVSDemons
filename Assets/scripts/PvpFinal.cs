@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using Photon.Pun;
 
@@ -13,6 +14,10 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     [SerializeField]private GameObject paredesFinal;
     PlayerCanvas playerCanvas;
 
+    void VueltaInicio()
+    {
+        SceneManager.LoadScene(0);
+    }
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player"))
@@ -135,11 +140,13 @@ public class PvpFinal : MonoBehaviourPunCallbacks
             {
                 Debug.Log("Gané");
                 playerCanvas.WinCanvas();
+                Invoke("VueltaInicio",4f);
             }
             else if(perdedor.GetComponent<PhotonView>().IsMine)
             {
                 Debug.Log("Perdí");
                 playerCanvas.LoseCanvas();
+                Invoke("VueltaInicio",4f);
             }
         }
         else
