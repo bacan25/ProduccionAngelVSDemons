@@ -96,6 +96,19 @@ public class PlayerCanvas : MonoBehaviour
         UpdatePocionesDisplay();
     }
 
+    public void RestarPociones()
+    {
+        if (cantidadPociones > 0)
+        {
+            cantidadPociones--;
+            UpdatePocionesDisplay();
+        }
+        else
+        {
+            Debug.LogWarning("No hay más pociones para restar.");
+        }
+    }
+
     private void UpdatePocionesDisplay()
     {
         if (pocionesText != null)
