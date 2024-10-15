@@ -27,7 +27,7 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
 
         if (other.CompareTag("Mercader"))
         {
-            playerCanvas?.ShowMercaderPanel();
+            playerCanvas?.ShowMercaderPanel(photonView);
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
@@ -43,7 +43,7 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
 
         if (other.CompareTag("Mercader"))
         {
-            playerCanvas?.HideMercaderPanel();
+            playerCanvas?.HideMercaderPanel(photonView);
         }
     }
 }

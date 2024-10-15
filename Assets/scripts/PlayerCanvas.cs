@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class PlayerCanvas : MonoBehaviour
 {
     public static PlayerCanvas Instance; // Singleton
+
     [SerializeField] private Slider healthBar;
     [SerializeField] private GameObject winCanvas;
     [SerializeField] private GameObject loseCanvas;
@@ -134,23 +136,29 @@ public class PlayerCanvas : MonoBehaviour
         }
     }
 
-    // Métodos para gestionar el panel del mercader
-    public void ShowMercaderPanel()
+    // Métodos para gestionar el panel del mercader solo para el jugador correspondiente
+    public void ShowMercaderPanel(PhotonView playerView)
     {
-        if (mercaderText != null)
-            mercaderText.SetActive(true);
+        if (playerView.IsMine)
+        {
+            if (mercaderText != null)
+                mercaderText.SetActive(true);
 
-        if (comprarPanel != null)
-            comprarPanel.SetActive(true);
+            if (comprarPanel != null)
+                comprarPanel.SetActive(true);
+        }
     }
 
-    public void HideMercaderPanel()
+    public void HideMercaderPanel(PhotonView playerView)
     {
-        if (mercaderText != null)
-            mercaderText.SetActive(false);
+        if (playerView.IsMine)
+        {
+            if (mercaderText != null)
+                mercaderText.SetActive(false);
 
-        if (comprarPanel != null)
-            comprarPanel.SetActive(false);
+            if (comprarPanel != null)
+                comprarPanel.SetActive(false);
+        }
     }
 
     public bool ComprarPocion(int precio)
