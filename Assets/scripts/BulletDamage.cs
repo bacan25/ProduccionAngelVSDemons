@@ -36,7 +36,7 @@ public class BulletDamage : MonoBehaviourPun
                     var healthSystem = other.GetComponent<HealthSystem>();
                     if (healthSystem != null)
                     {
-                        healthSystem.TakeDamage(10);  // Ejemplo: 10 de daño
+                        healthSystem.TakeDamage(20);  // Ejemplo: 10 de daño
                     }
                 }
                 else

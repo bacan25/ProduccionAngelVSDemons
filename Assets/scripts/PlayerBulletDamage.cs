@@ -61,7 +61,7 @@ public class PlayerBulletDamage : MonoBehaviourPun
                 else
                 {
                     // Modo online: enviar RPC para infligir daño al enemigo
-                    playerPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage, shooterView != null ? shooterView.ViewID : -1);
+                    playerPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
                 }
             }
 

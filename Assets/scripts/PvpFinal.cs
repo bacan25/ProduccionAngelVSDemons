@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using Photon.Pun;
 
@@ -11,8 +12,12 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     private GameObject player1;
     private GameObject player2;
     [SerializeField]private GameObject paredesFinal;
-    PlayerCanvas playerCanvas = PlayerCanvas.Instance;
+    PlayerCanvas playerCanvas;
 
+    void VueltaInicio()
+    {
+        SceneManager.LoadScene(0);
+    }
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player"))
@@ -115,7 +120,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
                 photonView.RPC("FightEnded", RpcTarget.AllBuffered, player1.GetComponent<PhotonView>().ViewID, player2.GetComponent<PhotonView>().ViewID);
                 yield break;
             }
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
     }
 
@@ -124,7 +129,7 @@ public class PvpFinal : MonoBehaviourPunCallbacks
     private void FightEnded(int winnerID, int loserID)
     {
         isFighting = false;
-
+        PlayerCanvas playerCanvas = PlayerCanvas.Instance;
         GameObject ganador = PhotonView.Find(winnerID)?.gameObject;
         GameObject perdedor = PhotonView.Find(loserID)?.gameObject;
 
@@ -133,11 +138,15 @@ public class PvpFinal : MonoBehaviourPunCallbacks
         {
             if(ganador.GetComponent<PhotonView>().IsMine)
             {
+                Debug.Log("Gané");
                 playerCanvas.WinCanvas();
+                Invoke("VueltaInicio",4f);
             }
             else if(perdedor.GetComponent<PhotonView>().IsMine)
             {
+                Debug.Log("Perdí");
                 playerCanvas.LoseCanvas();
+                Invoke("VueltaInicio",4f);
             }
         }
         else
