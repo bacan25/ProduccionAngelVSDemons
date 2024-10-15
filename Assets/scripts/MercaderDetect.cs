@@ -15,24 +15,39 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
             return;
         }
 
+        // Buscar los objetos del UI relacionados con el mercader solo para el jugador local
         mercaderText = GameObject.Find("MercaderText");
         comprarPanel = GameObject.Find("ComprarPanel");
+
+        // Si el jugador local no puede encontrar estos objetos, hay un error en la configuración de la escena
+        if (mercaderText == null || comprarPanel == null)
+        {
+            Debug.LogError("MercaderText o ComprarPanel no encontrado en la escena. Asegúrate de que están asignados correctamente.");
+        }
     }
 
     private void Start()
     {
+        // Ocultar el texto y el panel de compra inicialmente para el jugador local
         if (mercaderText != null)
             mercaderText.SetActive(false);
-        
+
         if (comprarPanel != null)
             comprarPanel.SetActive(false);
-        
-        // Obtener la referencia al PlayerGoldManager del jugador
+
+        // Obtener la referencia al PlayerGoldManager del jugador local
         playerGoldManager = GetComponent<PlayerGoldManager>();
+
+        if (playerGoldManager == null)
+        {
+            Debug.LogError("PlayerGoldManager no encontrado en el jugador. Asegúrate de que el componente está asignado correctamente.");
+        }
     }
 
     void OnTriggerStay(Collider other)
     {
+        if (!photonView.IsMine) return; // Solo el jugador local debe mostrar el panel de la tienda
+
         if (other.CompareTag("Mercader"))
         {
             if (mercaderText != null)
@@ -50,6 +65,8 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
 
     void OnTriggerExit(Collider other)
     {
+        if (!photonView.IsMine) return; // Solo el jugador local debe ocultar el panel de la tienda
+
         if (other.CompareTag("Mercader"))
         {
             if (mercaderText != null)
@@ -69,7 +86,7 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
             bool compraExitosa = playerGoldManager.SpendGold(pocionPrecio);
             if (compraExitosa)
             {
-                PlayerCanvas.Instance.SumarPociones(); // Actualizar la UI de las pociones
+                PlayerCanvas.Instance.SumarPociones(); // Actualizar la UI de las pociones solo para el jugador local
                 Debug.Log("Poción comprada con éxito!");
             }
             else
