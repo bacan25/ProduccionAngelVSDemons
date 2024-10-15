@@ -44,7 +44,7 @@ public class ItemManager : MonoBehaviourPun
         if (hubTransform != null)
         {
             inventory = hubTransform.Find("PanelInventario")?.gameObject;
-            skills = hubTransform.Find("PanelSkills")?.gameObject;
+            skills = hubTransform.Find("PanelSkills/Skills")?.gameObject; // Modificación para encontrar Skills dentro de PanelSkills
         }
 
         if (inventory != null)
@@ -69,16 +69,16 @@ public class ItemManager : MonoBehaviourPun
             skillsUpdate = skills.GetComponent<InventoryUpdate>();
             if (skillsUpdate != null)
             {
-                skillsUpdate.SetItemManager(this);  // Asignar este ItemManager al InventoryUpdate de PanelSkills
+                skillsUpdate.SetItemManager(this);  // Asignar este ItemManager al InventoryUpdate de Skills
             }
             else
             {
-                Debug.LogError("InventoryUpdate no encontrado en el objeto PanelSkills. Asegúrate de que PanelSkills tenga el componente InventoryUpdate.");
+                Debug.LogError("InventoryUpdate no encontrado en el objeto Skills. Asegúrate de que Skills tenga el componente InventoryUpdate.");
             }
         }
         else
         {
-            Debug.LogError("PanelSkills no encontrado en el HUB. Asegúrate de que el objeto PanelSkills exista en la jerarquía del HUB.");
+            Debug.LogError("Skills no encontrado en el PanelSkills. Asegúrate de que el objeto Skills exista en la jerarquía de PanelSkills.");
         }
 
         // Buscar el componente Text en los hijos de PanelInventario
@@ -144,15 +144,15 @@ public class ItemManager : MonoBehaviourPun
             {
                 PhotonNetwork.Destroy(other.gameObject);
             }
-            if (ID== 1)
+
+            // Actualizar habilidades del jugador según el ID del objeto recogido
+            if (ID == 1)
             {
                 move_Player.doubleJumpAbility = true;
-
             }
-            if (ID== 2)
+            if (ID == 2)
             {
                 move_Player.climbAbility = true;
-
             }
 
             // Realizar acciones según el ID del objeto
