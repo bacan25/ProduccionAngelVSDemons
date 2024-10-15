@@ -9,26 +9,29 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+        // Este script solo se debe habilitar para el jugador local
+        if (!PhotonNetwork.IsConnected || photonView.IsMine)
         {
-            enabled = false;
-            return;
-        }
-
-        // Buscar el ItemManager del jugador local
-        foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            var playerPhotonView = player.GetComponent<PhotonView>();
-            if (playerPhotonView != null && playerPhotonView.IsMine)
+            // Buscar el ItemManager del jugador local
+            foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
             {
-                itemManager = player.GetComponent<ItemManager>();
-                break;
+                var playerPhotonView = player.GetComponent<PhotonView>();
+                if (playerPhotonView != null && playerPhotonView.IsMine)
+                {
+                    itemManager = player.GetComponent<ItemManager>();
+                    break;
+                }
+            }
+
+            if (itemManager == null)
+            {
+                Debug.LogError("ItemManager no encontrado para el jugador local. Asegúrate de que el jugador tiene el componente ItemManager.");
             }
         }
-
-        if (itemManager == null)
+        else
         {
-            Debug.LogError("ItemManager no encontrado para el jugador local. Asegúrate de que el jugador tiene el componente ItemManager.");
+            // Si no es el jugador local, desactiva este script para evitar conflictos
+            enabled = false;
         }
     }
 
