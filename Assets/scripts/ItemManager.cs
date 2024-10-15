@@ -31,34 +31,38 @@ public class ItemManager : MonoBehaviourPun
             return;
         }
 
-        // Obtener el PanelInventario
-        inventory = GameObject.Find("PanelInventario");
-        if (inventory != null)
+        // Solo el jugador local debe buscar estos componentes
+        if (photonView.IsMine)
         {
-            inventoryUpdate = inventory.GetComponent<InventoryUpdate>();
-            if (inventoryUpdate == null)
+            // Obtener el PanelInventario
+            inventory = GameObject.Find("PanelInventario");
+            if (inventory != null)
             {
-                Debug.LogError("InventoryUpdate no encontrado en el objeto PanelInventario. Asegúrate de que PanelInventario tenga el componente InventoryUpdate.");
+                inventoryUpdate = inventory.GetComponent<InventoryUpdate>();
+                if (inventoryUpdate == null)
+                {
+                    Debug.LogError("InventoryUpdate no encontrado en el objeto PanelInventario. Asegúrate de que PanelInventario tenga el componente InventoryUpdate.");
+                }
             }
-        }
-        else
-        {
-            Debug.LogError("PanelInventario no encontrado. Asegúrate de que el objeto PanelInventario existe en la escena.");
-        }
+            else
+            {
+                Debug.LogError("PanelInventario no encontrado. Asegúrate de que el objeto PanelInventario existe en la escena.");
+            }
 
-        // Buscar el componente Text en los hijos de PanelInventario
-        uiPanel = GameObject.Find("PanelInventario");
-        if (uiPanel != null)
-        {
-            uiText = uiPanel.GetComponentInChildren<Text>();
-            if (uiText == null)
+            // Buscar el componente Text en los hijos de PanelInventario
+            uiPanel = GameObject.Find("PanelInventario");
+            if (uiPanel != null)
             {
-                Debug.LogError("Text no encontrado en los hijos de PanelInventario. Asegúrate de que haya un componente Text en uno de los hijos.");
+                uiText = uiPanel.GetComponentInChildren<Text>();
+                if (uiText == null)
+                {
+                    Debug.LogError("Text no encontrado en los hijos de PanelInventario. Asegúrate de que haya un componente Text en uno de los hijos.");
+                }
             }
-        }
-        else
-        {
-            Debug.LogError("PanelInventario no encontrado para buscar el Text.");
+            else
+            {
+                Debug.LogError("PanelInventario no encontrado para buscar el Text.");
+            }
         }
     }
 
