@@ -1,7 +1,5 @@
-using JetBrains.Annotations;
 using Photon.Pun;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,7 +24,6 @@ public class ItemManager : MonoBehaviourPun
     {
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
         {
-            // Asegurarse de que solo el jugador local maneje el inventario
             enabled = false;
             return;
         }
@@ -34,19 +31,19 @@ public class ItemManager : MonoBehaviourPun
         // Solo el jugador local debe buscar estos componentes
         if (photonView.IsMine)
         {
-            // Obtener el PanelInventario
-            inventory = GameObject.Find("PanelInventario");
-            if (inventory != null)
+            // Obtener el InventoryUpdate del Canvas
+            var inventoryCanvas = GameObject.Find("InventoryCanvas");
+            if (inventoryCanvas != null)
             {
-                inventoryUpdate = inventory.GetComponent<InventoryUpdate>();
+                inventoryUpdate = inventoryCanvas.GetComponentInChildren<InventoryUpdate>();
                 if (inventoryUpdate == null)
                 {
-                    Debug.LogError("InventoryUpdate no encontrado en el objeto PanelInventario. Asegúrate de que PanelInventario tenga el componente InventoryUpdate.");
+                    Debug.LogError("InventoryUpdate no encontrado en el InventoryCanvas.");
                 }
             }
             else
             {
-                Debug.LogError("PanelInventario no encontrado. Asegúrate de que el objeto PanelInventario existe en la escena.");
+                Debug.LogError("InventoryCanvas no encontrado. Asegúrate de que el objeto InventoryCanvas existe en la escena.");
             }
 
             // Buscar el componente Text en los hijos de PanelInventario
@@ -56,7 +53,7 @@ public class ItemManager : MonoBehaviourPun
                 uiText = uiPanel.GetComponentInChildren<Text>();
                 if (uiText == null)
                 {
-                    Debug.LogError("Text no encontrado en los hijos de PanelInventario. Asegúrate de que haya un componente Text en uno de los hijos.");
+                    Debug.LogError("Text no encontrado en los hijos de PanelInventario.");
                 }
             }
             else
