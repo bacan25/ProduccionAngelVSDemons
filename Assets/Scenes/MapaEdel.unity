@@ -9061,7 +9061,7 @@ PrefabInstance:
     - target: {fileID: 1560568309227131753, guid: d2dca7151d4ac464ab600fbb56761bdb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1754672261158881384, guid: d2dca7151d4ac464ab600fbb56761bdb,
         type: 3}
@@ -9201,6 +9201,16 @@ PrefabInstance:
       propertyPath: loseCanvas
       value: 
       objectReference: {fileID: 922640842}
+    - target: {fileID: 3866275237853664941, guid: d2dca7151d4ac464ab600fbb56761bdb,
+        type: 3}
+      propertyPath: comprarPanel
+      value: 
+      objectReference: {fileID: 1756200437}
+    - target: {fileID: 3866275237853664941, guid: d2dca7151d4ac464ab600fbb56761bdb,
+        type: 3}
+      propertyPath: mercaderText
+      value: 
+      objectReference: {fileID: 1405782710}
     - target: {fileID: 4129744148393198104, guid: d2dca7151d4ac464ab600fbb56761bdb,
         type: 3}
       propertyPath: sceneViewId
@@ -9214,7 +9224,7 @@ PrefabInstance:
     - target: {fileID: 4478277673808986034, guid: d2dca7151d4ac464ab600fbb56761bdb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4679800114339240614, guid: d2dca7151d4ac464ab600fbb56761bdb,
         type: 3}

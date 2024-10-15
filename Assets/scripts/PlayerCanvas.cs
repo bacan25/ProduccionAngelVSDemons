@@ -14,6 +14,9 @@ public class PlayerCanvas : MonoBehaviour
     [SerializeField] private Text monedasText;
     [SerializeField] private Text pocionesText;
 
+    [SerializeField] private GameObject mercaderText;
+    [SerializeField] private GameObject comprarPanel;
+
     public int monedasPlayer;
     private int cantidadPociones;
 
@@ -28,6 +31,15 @@ public class PlayerCanvas : MonoBehaviour
         {
             Destroy(gameObject); // Evitar duplicados
         }
+    }
+
+    private void Start()
+    {
+        if (mercaderText != null)
+            mercaderText.SetActive(false);
+
+        if (comprarPanel != null)
+            comprarPanel.SetActive(false);
     }
 
     public void UpdateHealthBar(float healthPercent)
@@ -82,7 +94,8 @@ public class PlayerCanvas : MonoBehaviour
     {
         if (monedasText != null)
         {
-            monedasText.text = newGoldAmount.ToString();
+            monedasPlayer = newGoldAmount;
+            monedasText.text = monedasPlayer.ToString();
         }
         else
         {
@@ -118,6 +131,42 @@ public class PlayerCanvas : MonoBehaviour
         else
         {
             Debug.LogError("Texto de pociones no asignado en el PlayerCanvas.");
+        }
+    }
+
+    // Métodos para gestionar el panel del mercader
+    public void ShowMercaderPanel()
+    {
+        if (mercaderText != null)
+            mercaderText.SetActive(true);
+
+        if (comprarPanel != null)
+            comprarPanel.SetActive(true);
+    }
+
+    public void HideMercaderPanel()
+    {
+        if (mercaderText != null)
+            mercaderText.SetActive(false);
+
+        if (comprarPanel != null)
+            comprarPanel.SetActive(false);
+    }
+
+    public bool ComprarPocion(int precio)
+    {
+        if (monedasPlayer >= precio)
+        {
+            monedasPlayer -= precio;
+            UpdateGoldDisplay(monedasPlayer);
+            SumarPociones();
+            Debug.Log("Poción comprada con éxito!");
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning("No tienes suficiente oro para comprar una poción.");
+            return false;
         }
     }
 }

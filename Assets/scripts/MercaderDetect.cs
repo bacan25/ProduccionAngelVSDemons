@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class MercaderDetect : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private GameObject mercaderText;
-    [SerializeField] private GameObject comprarPanel;
-    private PlayerGoldManager playerGoldManager;
+    private PlayerCanvas playerCanvas;
 
     private void Awake()
     {
@@ -15,23 +13,11 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
             return;
         }
 
-        // Ya no necesitamos usar GameObject.Find. Asignar mercaderText y comprarPanel en el Inspector de Unity.
-    }
-
-    private void Start()
-    {
-        if (mercaderText != null)
-            mercaderText.SetActive(false);
-
-        if (comprarPanel != null)
-            comprarPanel.SetActive(false);
-
-        // Obtener la referencia al PlayerGoldManager del jugador
-        playerGoldManager = GetComponent<PlayerGoldManager>();
-
-        if (playerGoldManager == null)
+        // Obtener referencia al PlayerCanvas del jugador local
+        playerCanvas = PlayerCanvas.Instance;
+        if (playerCanvas == null)
         {
-            Debug.LogError("PlayerGoldManager no encontrado en el jugador. Asegúrate de que el componente está asignado correctamente.");
+            Debug.LogError("PlayerCanvas no encontrado. Asegúrate de que el Canvas del jugador esté en la escena.");
         }
     }
 
@@ -41,15 +27,12 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
 
         if (other.CompareTag("Mercader"))
         {
-            if (mercaderText != null)
-                mercaderText.SetActive(true);
-
-            if (comprarPanel != null)
-                comprarPanel.SetActive(true);
+            playerCanvas?.ShowMercaderPanel();
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                ComprarPocion();
+                int pocionPrecio = 10; // Precio de una poción
+                playerCanvas?.ComprarPocion(pocionPrecio);
             }
         }
     }
@@ -60,30 +43,7 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
 
         if (other.CompareTag("Mercader"))
         {
-            if (mercaderText != null)
-                mercaderText.SetActive(false);
-
-            if (comprarPanel != null)
-                comprarPanel.SetActive(false);
-        }
-    }
-
-    private void ComprarPocion()
-    {
-        int pocionPrecio = 10; // Precio de una poción
-
-        if (playerGoldManager != null)
-        {
-            bool compraExitosa = playerGoldManager.SpendGold(pocionPrecio);
-            if (compraExitosa)
-            {
-                PlayerCanvas.Instance.SumarPociones(); // Actualizar la UI de las pociones solo para el jugador local
-                Debug.Log("Poción comprada con éxito!");
-            }
-            else
-            {
-                Debug.LogWarning("No tienes suficiente oro para comprar una poción.");
-            }
+            playerCanvas?.HideMercaderPanel();
         }
     }
 }
