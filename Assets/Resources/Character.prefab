@@ -641,9 +641,7 @@ MonoBehaviour:
   ID: 0
   nombre: 
   inventoryUpdate: {fileID: 0}
-  skillsUpdate: {fileID: 0}
   inventory: {fileID: 0}
-  skills: {fileID: 0}
   move_Player: {fileID: 2762129899826143140}
   wings:
   - {fileID: 0}

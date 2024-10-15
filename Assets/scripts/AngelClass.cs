@@ -106,7 +106,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
                 PlayerBulletDamage bulletDamage = basicAttack.GetComponent<PlayerBulletDamage>();
                 if (bulletDamage != null)
                 {
-                    bulletDamage.SetShooter(photonView);
+                    bulletDamage.SetShooter(photonView); // Asignar el PhotonView del jugador que disparó la bala
                 }
                 else
                 {
@@ -125,6 +125,7 @@ public class AngelClass : MonoBehaviourPunCallbacks
 
         playerCanvas.UpdateAbilityCooldown("BasicAttack", 0f);
     }
+
     private void PowerAttack()
     {
         powerTimer = 0f;

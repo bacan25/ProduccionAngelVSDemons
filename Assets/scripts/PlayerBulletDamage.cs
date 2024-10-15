@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerBulletDamage : MonoBehaviourPun
 {
     public int playerBulletDamage;
+    private PhotonView shooterView; // Referencia al jugador que disparó la bala
 
     private void Start()
     {
@@ -11,32 +12,14 @@ public class PlayerBulletDamage : MonoBehaviourPun
         Invoke(nameof(DestroyBullet), 4f);
     }
 
+    public void SetShooter(PhotonView shooter)
+    {
+        shooterView = shooter;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            PhotonView targetPhotonView = other.GetComponent<PhotonView>();
-            if (targetPhotonView != null)
-            {
-                if (PhotonNetwork.OfflineMode)
-                {
-                    // Modo offline: infligir daño localmente
-                    HealthSystem playerHealth = other.GetComponent<HealthSystem>();
-                    if (playerHealth != null)
-                    {
-                        playerHealth.TakeDamage(playerBulletDamage);
-                    }
-                }
-                else
-                {
-                    // Modo online: enviar RPC para infligir daño
-                    targetPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
-                }
-            }
-
-            DestroyBullet();
-        }
-      else if (other.CompareTag("Minion"))
+        if (other.CompareTag("Minion"))
         {
             // Manejar el daño a los enemigos
             PhotonView enemyPhotonView = other.GetComponent<PhotonView>();
@@ -48,23 +31,23 @@ public class PlayerBulletDamage : MonoBehaviourPun
                     EnemyHealthSystem enemyHealth = other.GetComponent<EnemyHealthSystem>();
                     if (enemyHealth != null)
                     {
-                        enemyHealth.ApplyDamage(playerBulletDamage, shooterView.ViewID);
-                    }   
+                        enemyHealth.ApplyDamage(playerBulletDamage, shooterView != null ? shooterView.ViewID : -1);
+                    }
                 }
                 else
                 {
                     // Modo online: enviar RPC para infligir daño al enemigo
-                    enemyPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage, shooterView.ViewID);
+                    enemyPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage, shooterView != null ? shooterView.ViewID : -1);
                 }
             }
 
             DestroyBullet();
+        }
         else if (other.CompareTag("Ground"))
         {
             DestroyBullet();
         }
     }
-     }
 
     private void DestroyBullet()
     {

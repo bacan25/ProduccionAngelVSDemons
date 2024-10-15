@@ -991,6 +991,7 @@ MonoBehaviour:
   readyIndicator: {fileID: 1157596880}
   player1NameText: {fileID: 1236237138}
   player2NameText: {fileID: 645019471}
+  playerTransforms: []
 --- !u!4 &833104755
 Transform:
   m_ObjectHideFlags: 0
