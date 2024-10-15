@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class MercaderDetect : MonoBehaviourPunCallbacks
 {
-    public GameObject mercaderText;
-    public GameObject comprarPanel;
+    [SerializeField] private GameObject mercaderText;
+    [SerializeField] private GameObject comprarPanel;
     private PlayerGoldManager playerGoldManager;
 
     private void Awake()
@@ -15,27 +15,18 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
             return;
         }
 
-        // Buscar los objetos del UI relacionados con el mercader solo para el jugador local
-        mercaderText = GameObject.Find("MercaderText");
-        comprarPanel = GameObject.Find("ComprarPanel");
-
-        // Si el jugador local no puede encontrar estos objetos, hay un error en la configuración de la escena
-        if (mercaderText == null || comprarPanel == null)
-        {
-            Debug.LogError("MercaderText o ComprarPanel no encontrado en la escena. Asegúrate de que están asignados correctamente.");
-        }
+        // Ya no necesitamos usar GameObject.Find. Asignar mercaderText y comprarPanel en el Inspector de Unity.
     }
 
     private void Start()
     {
-        // Ocultar el texto y el panel de compra inicialmente para el jugador local
         if (mercaderText != null)
             mercaderText.SetActive(false);
 
         if (comprarPanel != null)
             comprarPanel.SetActive(false);
 
-        // Obtener la referencia al PlayerGoldManager del jugador local
+        // Obtener la referencia al PlayerGoldManager del jugador
         playerGoldManager = GetComponent<PlayerGoldManager>();
 
         if (playerGoldManager == null)
