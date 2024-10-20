@@ -2672,7 +2672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab802c71ff79f74d90f30c8c3760058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 120
   healthSlider: {fileID: 1461606802678424478}
   monedas: 20
 --- !u!114 &2071707046638499722

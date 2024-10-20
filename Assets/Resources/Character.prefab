@@ -550,7 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051488903731ff54493d0bcfec4a364e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 8
   jumpForce: 5
   rotationSpeed: 100
   isGrounded: 0
@@ -641,7 +641,9 @@ MonoBehaviour:
   ID: 0
   nombre: 
   inventoryUpdate: {fileID: 0}
+  skillsUpdate: {fileID: 0}
   inventory: {fileID: 0}
+  skills: {fileID: 0}
   move_Player: {fileID: 2762129899826143140}
   wings:
   - {fileID: 0}

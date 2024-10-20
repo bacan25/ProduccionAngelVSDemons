@@ -7,24 +7,7 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
     public int allSlots;
     public Slot[] slots;
 
-    private void Awake()
-    {
-        // Desactivar el script si no pertenece al jugador local
-        if (!photonView.IsMine && PhotonNetwork.IsConnected)
-        {
-            enabled = false;
-            return;
-        }
-
-        // Intentar obtener la referencia del ItemManager del jugador local usando una mejor manera de acceder al componente correcto
-        itemManager = FindObjectOfType<ItemManager>(); // Busca el ItemManager en la escena (mejor en el contexto multijugador)
-        if (itemManager == null)
-        {
-            Debug.LogError("ItemManager no encontrado. Asegúrate de que el script esté asignado correctamente al jugador local.");
-        }
-    }
-
-    void Start()
+    private void Start()
     {
         allSlots = this.transform.childCount;
         slots = new Slot[allSlots];
@@ -32,6 +15,12 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
         for (int i = 0; i < allSlots; i++)
         {
             slots[i] = this.transform.GetChild(i).gameObject.GetComponent<Slot>();
+        }
+
+        // Este script no se debe desactivar en el Awake, ya que no depende del jugador directamente.
+        if (itemManager == null)
+        {
+            Debug.LogWarning("ItemManager aún no asignado al InventoryUpdate. Esto debe ser asignado por el ItemManager del jugador.");
         }
     }
 
@@ -51,5 +40,11 @@ public class InventoryUpdate : MonoBehaviourPunCallbacks
                 return;
             }
         }
+    }
+
+    // Método para asignar el ItemManager desde el jugador
+    public void SetItemManager(ItemManager manager)
+    {
+        itemManager = manager;
     }
 }
