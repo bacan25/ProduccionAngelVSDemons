@@ -20,7 +20,6 @@ public class PlayerCanvas : MonoBehaviour
     public int monedasPlayer;
     public int cantidadPociones;
 
-    public PlayerGoldManager goldManager;
 
     private void Awake()
     {
@@ -160,7 +159,6 @@ public class PlayerCanvas : MonoBehaviour
         if (monedasPlayer >= precio)
         {
             monedasPlayer -= precio;
-            goldManager.SpendGold(25);
             //UpdateGoldDisplay(monedasPlayer);
             SumarPociones();
             Debug.Log("Poción comprada con éxito!");
