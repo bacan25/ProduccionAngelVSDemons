@@ -46,18 +46,18 @@ public class PlayerGoldManager : MonoBehaviourPun
     }
 
     // Método para restar oro cuando se compra una poción
-    public bool SpendGold(int amount)
+    public void SpendGold(int amount)
     {
         if (currentGold >= amount)
         {
             currentGold -= amount;
             UpdateGoldUI();
-            return true; // Compra exitosa
+            //return true; // Compra exitosa
         }
         else
         {
             Debug.LogWarning("No hay suficiente oro para realizar la compra.");
-            return false; // No hay suficiente oro
+            //return false; // No hay suficiente oro
         }
     }
 

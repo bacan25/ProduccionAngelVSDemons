@@ -5,8 +5,8 @@ public class Move_Player : MonoBehaviourPun
 {
     [Header("Movement and Jump")]
     Rigidbody rb;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpForce;
+    public float moveSpeed;
+    public float jumpForce;
     [SerializeField] private float rotationSpeed;
 
     private float horizontalInput, verticalInput;

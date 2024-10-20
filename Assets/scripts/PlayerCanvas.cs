@@ -20,6 +20,8 @@ public class PlayerCanvas : MonoBehaviour
     public int monedasPlayer;
     public int cantidadPociones;
 
+    public PlayerGoldManager goldManager;
+
     private void Awake()
     {
         // Configuración del singleton
@@ -158,7 +160,8 @@ public class PlayerCanvas : MonoBehaviour
         if (monedasPlayer >= precio)
         {
             monedasPlayer -= precio;
-            UpdateGoldDisplay(monedasPlayer);
+            goldManager.SpendGold(25);
+            //UpdateGoldDisplay(monedasPlayer);
             SumarPociones();
             Debug.Log("Poción comprada con éxito!");
             return true;

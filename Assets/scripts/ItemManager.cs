@@ -12,6 +12,7 @@ public class ItemManager : MonoBehaviourPun
     public GameObject inventory;
     public GameObject skills;
     public Move_Player move_Player;
+    public AngelClass angelClass;
 
     public GameObject[] wings;
     public GameObject[] gloves;
@@ -155,9 +156,31 @@ public class ItemManager : MonoBehaviourPun
                 move_Player.climbAbility = true;
             }
 
+            if (ID == 4)
+            {
+                //Sombrero
+            }
+
+            if (ID == 5)
+            {
+                //Capa + 3 de daño en el poder principal. 
+            }
+
+            if (ID == 6)
+            {
+                //Chaleco
+                move_Player.moveSpeed += 2f;
+            }
+
+            if (ID == 7)
+            {
+                //Guantes +3 vel disparo, -1 de daño
+            }
+
             // Realizar acciones según el ID del objeto
             if (ID == 8)
             {
+                move_Player.jumpForce += 2f;
                 StartCoroutine(ActivarYDesactivarPanel(3f));
                 foreach (GameObject obj in wings)
                 {
