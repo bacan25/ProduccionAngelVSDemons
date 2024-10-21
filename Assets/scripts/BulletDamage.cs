@@ -14,29 +14,34 @@ public class BulletDamage : MonoBehaviourPun
         {
             rb.velocity = transform.forward * bulletSpeed;
         }
+
+        // Solo el propietario de la bala debe programar su destrucción
+        if (photonView.IsMine)
+        {
+            Invoke(nameof(DestroyBullet), 4f);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!photonView.IsMine) return; // Solo el propietario debe manejar la colisión y destrucción
+
         if (other.CompareTag("Player"))
         {
             PhotonView targetView = other.GetComponent<PhotonView>();
 
             if (targetView != null)
             {
-                // Si estás en una sala, envía el RPC; de lo contrario, ejecuta el daño localmente.
                 if (PhotonNetwork.InRoom)
                 {
-                    // Enviar el RPC para que todos los jugadores lo reciban
-                    targetView.RPC("TakeDamage", RpcTarget.All, 10);  // Ejemplo: 10 de daño
+                    targetView.RPC("TakeDamage", RpcTarget.All, 10); // Ejemplo: 10 de daño
                 }
                 else if (PhotonNetwork.OfflineMode)
                 {
-                    // Ejecutar localmente si estamos en modo offline
                     var healthSystem = other.GetComponent<HealthSystem>();
                     if (healthSystem != null)
                     {
-                        healthSystem.TakeDamage(20);  // Ejemplo: 10 de daño
+                        healthSystem.TakeDamage(20); // Ejemplo: 20 de daño
                     }
                 }
                 else
@@ -61,7 +66,6 @@ public class BulletDamage : MonoBehaviourPun
         }
         else
         {
-            // Transferir la propiedad antes de destruir si no somos los dueños
             if (!photonView.IsMine)
             {
                 photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
