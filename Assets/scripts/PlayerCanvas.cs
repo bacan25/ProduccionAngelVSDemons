@@ -22,7 +22,6 @@ public class PlayerCanvas : MonoBehaviourPun
     public int monedasPlayer;
     public int cantidadPociones;
 
-    private PhotonView photonView;
 
     private void Awake()
     {
@@ -167,7 +166,7 @@ public class PlayerCanvas : MonoBehaviourPun
         if (photonView.IsMine && monedasPlayer >= precio)
         {
             monedasPlayer -= precio;
-            UpdateGoldDisplay(monedasPlayer);
+            //UpdateGoldDisplay(monedasPlayer);
             SumarPociones();
             Debug.Log("Poción comprada con éxito!");
             return true;

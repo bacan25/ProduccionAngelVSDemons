@@ -6,6 +6,9 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
     private PlayerCanvas playerCanvas;
     private bool isBuying = false;
 
+    public PlayerGoldManager goldManager;
+
+
     private void Awake()
     {
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
@@ -28,6 +31,7 @@ public class MercaderDetect : MonoBehaviourPunCallbacks
         {
             int pocionPrecio = 25; // Precio de una poción
             playerCanvas?.ComprarPocion(pocionPrecio);
+            goldManager.SpendGold(25);
         }
     }
 
