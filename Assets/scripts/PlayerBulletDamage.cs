@@ -8,8 +8,11 @@ public class PlayerBulletDamage : MonoBehaviourPun
 
     private void Start()
     {
-        // Destruir la bala después de 4 segundos de ser instanciada
-        Invoke(nameof(DestroyBullet), 4f);
+        // Solo el propietario de la bala debe programar su destrucción
+        if (photonView.IsMine)
+        {
+            Invoke(nameof(DestroyBullet), 4f);
+        }
     }
 
     public void SetShooter(PhotonView shooter)
@@ -19,15 +22,15 @@ public class PlayerBulletDamage : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!photonView.IsMine) return; // Solo el propietario debe manejar la colisión y destrucción
+
         if (other.CompareTag("Minion"))
         {
-            // Manejar el daño a los enemigos
             PhotonView enemyPhotonView = other.GetComponent<PhotonView>();
             if (enemyPhotonView != null)
             {
                 if (PhotonNetwork.OfflineMode)
                 {
-                    // Modo offline: infligir daño localmente
                     EnemyHealthSystem enemyHealth = other.GetComponent<EnemyHealthSystem>();
                     if (enemyHealth != null)
                     {
@@ -36,22 +39,19 @@ public class PlayerBulletDamage : MonoBehaviourPun
                 }
                 else
                 {
-                    // Modo online: enviar RPC para infligir daño al enemigo
                     enemyPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage, shooterView != null ? shooterView.ViewID : -1);
                 }
             }
 
             DestroyBullet();
         }
-        if (other.CompareTag("Player"))
+        else if (other.CompareTag("Player"))
         {
-            // Manejar el daño a los enemigos
             PhotonView playerPhotonView = other.GetComponent<PhotonView>();
             if (playerPhotonView != null)
             {
                 if (PhotonNetwork.OfflineMode)
                 {
-                    // Modo offline: infligir daño localmente
                     HealthSystem playerHealth = other.GetComponent<HealthSystem>();
                     if (playerHealth != null)
                     {
@@ -60,14 +60,13 @@ public class PlayerBulletDamage : MonoBehaviourPun
                 }
                 else
                 {
-                    // Modo online: enviar RPC para infligir daño al enemigo
                     playerPhotonView.RPC("TakeDamage", RpcTarget.All, playerBulletDamage);
                 }
             }
 
             DestroyBullet();
         }
-        else
+        else if (other.CompareTag("Ground"))
         {
             DestroyBullet();
         }
@@ -81,7 +80,6 @@ public class PlayerBulletDamage : MonoBehaviourPun
         }
         else
         {
-            // Transferir la propiedad al cliente actual antes de destruir
             if (!photonView.IsMine)
             {
                 photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
